@@ -1,0 +1,164 @@
+📄 Loaded 682 skills from: D:\Ktas Project\ATS\ATS Email Parser\Skill.csv
+📂 Processing 51 resume file(s) from: D:\Ktas Project\ATS\ATS Email Parser\pending resume
+
+#    File                   Name                           Phone          Gender   Email
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  1    1.pdf                  ❌ NOT FOUND                    ❌ NOT FOUND    ❌ N/A    ❌ NOT FOUND
+       Address: ❌ NOT FOUND
+       Skills: ❌ NOT FOUND
+  2    2.pdf                  Mayurcn                        9850828043     Male     mayurcn13@gmail.com
+       Address: MAYUR NAGAR, 9 Mumbai 401209...
+       Skills [17]: advertising, bachelor, customer, finance, marketing, performance, research, retail  (+9 more)
+  3    3.pdf                  Organic Chemistry              8238921564     ❌ N/A    mayankpl456@gmail.com
+       Address: Khanjroli, Ta: Mandvi, Dist:Surat...
+       Skills [10]: analysis, bachelor, chemicals, chemistry, data, calibration, balance, monitoring  (+2 more)
+  4    4.pdf                  Sanjay Joshi                   +918696231056  Male     sanjay9596joshi@gmail.com
+       Address: 26 Alka park Socity Vastrapur railway station road, Jivrajpa...
+       Skills [24]: aggregate, application, business, control, designing, develop, development, email  (+16 more)
+  5    5.docx                 ❌ Error: Failed to extract from 5.docx: python-docx error: Bad CRC-32 for file 'word/media/image1.jpeg'
+  6    6.docx                 Chetansinh Gohil               9265700184     Male     chetangohil88@gmail.com
+       Address: To- Devli, Opp- Union Bank, Navapara, Tal- Kodinar-362720, D...
+       Skills [44]: analysis, api, applications, assessment, assurance, business, chemicals, client  (+36 more)
+  7    7.pdf                  Application Letter             +918460539089  Male     kushwaha_govind@yahoo.com
+       Address: B-103, Sai Darshan Appartment, Krishna Colony, Muktanand Mar...
+       Skills [37]: abilities, accountable, acme, analyze, application, assurance, benchmarking, control  (+29 more)
+  8    8.pdf                  Candidate Name                 9624999100     ❌ N/A    info@qualityhr.co.in
+       Address: 21 Year 0 Month Current CTC, 18.00 LPA, Notice Period, 60 Da...
+       Skills [35]: abilities, accountable, acme, analyze, assurance, benchmarking, control, credentials  (+27 more)
+  9    9.doc                  ❌ Error: Failed to extract from 9.doc: textract not installed (pip install textract for .doc support)
+  10   10.doc                 ❌ Error: Failed to extract from 10.doc: textract not installed (pip install textract for .doc support)
+  11   11.doc                 ❌ Error: Failed to extract from 11.doc: textract not installed (pip install textract for .doc support)
+  12   12.doc                 ❌ Error: Failed to extract from 12.doc: textract not installed (pip install textract for .doc support)
+  13   13.docx                Thanking You                   08938832968    Male     pawan.prod@gmail.com
+       Address: 98/41 A/27 C Tilak Nagar...
+       Skills [19]: application, assurance, biotech, calling, documentation, email, execution, formulation  (+11 more)
+  14   14.pdf                 Ajay Kumar                     ❌ NOT FOUND    Male     ajaybhuims@gmail.com
+       Address: May 2010 – May 2016: Shri Baidyanath Ayurveda Bhavan Pvt. Lt...
+       Skills [46]: accomplishment, administration, analysis, batch, business, client, control, credentials  (+38 more)
+  15   15.pdf                 Sanjay Kumar Singh             +919318780073  Male     pro_sanjupharma@yahoo.co.in
+       Address: (WHO, GMP ISO 9001 certified), Location : Rou Indore (M.P.),...
+       Skills [37]: administrative, batch, capabilities, certified, control, credentials, critical, develop  (+29 more)
+  16   16.doc                 ❌ Error: Failed to extract from 16.doc: textract not installed (pip install textract for .doc support)
+  17   17.pdf                 Candidate Name                 9624999100     ❌ N/A    info@qualityhr.co.in
+       Address: Flat No. 303,Third floor, Jaymin appartment ,dollat nagar, D...
+       Skills [41]: lean, allocation, analysis, assessment, automated, certified, computer, coordinating  (+33 more)
+  18   18.doc                 ❌ Error: Failed to extract from 18.doc: textract not installed (pip install textract for .doc support)
+  19   19.docx                Mr. Deepak B. Gerange          9850362654     Male     gerange_deepak@yahoo.com
+       Address: Vadodara, Gujarat, 392001., Cell No: 9850362654...
+       Skills [57]: administration, allocation, analysis, assurance, batch, capabilities, compliant, control  (+49 more)
+  20   20.docx                ❌ NOT FOUND                    ❌ NOT FOUND    ❌ N/A    ❌ NOT FOUND
+       Address: Confederation of Indian Industry (CII) Kaizen Competition - ...
+       Skills [43]: lean, abilities, accurate, administering, analysis, assessment, assessments, batch  (+35 more)
+  21   21.pdf                 Dilipbhai Parmar               6352193853     Male     dp9213254@gmail.com
+       Address: Mo. 6352193853...
+       Skills [12]: analysis, chemistry, chromatography, consulting, control, creative, data, email  (+4 more)
+  22   22.pdf                 Respected Sir                  +918140131084  Male     manojnehete123@gmail.com
+       Address: 2. FROM 3 RD FEBRUARY – 2021 (PRESENT), Working in SCHOTT-KA...
+       Skills [21]: accuracy, analysis, application, assurance, chemistry, computer, control, creative  (+13 more)
+  23   23.docx                Ramapati Chaurasia             09593263041    Female   ramapati_86@yahoo.co.in
+       Address: Address : Vivek Nagar, Pratapgarh (UP), Date of Birth : 04 t...
+       Skills [45]: lean, acme, analysis, batch, capabilities, control, coordinating, coordination  (+37 more)
+  24   24.pdf                 Shubham Solanki                6264404491     Male     solankishubham261@gmail.com
+       Address: SSTPP MPPGCL dongaliya. Khandwa Madhya Pradesh 450112, Coal ...
+       Skills [23]: analysis, computer, control, controller, email, environment, machine, maintenance  (+15 more)
+  25   25.docx                ❌ NOT FOUND                    ❌ NOT FOUND    ❌ N/A    ❌ NOT FOUND
+       Address: Sr. EXECUTIVE April 2014 to April 2023...
+       Skills [31]: accurate, analysis, api, applications, arrangement, batch, biotech, coordination  (+23 more)
+  26   26.pdf                 Gajendra Kumar                 +919004223335  Male     kgajendra11@gmail.com
+       Address: Dec’95 to Jul’03: Tabuk Pharmaceutical Mfg. Co., Tabuk, Saud...
+       Skills [43]: lean, alignment, allocation, assessment, assessments, assurance, business, capabilities  (+35 more)
+  27   27.pdf                 Jay Donga                      7359930530     Male     jaydonga04@gmail.com
+       Address: 12, Krishna Apartment, Near Vijay Mandap Service, Krishna Na...
+       Skills [32]: certified, client, computer, construction, coordinating, data, design, email  (+24 more)
+  28   28.pdf                 Jayendra D Gurjar              +919099945303  Male     jayendragurjar@gmail.com
+       Address: B.E., Mechanical Engineering, 01/2015, Rajiv Gandhi Proudyog...
+       Skills [33]: allocation, analysis, api, chemical, compliant, control, coordinating, development  (+25 more)
+  29   29.pdf                 Keval Mungra                   +917777978741  Male     mungrakeval123@gmail.com
+       Address: Near Kumkum Soc, Surat, +91 7777978741...
+       Skills [10]: chemical, chemistry, computer, software, audits, compliance, laboratory, quality  (+2 more)
+  30   30.pdf                 Vivekanand Higher Secon        918000017570   Male     gujrat.meetjagani7@gmail.com
+       Address: ❌ NOT FOUND
+       Skills [23]: accuracy, analysis, analyst, assurance, astm, bachelor, chemical, chemistry  (+15 more)
+  31   31.pdf                 Mitesh Thakur                  6351327539     Male     mitesht99@gmail.com
+       Address: GSHSEB, Gujarat, March - 2017, GSHSEB, Gujarat, March – 2015...
+       Skills [26]: analysis, certified, chemicals, critical, email, environment, installation, learning  (+18 more)
+  32   32.pdf                 Mayur Parmar                   +917434979347  Male     parmarmayur154@gmail.com
+       Address: Palanpur, India 385421, Mayur Parmar...
+       Skills [16]: acquisition, control, data, engineering, environment, machine, technical, technology  (+8 more)
+  33   33.pdf                 ❌ NOT FOUND                    ❌ NOT FOUND    ❌ N/A    ❌ NOT FOUND
+       Address: ❌ NOT FOUND
+       Skills: ❌ NOT FOUND
+  34   34.pdf                 Patel Zankruti Bhinang         8511200650     Male     zankrutipatel246@gmail.com
+       Address: 15 th July 2023, Nagpur, Maharashtra.,  National e-conferen...
+       Skills [32]: assessment, biostatistics, certification, design, development, documentation, drug, email  (+24 more)
+  35   35.pdf                 Pawan Prod                     08938832968    Male     pawan.prod@gmail.com
+       Address: 98/41 A/27 C Tilak Nagar, Allahpur ALLAHABAD, U.P. -211006, ...
+       Skills [19]: application, assurance, biotech, calling, documentation, email, execution, formulation  (+11 more)
+  36   36.pdf                 Prajapati Brijeshkumar Kanubh  8128569208     Female   prajapatibrijeshkumar50@gmail.com
+       Address: kumbhavadu faliyu, kareli, Bharucha 391810...
+       Skills [12]: chemical, computer, email, environment, gmp, time, calibration, balance  (+4 more)
+  37   37.pdf                 Patel Prashantbhai Sureshbhai  8347975969     Male     pp5927308@gmail.com
+       Address: BKM VALSAD 72.20%, VNSGU SURAT, P.G SCIENCE...
+       Skills [9]: analysis, analyst, bachelor, chemistry, chromatography, control, glp, audits  (+1 more)
+  38   38.pdf                 Coverletter                    09675727387    Male     jaiprakashmurya039@gmail.com
+       Address: PINCODE. 222143(U.P)...
+       Skills [52]: abilities, allocation, analytics, analyze, assurance, bachelor, biotech, business  (+44 more)
+  39   39.pdf                 Coverletter                    09675727387    Male     jaiprakashmurya039@gmail.com
+       Address: PINCODE. 222143(U.P)...
+       Skills [52]: abilities, allocation, analytics, analyze, assurance, bachelor, biotech, business  (+44 more)
+  40   40.pdf                 Sagar Rana                     9016634132     Male     rana.sagar77777@gmail.com
+       Address: Ahmedabad, Gujarat 382418...
+       Skills [12]: control, driving, engineering, environment, maintenance, technology, automation, electrical  (+4 more)
+  41   41.pdf                 Somya Velani                   9016525692     Female   velanisomya@gmail.com
+       Address: S.S.C | St. Mary’s School | 2017–2018 | Percentage: 78%, T E...
+       Skills [15]: configure, control, design, engineering, maintenance, programming, software, testing  (+7 more)
+  42   42.pdf                 Mr. Anil Suresh Thakare        ❌ NOT FOUND    Male     anilthakare707@gmail.com
+       Address: At -Junone, Post-Bhone, Tal -Amalner, Dist -Jalgaon., Pin Co...
+       Skills [54]: allocation, analysis, assurance, batch, chemical, chemicals, chemistry, chromatography  (+46 more)
+  43   43.pdf                 Rajkumar Bera                  ❌ NOT FOUND    Male     rbera350@gmail.com
+       Address: ACG associated capsules ltd, Dahanu road...
+       Skills [38]: lean, analysis, arrangement, batch, coding, control, creative, customer  (+30 more)
+  44   44.pdf                 Rohit Pandav                   09924277660    Male     rohitpharma007@gmail.com
+       Address: 09924277660 | 07990022368, Date of Birth : 20 th September 1...
+       Skills [50]: lean, automated, batch, business, client, control, controls, customers  (+42 more)
+  45   45.pdf                 Sanjay Vaman Kadam             ❌ NOT FOUND    Male     sanjay18577@rediffmail.com
+       Address: 9. As a Chemist - Quality Control with M/s Emmellen Biotech ...
+       Skills [52]: abilities, acquisition, allocation, analysis, analyst, api, assessment, assurance  (+44 more)
+  46   46.pdf                 Shaik                          +919392675588  Male     hajishaik497@gmail.com
+       Address: Kurnool, Andhra Pradesh, (+91) 9392675588, 2 Apr '04...
+       Skills [35]: accurate, applications, capability, certifications, certified, compliant, customer, designing  (+27 more)
+  47   47.pdf                 Ghosh Basubhrajit              8777869920     Male     subhrajit-ghosh-84b67221asubhrajit367@gmail.com
+       Address: ❌ NOT FOUND
+       Skills [21]: accountancy, bachelor, computer, construction, detail, electrician, electronics, engineering  (+13 more)
+  48   48.pdf                 Sumit Keshri                   +916205142771  Male     keshrisumit0099@gmail.com
+       Address: • Represented the school in the District-Level Quiz Competit...
+       Skills [25]: abilities, application, applications, chemical, collaborative, critical, design, engineering  (+17 more)
+  49   49.pdf                 Vikramji Thakor                9725721360     Female   vikramthakor20@gmail.com
+       Address: MEHSANA , GUJARAT - 384330,  SKILLS,  To Calculate Daily P...
+       Skills [19]: analysis, computer, control, coordination, electrician, engineering, installation, machine  (+11 more)
+  50   50.docx                Tej Ram Sharma                 6284440827     ❌ N/A    tejramsharma333@gmail.com
+       Address: # A-28 GF Anand Homes, Shiwalik Avenue, Sector-125, Kharar, ...
+       Skills [49]: batch, biotech, capability, computer, control, controls, coordinate, coordination  (+41 more)
+  51   51.pdf                 Daksh Uttambhai Patel          +919512377146  Male     dakshpatel5268@gmail.com
+       Address: HSC from Gujarat Secondary and Higher Secondary Education Bo...
+       Skills [27]: adaptable, analysis, backend, collaborative, computer, data, databases, developer  (+19 more)
+
+========================================================================================================================
+💾 Validation report saved → D:\Ktas Project\ATS\ATS Email Parser\output\validation_report.json
+
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+📊 PROCESSING SUMMARY:
+   Total files processed: 51
+   Successfully parsed: 44 (86.3%)
+   Extraction errors: 7 (13.7%)
+
+📋 EXTRACTION QUALITY:
+   Names found: 47/51 (92.2%)
+   Emails found: 47/51 (92.2%)
+   Phones found: 43/51 (84.3%)
+   Resumes with skills: 42/51 (82.4%)
+
+💾 Results saved:
+   Main output → D:\Ktas Project\ATS\ATS Email Parser\output\resume_parsed.json
+   Processing log → D:\Ktas Project\ATS\ATS Email Parser\output\parser.log
+✅ Done.

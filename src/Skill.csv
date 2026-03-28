@@ -1,0 +1,674 @@
+﻿skill,category,normalized_skill,resume_match_weight
+acca,Certifications & Credentials,Acca,5
+acls,Certifications & Credentials,Acls,5
+bls,Certifications & Credentials,Bls,5
+ceh,Certifications & Credentials,Ceh,5
+cissp,Certifications & Credentials,Cissp,5
+cpa,Certifications & Credentials,Cpa,5
+cpr,Certifications & Credentials,Cpr,5
+lean,Certifications & Credentials,Lean,5
+osha,Certifications & Credentials,Osha,5
+aaarated,Domain-Specific / Other,Aaarated,2
+aacn,Domain-Specific / Other,Aacn,2
+aacsb,Domain-Specific / Other,Aacsb,2
+aama,Domain-Specific / Other,Aama,2
+aanp,Domain-Specific / Other,Aanp,2
+aashto,Domain-Specific / Other,Aashto,2
+abdominal,Domain-Specific / Other,Abdominal,2
+abilities,Domain-Specific / Other,Abilities,2
+ablation,Domain-Specific / Other,Ablation,2
+ablations,Domain-Specific / Other,Ablations,2
+abms,Domain-Specific / Other,Abms,2
+aboriginal,Domain-Specific / Other,Aboriginal,2
+abpi,Domain-Specific / Other,Abpi,2
+abscess,Domain-Specific / Other,Abscess,2
+absence,Domain-Specific / Other,Absence,2
+absorption,Domain-Specific / Other,Absorption,2
+abstract,Domain-Specific / Other,Abstract,2
+abstracting,Domain-Specific / Other,Abstracting,2
+abstraction,Domain-Specific / Other,Abstraction,2
+aca,Domain-Specific / Other,Aca,2
+acceleration,Domain-Specific / Other,Acceleration,2
+accelerator,Domain-Specific / Other,Accelerator,2
+accomplishment,Domain-Specific / Other,Accomplishment,2
+accomplishments,Domain-Specific / Other,Accomplishments,2
+accountable,Domain-Specific / Other,Accountable,2
+accountancy,Domain-Specific / Other,Accountancy,2
+accountant,Domain-Specific / Other,Accountant,2
+accrual,Domain-Specific / Other,Accrual,2
+accruals,Domain-Specific / Other,Accruals,2
+accuracy,Domain-Specific / Other,Accuracy,2
+accurate,Domain-Specific / Other,Accurate,2
+acme,Domain-Specific / Other,Acme,2
+acoustical,Domain-Specific / Other,Acoustical,2
+acoustics,Domain-Specific / Other,Acoustics,2
+acquisition,Domain-Specific / Other,Acquisition,2
+acquisitions,Domain-Specific / Other,Acquisitions,2
+adaptable,Domain-Specific / Other,Adaptable,2
+adaptation,Domain-Specific / Other,Adaptation,2
+adaptive,Domain-Specific / Other,Adaptive,2
+administer,Domain-Specific / Other,Administer,2
+administering,Domain-Specific / Other,Administering,2
+administration,Domain-Specific / Other,Administration,2
+administrative,Domain-Specific / Other,Administrative,2
+administrator,Domain-Specific / Other,Administrator,2
+admissions,Domain-Specific / Other,Admissions,2
+adolescent,Domain-Specific / Other,Adolescent,2
+adolescents,Domain-Specific / Other,Adolescents,2
+advertising,Domain-Specific / Other,Advertising,2
+advisory,Domain-Specific / Other,Advisory,2
+advocacy,Domain-Specific / Other,Advocacy,2
+advocate,Domain-Specific / Other,Advocate,2
+aerodynamics,Domain-Specific / Other,Aerodynamics,2
+aeronautical,Domain-Specific / Other,Aeronautical,2
+aeronautics,Domain-Specific / Other,Aeronautics,2
+aesthetics,Domain-Specific / Other,Aesthetics,2
+aggregate,Domain-Specific / Other,Aggregate,2
+aggregation,Domain-Specific / Other,Aggregation,2
+agile,Domain-Specific / Other,Agile,2
+agility,Domain-Specific / Other,Agility,2
+agricultural,Domain-Specific / Other,Agricultural,2
+agriculture,Domain-Specific / Other,Agriculture,2
+agronomic,Domain-Specific / Other,Agronomic,2
+agronomy,Domain-Specific / Other,Agronomy,2
+ajax,Domain-Specific / Other,Ajax,2
+algorithm,Domain-Specific / Other,Algorithm,2
+algorithms,Domain-Specific / Other,Algorithms,2
+alignment,Domain-Specific / Other,Alignment,2
+allocation,Domain-Specific / Other,Allocation,2
+allocations,Domain-Specific / Other,Allocations,2
+altium,Domain-Specific / Other,Altium,2
+ambulation,Domain-Specific / Other,Ambulation,2
+ambulatory,Domain-Specific / Other,Ambulatory,2
+analysis,Domain-Specific / Other,Analysis,2
+analyst,Domain-Specific / Other,Analyst,2
+analytics,Domain-Specific / Other,Analytics,2
+analyze,Domain-Specific / Other,Analyze,2
+analyzers,Domain-Specific / Other,Analyzers,2
+anatomy,Domain-Specific / Other,Anatomy,2
+anesthesiologist,Domain-Specific / Other,Anesthesiologist,2
+anesthesiology,Domain-Specific / Other,Anesthesiology,2
+anesthetic,Domain-Specific / Other,Anesthetic,2
+animation,Domain-Specific / Other,Animation,2
+antimicrobial,Domain-Specific / Other,Antimicrobial,2
+apache,Domain-Specific / Other,Apache,2
+api,Domain-Specific / Other,Api,2
+apics,Domain-Specific / Other,Apics,2
+apis,Domain-Specific / Other,Apis,2
+apparel,Domain-Specific / Other,Apparel,2
+application,Domain-Specific / Other,Application,2
+applications,Domain-Specific / Other,Applications,2
+appointments,Domain-Specific / Other,Appointments,2
+appraisal,Domain-Specific / Other,Appraisal,2
+appraisals,Domain-Specific / Other,Appraisals,2
+arcgis,Domain-Specific / Other,Arcgis,2
+archaeology,Domain-Specific / Other,Archaeology,2
+architect,Domain-Specific / Other,Architect,2
+architects,Domain-Specific / Other,Architects,2
+architectural,Domain-Specific / Other,Architectural,2
+architecture,Domain-Specific / Other,Architecture,2
+archival,Domain-Specific / Other,Archival,2
+archiving,Domain-Specific / Other,Archiving,2
+ariba,Domain-Specific / Other,Ariba,2
+arithmetic,Domain-Specific / Other,Arithmetic,2
+arrangement,Domain-Specific / Other,Arrangement,2
+assembly,Domain-Specific / Other,Assembly,2
+assertiveness,Domain-Specific / Other,Assertiveness,2
+assessment,Domain-Specific / Other,Assessment,2
+assessments,Domain-Specific / Other,Assessments,2
+assurance,Domain-Specific / Other,Assurance,2
+asthma,Domain-Specific / Other,Asthma,2
+astm,Domain-Specific / Other,Astm,2
+astrophysics,Domain-Specific / Other,Astrophysics,2
+atlassian,Domain-Specific / Other,Atlassian,2
+atomic,Domain-Specific / Other,Atomic,2
+autism,Domain-Specific / Other,Autism,2
+autodesk,Domain-Specific / Other,Autodesk,2
+autoimmune,Domain-Specific / Other,Autoimmune,2
+automated,Domain-Specific / Other,Automated,2
+automotive,Domain-Specific / Other,Automotive,2
+autonomous,Domain-Specific / Other,Autonomous,2
+autonomy,Domain-Specific / Other,Autonomy,2
+autosar,Domain-Specific / Other,Autosar,2
+aviation,Domain-Specific / Other,Aviation,2
+avionics,Domain-Specific / Other,Avionics,2
+bachelor,Domain-Specific / Other,Bachelor,2
+backend,Domain-Specific / Other,Backend,2
+backlog,Domain-Specific / Other,Backlog,2
+bacteria,Domain-Specific / Other,Bacteria,2
+bacterial,Domain-Specific / Other,Bacterial,2
+bacteriology,Domain-Specific / Other,Bacteriology,2
+baking,Domain-Specific / Other,Baking,2
+bankruptcy,Domain-Specific / Other,Bankruptcy,2
+barista,Domain-Specific / Other,Barista,2
+bartending,Domain-Specific / Other,Bartending,2
+baseline,Domain-Specific / Other,Baseline,2
+batch,Domain-Specific / Other,Batch,2
+batching,Domain-Specific / Other,Batching,2
+benchmarking,Domain-Specific / Other,Benchmarking,2
+benchmarks,Domain-Specific / Other,Benchmarks,2
+binary,Domain-Specific / Other,Binary,2
+bioanalysis,Domain-Specific / Other,Bioanalysis,2
+biobased,Domain-Specific / Other,Biobased,2
+bioburden,Domain-Specific / Other,Bioburden,2
+biocatalysis,Domain-Specific / Other,Biocatalysis,2
+biochemical,Domain-Specific / Other,Biochemical,2
+biochemistry,Domain-Specific / Other,Biochemistry,2
+bioinformatics,Domain-Specific / Other,Bioinformatics,2
+biological,Domain-Specific / Other,Biological,2
+biologics,Domain-Specific / Other,Biologics,2
+biology,Domain-Specific / Other,Biology,2
+biomarker,Domain-Specific / Other,Biomarker,2
+biomarkers,Domain-Specific / Other,Biomarkers,2
+biomass,Domain-Specific / Other,Biomass,2
+biomechanics,Domain-Specific / Other,Biomechanics,2
+biopharmaceutical,Domain-Specific / Other,Biopharmaceutical,2
+biophysics,Domain-Specific / Other,Biophysics,2
+biostatistics,Domain-Specific / Other,Biostatistics,2
+biotech,Domain-Specific / Other,Biotech,2
+biotherapeutics,Domain-Specific / Other,Biotherapeutics,2
+blackline,Domain-Specific / Other,Blackline,2
+bloomberg,Domain-Specific / Other,Bloomberg,2
+blueprints,Domain-Specific / Other,Blueprints,2
+boarding,Domain-Specific / Other,Boarding,2
+bpm,Domain-Specific / Other,Bpm,2
+bpo,Domain-Specific / Other,Bpo,2
+branding,Domain-Specific / Other,Branding,2
+brazing,Domain-Specific / Other,Brazing,2
+buildroot,Domain-Specific / Other,Buildroot,2
+bundle,Domain-Specific / Other,Bundle,2
+business,Domain-Specific / Other,Business,2
+calling,Domain-Specific / Other,Calling,2
+capabilities,Domain-Specific / Other,Capabilities,2
+capability,Domain-Specific / Other,Capability,2
+cardiac,Domain-Specific / Other,Cardiac,2
+cardiopulmonary,Domain-Specific / Other,Cardiopulmonary,2
+cardiovascular,Domain-Specific / Other,Cardiovascular,2
+caregiving,Domain-Specific / Other,Caregiving,2
+carpentry,Domain-Specific / Other,Carpentry,2
+casas,Domain-Specific / Other,Casas,2
+case,Domain-Specific / Other,Case,2
+cataloging,Domain-Specific / Other,Cataloging,2
+catering,Domain-Specific / Other,Catering,2
+certification,Domain-Specific / Other,Certification,2
+certifications,Domain-Specific / Other,Certifications,2
+certified,Domain-Specific / Other,Certified,2
+chemical,Domain-Specific / Other,Chemical,2
+chemicals,Domain-Specific / Other,Chemicals,2
+chemistry,Domain-Specific / Other,Chemistry,2
+chromatography,Domain-Specific / Other,Chromatography,2
+claims,Domain-Specific / Other,Claims,2
+classification,Domain-Specific / Other,Classification,2
+client,Domain-Specific / Other,Client,2
+clustering,Domain-Specific / Other,Clustering,2
+cobol,Domain-Specific / Other,Cobol,2
+coding,Domain-Specific / Other,Coding,2
+cognitive,Domain-Specific / Other,Cognitive,2
+collaborate,Domain-Specific / Other,Collaborate,2
+collaborative,Domain-Specific / Other,Collaborative,2
+collection,Domain-Specific / Other,Collection,2
+compensation,Domain-Specific / Other,Compensation,2
+compliant,Domain-Specific / Other,Compliant,2
+computation,Domain-Specific / Other,Computation,2
+computational,Domain-Specific / Other,Computational,2
+computer,Domain-Specific / Other,Computer,2
+computeraided,Domain-Specific / Other,Computeraided,2
+computerized,Domain-Specific / Other,Computerized,2
+computers,Domain-Specific / Other,Computers,2
+computing,Domain-Specific / Other,Computing,2
+concrete,Domain-Specific / Other,Concrete,2
+condenser,Domain-Specific / Other,Condenser,2
+configure,Domain-Specific / Other,Configure,2
+construction,Domain-Specific / Other,Construction,2
+constructive,Domain-Specific / Other,Constructive,2
+consulting,Domain-Specific / Other,Consulting,2
+control,Domain-Specific / Other,Control,2
+controller,Domain-Specific / Other,Controller,2
+controllers,Domain-Specific / Other,Controllers,2
+controls,Domain-Specific / Other,Controls,2
+conveyor,Domain-Specific / Other,Conveyor,2
+coordinate,Domain-Specific / Other,Coordinate,2
+coordinating,Domain-Specific / Other,Coordinating,2
+coordination,Domain-Specific / Other,Coordination,2
+counseling,Domain-Specific / Other,Counseling,2
+counselor,Domain-Specific / Other,Counselor,2
+creative,Domain-Specific / Other,Creative,2
+credentials,Domain-Specific / Other,Credentials,2
+critical,Domain-Specific / Other,Critical,2
+crm,Domain-Specific / Other,Crm,2
+crossfunctional,Domain-Specific / Other,Crossfunctional,2
+cryptography,Domain-Specific / Other,Cryptography,2
+csa,Domain-Specific / Other,Csa,2
+csat,Domain-Specific / Other,Csat,2
+csv,Domain-Specific / Other,Csv,2
+customer,Domain-Specific / Other,Customer,2
+customercentric,Domain-Specific / Other,Customercentric,2
+customeroriented,Domain-Specific / Other,Customeroriented,2
+customers,Domain-Specific / Other,Customers,2
+cyberark,Domain-Specific / Other,Cyberark,2
+cycle,Domain-Specific / Other,Cycle,2
+cytometry,Domain-Specific / Other,Cytometry,2
+cytotechnologist,Domain-Specific / Other,Cytotechnologist,2
+dashboards,Domain-Specific / Other,Dashboards,2
+data,Domain-Specific / Other,Data,2
+database,Domain-Specific / Other,Database,2
+databases,Domain-Specific / Other,Databases,2
+datacenter,Domain-Specific / Other,Datacenter,2
+datadriven,Domain-Specific / Other,Datadriven,2
+datasets,Domain-Specific / Other,Datasets,2
+deadline,Domain-Specific / Other,Deadline,2
+debugging,Domain-Specific / Other,Debugging,2
+decision,Domain-Specific / Other,Decision,2
+delegation,Domain-Specific / Other,Delegation,2
+dental,Domain-Specific / Other,Dental,2
+deployment,Domain-Specific / Other,Deployment,2
+design,Domain-Specific / Other,Design,2
+designer,Domain-Specific / Other,Designer,2
+designing,Domain-Specific / Other,Designing,2
+detail,Domain-Specific / Other,Detail,2
+develop,Domain-Specific / Other,Develop,2
+developer,Domain-Specific / Other,Developer,2
+developers,Domain-Specific / Other,Developers,2
+development,Domain-Specific / Other,Development,2
+developmental,Domain-Specific / Other,Developmental,2
+dexterity,Domain-Specific / Other,Dexterity,2
+diagnosis,Domain-Specific / Other,Diagnosis,2
+digital,Domain-Specific / Other,Digital,2
+digitalization,Domain-Specific / Other,Digitalization,2
+diligence,Domain-Specific / Other,Diligence,2
+disaster,Domain-Specific / Other,Disaster,2
+discharge,Domain-Specific / Other,Discharge,2
+discovery,Domain-Specific / Other,Discovery,2
+documentation,Domain-Specific / Other,Documentation,2
+drafting,Domain-Specific / Other,Drafting,2
+driving,Domain-Specific / Other,Driving,2
+drug,Domain-Specific / Other,Drug,2
+electrician,Domain-Specific / Other,Electrician,2
+electricity,Domain-Specific / Other,Electricity,2
+electronic,Domain-Specific / Other,Electronic,2
+electronics,Domain-Specific / Other,Electronics,2
+electrophysiology,Domain-Specific / Other,Electrophysiology,2
+email,Domain-Specific / Other,Email,2
+embedded,Domain-Specific / Other,Embedded,2
+embedding,Domain-Specific / Other,Embedding,2
+engineering,Domain-Specific / Other,Engineering,2
+entrepreneur,Domain-Specific / Other,Entrepreneur,2
+environment,Domain-Specific / Other,Environment,2
+environmental,Domain-Specific / Other,Environmental,2
+escalation,Domain-Specific / Other,Escalation,2
+esthetics,Domain-Specific / Other,Esthetics,2
+estimate,Domain-Specific / Other,Estimate,2
+estimating,Domain-Specific / Other,Estimating,2
+evaluation,Domain-Specific / Other,Evaluation,2
+execution,Domain-Specific / Other,Execution,2
+facilitation,Domain-Specific / Other,Facilitation,2
+facilitator,Domain-Specific / Other,Facilitator,2
+facilities,Domain-Specific / Other,Facilities,2
+feedback,Domain-Specific / Other,Feedback,2
+finance,Domain-Specific / Other,Finance,2
+firmware,Domain-Specific / Other,Firmware,2
+forklift,Domain-Specific / Other,Forklift,2
+formulation,Domain-Specific / Other,Formulation,2
+framework,Domain-Specific / Other,Framework,2
+frameworks,Domain-Specific / Other,Frameworks,2
+gdpr,Domain-Specific / Other,Gdpr,2
+genomic,Domain-Specific / Other,Genomic,2
+genomics,Domain-Specific / Other,Genomics,2
+geographic,Domain-Specific / Other,Geographic,2
+getaaa,Domain-Specific / Other,Getaaa,2
+gis,Domain-Specific / Other,Gis,2
+github,Domain-Specific / Other,Github,2
+gitlab,Domain-Specific / Other,Gitlab,2
+glp,Domain-Specific / Other,Glp,2
+gmp,Domain-Specific / Other,Gmp,2
+grant,Domain-Specific / Other,Grant,2
+graphic,Domain-Specific / Other,Graphic,2
+graphics,Domain-Specific / Other,Graphics,2
+grooming,Domain-Specific / Other,Grooming,2
+guiding,Domain-Specific / Other,Guiding,2
+human,Domain-Specific / Other,Human,2
+hygiene,Domain-Specific / Other,Hygiene,2
+immunoassay,Domain-Specific / Other,Immunoassay,2
+innovation,Domain-Specific / Other,Innovation,2
+installation,Domain-Specific / Other,Installation,2
+instructional,Domain-Specific / Other,Instructional,2
+intelligence,Domain-Specific / Other,Intelligence,2
+inventories,Domain-Specific / Other,Inventories,2
+investigation,Domain-Specific / Other,Investigation,2
+ios,Domain-Specific / Other,Ios,2
+iot,Domain-Specific / Other,Iot,2
+jquery,Domain-Specific / Other,Jquery,2
+kinetics,Domain-Specific / Other,Kinetics,2
+labeling,Domain-Specific / Other,Labeling,2
+laser,Domain-Specific / Other,Laser,2
+learning,Domain-Specific / Other,Learning,2
+legal,Domain-Specific / Other,Legal,2
+machine,Domain-Specific / Other,Machine,2
+maintenance,Domain-Specific / Other,Maintenance,2
+marketing,Domain-Specific / Other,Marketing,2
+metabolomics,Domain-Specific / Other,Metabolomics,2
+microscopy,Domain-Specific / Other,Microscopy,2
+microsoft,Domain-Specific / Other,Microsoft,2
+modeling,Domain-Specific / Other,Modeling,2
+modelling,Domain-Specific / Other,Modelling,2
+motivating,Domain-Specific / Other,Motivating,2
+motivation,Domain-Specific / Other,Motivation,2
+narration,Domain-Specific / Other,Narration,2
+nist,Domain-Specific / Other,Nist,2
+nosql,Domain-Specific / Other,Nosql,2
+orchestration,Domain-Specific / Other,Orchestration,2
+orthodontic,Domain-Specific / Other,Orthodontic,2
+orthopedic,Domain-Specific / Other,Orthopedic,2
+outreach,Domain-Specific / Other,Outreach,2
+paralegal,Domain-Specific / Other,Paralegal,2
+pedagogy,Domain-Specific / Other,Pedagogy,2
+performance,Domain-Specific / Other,Performance,2
+photography,Domain-Specific / Other,Photography,2
+physician,Domain-Specific / Other,Physician,2
+physics,Domain-Specific / Other,Physics,2
+pilates,Domain-Specific / Other,Pilates,2
+plumbing,Domain-Specific / Other,Plumbing,2
+policy,Domain-Specific / Other,Policy,2
+postgres,Domain-Specific / Other,Postgres,2
+priorities,Domain-Specific / Other,Priorities,2
+problem,Domain-Specific / Other,Problem,2
+programming,Domain-Specific / Other,Programming,2
+project,Domain-Specific / Other,Project,2
+protocol,Domain-Specific / Other,Protocol,2
+recruiting,Domain-Specific / Other,Recruiting,2
+recruitment,Domain-Specific / Other,Recruitment,2
+regex,Domain-Specific / Other,Regex,2
+remote,Domain-Specific / Other,Remote,2
+research,Domain-Specific / Other,Research,2
+retail,Domain-Specific / Other,Retail,2
+scanning,Domain-Specific / Other,Scanning,2
+sharepoint,Domain-Specific / Other,Sharepoint,2
+simulation,Domain-Specific / Other,Simulation,2
+software,Domain-Specific / Other,Software,2
+spectroscopy,Domain-Specific / Other,Spectroscopy,2
+spreadsheets,Domain-Specific / Other,Spreadsheets,2
+statistics,Domain-Specific / Other,Statistics,2
+strategy,Domain-Specific / Other,Strategy,2
+supervision,Domain-Specific / Other,Supervision,2
+sustainability,Domain-Specific / Other,Sustainability,2
+technical,Domain-Specific / Other,Technical,2
+technology,Domain-Specific / Other,Technology,2
+testing,Domain-Specific / Other,Testing,2
+time,Domain-Specific / Other,Time,2
+transport,Domain-Specific / Other,Transport,2
+troubleshooting,Domain-Specific / Other,Troubleshooting,2
+usability,Domain-Specific / Other,Usability,2
+virtual,Domain-Specific / Other,Virtual,2
+visual,Domain-Specific / Other,Visual,2
+warehousing,Domain-Specific / Other,Warehousing,2
+academia,Engineering & Manufacturing,Academia,3
+academic,Engineering & Manufacturing,Academic,3
+academics,Engineering & Manufacturing,Academics,3
+academy,Engineering & Manufacturing,Academy,3
+aerospace,Engineering & Manufacturing,Aerospace,3
+automation,Engineering & Manufacturing,Automation,3
+bim,Engineering & Manufacturing,Bim,3
+biomaterials,Engineering & Manufacturing,Biomaterials,3
+cad,Engineering & Manufacturing,Cad,3
+cadence,Engineering & Manufacturing,Cadence,3
+calibration,Engineering & Manufacturing,Calibration,3
+calibrations,Engineering & Manufacturing,Calibrations,3
+campaign,Engineering & Manufacturing,Campaign,3
+campaigns,Engineering & Manufacturing,Campaigns,3
+civil,Engineering & Manufacturing,Civil,3
+cleanroom,Engineering & Manufacturing,Cleanroom,3
+drawing,Engineering & Manufacturing,Drawing,3
+drawings,Engineering & Manufacturing,Drawings,3
+electrical,Engineering & Manufacturing,Electrical,3
+electromechanical,Engineering & Manufacturing,Electromechanical,3
+fabrication,Engineering & Manufacturing,Fabrication,3
+geospatial,Engineering & Manufacturing,Geospatial,3
+geotechnical,Engineering & Manufacturing,Geotechnical,3
+hydraulic,Engineering & Manufacturing,Hydraulic,3
+hydraulics,Engineering & Manufacturing,Hydraulics,3
+inspection,Engineering & Manufacturing,Inspection,3
+kaizen,Engineering & Manufacturing,Kaizen,3
+machining,Engineering & Manufacturing,Machining,3
+manufacturing,Engineering & Manufacturing,Manufacturing,3
+materials,Engineering & Manufacturing,Materials,3
+metrology,Engineering & Manufacturing,Metrology,3
+robotics,Engineering & Manufacturing,Robotics,3
+structural,Engineering & Manufacturing,Structural,3
+validation,Engineering & Manufacturing,Validation,3
+welding,Engineering & Manufacturing,Welding,3
+accounting,Finance & Accounting,Accounting,3
+accreditation,Finance & Accounting,Accreditation,3
+accredited,Finance & Accounting,Accredited,3
+asset,Finance & Accounting,Asset,3
+assets,Finance & Accounting,Assets,3
+auditing,Finance & Accounting,Auditing,3
+auditor,Finance & Accounting,Auditor,3
+auditors,Finance & Accounting,Auditors,3
+audits,Finance & Accounting,Audits,3
+banking,Finance & Accounting,Banking,3
+bookkeeping,Finance & Accounting,Bookkeeping,3
+budgeting,Finance & Accounting,Budgeting,3
+compliance,Finance & Accounting,Compliance,3
+cybersecurity,Finance & Accounting,Cybersecurity,3
+devsecops,Finance & Accounting,Devsecops,3
+financial,Finance & Accounting,Financial,3
+financials,Finance & Accounting,Financials,3
+forecasting,Finance & Accounting,Forecasting,3
+fundraising,Finance & Accounting,Fundraising,3
+grants,Finance & Accounting,Grants,3
+investment,Finance & Accounting,Investment,3
+invoicing,Finance & Accounting,Invoicing,3
+lending,Finance & Accounting,Lending,3
+management,Finance & Accounting,Management,3
+mortgage,Finance & Accounting,Mortgage,3
+nonprofit,Finance & Accounting,Nonprofit,3
+payroll,Finance & Accounting,Payroll,3
+portfolio,Finance & Accounting,Portfolio,3
+reimbursement,Finance & Accounting,Reimbursement,3
+security,Finance & Accounting,Security,3
+anesthesia,Healthcare & Clinical,Anesthesia,3
+autoclave,Healthcare & Clinical,Autoclave,3
+biomedical,Healthcare & Clinical,Biomedical,3
+biopsy,Healthcare & Clinical,Biopsy,3
+brachytherapy,Healthcare & Clinical,Brachytherapy,3
+cardiology,Healthcare & Clinical,Cardiology,3
+catheter,Healthcare & Clinical,Catheter,3
+catheterization,Healthcare & Clinical,Catheterization,3
+catheters,Healthcare & Clinical,Catheters,3
+chemotherapy,Healthcare & Clinical,Chemotherapy,3
+chiropractic,Healthcare & Clinical,Chiropractic,3
+cytology,Healthcare & Clinical,Cytology,3
+dentistry,Healthcare & Clinical,Dentistry,3
+diagnostic,Healthcare & Clinical,Diagnostic,3
+dialysis,Healthcare & Clinical,Dialysis,3
+ehr,Healthcare & Clinical,Ehr,3
+emergency,Healthcare & Clinical,Emergency,3
+emr,Healthcare & Clinical,Emr,3
+epidural,Healthcare & Clinical,Epidural,3
+glucose,Healthcare & Clinical,Glucose,3
+healthcare,Healthcare & Clinical,Healthcare,3
+hematology,Healthcare & Clinical,Hematology,3
+hipaa,Healthcare & Clinical,Hipaa,3
+histology,Healthcare & Clinical,Histology,3
+histopathology,Healthcare & Clinical,Histopathology,3
+immunology,Healthcare & Clinical,Immunology,3
+inpatient,Healthcare & Clinical,Inpatient,3
+laboratory,Healthcare & Clinical,Laboratory,3
+laparoscopic,Healthcare & Clinical,Laparoscopic,3
+laparoscopy,Healthcare & Clinical,Laparoscopy,3
+medical,Healthcare & Clinical,Medical,3
+nephrology,Healthcare & Clinical,Nephrology,3
+neurology,Healthcare & Clinical,Neurology,3
+nursing,Healthcare & Clinical,Nursing,3
+nutrition,Healthcare & Clinical,Nutrition,3
+occupational,Healthcare & Clinical,Occupational,3
+oncology,Healthcare & Clinical,Oncology,3
+ophthalmology,Healthcare & Clinical,Ophthalmology,3
+paediatric,Healthcare & Clinical,Paediatric,3
+paramedicine,Healthcare & Clinical,Paramedicine,3
+pathology,Healthcare & Clinical,Pathology,3
+patient,Healthcare & Clinical,Patient,3
+patientcentered,Healthcare & Clinical,Patientcentered,3
+pharmacy,Healthcare & Clinical,Pharmacy,3
+physical,Healthcare & Clinical,Physical,3
+physiotherapy,Healthcare & Clinical,Physiotherapy,3
+psychiatry,Healthcare & Clinical,Psychiatry,3
+psychology,Healthcare & Clinical,Psychology,3
+radiology,Healthcare & Clinical,Radiology,3
+rehabilitation,Healthcare & Clinical,Rehabilitation,3
+respiratory,Healthcare & Clinical,Respiratory,3
+sterilization,Healthcare & Clinical,Sterilization,3
+therapy,Healthcare & Clinical,Therapy,3
+ultrasound,Healthcare & Clinical,Ultrasound,3
+access,IT Infrastructure & Security,Access,3
+accessibility,IT Infrastructure & Security,Accessibility,3
+accessible,IT Infrastructure & Security,Accessible,3
+accessioning,IT Infrastructure & Security,Accessioning,3
+ambulance,IT Infrastructure & Security,Ambulance,3
+anaplan,IT Infrastructure & Security,Anaplan,3
+android,IT Infrastructure & Security,Android,3
+anticipation,IT Infrastructure & Security,Anticipation,3
+antimalware,IT Infrastructure & Security,Antimalware,3
+apprenticeship,IT Infrastructure & Security,Apprenticeship,3
+apprenticeships,IT Infrastructure & Security,Apprenticeships,3
+authentication,IT Infrastructure & Security,Authentication,3
+authorization,IT Infrastructure & Security,Authorization,3
+backup,IT Infrastructure & Security,Backup,3
+backups,IT Infrastructure & Security,Backups,3
+balance,IT Infrastructure & Security,Balance,3
+balancing,IT Infrastructure & Security,Balancing,3
+blockchain,IT Infrastructure & Security,Blockchain,3
+caliper,IT Infrastructure & Security,Caliper,3
+calipers,IT Infrastructure & Security,Calipers,3
+cloud,IT Infrastructure & Security,Cloud,3
+cloudbased,IT Infrastructure & Security,Cloudbased,3
+cloudwatch,IT Infrastructure & Security,Cloudwatch,3
+configuration,IT Infrastructure & Security,Configuration,3
+devops,IT Infrastructure & Security,Devops,3
+diplomacy,IT Infrastructure & Security,Diplomacy,3
+discipline,IT Infrastructure & Security,Discipline,3
+dispatch,IT Infrastructure & Security,Dispatch,3
+dispatcher,IT Infrastructure & Security,Dispatcher,3
+dns,IT Infrastructure & Security,Dns,3
+encryption,IT Infrastructure & Security,Encryption,3
+incident,IT Infrastructure & Security,Incident,3
+landscaping,IT Infrastructure & Security,Landscaping,3
+leadership,IT Infrastructure & Security,Leadership,3
+mentorship,IT Infrastructure & Security,Mentorship,3
+microservices,IT Infrastructure & Security,Microservices,3
+monitoring,IT Infrastructure & Security,Monitoring,3
+multidisciplinary,IT Infrastructure & Security,Multidisciplinary,3
+networking,IT Infrastructure & Security,Networking,3
+ownership,IT Infrastructure & Security,Ownership,3
+planning,IT Infrastructure & Security,Planning,3
+routing,IT Infrastructure & Security,Routing,3
+scripting,IT Infrastructure & Security,Scripting,3
+server,IT Infrastructure & Security,Server,3
+serverless,IT Infrastructure & Security,Serverless,3
+shipping,IT Infrastructure & Security,Shipping,3
+virtualization,IT Infrastructure & Security,Virtualization,3
+wireless,IT Infrastructure & Security,Wireless,3
+bioprocess,Operations & Logistics,Bioprocess,2
+capacity,Operations & Logistics,Capacity,2
+contract,Operations & Logistics,Contract,2
+contracting,Operations & Logistics,Contracting,2
+contractors,Operations & Logistics,Contractors,2
+contracts,Operations & Logistics,Contracts,2
+inventory,Operations & Logistics,Inventory,2
+kanban,Operations & Logistics,Kanban,2
+logistics,Operations & Logistics,Logistics,2
+negotiation,Operations & Logistics,Negotiation,2
+operations,Operations & Logistics,Operations,2
+optimization,Operations & Logistics,Optimization,2
+procurement,Operations & Logistics,Procurement,2
+quality,Operations & Logistics,Quality,2
+safety,Operations & Logistics,Safety,2
+scheduling,Operations & Logistics,Scheduling,2
+training,Operations & Logistics,Training,2
+vendor,Operations & Logistics,Vendor,2
+workflow,Operations & Logistics,Workflow,2
+accountability,Soft Skills & Competencies,Accountability,1
+adaptability,Soft Skills & Competencies,Adaptability,1
+analytical,Soft Skills & Competencies,Analytical,1
+bioanalytical,Soft Skills & Competencies,Bioanalytical,1
+coaching,Soft Skills & Competencies,Coaching,1
+collaboration,Soft Skills & Competencies,Collaboration,1
+communication,Soft Skills & Competencies,Communication,1
+communications,Soft Skills & Competencies,Communications,1
+copywriting,Soft Skills & Competencies,Copywriting,1
+creativity,Soft Skills & Competencies,Creativity,1
+customerfocused,Soft Skills & Competencies,Customerfocused,1
+decisionmaking,Soft Skills & Competencies,Decisionmaking,1
+ethics,Soft Skills & Competencies,Ethics,1
+flexibility,Soft Skills & Competencies,Flexibility,1
+innovative,Soft Skills & Competencies,Innovative,1
+integrity,Soft Skills & Competencies,Integrity,1
+mentoring,Soft Skills & Competencies,Mentoring,1
+multitasking,Soft Skills & Competencies,Multitasking,1
+organizational,Soft Skills & Competencies,Organizational,1
+presentation,Soft Skills & Competencies,Presentation,1
+prioritization,Soft Skills & Competencies,Prioritization,1
+problemsolving,Soft Skills & Competencies,Problemsolving,1
+reporting,Soft Skills & Competencies,Reporting,1
+resilience,Soft Skills & Competencies,Resilience,1
+telecommunication,Soft Skills & Competencies,Telecommunication,1
+writing,Soft Skills & Competencies,Writing,1
+adobe,Technical Skills - Software & Programming,Adobe,4
+alteryx,Technical Skills - Software & Programming,Alteryx,4
+angular,Technical Skills - Software & Programming,Angular,4
+angularjs,Technical Skills - Software & Programming,Angularjs,4
+ansible,Technical Skills - Software & Programming,Ansible,4
+ansys,Technical Skills - Software & Programming,Ansys,4
+autocad,Technical Skills - Software & Programming,Autocad,4
+azure,Technical Skills - Software & Programming,Azure,4
+canva,Technical Skills - Software & Programming,Canva,4
+cisco,Technical Skills - Software & Programming,Cisco,4
+confluence,Technical Skills - Software & Programming,Confluence,4
+datadog,Technical Skills - Software & Programming,Datadog,4
+docker,Technical Skills - Software & Programming,Docker,4
+elasticsearch,Technical Skills - Software & Programming,Elasticsearch,4
+epic,Technical Skills - Software & Programming,Epic,4
+excel,Technical Skills - Software & Programming,Excel,4
+git,Technical Skills - Software & Programming,Git,4
+golang,Technical Skills - Software & Programming,Golang,4
+gradle,Technical Skills - Software & Programming,Gradle,4
+grafana,Technical Skills - Software & Programming,Grafana,4
+graphql,Technical Skills - Software & Programming,Graphql,4
+hadoop,Technical Skills - Software & Programming,Hadoop,4
+html,Technical Skills - Software & Programming,Html,4
+java,Technical Skills - Software & Programming,Java,4
+javascript,Technical Skills - Software & Programming,Javascript,4
+jenkins,Technical Skills - Software & Programming,Jenkins,4
+jira,Technical Skills - Software & Programming,Jira,4
+json,Technical Skills - Software & Programming,Json,4
+jupyter,Technical Skills - Software & Programming,Jupyter,4
+kafka,Technical Skills - Software & Programming,Kafka,4
+kubernetes,Technical Skills - Software & Programming,Kubernetes,4
+linux,Technical Skills - Software & Programming,Linux,4
+matlab,Technical Skills - Software & Programming,Matlab,4
+meditech,Technical Skills - Software & Programming,Meditech,4
+mongodb,Technical Skills - Software & Programming,Mongodb,4
+mysql,Technical Skills - Software & Programming,Mysql,4
+nodejs,Technical Skills - Software & Programming,Nodejs,4
+oracle,Technical Skills - Software & Programming,Oracle,4
+photoshop,Technical Skills - Software & Programming,Photoshop,4
+plc,Technical Skills - Software & Programming,Plc,4
+postgresql,Technical Skills - Software & Programming,Postgresql,4
+powerbi,Technical Skills - Software & Programming,Powerbi,4
+powershell,Technical Skills - Software & Programming,Powershell,4
+python,Technical Skills - Software & Programming,Python,4
+pytorch,Technical Skills - Software & Programming,Pytorch,4
+quickbooks,Technical Skills - Software & Programming,Quickbooks,4
+salesforce,Technical Skills - Software & Programming,Salesforce,4
+scikit,Technical Skills - Software & Programming,Scikit,4
+selenium,Technical Skills - Software & Programming,Selenium,4
+solidworks,Technical Skills - Software & Programming,Solidworks,4
+splunk,Technical Skills - Software & Programming,Splunk,4
+sql,Technical Skills - Software & Programming,Sql,4
+tableau,Technical Skills - Software & Programming,Tableau,4
+terraform,Technical Skills - Software & Programming,Terraform,4
+typescript,Technical Skills - Software & Programming,Typescript,4
+unix,Technical Skills - Software & Programming,Unix,4
+vmware,Technical Skills - Software & Programming,Vmware,4
+xml,Technical Skills - Software & Programming,Xml,4
+yaml,Technical Skills - Software & Programming,Yaml,4
