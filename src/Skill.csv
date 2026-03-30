@@ -1,4 +1,4 @@
-﻿skill,category,normalized_skill,resume_match_weight
+skill,category,normalized_skill,resume_match_weight
 acca,Certifications & Credentials,Acca,5
 acls,Certifications & Credentials,Acls,5
 bls,Certifications & Credentials,Bls,5
@@ -15,7 +15,6 @@ aama,Domain-Specific / Other,Aama,2
 aanp,Domain-Specific / Other,Aanp,2
 aashto,Domain-Specific / Other,Aashto,2
 abdominal,Domain-Specific / Other,Abdominal,2
-abilities,Domain-Specific / Other,Abilities,2
 ablation,Domain-Specific / Other,Ablation,2
 ablations,Domain-Specific / Other,Ablations,2
 abms,Domain-Specific / Other,Abms,2
@@ -30,28 +29,13 @@ abstraction,Domain-Specific / Other,Abstraction,2
 aca,Domain-Specific / Other,Aca,2
 acceleration,Domain-Specific / Other,Acceleration,2
 accelerator,Domain-Specific / Other,Accelerator,2
-accomplishment,Domain-Specific / Other,Accomplishment,2
-accomplishments,Domain-Specific / Other,Accomplishments,2
-accountable,Domain-Specific / Other,Accountable,2
-accountancy,Domain-Specific / Other,Accountancy,2
-accountant,Domain-Specific / Other,Accountant,2
 accrual,Domain-Specific / Other,Accrual,2
 accruals,Domain-Specific / Other,Accruals,2
-accuracy,Domain-Specific / Other,Accuracy,2
-accurate,Domain-Specific / Other,Accurate,2
 acme,Domain-Specific / Other,Acme,2
 acoustical,Domain-Specific / Other,Acoustical,2
 acoustics,Domain-Specific / Other,Acoustics,2
 acquisition,Domain-Specific / Other,Acquisition,2
 acquisitions,Domain-Specific / Other,Acquisitions,2
-adaptable,Domain-Specific / Other,Adaptable,2
-adaptation,Domain-Specific / Other,Adaptation,2
-adaptive,Domain-Specific / Other,Adaptive,2
-administer,Domain-Specific / Other,Administer,2
-administering,Domain-Specific / Other,Administering,2
-administration,Domain-Specific / Other,Administration,2
-administrative,Domain-Specific / Other,Administrative,2
-administrator,Domain-Specific / Other,Administrator,2
 admissions,Domain-Specific / Other,Admissions,2
 adolescent,Domain-Specific / Other,Adolescent,2
 adolescents,Domain-Specific / Other,Adolescents,2
@@ -81,7 +65,6 @@ altium,Domain-Specific / Other,Altium,2
 ambulation,Domain-Specific / Other,Ambulation,2
 ambulatory,Domain-Specific / Other,Ambulatory,2
 analysis,Domain-Specific / Other,Analysis,2
-analyst,Domain-Specific / Other,Analyst,2
 analytics,Domain-Specific / Other,Analytics,2
 analyze,Domain-Specific / Other,Analyze,2
 analyzers,Domain-Specific / Other,Analyzers,2
@@ -96,14 +79,11 @@ api,Domain-Specific / Other,Api,2
 apics,Domain-Specific / Other,Apics,2
 apis,Domain-Specific / Other,Apis,2
 apparel,Domain-Specific / Other,Apparel,2
-application,Domain-Specific / Other,Application,2
-applications,Domain-Specific / Other,Applications,2
 appointments,Domain-Specific / Other,Appointments,2
 appraisal,Domain-Specific / Other,Appraisal,2
 appraisals,Domain-Specific / Other,Appraisals,2
 arcgis,Domain-Specific / Other,Arcgis,2
 archaeology,Domain-Specific / Other,Archaeology,2
-architect,Domain-Specific / Other,Architect,2
 architects,Domain-Specific / Other,Architects,2
 architectural,Domain-Specific / Other,Architectural,2
 architecture,Domain-Specific / Other,Architecture,2
@@ -140,7 +120,6 @@ bacterial,Domain-Specific / Other,Bacterial,2
 bacteriology,Domain-Specific / Other,Bacteriology,2
 baking,Domain-Specific / Other,Baking,2
 bankruptcy,Domain-Specific / Other,Bankruptcy,2
-barista,Domain-Specific / Other,Barista,2
 bartending,Domain-Specific / Other,Bartending,2
 baseline,Domain-Specific / Other,Baseline,2
 batch,Domain-Specific / Other,Batch,2
@@ -177,10 +156,7 @@ branding,Domain-Specific / Other,Branding,2
 brazing,Domain-Specific / Other,Brazing,2
 buildroot,Domain-Specific / Other,Buildroot,2
 bundle,Domain-Specific / Other,Bundle,2
-business,Domain-Specific / Other,Business,2
 calling,Domain-Specific / Other,Calling,2
-capabilities,Domain-Specific / Other,Capabilities,2
-capability,Domain-Specific / Other,Capability,2
 cardiac,Domain-Specific / Other,Cardiac,2
 cardiopulmonary,Domain-Specific / Other,Cardiopulmonary,2
 cardiovascular,Domain-Specific / Other,Cardiovascular,2
@@ -190,8 +166,6 @@ casas,Domain-Specific / Other,Casas,2
 case,Domain-Specific / Other,Case,2
 cataloging,Domain-Specific / Other,Cataloging,2
 catering,Domain-Specific / Other,Catering,2
-certification,Domain-Specific / Other,Certification,2
-certifications,Domain-Specific / Other,Certifications,2
 certified,Domain-Specific / Other,Certified,2
 chemical,Domain-Specific / Other,Chemical,2
 chemicals,Domain-Specific / Other,Chemicals,2
@@ -211,7 +185,6 @@ compensation,Domain-Specific / Other,Compensation,2
 compliant,Domain-Specific / Other,Compliant,2
 computation,Domain-Specific / Other,Computation,2
 computational,Domain-Specific / Other,Computational,2
-computer,Domain-Specific / Other,Computer,2
 computeraided,Domain-Specific / Other,Computeraided,2
 computerized,Domain-Specific / Other,Computerized,2
 computers,Domain-Specific / Other,Computers,2
@@ -231,7 +204,6 @@ coordinate,Domain-Specific / Other,Coordinate,2
 coordinating,Domain-Specific / Other,Coordinating,2
 coordination,Domain-Specific / Other,Coordination,2
 counseling,Domain-Specific / Other,Counseling,2
-counselor,Domain-Specific / Other,Counselor,2
 creative,Domain-Specific / Other,Creative,2
 credentials,Domain-Specific / Other,Credentials,2
 critical,Domain-Specific / Other,Critical,2
@@ -262,14 +234,10 @@ decision,Domain-Specific / Other,Decision,2
 delegation,Domain-Specific / Other,Delegation,2
 dental,Domain-Specific / Other,Dental,2
 deployment,Domain-Specific / Other,Deployment,2
-design,Domain-Specific / Other,Design,2
-designer,Domain-Specific / Other,Designer,2
 designing,Domain-Specific / Other,Designing,2
 detail,Domain-Specific / Other,Detail,2
 develop,Domain-Specific / Other,Develop,2
-developer,Domain-Specific / Other,Developer,2
 developers,Domain-Specific / Other,Developers,2
-development,Domain-Specific / Other,Development,2
 developmental,Domain-Specific / Other,Developmental,2
 dexterity,Domain-Specific / Other,Dexterity,2
 diagnosis,Domain-Specific / Other,Diagnosis,2
@@ -283,7 +251,6 @@ documentation,Domain-Specific / Other,Documentation,2
 drafting,Domain-Specific / Other,Drafting,2
 driving,Domain-Specific / Other,Driving,2
 drug,Domain-Specific / Other,Drug,2
-electrician,Domain-Specific / Other,Electrician,2
 electricity,Domain-Specific / Other,Electricity,2
 electronic,Domain-Specific / Other,Electronic,2
 electronics,Domain-Specific / Other,Electronics,2
@@ -302,7 +269,6 @@ estimating,Domain-Specific / Other,Estimating,2
 evaluation,Domain-Specific / Other,Evaluation,2
 execution,Domain-Specific / Other,Execution,2
 facilitation,Domain-Specific / Other,Facilitation,2
-facilitator,Domain-Specific / Other,Facilitator,2
 facilities,Domain-Specific / Other,Facilities,2
 feedback,Domain-Specific / Other,Feedback,2
 finance,Domain-Specific / Other,Finance,2
@@ -360,11 +326,9 @@ orchestration,Domain-Specific / Other,Orchestration,2
 orthodontic,Domain-Specific / Other,Orthodontic,2
 orthopedic,Domain-Specific / Other,Orthopedic,2
 outreach,Domain-Specific / Other,Outreach,2
-paralegal,Domain-Specific / Other,Paralegal,2
 pedagogy,Domain-Specific / Other,Pedagogy,2
 performance,Domain-Specific / Other,Performance,2
 photography,Domain-Specific / Other,Photography,2
-physician,Domain-Specific / Other,Physician,2
 physics,Domain-Specific / Other,Physics,2
 pilates,Domain-Specific / Other,Pilates,2
 plumbing,Domain-Specific / Other,Plumbing,2
@@ -373,26 +337,21 @@ postgres,Domain-Specific / Other,Postgres,2
 priorities,Domain-Specific / Other,Priorities,2
 problem,Domain-Specific / Other,Problem,2
 programming,Domain-Specific / Other,Programming,2
-project,Domain-Specific / Other,Project,2
 protocol,Domain-Specific / Other,Protocol,2
 recruiting,Domain-Specific / Other,Recruiting,2
 recruitment,Domain-Specific / Other,Recruitment,2
 regex,Domain-Specific / Other,Regex,2
 remote,Domain-Specific / Other,Remote,2
-research,Domain-Specific / Other,Research,2
 retail,Domain-Specific / Other,Retail,2
 scanning,Domain-Specific / Other,Scanning,2
 sharepoint,Domain-Specific / Other,Sharepoint,2
 simulation,Domain-Specific / Other,Simulation,2
-software,Domain-Specific / Other,Software,2
 spectroscopy,Domain-Specific / Other,Spectroscopy,2
 spreadsheets,Domain-Specific / Other,Spreadsheets,2
 statistics,Domain-Specific / Other,Statistics,2
 strategy,Domain-Specific / Other,Strategy,2
 supervision,Domain-Specific / Other,Supervision,2
 sustainability,Domain-Specific / Other,Sustainability,2
-technical,Domain-Specific / Other,Technical,2
-technology,Domain-Specific / Other,Technology,2
 testing,Domain-Specific / Other,Testing,2
 time,Domain-Specific / Other,Time,2
 transport,Domain-Specific / Other,Transport,2
@@ -459,7 +418,6 @@ grants,Finance & Accounting,Grants,3
 investment,Finance & Accounting,Investment,3
 invoicing,Finance & Accounting,Invoicing,3
 lending,Finance & Accounting,Lending,3
-management,Finance & Accounting,Management,3
 mortgage,Finance & Accounting,Mortgage,3
 nonprofit,Finance & Accounting,Nonprofit,3
 payroll,Finance & Accounting,Payroll,3
@@ -486,7 +444,6 @@ emergency,Healthcare & Clinical,Emergency,3
 emr,Healthcare & Clinical,Emr,3
 epidural,Healthcare & Clinical,Epidural,3
 glucose,Healthcare & Clinical,Glucose,3
-healthcare,Healthcare & Clinical,Healthcare,3
 hematology,Healthcare & Clinical,Hematology,3
 hipaa,Healthcare & Clinical,Hipaa,3
 histology,Healthcare & Clinical,Histology,3
@@ -507,8 +464,6 @@ ophthalmology,Healthcare & Clinical,Ophthalmology,3
 paediatric,Healthcare & Clinical,Paediatric,3
 paramedicine,Healthcare & Clinical,Paramedicine,3
 pathology,Healthcare & Clinical,Pathology,3
-patient,Healthcare & Clinical,Patient,3
-patientcentered,Healthcare & Clinical,Patientcentered,3
 pharmacy,Healthcare & Clinical,Pharmacy,3
 physical,Healthcare & Clinical,Physical,3
 physiotherapy,Healthcare & Clinical,Physiotherapy,3
@@ -520,9 +475,6 @@ respiratory,Healthcare & Clinical,Respiratory,3
 sterilization,Healthcare & Clinical,Sterilization,3
 therapy,Healthcare & Clinical,Therapy,3
 ultrasound,Healthcare & Clinical,Ultrasound,3
-access,IT Infrastructure & Security,Access,3
-accessibility,IT Infrastructure & Security,Accessibility,3
-accessible,IT Infrastructure & Security,Accessible,3
 accessioning,IT Infrastructure & Security,Accessioning,3
 ambulance,IT Infrastructure & Security,Ambulance,3
 anaplan,IT Infrastructure & Security,Anaplan,3
@@ -578,7 +530,6 @@ inventory,Operations & Logistics,Inventory,2
 kanban,Operations & Logistics,Kanban,2
 logistics,Operations & Logistics,Logistics,2
 negotiation,Operations & Logistics,Negotiation,2
-operations,Operations & Logistics,Operations,2
 optimization,Operations & Logistics,Optimization,2
 procurement,Operations & Logistics,Procurement,2
 quality,Operations & Logistics,Quality,2

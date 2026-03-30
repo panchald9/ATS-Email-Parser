@@ -9,7 +9,7 @@ Fallback source:         Skill.csv (optional)
 Output saved to:         output/resume_parsed.json
 
 Performance defaults:
-    - Fast-response mode is ON by default (use --full-accuracy to disable)
+    - Full extraction is ON by default (use --fast-response for speed mode)
     - Skill source default is auto (CSV-first, SkillNer fallback)
 
 Optional speed-ups (install if available):
@@ -124,9 +124,6 @@ SKILL_SOURCE = 'auto'
 # SkillNer performance tuning
 FAST_SKILLNER_MODE = True
 SKILLNER_MAX_TEXT_CHARS = 2200
-
-# ATS section formatting
-ROLE_TARGET = 'general'  # general | fullstack | backend | analyst
 
 # Logging & Error Handling
 ENABLE_VALIDATION = True  # Enable accuracy validation
@@ -370,6 +367,61 @@ def _normalize_phone_candidate(raw):
     return f'+{digits}' if cleaned.startswith('+') else digits
 
 
+def _extract_doc_with_word_com(path):
+    """Fallback .doc text extraction on Windows using installed Microsoft Word."""
+    word = None
+    doc = None
+    try:
+        import win32com.client
+    except Exception as exc:
+        return None, f"pywin32 not available for Word COM fallback: {str(exc)[:120]}"
+
+    try:
+        word = win32com.client.Dispatch("Word.Application")
+        word.Visible = False
+        word.DisplayAlerts = 0
+
+        doc = word.Documents.Open(path, ConfirmConversions=False, ReadOnly=True, AddToRecentFiles=False)
+        text = (doc.Content.Text or '').strip()
+        if text:
+            return text, None
+        return None, "Word COM returned empty text"
+    except Exception as exc:
+        return None, f"Word COM extraction error: {str(exc)[:140]}"
+    finally:
+        try:
+            if doc is not None:
+                doc.Close(False)
+        except Exception:
+            pass
+        try:
+            if word is not None:
+                word.Quit()
+        except Exception:
+            pass
+
+
+def _clean_extracted_text(text):
+    """Normalize raw extractor output into stable line-oriented plain text."""
+    if not text:
+        return ''
+
+    # Normalize newline styles first.
+    text = text.replace('\r\n', '\n').replace('\r', '\n')
+
+    # Convert vertical tab / form feed to line breaks.
+    text = text.replace('\x0b', '\n').replace('\x0c', '\n')
+
+    # Strip remaining control chars except tab/newline.
+    text = re.sub(r'[\x00-\x08\x0e-\x1f\x7f]', ' ', text)
+
+    # Normalize spacing while preserving line boundaries.
+    text = re.sub(r'[ \t]+', ' ', text)
+    text = re.sub(r'\n{3,}', '\n\n', text)
+
+    return text.strip()
+
+
 def extract_text(path):
     """Extract text from PDF, DOCX, or DOC files with error handling."""
     if not os.path.exists(path):
@@ -408,13 +460,36 @@ def extract_text(path):
                     if not text or not text.strip():
                         error = "DOC extraction returned empty text"
                 except Exception as textract_err:
-                    error = f"textract error: {str(textract_err)[:100]}"
+                    textract_msg = str(textract_err)
+                    if 'antiword' in textract_msg.lower():
+                        fallback_text, fallback_err = _extract_doc_with_word_com(path)
+                        if fallback_text and fallback_text.strip():
+                            text = fallback_text
+                            error = None
+                        else:
+                            error = (
+                                "textract error: antiword missing for .doc support; "
+                                + (fallback_err or "Word COM fallback unavailable")
+                            )
+                    else:
+                        error = f"textract error: {textract_msg[:100]}"
             else:
-                error = "textract not installed (pip install textract for .doc support)"
+                fallback_text, fallback_err = _extract_doc_with_word_com(path)
+                if fallback_text and fallback_text.strip():
+                    text = fallback_text
+                    error = None
+                else:
+                    error = (
+                        "textract not installed (pip install textract for .doc support); "
+                        + (fallback_err or "Word COM fallback unavailable")
+                    )
         
         else:
             error = f"Unsupported file extension: {ext}"
         
+        if text:
+            text = _clean_extracted_text(text)
+
         # If we got an error but still have some text, log warning but return text
         if error and text:
             if ENABLE_DETAILED_LOGGING:
@@ -452,7 +527,28 @@ def normalize_caps(line):
 
 
 def title_case(s):
-    return ' '.join(w.capitalize() for w in s.split())
+    def _case_word(word):
+        alpha = re.sub(r'[^A-Za-z]', '', word)
+        if not alpha:
+            return word
+
+        # Preserve initials formatting like K., .K., A.B.
+        if len(alpha) <= 2 and '.' in word:
+            return re.sub(r'[a-z]', lambda m: m.group(0).upper(), word)
+
+        chars = list(word)
+        seen_alpha = False
+        for i, ch in enumerate(chars):
+            if not ch.isalpha():
+                continue
+            if not seen_alpha:
+                chars[i] = ch.upper()
+                seen_alpha = True
+            else:
+                chars[i] = ch.lower()
+        return ''.join(chars)
+
+    return ' '.join(_case_word(w) for w in s.split())
 
 
 def is_spaced(line):
@@ -498,6 +594,8 @@ def sanitize_candidate(candidate):
     c = re.sub(r'(?i)^\s*resume\s+of\s*', '', c)
     c = re.sub(r'^[\-–—:\.\)\(\[\]\{\}\|\s]+', '', c)
     c = re.sub(r'[\-–—:\.\)\(\[\]\{\}\|\s]+$', '', c)
+    # Normalize dotted initials such as ".k." -> ".K."
+    c = re.sub(r'\b([a-z])(?=\.)', lambda m: m.group(1).upper(), c)
     c = re.sub(r'\s+', ' ', c)
     if c.isupper() or c.islower():
         c = normalize_name_case(c)
@@ -522,7 +620,16 @@ def has_name_case_pattern(line):
         return True
     if len(words) == 1:
         return words[0][0].isupper()
-    capped = sum(1 for w in words if w[0].isupper())
+    def _looks_name_cased(word):
+        alpha = re.sub(r'[^A-Za-z]', '', word)
+        if not alpha:
+            return False
+        # Allow initials like K / K. / .K.
+        if len(alpha) == 1:
+            return True
+        return alpha[0].isupper()
+
+    capped = sum(1 for w in words if _looks_name_cased(w))
     return capped == len(words)
 
 
@@ -575,6 +682,10 @@ def is_valid(name, allow_single=False):
         alpha = re.sub(r'[^A-Za-z]', '', w)
         if not alpha:
             continue
+        if len(alpha) == 1:
+            # Accept initials regardless of case if punctuation/initial style is present.
+            if w.endswith('.') or w.isupper() or w.startswith('.'):
+                continue
         if not alpha[0].isupper():
             return False
         if len(alpha) < 2:
@@ -760,10 +871,9 @@ def _resolve_process_folder():
     parser.add_argument('--limit', dest='limit', type=int, default=0)
     parser.add_argument('--random-order', action='store_true')
     parser.add_argument('--seed', dest='seed', type=int, default=42)
-    parser.add_argument('--role', dest='role', default=ROLE_TARGET)
     parser.add_argument('--fast-response', dest='fast_response', action='store_true')
     parser.add_argument('--full-accuracy', dest='fast_response', action='store_false')
-    parser.set_defaults(fast_response=True)
+    parser.set_defaults(fast_response=False)
     args, _ = parser.parse_known_args()
 
     cli_folder = (args.folder or '').strip().strip('"')
@@ -777,9 +887,6 @@ def _resolve_process_folder():
         source = SKILL_SOURCE
     workers = max(1, int(args.workers or 1))
     limit = max(0, int(args.limit or 0))
-    role = (args.role or ROLE_TARGET).strip().lower()
-    if role not in {'general', 'fullstack', 'backend', 'analyst'}:
-        role = ROLE_TARGET
     return (
         chosen_folder,
         args.no_validation,
@@ -788,7 +895,6 @@ def _resolve_process_folder():
         limit,
         bool(args.random_order),
         int(args.seed),
-        role,
         bool(args.fast_response),
     )
 
@@ -1256,6 +1362,41 @@ def _infer_gender_from_name(name):
     return None
 
 
+def _infer_gender_from_text_context(text):
+    """Infer gender from common self-identification cues in resume text."""
+    if not text:
+        return None
+
+    t = normalize_compact_text(text).lower()
+    if not t:
+        return None
+
+    # Strong direct statements.
+    if re.search(r'\b(?:i\s*am|im|i\'m)\s+male\b', t):
+        return 'Male'
+    if re.search(r'\b(?:i\s*am|im|i\'m)\s+female\b', t):
+        return 'Female'
+
+    male_score = 0
+    female_score = 0
+
+    # Honorific/title cues.
+    male_score += len(re.findall(r'\b(?:mr\.?|mister|sir|shri)\b', t)) * 2
+    female_score += len(re.findall(r'\b(?:mrs\.?|ms\.?|miss|madam|smt)\b', t)) * 2
+
+    # Pronoun cues in first part of resume (avoid overfitting on long docs).
+    head = t[:3500]
+    male_score += len(re.findall(r'\b(?:he|him|his)\b', head))
+    female_score += len(re.findall(r'\b(?:she|her|hers)\b', head))
+
+    if male_score >= 2 and male_score >= female_score + 1:
+        return 'Male'
+    if female_score >= 2 and female_score >= male_score + 1:
+        return 'Female'
+
+    return None
+
+
 def extract_gender(text, name=None):
     if not text:
         return _infer_gender_from_name(name)
@@ -1279,6 +1420,11 @@ def extract_gender(text, name=None):
         return 'Male'
     if GENDER_EARLY_FEMALE_RE.search(early):
         return 'Female'
+
+    # Additional fallback: use self-identification cues from resume narrative.
+    inferred_from_text = _infer_gender_from_text_context(t)
+    if inferred_from_text:
+        return inferred_from_text
 
     # Last fallback: infer from the extracted candidate name.
     return _infer_gender_from_name(name)
@@ -1445,6 +1591,8 @@ GENERIC_SKILL_STOPWORDS = {
     'professional', 'project', 'projects', 'quality', 'reporting', 'research', 'responsibility',
     'responsibilities', 'safety', 'skills', 'solution', 'solutions', 'strategy', 'support',
     'systems', 'technical', 'technology', 'testing', 'training', 'troubleshooting', 'work',
+    'certification', 'certifications',
+    'manufacturing', 'materials', 'balance', 'routing',
 }
 
 # Keep essential one-word technical skills even when generic filtering is active.
@@ -1454,206 +1602,6 @@ STRONG_SINGLE_WORD_SKILLS = {
     'mysql', 'oracle', 'php', 'postgresql', 'powerbi', 'powershell', 'python', 'sap',
     'selenium', 'snowflake', 'sql', 'tableau', 'terraform', 'typescript', 'unix', 'xml', 'yaml',
 }
-
-ATS_CATEGORY_ORDER = [
-    'Programming Languages',
-    'Frameworks & Libraries',
-    'Web Technologies',
-    'Databases',
-    'Cloud & DevOps',
-    'Tools & Platforms',
-    'Testing & QA',
-    'Operating Systems',
-    'Methodologies',
-]
-
-ROLE_CATEGORY_PRIORITY = {
-    'general': ATS_CATEGORY_ORDER,
-    'fullstack': [
-        'Programming Languages',
-        'Frameworks & Libraries',
-        'Web Technologies',
-        'Databases',
-        'Cloud & DevOps',
-        'Tools & Platforms',
-        'Testing & QA',
-        'Operating Systems',
-        'Methodologies',
-    ],
-    'backend': [
-        'Programming Languages',
-        'Frameworks & Libraries',
-        'Databases',
-        'Web Technologies',
-        'Cloud & DevOps',
-        'Tools & Platforms',
-        'Testing & QA',
-        'Operating Systems',
-        'Methodologies',
-    ],
-    'analyst': [
-        'Databases',
-        'Tools & Platforms',
-        'Testing & QA',
-        'Methodologies',
-        'Programming Languages',
-        'Web Technologies',
-        'Cloud & DevOps',
-        'Frameworks & Libraries',
-        'Operating Systems',
-    ],
-}
-
-SKILL_CANONICAL_MAP = {
-    'java script': 'JavaScript',
-    'javascript': 'JavaScript',
-    'node js': 'Node.js',
-    'nodejs': 'Node.js',
-    'node.js': 'Node.js',
-    'reactjs': 'React',
-    'angularjs': 'AngularJS',
-    'html': 'HTML5',
-    'css': 'CSS3',
-    'rest': 'REST APIs',
-    'restful': 'REST APIs',
-    'rest api': 'REST APIs',
-    'rest apis': 'REST APIs',
-    'micro services': 'Microservices',
-    'microservice': 'Microservices',
-    'api': 'APIs',
-    'apis': 'APIs',
-    'ci/cd': 'CI/CD',
-    'cicd': 'CI/CD',
-    'k8s': 'Kubernetes',
-    'postgres': 'PostgreSQL',
-    'postgresql': 'PostgreSQL',
-    'ms sql': 'SQL Server',
-    'mssql': 'SQL Server',
-    'qa': 'Quality Assurance',
-    'junit': 'JUnit',
-}
-
-NOISY_SKILL_TERMS = {
-    'analyze', 'automation', 'backend', 'business', 'case', 'client', 'coding',
-    'collection', 'configure', 'configuration', 'controller', 'controllers', 'cycle',
-    'database', 'databases', 'deploy', 'deployment', 'develop', 'developers',
-    'designing', 'discovery', 'innovative', 'presentation', 'programming', 'routing',
-    'scripting', 'server', 'software', 'time', 'usability', 'validation', 'writing',
-    'analytics', 'architectural', 'architecture', 'asset', 'authentication', 'authorization',
-    'branding', 'certification', 'certified', 'claims', 'collaboration', 'communications',
-    'coordinate', 'crm', 'customer', 'customers', 'dashboards', 'electronic', 'electronics',
-    'feedback', 'financial', 'grooming', 'human', 'intelligence', 'kanban', 'lean',
-    'legal', 'nosql', 'patient', 'policy', 'portfolio', 'priorities', 'protocol', 'retail',
-    'security', 'visual', 'workflow', 'accuracy',
-}
-
-
-def _pretty_skill_name(skill):
-    """Normalize common variants into ATS-friendly canonical skill names."""
-    if not skill:
-        return ''
-    raw = re.sub(r'[`\"\']', '', skill).strip()
-    raw = re.sub(r'\s+', ' ', raw)
-    key = raw.lower()
-    key = re.sub(r'[^a-z0-9+#./\s-]', '', key)
-    key = re.sub(r'\s+', ' ', key).strip()
-    if key in SKILL_CANONICAL_MAP:
-        return SKILL_CANONICAL_MAP[key]
-
-    explicit = {
-        'aws': 'AWS', 'azure': 'Azure', 'sql': 'SQL', 'xml': 'XML', 'json': 'JSON',
-        'yaml': 'YAML', 'jira': 'Jira', 'git': 'Git', 'github': 'GitHub',
-        'linux': 'Linux', 'unix': 'Unix', 'oracle': 'Oracle', 'mysql': 'MySQL',
-        'mongodb': 'MongoDB', 'jenkins': 'Jenkins', 'docker': 'Docker',
-        'kubernetes': 'Kubernetes', 'selenium': 'Selenium', 'python': 'Python',
-        'java': 'Java', 'golang': 'Go', 'go': 'Go', 'apache': 'Apache',
-        'jquery': 'jQuery', 'tableau': 'Tableau', 'confluence': 'Confluence',
-        'sharepoint': 'SharePoint', 'powershell': 'PowerShell', 'hadoop': 'Hadoop',
-        'iot': 'IoT', 'android': 'Android',
-    }
-    if key in explicit:
-        return explicit[key]
-
-    # Keep simple title-cased fallback for unknown terms.
-    return ' '.join(part.capitalize() for part in raw.split())
-
-
-def _is_noise_skill_for_ats(skill):
-    """Filter generic/non-technical tokens before ATS section formatting."""
-    if not skill:
-        return True
-    normalized = normalize_skill_key(skill)
-    if not normalized:
-        return True
-    if normalized in STRONG_SINGLE_WORD_SKILLS:
-        return False
-    if normalized in NOISY_SKILL_TERMS:
-        return True
-    if normalized in BLACKLIST:
-        return True
-    if _is_weak_generic_skill(skill):
-        return True
-    return False
-
-
-def _categorize_skill_ats(pretty_skill):
-    """Map canonical skill names to ATS categories."""
-    s = pretty_skill.lower()
-
-    if s in {'java', 'python', 'javascript', 'sql', 'go', 'c', 'c#', 'c++', 'php', 'typescript'}:
-        return 'Programming Languages'
-    if s in {'spring', 'spring boot', 'hibernate', 'django', 'flask', 'react', 'angular', 'angularjs', 'node.js', 'microservices', 'jquery', 'apache'}:
-        return 'Frameworks & Libraries'
-    if s in {'html5', 'css3', 'ajax', 'rest apis', 'apis', 'json', 'xml', 'yaml', 'soap'}:
-        return 'Web Technologies'
-    if s in {'oracle', 'mysql', 'mongodb', 'postgresql', 'sql server', 'db2', 'dynamodb', 'cassandra'}:
-        return 'Databases'
-    if s in {'aws', 'azure', 'docker', 'kubernetes', 'jenkins', 'ci/cd', 'terraform'}:
-        return 'Cloud & DevOps'
-    if s in {'git', 'github', 'jira', 'confluence', 'sharepoint', 'tableau', 'postman', 'powerbi', 'hadoop', 'iot'}:
-        return 'Tools & Platforms'
-    if s in {'selenium', 'junit', 'quality assurance', 'test automation', 'postman'}:
-        return 'Testing & QA'
-    if s in {'linux', 'unix', 'windows', 'android', 'macos'}:
-        return 'Operating Systems'
-    if s in {'agile', 'scrum', 'kanban', 'sdlc', 'lean', 'waterfall'}:
-        return 'Methodologies'
-
-    return 'Tools & Platforms'
-
-
-def build_ats_skills_section(skills, role='general'):
-    """Create a concise ATS-friendly skills section grouped by category."""
-    role = (role or 'general').strip().lower()
-    if role not in ROLE_CATEGORY_PRIORITY:
-        role = 'general'
-
-    categorized = {cat: [] for cat in ATS_CATEGORY_ORDER}
-    seen = set()
-    for skill in skills or []:
-        if _is_noise_skill_for_ats(skill):
-            continue
-        pretty = _pretty_skill_name(skill)
-        key = normalize_skill_key(pretty)
-        if not pretty or not key or key in seen:
-            continue
-        seen.add(key)
-        cat = _categorize_skill_ats(pretty)
-        if pretty not in categorized[cat]:
-            categorized[cat].append(pretty)
-
-    lines = ['Technical Skills']
-    total_lines = 1
-    for category in ROLE_CATEGORY_PRIORITY[role]:
-        values = categorized.get(category, [])[:8]
-        if not values:
-            continue
-        lines.append(f"- {category}: {', '.join(values)}")
-        total_lines += 1
-        if total_lines >= 10:
-            break
-
-    return '\n'.join(lines)
 
 SKILL_SECTION_HEADER_RE = re.compile(
     r'(?i)\b('
@@ -1692,6 +1640,13 @@ def _is_weak_generic_skill(skill):
 
     words = re.findall(r'[A-Za-z0-9+#]+', skill.lower())
     if not words:
+        return True
+
+    # Reject fragmented tokens like "e e" or "t t" from OCR/NER noise.
+    if len(words) >= 2 and all(len(w) == 1 for w in words):
+        return True
+
+    if normalized in {'com', 'iam'}:
         return True
 
     # Most false positives are single generic words from resume narrative text.
@@ -1734,12 +1689,17 @@ def load_skills_from_csv(csv_path):
         # Detect format: does it have our generated columns?
         has_skill_col = 'skill' in [fn.strip().lower() for fn in fieldnames]
         has_norm_col  = 'normalized_skill' in [fn.strip().lower() for fn in fieldnames]
+        has_weight_col = 'resume_match_weight' in [fn.strip().lower() for fn in fieldnames]
 
         for row in reader:
             if has_skill_col:
                 # Our generated CSV: use both 'skill' (raw) and 'normalized_skill' (display)
                 raw_skill  = row.get('skill', '').strip()
                 norm_skill = row.get('normalized_skill', '').strip() if has_norm_col else ''
+                try:
+                    weight = int((row.get('resume_match_weight', '0') or '0').strip()) if has_weight_col else 0
+                except Exception:
+                    weight = 0
 
                 for candidate in filter(None, [raw_skill, norm_skill]):
                     candidate = re.sub(r'\s+', ' ', candidate).strip(" \t\r\n\"'")
@@ -1747,6 +1707,12 @@ def load_skills_from_csv(csv_path):
                         if candidate:
                             invalid_count += 1
                         continue
+                    # Ignore low-weight one-word generic tokens from broad CSV inventories.
+                    words = re.findall(r'[A-Za-z0-9+#]+', candidate.lower())
+                    if has_weight_col and weight <= 2 and len(words) == 1:
+                        w = words[0]
+                        if w not in STRONG_SINGLE_WORD_SKILLS and len(w) <= 12:
+                            continue
                     key = normalize_skill_key(candidate)
                     if key and key not in seen:
                         seen.add(key)
@@ -1787,6 +1753,153 @@ def build_skill_matchers(skills_list):
     return matchers
 
 
+INFERRED_SKILL_RULES = [
+    (r'\bextrusion\b', 'Extrusion'),
+    (r'\binjection\s*mou?ld(?:ing)?\b', 'Injection Molding'),
+    (r'\bplastic\s+processing\b', 'Plastic Processing'),
+    (r'\bquality\s*assurance\b|\bq\.?\s*a\.?\b', 'Quality Assurance'),
+    (r'\bquality\s*control\b|\bq\.?\s*c\.?\b', 'Quality Control'),
+    (r'\binternal\s+auditor\b|\bauditing\b', 'Internal Auditing'),
+    (r'\binspection\b', 'Inspection'),
+    (r'\bprocess\s+parameter\b', 'Process Parameter Control'),
+    (r'\btroubleshooting\b', 'Troubleshooting'),
+    (r'\bprocess\s+improvement\b|\bkaizen\b', 'Process Improvement'),
+    (r'\bproduction\s+schedul(?:e|ing)\b', 'Production Scheduling'),
+    (r'\bmanpower\s+planning\b', 'Manpower Planning'),
+    (r'\braw\s+material\b', 'Raw Material Handling'),
+    (r'\blaboratory\s+testing\b|\bmaterial\s+testing\b', 'Material Testing'),
+    (r'\bmfi\b|\bmelt\s+flow\s+index\b', 'MFI Testing'),
+    (r'\btensile\s+strength\b', 'Tensile Testing'),
+    (r'\bimpact\b', 'Impact Testing'),
+    (r'\bhydro\s*pressure\b', 'Hydro Pressure Testing'),
+    (r'\bdensity\b', 'Density Testing'),
+    (r'\biso\s*9001(?::?2015)?\b', 'ISO 9001'),
+    (r'\biso\s*14001(?::?2015)?\b', 'ISO 14001'),
+    (r'\biso\s*45001(?::?2018)?\b|\bohsas\s*18001(?::?2007)?\b', 'ISO 45001'),
+    (r'\bhdpe\b', 'HDPE'),
+    (r'\bupvc\b', 'UPVC'),
+    (r'\bcpvc\b', 'CPVC'),
+    (r'\bppr\b', 'PPR'),
+    (r'\bdrip\s+irrigation\b', 'Drip Irrigation Systems'),
+    (r'\bcgmp\b|\bgmp\b', 'cGMP'),
+    (r'\bprocess\s+validation\b', 'Process Validation'),
+    (r'\btablet\s+manufacturing\b', 'Tablet Manufacturing'),
+    (r'\bwet\s+granulation\b', 'Wet Granulation'),
+    (r'\bdry\s+granulation\b', 'Dry Granulation'),
+    (r'\bcompression\b', 'Compression'),
+    (r'\bcoating\b', 'Coating'),
+    (r'\boee\b|\boverall\s+equipment\s+efficien(?:cy|t)\b', 'OEE (Overall Equipment Efficiency)'),
+    (r'\bequipment\s+calibration\b|\bcalibration\b', 'Equipment Calibration'),
+    (r'\bequipment\s+qualification\b', 'Equipment Qualification'),
+    (r'\bfda\b', 'FDA Compliance'),
+    (r'\bregulatory\s+compliance\b', 'Regulatory Compliance'),
+    (r'\bsop\b', 'SOP Documentation'),
+    (r'\bbmr\b|\bmfr\b|\bbatch\s+manufacturing\b', 'Batch Manufacturing (BMR/MFR)'),
+    (r'\bquality\s+audit\b|\baudits?\b', 'Quality Audits'),
+    (r'\bchange\s+control\b', 'Change Control'),
+    (r'\bdeviation\s+management\b|\bdeviation\b', 'Deviation Management'),
+    (r'\bsap\b.*\bproduction\b|\bproduction\b.*\bsap\b', 'SAP Production Module'),
+    (r'\bexcel\b', 'Excel'),
+    (r'\bword\b', 'Word'),
+    (r'\bpower\s*point\b|\bpowerpoint\b', 'PowerPoint'),
+]
+
+
+def infer_context_skills(text, existing_skills=None):
+    """Infer technical skills from experience/project text when explicit skill sections are weak."""
+    if not text:
+        return []
+
+    inferred = []
+    seen = {normalize_skill_key(s) for s in (existing_skills or []) if s}
+    haystack = normalize_compact_text(text).lower()
+
+    for pattern, skill in INFERRED_SKILL_RULES:
+        if re.search(pattern, haystack, re.I):
+            key = normalize_skill_key(skill)
+            if key and key not in seen and not _is_weak_generic_skill(skill):
+                seen.add(key)
+                inferred.append(skill)
+
+    # Role-based fallback inference
+    if re.search(r'\bquality\s+supervisor\b|\bqa\s+engineer\b|\bquality\s+engineer\b', haystack):
+        for skill in ['Quality Assurance', 'Inspection', 'Quality Control']:
+            key = normalize_skill_key(skill)
+            if key not in seen:
+                seen.add(key)
+                inferred.append(skill)
+
+    if re.search(r'\bproduction\b', haystack):
+        for skill in ['Production Planning', 'Process Control']:
+            key = normalize_skill_key(skill)
+            if key not in seen:
+                seen.add(key)
+                inferred.append(skill)
+
+    return inferred
+
+
+def cleanup_extracted_skills(text, extracted_skills):
+    """Normalize, deduplicate, remove weak tokens, and prefer multi-word ATS skills."""
+    if not extracted_skills:
+        return []
+
+    alias_map = {
+        'gmp': 'cGMP',
+        'cgmp': 'cGMP',
+        'processvalidation': 'Process Validation',
+        'tabletmanufacturing': 'Tablet Manufacturing',
+        'wetgranulation': 'Wet Granulation',
+        'drygranulation': 'Dry Granulation',
+        'sop': 'SOP Documentation',
+        'bmr': 'Batch Manufacturing (BMR/MFR)',
+        'mfr': 'Batch Manufacturing (BMR/MFR)',
+        'oee': 'OEE (Overall Equipment Efficiency)',
+    }
+    weak_exact = {'manufacturing', 'materials', 'balance', 'routing'}
+
+    normalized = []
+    seen = set()
+
+    for raw in extracted_skills:
+        if not raw:
+            continue
+        key = normalize_skill_key(raw)
+        if not key:
+            continue
+
+        skill = alias_map.get(key, raw)
+        skill_key = normalize_skill_key(skill)
+        if not skill_key or skill_key in seen:
+            continue
+
+        if skill_key in weak_exact:
+            continue
+        if _is_weak_generic_skill(skill):
+            continue
+
+        seen.add(skill_key)
+        normalized.append(skill)
+
+    # Prefer multi-word skills over single generic tokens.
+    token_sets = [
+        set(re.findall(r'[a-z0-9+#]+', s.lower()))
+        for s in normalized
+        if len(re.findall(r'[a-z0-9+#]+', s.lower())) > 1
+    ]
+
+    final_skills = []
+    for skill in normalized:
+        words = re.findall(r'[a-z0-9+#]+', skill.lower())
+        if len(words) == 1:
+            token = words[0]
+            if any(token in ts for ts in token_sets):
+                continue
+        final_skills.append(skill)
+
+    return final_skills
+
+
 def extract_skills_from_resume(text, skills_list, compiled_skill_matchers=None):
     """
     Return every skill from skills_list that appears in the resume text.
@@ -1796,6 +1909,7 @@ def extract_skills_from_resume(text, skills_list, compiled_skill_matchers=None):
         return []
 
     section_text, has_section = _extract_skill_section_text(text)
+    # Fallback to compact full text when resume has no explicit skills section.
     normalized_text = section_text if has_section else normalize_compact_text(text)
     matched_skills = []
     seen = set()
@@ -1989,11 +2103,11 @@ def extract_skills_from_dataset(text):
     if not _ensure_skillner_loaded():
         return []
 
+    # Use section text when available; otherwise use reduced full text fallback.
     section_text, has_section = _extract_skill_section_text(text)
-    if has_section:
-        text_for_skillner = section_text
-    else:
-        text_for_skillner = _build_fast_skillner_text(text) if FAST_SKILLNER_MODE else text
+    text_for_skillner = section_text if has_section else _build_fast_skillner_text(text)
+    if not text_for_skillner:
+        return []
 
     try:
         result = skill_extractor.annotate(text_for_skillner)
@@ -2023,7 +2137,7 @@ def extract_skills_from_dataset(text):
     return candidates
 
 
-def _extract_resume_record(fname, process_folder, skill_source, skills_list, compiled_skill_matchers=None, role='general', fast_response=False):
+def _extract_resume_record(fname, process_folder, skill_source, skills_list, compiled_skill_matchers=None, fast_response=False):
     """Extract all fields for a single resume file."""
     path = os.path.join(process_folder, fname)
     try:
@@ -2048,7 +2162,11 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list, com
             if not matched_skills:
                 matched_skills = extract_skills_from_dataset(text)
 
-        ats_skills_section = build_ats_skills_section(matched_skills, role=role)
+        inferred_skills = infer_context_skills(text, matched_skills)
+        if inferred_skills:
+            matched_skills.extend(inferred_skills)
+
+        matched_skills = cleanup_extracted_skills(text, matched_skills)
 
         return {
             'file': fname,
@@ -2058,7 +2176,6 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list, com
             'gender': gender,
             'address': address,
             'skills': matched_skills,
-            'skills_section': ats_skills_section,
         }
     except Exception as exc:
         return {
@@ -2069,7 +2186,6 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list, com
             'gender': None,
             'address': None,
             'skills': [],
-            'skills_section': 'Technical Skills',
             'error': str(exc),
         }
 
@@ -2090,7 +2206,6 @@ if __name__ == '__main__':
         max_files,
         random_order,
         random_seed,
-        role_target,
         fast_response_mode,
     ) = _resolve_process_folder()
     runtime_validation_enabled = ENABLE_VALIDATION and not disable_validation
@@ -2171,7 +2286,6 @@ if __name__ == '__main__':
     if max_files > 0:
         mode = "random sample" if random_order else "first files"
         log_message(f"[*] Limit enabled: {len(resume_files)} file(s), mode={mode}, seed={random_seed}")
-    log_message(f"[*] Role target for ATS skill section: {role_target}")
     if fast_response_mode:
         log_message("[*] Fast-response mode: ON (validation off, gender/address skipped, csv-preferred in auto)")
     if disable_validation:
@@ -2245,7 +2359,6 @@ if __name__ == '__main__':
                 skill_source,
                 skills_list,
                 compiled_skill_matchers,
-                role_target,
                 fast_response_mode,
             )
             results.append(record)
@@ -2274,7 +2387,6 @@ if __name__ == '__main__':
                     skill_source,
                     skills_list,
                     compiled_skill_matchers,
-                    role_target,
                     fast_response_mode,
                 ): (i, fname)
                 for i, fname in indexed_files

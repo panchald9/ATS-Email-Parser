@@ -1,299 +1,23 @@
 {
-  "total_resumes": 91,
-  "average_score": 85.63,
-  "min_score": 36.0,
-  "max_score": 96.0,
+  "total_resumes": 41,
+  "average_score": 74.96,
+  "min_score": 0.0,
+  "max_score": 95.0,
   "quality_distribution": {
-    "excellent": 65,
-    "good": 11,
-    "fair": 9,
-    "poor": 6
+    "excellent": 27,
+    "good": 6,
+    "fair": 1,
+    "poor": 7
   },
   "quality_percentage": {
-    "excellent": 71.4,
-    "good": 12.1,
-    "fair": 9.9,
-    "poor": 6.6
+    "excellent": 65.9,
+    "good": 14.6,
+    "fair": 2.4,
+    "poor": 17.1
   },
   "validated_results": [
     {
-      "file": "8.pdf",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 50,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "39/39 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 85.83333333333333,
-      "quality_level": "good"
-    },
-    {
-      "file": "4.pdf",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "1/1 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 95.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "7.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": false,
-          "score": 0,
-          "reason": "Email is empty"
-        },
-        "phone": {
-          "valid": false,
-          "score": 0,
-          "reason": "Phone is empty"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 90,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "46/46 skills valid"
-        }
-      },
-      "warnings": [
-        "Email issue: Email is empty",
-        "Phone issue: Phone is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 61.666666666666664,
-      "quality_level": "fair"
-    },
-    {
-      "file": "11.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "42/42 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 95.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "6.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": false,
-          "score": 0,
-          "reason": "Phone is empty"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "71/71 skills valid"
-        }
-      },
-      "warnings": [
-        "Phone issue: Phone is empty"
-      ],
-      "overall_score": 79.16666666666667,
-      "quality_level": "good"
-    },
-    {
-      "file": "3.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": false,
-          "score": 0,
-          "reason": "Email is empty"
-        },
-        "phone": {
-          "valid": false,
-          "score": 0,
-          "reason": "Phone is empty"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "59/59 skills valid"
-        }
-      },
-      "warnings": [
-        "Email issue: Email is empty",
-        "Phone issue: Phone is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 60.833333333333336,
-      "quality_level": "fair"
-    },
-    {
-      "file": "10.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "67/67 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 90.83333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "12.docx",
+      "file": "2_pdf.pdf",
       "fields": {
         "name": {
           "valid": true,
@@ -323,7 +47,7 @@
         "skills": {
           "valid": true,
           "score": 95.0,
-          "reason": "70/70 skills valid"
+          "reason": "8/8 skills valid"
         }
       },
       "warnings": [],
@@ -331,7 +55,7 @@
       "quality_level": "excellent"
     },
     {
-      "file": "15.docx",
+      "file": "4_pdf.pdf",
       "fields": {
         "name": {
           "valid": true,
@@ -344,278 +68,9 @@
           "reason": "Email valid"
         },
         "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
           "valid": true,
           "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "33/33 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "14.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "64/64 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "9.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "79/79 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 94.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "18.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": false,
-          "score": 0,
-          "reason": "Address is empty"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "24/24 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 95.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "13.docx",
-      "fields": {
-        "name": {
-          "valid": false,
-          "score": 0,
-          "reason": "Name is empty"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "60/60 skills valid"
-        }
-      },
-      "warnings": [
-        "Name issue: Name is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 70.0,
-      "quality_level": "fair"
-    },
-    {
-      "file": "2.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "86/86 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "16.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "52/52 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "20.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
+          "reason": "Valid international format with country code"
         },
         "gender": {
           "valid": true,
@@ -630,243 +85,15 @@
         "skills": {
           "valid": true,
           "score": 95.0,
-          "reason": "32/32 skills valid"
+          "reason": "5/5 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 93.33333333333333,
+      "overall_score": 94.16666666666667,
       "quality_level": "excellent"
     },
     {
-      "file": "17.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "22/22 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 94.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "19.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": false,
-          "score": 40,
-          "reason": "Too many skills (101 > 100, likely noise)"
-        }
-      },
-      "warnings": [],
-      "overall_score": 83.0,
-      "quality_level": "good"
-    },
-    {
-      "file": "22.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "57/57 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "21.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "36/36 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "26.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "33/33 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "23.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "23/23 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "31.pdf",
+      "file": "3_pdf.pdf",
       "fields": {
         "name": {
           "valid": true,
@@ -896,7 +123,7 @@
         "skills": {
           "valid": true,
           "score": 95.0,
-          "reason": "4/4 skills valid"
+          "reason": "12/12 skills valid"
         }
       },
       "warnings": [],
@@ -904,7 +131,121 @@
       "quality_level": "excellent"
     },
     {
-      "file": "24.docx",
+      "file": "1_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "29/29 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 92.5,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "5_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": false,
+          "score": 0,
+          "reason": "Address is empty"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "7/7 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 95.0,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "7_doc.docx",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 70,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "6/6 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 90.83333333333333,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "6_doc.docx",
       "fields": {
         "name": {
           "valid": true,
@@ -934,7 +275,7 @@
         "skills": {
           "valid": true,
           "score": 95.0,
-          "reason": "21/21 skills valid"
+          "reason": "3/3 skills valid"
         }
       },
       "warnings": [],
@@ -942,7 +283,7 @@
       "quality_level": "excellent"
     },
     {
-      "file": "25.docx",
+      "file": "2_doc.docx",
       "fields": {
         "name": {
           "valid": true,
@@ -950,14 +291,52 @@
           "reason": "Valid name format"
         },
         "email": {
-          "valid": false,
-          "score": 0,
-          "reason": "Email is empty"
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
         },
         "phone": {
-          "valid": false,
-          "score": 0,
-          "reason": "Phone is empty"
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 70,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "19/19 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 90.83333333333333,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "9_doc.docx",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
         },
         "gender": {
           "valid": true,
@@ -972,19 +351,751 @@
         "skills": {
           "valid": true,
           "score": 95.0,
-          "reason": "26/26 skills valid"
+          "reason": "1/1 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 92.5,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "8_doc.docx",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "10/10 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 93.33333333333333,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "12_doc.doc",
+      "fields": {
+        "name": {
+          "valid": false,
+          "score": 0,
+          "reason": "Name is empty"
+        },
+        "email": {
+          "valid": false,
+          "score": 0,
+          "reason": "Email is empty"
+        },
+        "phone": {
+          "valid": false,
+          "score": 0,
+          "reason": "Phone is empty"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": false,
+          "score": 0,
+          "reason": "Address is empty"
+        },
+        "skills": {
+          "valid": false,
+          "score": 0,
+          "reason": "No skills extracted"
         }
       },
       "warnings": [
+        "Extraction error: Failed to extract from 12_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)",
+        "Name issue: Name is empty",
         "Email issue: Email is empty",
         "Phone issue: Phone is empty",
         "⚠️ Missing critical fields (name or email)"
       ],
-      "overall_score": 60.833333333333336,
-      "quality_level": "fair"
+      "overall_score": 0.0,
+      "quality_level": "poor"
     },
     {
-      "file": "33.docx",
+      "file": "3_doc.docx",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 85,
+          "reason": "Valid generic international format"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "22/22 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 91.66666666666667,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "12_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": false,
+          "score": 0,
+          "reason": "Phone is empty"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 95,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "1/1 skills valid"
+        }
+      },
+      "warnings": [
+        "Phone issue: Phone is empty"
+      ],
+      "overall_score": 79.16666666666667,
+      "quality_level": "good"
+    },
+    {
+      "file": "5_doc.docx",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "15/15 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 93.33333333333333,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "4_doc.docx",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "22/22 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 93.33333333333333,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "16_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 95,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "8/8 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 95.0,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "1_doc.doc",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "10/10 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 93.33333333333333,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "15_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": false,
+          "score": 0,
+          "reason": "Name is empty"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "2/2 skills valid"
+        }
+      },
+      "warnings": [
+        "Name issue: Name is empty",
+        "⚠️ Missing critical fields (name or email)"
+      ],
+      "overall_score": 76.66666666666667,
+      "quality_level": "good"
+    },
+    {
+      "file": "18_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "6/6 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 92.5,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "19_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": false,
+          "score": 0,
+          "reason": "Email is empty"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "5/5 skills valid"
+        }
+      },
+      "warnings": [
+        "Email issue: Email is empty",
+        "⚠️ Missing critical fields (name or email)"
+      ],
+      "overall_score": 76.66666666666667,
+      "quality_level": "good"
+    },
+    {
+      "file": "20_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "3/3 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 93.33333333333333,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "17_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "2/2 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 92.5,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "22_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 70,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "6/6 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 90.0,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "23_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "8/8 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 92.5,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "24_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "3/3 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 94.0,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "25_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 95,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "9/9 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 95.0,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "26_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 70,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "4/4 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 90.0,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "20_doc.doc",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "4/4 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 93.33333333333333,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "27_pdf.pdf",
       "fields": {
         "name": {
           "valid": true,
@@ -1014,7 +1125,7 @@
         "skills": {
           "valid": true,
           "score": 95.0,
-          "reason": "39/39 skills valid"
+          "reason": "7/7 skills valid"
         }
       },
       "warnings": [
@@ -1026,45 +1137,227 @@
       "quality_level": "fair"
     },
     {
-      "file": "29.docx",
+      "file": "30_doc.doc",
       "fields": {
         "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
+          "valid": false,
+          "score": 0,
+          "reason": "Name is empty"
         },
         "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
+          "valid": false,
+          "score": 0,
+          "reason": "Email is empty"
         },
         "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
+          "valid": false,
+          "score": 0,
+          "reason": "Phone is empty"
         },
         "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
         },
         "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
+          "valid": false,
+          "score": 0,
+          "reason": "Address is empty"
         },
         "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "32/32 skills valid"
+          "valid": false,
+          "score": 0,
+          "reason": "No skills extracted"
         }
       },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
+      "warnings": [
+        "Extraction error: Failed to extract from 30_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)",
+        "Name issue: Name is empty",
+        "Email issue: Email is empty",
+        "Phone issue: Phone is empty",
+        "⚠️ Missing critical fields (name or email)"
+      ],
+      "overall_score": 0.0,
+      "quality_level": "poor"
     },
     {
-      "file": "35.docx",
+      "file": "40_doc.doc",
+      "fields": {
+        "name": {
+          "valid": false,
+          "score": 0,
+          "reason": "Name is empty"
+        },
+        "email": {
+          "valid": false,
+          "score": 0,
+          "reason": "Email is empty"
+        },
+        "phone": {
+          "valid": false,
+          "score": 0,
+          "reason": "Phone is empty"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": false,
+          "score": 0,
+          "reason": "Address is empty"
+        },
+        "skills": {
+          "valid": false,
+          "score": 0,
+          "reason": "No skills extracted"
+        }
+      },
+      "warnings": [
+        "Extraction error: Failed to extract from 40_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)",
+        "Name issue: Name is empty",
+        "Email issue: Email is empty",
+        "Phone issue: Phone is empty",
+        "⚠️ Missing critical fields (name or email)"
+      ],
+      "overall_score": 0.0,
+      "quality_level": "poor"
+    },
+    {
+      "file": "45_doc.doc",
+      "fields": {
+        "name": {
+          "valid": false,
+          "score": 0,
+          "reason": "Name is empty"
+        },
+        "email": {
+          "valid": false,
+          "score": 0,
+          "reason": "Email is empty"
+        },
+        "phone": {
+          "valid": false,
+          "score": 0,
+          "reason": "Phone is empty"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": false,
+          "score": 0,
+          "reason": "Address is empty"
+        },
+        "skills": {
+          "valid": false,
+          "score": 0,
+          "reason": "No skills extracted"
+        }
+      },
+      "warnings": [
+        "Extraction error: Failed to extract from 45_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)",
+        "Name issue: Name is empty",
+        "Email issue: Email is empty",
+        "Phone issue: Phone is empty",
+        "⚠️ Missing critical fields (name or email)"
+      ],
+      "overall_score": 0.0,
+      "quality_level": "poor"
+    },
+    {
+      "file": "59_doc.doc",
+      "fields": {
+        "name": {
+          "valid": false,
+          "score": 0,
+          "reason": "Name is empty"
+        },
+        "email": {
+          "valid": false,
+          "score": 0,
+          "reason": "Email is empty"
+        },
+        "phone": {
+          "valid": false,
+          "score": 0,
+          "reason": "Phone is empty"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": false,
+          "score": 0,
+          "reason": "Address is empty"
+        },
+        "skills": {
+          "valid": false,
+          "score": 0,
+          "reason": "No skills extracted"
+        }
+      },
+      "warnings": [
+        "Extraction error: Failed to extract from 59_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)",
+        "Name issue: Name is empty",
+        "Email issue: Email is empty",
+        "Phone issue: Phone is empty",
+        "⚠️ Missing critical fields (name or email)"
+      ],
+      "overall_score": 0.0,
+      "quality_level": "poor"
+    },
+    {
+      "file": "160_doc.doc",
+      "fields": {
+        "name": {
+          "valid": false,
+          "score": 0,
+          "reason": "Name is empty"
+        },
+        "email": {
+          "valid": false,
+          "score": 0,
+          "reason": "Email is empty"
+        },
+        "phone": {
+          "valid": false,
+          "score": 0,
+          "reason": "Phone is empty"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": false,
+          "score": 0,
+          "reason": "Address is empty"
+        },
+        "skills": {
+          "valid": false,
+          "score": 0,
+          "reason": "No skills extracted"
+        }
+      },
+      "warnings": [
+        "Extraction error: Failed to extract from 160_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)",
+        "Name issue: Name is empty",
+        "Email issue: Email is empty",
+        "Phone issue: Phone is empty",
+        "⚠️ Missing critical fields (name or email)"
+      ],
+      "overall_score": 0.0,
+      "quality_level": "poor"
+    },
+    {
+      "file": "14_pdf.pdf",
       "fields": {
         "name": {
           "valid": true,
@@ -1088,1580 +1381,23 @@
         },
         "address": {
           "valid": true,
-          "score": 85,
+          "score": 95,
           "reason": "Address appears valid"
         },
         "skills": {
           "valid": true,
           "score": 95.0,
-          "reason": "64/64 skills valid"
+          "reason": "9/9 skills valid"
         }
       },
       "warnings": [
         "Phone issue: Phone is empty"
       ],
-      "overall_score": 77.5,
+      "overall_score": 79.16666666666667,
       "quality_level": "good"
     },
     {
-      "file": "30.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "53/53 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "32.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "62/62 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 90.83333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "27.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "66/66 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "28.docx",
-      "fields": {
-        "name": {
-          "valid": false,
-          "score": 0,
-          "reason": "Name is empty"
-        },
-        "email": {
-          "valid": false,
-          "score": 0,
-          "reason": "Email is empty"
-        },
-        "phone": {
-          "valid": false,
-          "score": 0,
-          "reason": "Phone is empty"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "40/40 skills valid"
-        }
-      },
-      "warnings": [
-        "Name issue: Name is empty",
-        "Email issue: Email is empty",
-        "Phone issue: Phone is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 36.0,
-      "quality_level": "poor"
-    },
-    {
-      "file": "34.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "65/65 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "40.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "28/28 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 95.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "37.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "35/35 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 90.83333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "42.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": false,
-          "score": 0,
-          "reason": "Email is empty"
-        },
-        "phone": {
-          "valid": false,
-          "score": 0,
-          "reason": "Phone is empty"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "18/18 skills valid"
-        }
-      },
-      "warnings": [
-        "Email issue: Email is empty",
-        "Phone issue: Phone is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 60.833333333333336,
-      "quality_level": "fair"
-    },
-    {
-      "file": "36.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "73/73 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 89.16666666666667,
-      "quality_level": "good"
-    },
-    {
-      "file": "38.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "47/47 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 91.66666666666667,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "39.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "49/49 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 91.66666666666667,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "41.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "58/58 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 90.83333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "45.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "33/33 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 90.83333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "47.docx",
-      "fields": {
-        "name": {
-          "valid": false,
-          "score": 0,
-          "reason": "Name is empty"
-        },
-        "email": {
-          "valid": false,
-          "score": 0,
-          "reason": "Email is empty"
-        },
-        "phone": {
-          "valid": false,
-          "score": 0,
-          "reason": "Phone is empty"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "34/34 skills valid"
-        }
-      },
-      "warnings": [
-        "Name issue: Name is empty",
-        "Email issue: Email is empty",
-        "Phone issue: Phone is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 36.0,
-      "quality_level": "poor"
-    },
-    {
-      "file": "43.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "62/62 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "48.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "59/59 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 91.66666666666667,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "44.docx",
-      "fields": {
-        "name": {
-          "valid": false,
-          "score": 0,
-          "reason": "Name is empty"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "58/58 skills valid"
-        }
-      },
-      "warnings": [
-        "Name issue: Name is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 75.0,
-      "quality_level": "good"
-    },
-    {
-      "file": "46.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "62/62 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 96.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "49.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "25/25 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 95.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "51.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": false,
-          "score": 0,
-          "reason": "Email is empty"
-        },
-        "phone": {
-          "valid": false,
-          "score": 0,
-          "reason": "Phone is empty"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "56/56 skills valid"
-        }
-      },
-      "warnings": [
-        "Email issue: Email is empty",
-        "Phone issue: Phone is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 60.833333333333336,
-      "quality_level": "fair"
-    },
-    {
-      "file": "50.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "46/46 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 90.83333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "52.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "50/50 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 96.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "58.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "41/41 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 90.83333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "54.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "27/27 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 95.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "59.docx",
-      "fields": {
-        "name": {
-          "valid": false,
-          "score": 0,
-          "reason": "Name is empty"
-        },
-        "email": {
-          "valid": false,
-          "score": 0,
-          "reason": "Email is empty"
-        },
-        "phone": {
-          "valid": false,
-          "score": 0,
-          "reason": "Phone is empty"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "42/42 skills valid"
-        }
-      },
-      "warnings": [
-        "Name issue: Name is empty",
-        "Email issue: Email is empty",
-        "Phone issue: Phone is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 38.0,
-      "quality_level": "poor"
-    },
-    {
-      "file": "56.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": false,
-          "score": 0,
-          "reason": "Email is empty"
-        },
-        "phone": {
-          "valid": false,
-          "score": 0,
-          "reason": "Phone is empty"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "40/40 skills valid"
-        }
-      },
-      "warnings": [
-        "Email issue: Email is empty",
-        "Phone issue: Phone is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 60.833333333333336,
-      "quality_level": "fair"
-    },
-    {
-      "file": "53.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "95/95 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "55.docx",
-      "fields": {
-        "name": {
-          "valid": false,
-          "score": 0,
-          "reason": "Name is empty"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "75/75 skills valid"
-        }
-      },
-      "warnings": [
-        "Name issue: Name is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 75.0,
-      "quality_level": "good"
-    },
-    {
-      "file": "63.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "60/60 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "64.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "77/77 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "60.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "65/65 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 90.83333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "61.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "62/62 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 90.83333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "62.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "75/75 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "65.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "78/78 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "66.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "61/61 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "68.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "26/26 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 89.16666666666667,
-      "quality_level": "good"
-    },
-    {
-      "file": "70.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": false,
-          "score": 0,
-          "reason": "Email is empty"
-        },
-        "phone": {
-          "valid": false,
-          "score": 0,
-          "reason": "Phone is empty"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "48/48 skills valid"
-        }
-      },
-      "warnings": [
-        "Email issue: Email is empty",
-        "Phone issue: Phone is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 60.833333333333336,
-      "quality_level": "fair"
-    },
-    {
-      "file": "73.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "20/20 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "67.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "58/58 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 92.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "74.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "38/38 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "69.docx",
+      "file": "21_pdf.pdf",
       "fields": {
         "name": {
           "valid": true,
@@ -2691,7 +1427,7 @@
         "skills": {
           "valid": true,
           "score": 95.0,
-          "reason": "44/44 skills valid"
+          "reason": "7/7 skills valid"
         }
       },
       "warnings": [
@@ -2702,7 +1438,45 @@
       "quality_level": "good"
     },
     {
-      "file": "71.docx",
+      "file": "9_pdf.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": true,
+          "score": 70,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "1/1 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 91.0,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "10_pdf.pdf",
       "fields": {
         "name": {
           "valid": true,
@@ -2732,7 +1506,7 @@
         "skills": {
           "valid": true,
           "score": 95.0,
-          "reason": "73/73 skills valid"
+          "reason": "7/7 skills valid"
         }
       },
       "warnings": [],
@@ -2740,7 +1514,7 @@
       "quality_level": "excellent"
     },
     {
-      "file": "76.docx",
+      "file": "28_pdf.pdf",
       "fields": {
         "name": {
           "valid": true,
@@ -2758,47 +1532,9 @@
           "reason": "Valid Indian phone (10 digits)"
         },
         "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "45/45 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 95.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "78.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
         },
         "address": {
           "valid": true,
@@ -2807,358 +1543,16 @@
         },
         "skills": {
           "valid": true,
-          "score": 95.0,
-          "reason": "40/40 skills valid"
+          "score": 88.0,
+          "reason": "4/5 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 93.33333333333333,
+      "overall_score": 92.6,
       "quality_level": "excellent"
     },
     {
-      "file": "77.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "34/34 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "79.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "36/36 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "72.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "71/71 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "80.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "50/50 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 95.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "83.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "23/23 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "75.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "55/55 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "86.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "25/25 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "81.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "67/67 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "87.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "41/41 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 95.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "82.docx",
+      "file": "13_pdf.pdf",
       "fields": {
         "name": {
           "valid": true,
@@ -3171,48 +1565,6 @@
           "reason": "Email is empty"
         },
         "phone": {
-          "valid": false,
-          "score": 0,
-          "reason": "Phone is empty"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "73/73 skills valid"
-        }
-      },
-      "warnings": [
-        "Email issue: Email is empty",
-        "Phone issue: Phone is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 58.333333333333336,
-      "quality_level": "poor"
-    },
-    {
-      "file": "88.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
           "valid": true,
           "score": 95,
           "reason": "Valid Indian phone (10 digits)"
@@ -3229,16 +1581,19 @@
         },
         "skills": {
           "valid": true,
-          "score": 95.0,
-          "reason": "43/43 skills valid"
+          "score": 92.8125,
+          "reason": "15/16 skills valid"
         }
       },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
+      "warnings": [
+        "Email issue: Email is empty",
+        "⚠️ Missing critical fields (name or email)"
+      ],
+      "overall_score": 76.30208333333333,
+      "quality_level": "good"
     },
     {
-      "file": "85.docx",
+      "file": "11_pdf.pdf",
       "fields": {
         "name": {
           "valid": true,
@@ -3266,9 +1621,9 @@
           "reason": "Address is empty"
         },
         "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "66/66 skills valid"
+          "valid": false,
+          "score": 20,
+          "reason": "All skills look like noise"
         }
       },
       "warnings": [
@@ -3276,281 +1631,8 @@
         "Phone issue: Phone is empty",
         "⚠️ Missing critical fields (name or email)"
       ],
-      "overall_score": 56.0,
+      "overall_score": 41.0,
       "quality_level": "poor"
-    },
-    {
-      "file": "92.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "47/47 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 95.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "93.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": false,
-          "score": 0,
-          "reason": "Email is empty"
-        },
-        "phone": {
-          "valid": false,
-          "score": 0,
-          "reason": "Phone is empty"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "43/43 skills valid"
-        }
-      },
-      "warnings": [
-        "Email issue: Email is empty",
-        "Phone issue: Phone is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 55.0,
-      "quality_level": "poor"
-    },
-    {
-      "file": "84.docx",
-      "fields": {
-        "name": {
-          "valid": false,
-          "score": 0,
-          "reason": "Name is empty"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "73/73 skills valid"
-        }
-      },
-      "warnings": [
-        "Name issue: Name is empty",
-        "⚠️ Missing critical fields (name or email)"
-      ],
-      "overall_score": 75.0,
-      "quality_level": "good"
-    },
-    {
-      "file": "90.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "57/57 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 91.66666666666667,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "89.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": false,
-          "score": 0,
-          "reason": "Address is empty"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "60/60 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 95.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "91.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "69/69 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 89.16666666666667,
-      "quality_level": "good"
-    },
-    {
-      "file": "94.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "55/55 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 92.0,
-      "quality_level": "excellent"
     }
   ]
 }
