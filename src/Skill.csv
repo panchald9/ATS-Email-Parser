@@ -1,644 +1,911 @@
-skill,category,normalized_skill,resume_match_weight
-acca,Certifications & Credentials,Acca,5
-acls,Certifications & Credentials,Acls,5
-bls,Certifications & Credentials,Bls,5
-ceh,Certifications & Credentials,Ceh,5
-cissp,Certifications & Credentials,Cissp,5
-cpa,Certifications & Credentials,Cpa,5
-cpr,Certifications & Credentials,Cpr,5
-lean,Certifications & Credentials,Lean,5
-osha,Certifications & Credentials,Osha,5
-aaarated,Domain-Specific / Other,Aaarated,2
-aacn,Domain-Specific / Other,Aacn,2
-aacsb,Domain-Specific / Other,Aacsb,2
-aama,Domain-Specific / Other,Aama,2
-aanp,Domain-Specific / Other,Aanp,2
-aashto,Domain-Specific / Other,Aashto,2
-abdominal,Domain-Specific / Other,Abdominal,2
-ablation,Domain-Specific / Other,Ablation,2
-ablations,Domain-Specific / Other,Ablations,2
-abms,Domain-Specific / Other,Abms,2
-aboriginal,Domain-Specific / Other,Aboriginal,2
-abpi,Domain-Specific / Other,Abpi,2
-abscess,Domain-Specific / Other,Abscess,2
-absence,Domain-Specific / Other,Absence,2
-absorption,Domain-Specific / Other,Absorption,2
-abstract,Domain-Specific / Other,Abstract,2
-abstracting,Domain-Specific / Other,Abstracting,2
-abstraction,Domain-Specific / Other,Abstraction,2
-aca,Domain-Specific / Other,Aca,2
-acceleration,Domain-Specific / Other,Acceleration,2
-accelerator,Domain-Specific / Other,Accelerator,2
-accrual,Domain-Specific / Other,Accrual,2
-accruals,Domain-Specific / Other,Accruals,2
-acme,Domain-Specific / Other,Acme,2
-acoustical,Domain-Specific / Other,Acoustical,2
-acoustics,Domain-Specific / Other,Acoustics,2
-acquisition,Domain-Specific / Other,Acquisition,2
-acquisitions,Domain-Specific / Other,Acquisitions,2
-admissions,Domain-Specific / Other,Admissions,2
-adolescent,Domain-Specific / Other,Adolescent,2
-adolescents,Domain-Specific / Other,Adolescents,2
-advertising,Domain-Specific / Other,Advertising,2
-advisory,Domain-Specific / Other,Advisory,2
-advocacy,Domain-Specific / Other,Advocacy,2
-advocate,Domain-Specific / Other,Advocate,2
-aerodynamics,Domain-Specific / Other,Aerodynamics,2
-aeronautical,Domain-Specific / Other,Aeronautical,2
-aeronautics,Domain-Specific / Other,Aeronautics,2
-aesthetics,Domain-Specific / Other,Aesthetics,2
-aggregate,Domain-Specific / Other,Aggregate,2
-aggregation,Domain-Specific / Other,Aggregation,2
-agile,Domain-Specific / Other,Agile,2
-agility,Domain-Specific / Other,Agility,2
-agricultural,Domain-Specific / Other,Agricultural,2
-agriculture,Domain-Specific / Other,Agriculture,2
-agronomic,Domain-Specific / Other,Agronomic,2
-agronomy,Domain-Specific / Other,Agronomy,2
-ajax,Domain-Specific / Other,Ajax,2
-algorithm,Domain-Specific / Other,Algorithm,2
-algorithms,Domain-Specific / Other,Algorithms,2
-alignment,Domain-Specific / Other,Alignment,2
-allocation,Domain-Specific / Other,Allocation,2
-allocations,Domain-Specific / Other,Allocations,2
-altium,Domain-Specific / Other,Altium,2
-ambulation,Domain-Specific / Other,Ambulation,2
-ambulatory,Domain-Specific / Other,Ambulatory,2
-analysis,Domain-Specific / Other,Analysis,2
-analytics,Domain-Specific / Other,Analytics,2
-analyze,Domain-Specific / Other,Analyze,2
-analyzers,Domain-Specific / Other,Analyzers,2
-anatomy,Domain-Specific / Other,Anatomy,2
-anesthesiologist,Domain-Specific / Other,Anesthesiologist,2
-anesthesiology,Domain-Specific / Other,Anesthesiology,2
-anesthetic,Domain-Specific / Other,Anesthetic,2
-animation,Domain-Specific / Other,Animation,2
-antimicrobial,Domain-Specific / Other,Antimicrobial,2
-apache,Domain-Specific / Other,Apache,2
-api,Domain-Specific / Other,Api,2
-apics,Domain-Specific / Other,Apics,2
-apis,Domain-Specific / Other,Apis,2
-apparel,Domain-Specific / Other,Apparel,2
-appointments,Domain-Specific / Other,Appointments,2
-appraisal,Domain-Specific / Other,Appraisal,2
-appraisals,Domain-Specific / Other,Appraisals,2
-arcgis,Domain-Specific / Other,Arcgis,2
-archaeology,Domain-Specific / Other,Archaeology,2
-architects,Domain-Specific / Other,Architects,2
-architectural,Domain-Specific / Other,Architectural,2
-architecture,Domain-Specific / Other,Architecture,2
-archival,Domain-Specific / Other,Archival,2
-archiving,Domain-Specific / Other,Archiving,2
-ariba,Domain-Specific / Other,Ariba,2
-arithmetic,Domain-Specific / Other,Arithmetic,2
-arrangement,Domain-Specific / Other,Arrangement,2
-assembly,Domain-Specific / Other,Assembly,2
-assertiveness,Domain-Specific / Other,Assertiveness,2
-assessment,Domain-Specific / Other,Assessment,2
-assessments,Domain-Specific / Other,Assessments,2
-assurance,Domain-Specific / Other,Assurance,2
-asthma,Domain-Specific / Other,Asthma,2
-astm,Domain-Specific / Other,Astm,2
-astrophysics,Domain-Specific / Other,Astrophysics,2
-atlassian,Domain-Specific / Other,Atlassian,2
-atomic,Domain-Specific / Other,Atomic,2
-autism,Domain-Specific / Other,Autism,2
-autodesk,Domain-Specific / Other,Autodesk,2
-autoimmune,Domain-Specific / Other,Autoimmune,2
-automated,Domain-Specific / Other,Automated,2
-automotive,Domain-Specific / Other,Automotive,2
-autonomous,Domain-Specific / Other,Autonomous,2
-autonomy,Domain-Specific / Other,Autonomy,2
-autosar,Domain-Specific / Other,Autosar,2
-aviation,Domain-Specific / Other,Aviation,2
-avionics,Domain-Specific / Other,Avionics,2
-bachelor,Domain-Specific / Other,Bachelor,2
-backend,Domain-Specific / Other,Backend,2
-backlog,Domain-Specific / Other,Backlog,2
-bacteria,Domain-Specific / Other,Bacteria,2
-bacterial,Domain-Specific / Other,Bacterial,2
-bacteriology,Domain-Specific / Other,Bacteriology,2
-baking,Domain-Specific / Other,Baking,2
-bankruptcy,Domain-Specific / Other,Bankruptcy,2
-bartending,Domain-Specific / Other,Bartending,2
-baseline,Domain-Specific / Other,Baseline,2
-batch,Domain-Specific / Other,Batch,2
-batching,Domain-Specific / Other,Batching,2
-benchmarking,Domain-Specific / Other,Benchmarking,2
-benchmarks,Domain-Specific / Other,Benchmarks,2
-binary,Domain-Specific / Other,Binary,2
-bioanalysis,Domain-Specific / Other,Bioanalysis,2
-biobased,Domain-Specific / Other,Biobased,2
-bioburden,Domain-Specific / Other,Bioburden,2
-biocatalysis,Domain-Specific / Other,Biocatalysis,2
-biochemical,Domain-Specific / Other,Biochemical,2
-biochemistry,Domain-Specific / Other,Biochemistry,2
-bioinformatics,Domain-Specific / Other,Bioinformatics,2
-biological,Domain-Specific / Other,Biological,2
-biologics,Domain-Specific / Other,Biologics,2
-biology,Domain-Specific / Other,Biology,2
-biomarker,Domain-Specific / Other,Biomarker,2
-biomarkers,Domain-Specific / Other,Biomarkers,2
-biomass,Domain-Specific / Other,Biomass,2
-biomechanics,Domain-Specific / Other,Biomechanics,2
-biopharmaceutical,Domain-Specific / Other,Biopharmaceutical,2
-biophysics,Domain-Specific / Other,Biophysics,2
-biostatistics,Domain-Specific / Other,Biostatistics,2
-biotech,Domain-Specific / Other,Biotech,2
-biotherapeutics,Domain-Specific / Other,Biotherapeutics,2
-blackline,Domain-Specific / Other,Blackline,2
-bloomberg,Domain-Specific / Other,Bloomberg,2
-blueprints,Domain-Specific / Other,Blueprints,2
-boarding,Domain-Specific / Other,Boarding,2
-bpm,Domain-Specific / Other,Bpm,2
-bpo,Domain-Specific / Other,Bpo,2
-branding,Domain-Specific / Other,Branding,2
-brazing,Domain-Specific / Other,Brazing,2
-buildroot,Domain-Specific / Other,Buildroot,2
-bundle,Domain-Specific / Other,Bundle,2
-calling,Domain-Specific / Other,Calling,2
-cardiac,Domain-Specific / Other,Cardiac,2
-cardiopulmonary,Domain-Specific / Other,Cardiopulmonary,2
-cardiovascular,Domain-Specific / Other,Cardiovascular,2
-caregiving,Domain-Specific / Other,Caregiving,2
-carpentry,Domain-Specific / Other,Carpentry,2
-casas,Domain-Specific / Other,Casas,2
-case,Domain-Specific / Other,Case,2
-cataloging,Domain-Specific / Other,Cataloging,2
-catering,Domain-Specific / Other,Catering,2
-certified,Domain-Specific / Other,Certified,2
-chemical,Domain-Specific / Other,Chemical,2
-chemicals,Domain-Specific / Other,Chemicals,2
-chemistry,Domain-Specific / Other,Chemistry,2
-chromatography,Domain-Specific / Other,Chromatography,2
-claims,Domain-Specific / Other,Claims,2
-classification,Domain-Specific / Other,Classification,2
-client,Domain-Specific / Other,Client,2
-clustering,Domain-Specific / Other,Clustering,2
-cobol,Domain-Specific / Other,Cobol,2
-coding,Domain-Specific / Other,Coding,2
-cognitive,Domain-Specific / Other,Cognitive,2
-collaborate,Domain-Specific / Other,Collaborate,2
-collaborative,Domain-Specific / Other,Collaborative,2
-collection,Domain-Specific / Other,Collection,2
-compensation,Domain-Specific / Other,Compensation,2
-compliant,Domain-Specific / Other,Compliant,2
-computation,Domain-Specific / Other,Computation,2
-computational,Domain-Specific / Other,Computational,2
-computeraided,Domain-Specific / Other,Computeraided,2
-computerized,Domain-Specific / Other,Computerized,2
-computers,Domain-Specific / Other,Computers,2
-computing,Domain-Specific / Other,Computing,2
-concrete,Domain-Specific / Other,Concrete,2
-condenser,Domain-Specific / Other,Condenser,2
-configure,Domain-Specific / Other,Configure,2
-construction,Domain-Specific / Other,Construction,2
-constructive,Domain-Specific / Other,Constructive,2
-consulting,Domain-Specific / Other,Consulting,2
-control,Domain-Specific / Other,Control,2
-controller,Domain-Specific / Other,Controller,2
-controllers,Domain-Specific / Other,Controllers,2
-controls,Domain-Specific / Other,Controls,2
-conveyor,Domain-Specific / Other,Conveyor,2
-coordinate,Domain-Specific / Other,Coordinate,2
-coordinating,Domain-Specific / Other,Coordinating,2
-coordination,Domain-Specific / Other,Coordination,2
-counseling,Domain-Specific / Other,Counseling,2
-creative,Domain-Specific / Other,Creative,2
-credentials,Domain-Specific / Other,Credentials,2
-critical,Domain-Specific / Other,Critical,2
-crm,Domain-Specific / Other,Crm,2
-crossfunctional,Domain-Specific / Other,Crossfunctional,2
-cryptography,Domain-Specific / Other,Cryptography,2
-csa,Domain-Specific / Other,Csa,2
-csat,Domain-Specific / Other,Csat,2
-csv,Domain-Specific / Other,Csv,2
-customer,Domain-Specific / Other,Customer,2
-customercentric,Domain-Specific / Other,Customercentric,2
-customeroriented,Domain-Specific / Other,Customeroriented,2
-customers,Domain-Specific / Other,Customers,2
-cyberark,Domain-Specific / Other,Cyberark,2
-cycle,Domain-Specific / Other,Cycle,2
-cytometry,Domain-Specific / Other,Cytometry,2
-cytotechnologist,Domain-Specific / Other,Cytotechnologist,2
-dashboards,Domain-Specific / Other,Dashboards,2
-data,Domain-Specific / Other,Data,2
-database,Domain-Specific / Other,Database,2
-databases,Domain-Specific / Other,Databases,2
-datacenter,Domain-Specific / Other,Datacenter,2
-datadriven,Domain-Specific / Other,Datadriven,2
-datasets,Domain-Specific / Other,Datasets,2
-deadline,Domain-Specific / Other,Deadline,2
-debugging,Domain-Specific / Other,Debugging,2
-decision,Domain-Specific / Other,Decision,2
-delegation,Domain-Specific / Other,Delegation,2
-dental,Domain-Specific / Other,Dental,2
-deployment,Domain-Specific / Other,Deployment,2
-designing,Domain-Specific / Other,Designing,2
-detail,Domain-Specific / Other,Detail,2
-develop,Domain-Specific / Other,Develop,2
-developers,Domain-Specific / Other,Developers,2
-developmental,Domain-Specific / Other,Developmental,2
-dexterity,Domain-Specific / Other,Dexterity,2
-diagnosis,Domain-Specific / Other,Diagnosis,2
-digital,Domain-Specific / Other,Digital,2
-digitalization,Domain-Specific / Other,Digitalization,2
-diligence,Domain-Specific / Other,Diligence,2
-disaster,Domain-Specific / Other,Disaster,2
-discharge,Domain-Specific / Other,Discharge,2
-discovery,Domain-Specific / Other,Discovery,2
-documentation,Domain-Specific / Other,Documentation,2
-drafting,Domain-Specific / Other,Drafting,2
-driving,Domain-Specific / Other,Driving,2
-drug,Domain-Specific / Other,Drug,2
-electricity,Domain-Specific / Other,Electricity,2
-electronic,Domain-Specific / Other,Electronic,2
-electronics,Domain-Specific / Other,Electronics,2
-electrophysiology,Domain-Specific / Other,Electrophysiology,2
-email,Domain-Specific / Other,Email,2
-embedded,Domain-Specific / Other,Embedded,2
-embedding,Domain-Specific / Other,Embedding,2
-engineering,Domain-Specific / Other,Engineering,2
-entrepreneur,Domain-Specific / Other,Entrepreneur,2
-environment,Domain-Specific / Other,Environment,2
-environmental,Domain-Specific / Other,Environmental,2
-escalation,Domain-Specific / Other,Escalation,2
-esthetics,Domain-Specific / Other,Esthetics,2
-estimate,Domain-Specific / Other,Estimate,2
-estimating,Domain-Specific / Other,Estimating,2
-evaluation,Domain-Specific / Other,Evaluation,2
-execution,Domain-Specific / Other,Execution,2
-facilitation,Domain-Specific / Other,Facilitation,2
-facilities,Domain-Specific / Other,Facilities,2
-feedback,Domain-Specific / Other,Feedback,2
-finance,Domain-Specific / Other,Finance,2
-firmware,Domain-Specific / Other,Firmware,2
-forklift,Domain-Specific / Other,Forklift,2
-formulation,Domain-Specific / Other,Formulation,2
-framework,Domain-Specific / Other,Framework,2
-frameworks,Domain-Specific / Other,Frameworks,2
-gdpr,Domain-Specific / Other,Gdpr,2
-genomic,Domain-Specific / Other,Genomic,2
-genomics,Domain-Specific / Other,Genomics,2
-geographic,Domain-Specific / Other,Geographic,2
-getaaa,Domain-Specific / Other,Getaaa,2
-gis,Domain-Specific / Other,Gis,2
-github,Domain-Specific / Other,Github,2
-gitlab,Domain-Specific / Other,Gitlab,2
-glp,Domain-Specific / Other,Glp,2
-gmp,Domain-Specific / Other,Gmp,2
-grant,Domain-Specific / Other,Grant,2
-graphic,Domain-Specific / Other,Graphic,2
-graphics,Domain-Specific / Other,Graphics,2
-grooming,Domain-Specific / Other,Grooming,2
-guiding,Domain-Specific / Other,Guiding,2
-human,Domain-Specific / Other,Human,2
-hygiene,Domain-Specific / Other,Hygiene,2
-immunoassay,Domain-Specific / Other,Immunoassay,2
-innovation,Domain-Specific / Other,Innovation,2
-installation,Domain-Specific / Other,Installation,2
-instructional,Domain-Specific / Other,Instructional,2
-intelligence,Domain-Specific / Other,Intelligence,2
-inventories,Domain-Specific / Other,Inventories,2
-investigation,Domain-Specific / Other,Investigation,2
-ios,Domain-Specific / Other,Ios,2
-iot,Domain-Specific / Other,Iot,2
-jquery,Domain-Specific / Other,Jquery,2
-kinetics,Domain-Specific / Other,Kinetics,2
-labeling,Domain-Specific / Other,Labeling,2
-laser,Domain-Specific / Other,Laser,2
-learning,Domain-Specific / Other,Learning,2
-legal,Domain-Specific / Other,Legal,2
-machine,Domain-Specific / Other,Machine,2
-maintenance,Domain-Specific / Other,Maintenance,2
-marketing,Domain-Specific / Other,Marketing,2
-metabolomics,Domain-Specific / Other,Metabolomics,2
-microscopy,Domain-Specific / Other,Microscopy,2
-microsoft,Domain-Specific / Other,Microsoft,2
-modeling,Domain-Specific / Other,Modeling,2
-modelling,Domain-Specific / Other,Modelling,2
-motivating,Domain-Specific / Other,Motivating,2
-motivation,Domain-Specific / Other,Motivation,2
-narration,Domain-Specific / Other,Narration,2
-nist,Domain-Specific / Other,Nist,2
-nosql,Domain-Specific / Other,Nosql,2
-orchestration,Domain-Specific / Other,Orchestration,2
-orthodontic,Domain-Specific / Other,Orthodontic,2
-orthopedic,Domain-Specific / Other,Orthopedic,2
-outreach,Domain-Specific / Other,Outreach,2
-pedagogy,Domain-Specific / Other,Pedagogy,2
-performance,Domain-Specific / Other,Performance,2
-photography,Domain-Specific / Other,Photography,2
-physics,Domain-Specific / Other,Physics,2
-pilates,Domain-Specific / Other,Pilates,2
-plumbing,Domain-Specific / Other,Plumbing,2
-policy,Domain-Specific / Other,Policy,2
-postgres,Domain-Specific / Other,Postgres,2
-priorities,Domain-Specific / Other,Priorities,2
-problem,Domain-Specific / Other,Problem,2
-programming,Domain-Specific / Other,Programming,2
-protocol,Domain-Specific / Other,Protocol,2
-recruiting,Domain-Specific / Other,Recruiting,2
-recruitment,Domain-Specific / Other,Recruitment,2
-regex,Domain-Specific / Other,Regex,2
-remote,Domain-Specific / Other,Remote,2
-retail,Domain-Specific / Other,Retail,2
-scanning,Domain-Specific / Other,Scanning,2
-sharepoint,Domain-Specific / Other,Sharepoint,2
-simulation,Domain-Specific / Other,Simulation,2
-spectroscopy,Domain-Specific / Other,Spectroscopy,2
-spreadsheets,Domain-Specific / Other,Spreadsheets,2
-statistics,Domain-Specific / Other,Statistics,2
-strategy,Domain-Specific / Other,Strategy,2
-supervision,Domain-Specific / Other,Supervision,2
-sustainability,Domain-Specific / Other,Sustainability,2
-testing,Domain-Specific / Other,Testing,2
-time,Domain-Specific / Other,Time,2
-transport,Domain-Specific / Other,Transport,2
-troubleshooting,Domain-Specific / Other,Troubleshooting,2
-usability,Domain-Specific / Other,Usability,2
-virtual,Domain-Specific / Other,Virtual,2
-visual,Domain-Specific / Other,Visual,2
-warehousing,Domain-Specific / Other,Warehousing,2
-academia,Engineering & Manufacturing,Academia,3
-academic,Engineering & Manufacturing,Academic,3
-academics,Engineering & Manufacturing,Academics,3
-academy,Engineering & Manufacturing,Academy,3
-aerospace,Engineering & Manufacturing,Aerospace,3
-automation,Engineering & Manufacturing,Automation,3
-bim,Engineering & Manufacturing,Bim,3
-biomaterials,Engineering & Manufacturing,Biomaterials,3
-cad,Engineering & Manufacturing,Cad,3
-cadence,Engineering & Manufacturing,Cadence,3
-calibration,Engineering & Manufacturing,Calibration,3
-calibrations,Engineering & Manufacturing,Calibrations,3
-campaign,Engineering & Manufacturing,Campaign,3
-campaigns,Engineering & Manufacturing,Campaigns,3
-civil,Engineering & Manufacturing,Civil,3
-cleanroom,Engineering & Manufacturing,Cleanroom,3
-drawing,Engineering & Manufacturing,Drawing,3
-drawings,Engineering & Manufacturing,Drawings,3
-electrical,Engineering & Manufacturing,Electrical,3
-electromechanical,Engineering & Manufacturing,Electromechanical,3
-fabrication,Engineering & Manufacturing,Fabrication,3
-geospatial,Engineering & Manufacturing,Geospatial,3
-geotechnical,Engineering & Manufacturing,Geotechnical,3
-hydraulic,Engineering & Manufacturing,Hydraulic,3
-hydraulics,Engineering & Manufacturing,Hydraulics,3
-inspection,Engineering & Manufacturing,Inspection,3
-kaizen,Engineering & Manufacturing,Kaizen,3
-machining,Engineering & Manufacturing,Machining,3
-manufacturing,Engineering & Manufacturing,Manufacturing,3
-materials,Engineering & Manufacturing,Materials,3
-metrology,Engineering & Manufacturing,Metrology,3
-robotics,Engineering & Manufacturing,Robotics,3
-structural,Engineering & Manufacturing,Structural,3
-validation,Engineering & Manufacturing,Validation,3
-welding,Engineering & Manufacturing,Welding,3
-accounting,Finance & Accounting,Accounting,3
-accreditation,Finance & Accounting,Accreditation,3
-accredited,Finance & Accounting,Accredited,3
-asset,Finance & Accounting,Asset,3
-assets,Finance & Accounting,Assets,3
-auditing,Finance & Accounting,Auditing,3
-auditor,Finance & Accounting,Auditor,3
-auditors,Finance & Accounting,Auditors,3
-audits,Finance & Accounting,Audits,3
-banking,Finance & Accounting,Banking,3
-bookkeeping,Finance & Accounting,Bookkeeping,3
-budgeting,Finance & Accounting,Budgeting,3
-compliance,Finance & Accounting,Compliance,3
-cybersecurity,Finance & Accounting,Cybersecurity,3
-devsecops,Finance & Accounting,Devsecops,3
-financial,Finance & Accounting,Financial,3
-financials,Finance & Accounting,Financials,3
-forecasting,Finance & Accounting,Forecasting,3
-fundraising,Finance & Accounting,Fundraising,3
-grants,Finance & Accounting,Grants,3
-investment,Finance & Accounting,Investment,3
-invoicing,Finance & Accounting,Invoicing,3
-lending,Finance & Accounting,Lending,3
-mortgage,Finance & Accounting,Mortgage,3
-nonprofit,Finance & Accounting,Nonprofit,3
-payroll,Finance & Accounting,Payroll,3
-portfolio,Finance & Accounting,Portfolio,3
-reimbursement,Finance & Accounting,Reimbursement,3
-security,Finance & Accounting,Security,3
-anesthesia,Healthcare & Clinical,Anesthesia,3
-autoclave,Healthcare & Clinical,Autoclave,3
-biomedical,Healthcare & Clinical,Biomedical,3
-biopsy,Healthcare & Clinical,Biopsy,3
-brachytherapy,Healthcare & Clinical,Brachytherapy,3
-cardiology,Healthcare & Clinical,Cardiology,3
-catheter,Healthcare & Clinical,Catheter,3
-catheterization,Healthcare & Clinical,Catheterization,3
-catheters,Healthcare & Clinical,Catheters,3
-chemotherapy,Healthcare & Clinical,Chemotherapy,3
-chiropractic,Healthcare & Clinical,Chiropractic,3
-cytology,Healthcare & Clinical,Cytology,3
-dentistry,Healthcare & Clinical,Dentistry,3
-diagnostic,Healthcare & Clinical,Diagnostic,3
-dialysis,Healthcare & Clinical,Dialysis,3
-ehr,Healthcare & Clinical,Ehr,3
-emergency,Healthcare & Clinical,Emergency,3
-emr,Healthcare & Clinical,Emr,3
-epidural,Healthcare & Clinical,Epidural,3
-glucose,Healthcare & Clinical,Glucose,3
-hematology,Healthcare & Clinical,Hematology,3
-hipaa,Healthcare & Clinical,Hipaa,3
-histology,Healthcare & Clinical,Histology,3
-histopathology,Healthcare & Clinical,Histopathology,3
-immunology,Healthcare & Clinical,Immunology,3
-inpatient,Healthcare & Clinical,Inpatient,3
-laboratory,Healthcare & Clinical,Laboratory,3
-laparoscopic,Healthcare & Clinical,Laparoscopic,3
-laparoscopy,Healthcare & Clinical,Laparoscopy,3
-medical,Healthcare & Clinical,Medical,3
-nephrology,Healthcare & Clinical,Nephrology,3
-neurology,Healthcare & Clinical,Neurology,3
-nursing,Healthcare & Clinical,Nursing,3
-nutrition,Healthcare & Clinical,Nutrition,3
-occupational,Healthcare & Clinical,Occupational,3
-oncology,Healthcare & Clinical,Oncology,3
-ophthalmology,Healthcare & Clinical,Ophthalmology,3
-paediatric,Healthcare & Clinical,Paediatric,3
-paramedicine,Healthcare & Clinical,Paramedicine,3
-pathology,Healthcare & Clinical,Pathology,3
-pharmacy,Healthcare & Clinical,Pharmacy,3
-physical,Healthcare & Clinical,Physical,3
-physiotherapy,Healthcare & Clinical,Physiotherapy,3
-psychiatry,Healthcare & Clinical,Psychiatry,3
-psychology,Healthcare & Clinical,Psychology,3
-radiology,Healthcare & Clinical,Radiology,3
-rehabilitation,Healthcare & Clinical,Rehabilitation,3
-respiratory,Healthcare & Clinical,Respiratory,3
-sterilization,Healthcare & Clinical,Sterilization,3
-therapy,Healthcare & Clinical,Therapy,3
-ultrasound,Healthcare & Clinical,Ultrasound,3
-accessioning,IT Infrastructure & Security,Accessioning,3
-ambulance,IT Infrastructure & Security,Ambulance,3
-anaplan,IT Infrastructure & Security,Anaplan,3
-android,IT Infrastructure & Security,Android,3
-anticipation,IT Infrastructure & Security,Anticipation,3
-antimalware,IT Infrastructure & Security,Antimalware,3
-apprenticeship,IT Infrastructure & Security,Apprenticeship,3
-apprenticeships,IT Infrastructure & Security,Apprenticeships,3
-authentication,IT Infrastructure & Security,Authentication,3
-authorization,IT Infrastructure & Security,Authorization,3
-backup,IT Infrastructure & Security,Backup,3
-backups,IT Infrastructure & Security,Backups,3
-balance,IT Infrastructure & Security,Balance,3
-balancing,IT Infrastructure & Security,Balancing,3
-blockchain,IT Infrastructure & Security,Blockchain,3
-caliper,IT Infrastructure & Security,Caliper,3
-calipers,IT Infrastructure & Security,Calipers,3
-cloud,IT Infrastructure & Security,Cloud,3
-cloudbased,IT Infrastructure & Security,Cloudbased,3
-cloudwatch,IT Infrastructure & Security,Cloudwatch,3
-configuration,IT Infrastructure & Security,Configuration,3
-devops,IT Infrastructure & Security,Devops,3
-diplomacy,IT Infrastructure & Security,Diplomacy,3
-discipline,IT Infrastructure & Security,Discipline,3
-dispatch,IT Infrastructure & Security,Dispatch,3
-dispatcher,IT Infrastructure & Security,Dispatcher,3
-dns,IT Infrastructure & Security,Dns,3
-encryption,IT Infrastructure & Security,Encryption,3
-incident,IT Infrastructure & Security,Incident,3
-landscaping,IT Infrastructure & Security,Landscaping,3
-leadership,IT Infrastructure & Security,Leadership,3
-mentorship,IT Infrastructure & Security,Mentorship,3
-microservices,IT Infrastructure & Security,Microservices,3
-monitoring,IT Infrastructure & Security,Monitoring,3
-multidisciplinary,IT Infrastructure & Security,Multidisciplinary,3
-networking,IT Infrastructure & Security,Networking,3
-ownership,IT Infrastructure & Security,Ownership,3
-planning,IT Infrastructure & Security,Planning,3
-routing,IT Infrastructure & Security,Routing,3
-scripting,IT Infrastructure & Security,Scripting,3
-server,IT Infrastructure & Security,Server,3
-serverless,IT Infrastructure & Security,Serverless,3
-shipping,IT Infrastructure & Security,Shipping,3
-virtualization,IT Infrastructure & Security,Virtualization,3
-wireless,IT Infrastructure & Security,Wireless,3
-bioprocess,Operations & Logistics,Bioprocess,2
-capacity,Operations & Logistics,Capacity,2
-contract,Operations & Logistics,Contract,2
-contracting,Operations & Logistics,Contracting,2
-contractors,Operations & Logistics,Contractors,2
-contracts,Operations & Logistics,Contracts,2
-inventory,Operations & Logistics,Inventory,2
-kanban,Operations & Logistics,Kanban,2
-logistics,Operations & Logistics,Logistics,2
-negotiation,Operations & Logistics,Negotiation,2
-optimization,Operations & Logistics,Optimization,2
-procurement,Operations & Logistics,Procurement,2
-quality,Operations & Logistics,Quality,2
-safety,Operations & Logistics,Safety,2
-scheduling,Operations & Logistics,Scheduling,2
-training,Operations & Logistics,Training,2
-vendor,Operations & Logistics,Vendor,2
-workflow,Operations & Logistics,Workflow,2
-accountability,Soft Skills & Competencies,Accountability,1
-adaptability,Soft Skills & Competencies,Adaptability,1
-analytical,Soft Skills & Competencies,Analytical,1
-bioanalytical,Soft Skills & Competencies,Bioanalytical,1
-coaching,Soft Skills & Competencies,Coaching,1
-collaboration,Soft Skills & Competencies,Collaboration,1
-communication,Soft Skills & Competencies,Communication,1
-communications,Soft Skills & Competencies,Communications,1
-copywriting,Soft Skills & Competencies,Copywriting,1
-creativity,Soft Skills & Competencies,Creativity,1
-customerfocused,Soft Skills & Competencies,Customerfocused,1
-decisionmaking,Soft Skills & Competencies,Decisionmaking,1
-ethics,Soft Skills & Competencies,Ethics,1
-flexibility,Soft Skills & Competencies,Flexibility,1
-innovative,Soft Skills & Competencies,Innovative,1
-integrity,Soft Skills & Competencies,Integrity,1
-mentoring,Soft Skills & Competencies,Mentoring,1
-multitasking,Soft Skills & Competencies,Multitasking,1
-organizational,Soft Skills & Competencies,Organizational,1
-presentation,Soft Skills & Competencies,Presentation,1
-prioritization,Soft Skills & Competencies,Prioritization,1
-problemsolving,Soft Skills & Competencies,Problemsolving,1
-reporting,Soft Skills & Competencies,Reporting,1
-resilience,Soft Skills & Competencies,Resilience,1
-telecommunication,Soft Skills & Competencies,Telecommunication,1
-writing,Soft Skills & Competencies,Writing,1
-adobe,Technical Skills - Software & Programming,Adobe,4
-alteryx,Technical Skills - Software & Programming,Alteryx,4
-angular,Technical Skills - Software & Programming,Angular,4
-angularjs,Technical Skills - Software & Programming,Angularjs,4
-ansible,Technical Skills - Software & Programming,Ansible,4
-ansys,Technical Skills - Software & Programming,Ansys,4
-autocad,Technical Skills - Software & Programming,Autocad,4
-azure,Technical Skills - Software & Programming,Azure,4
-canva,Technical Skills - Software & Programming,Canva,4
-cisco,Technical Skills - Software & Programming,Cisco,4
-confluence,Technical Skills - Software & Programming,Confluence,4
-datadog,Technical Skills - Software & Programming,Datadog,4
-docker,Technical Skills - Software & Programming,Docker,4
-elasticsearch,Technical Skills - Software & Programming,Elasticsearch,4
-epic,Technical Skills - Software & Programming,Epic,4
-excel,Technical Skills - Software & Programming,Excel,4
-git,Technical Skills - Software & Programming,Git,4
-golang,Technical Skills - Software & Programming,Golang,4
-gradle,Technical Skills - Software & Programming,Gradle,4
-grafana,Technical Skills - Software & Programming,Grafana,4
-graphql,Technical Skills - Software & Programming,Graphql,4
-hadoop,Technical Skills - Software & Programming,Hadoop,4
-html,Technical Skills - Software & Programming,Html,4
-java,Technical Skills - Software & Programming,Java,4
-javascript,Technical Skills - Software & Programming,Javascript,4
-jenkins,Technical Skills - Software & Programming,Jenkins,4
-jira,Technical Skills - Software & Programming,Jira,4
-json,Technical Skills - Software & Programming,Json,4
-jupyter,Technical Skills - Software & Programming,Jupyter,4
-kafka,Technical Skills - Software & Programming,Kafka,4
-kubernetes,Technical Skills - Software & Programming,Kubernetes,4
-linux,Technical Skills - Software & Programming,Linux,4
-matlab,Technical Skills - Software & Programming,Matlab,4
-meditech,Technical Skills - Software & Programming,Meditech,4
-mongodb,Technical Skills - Software & Programming,Mongodb,4
-mysql,Technical Skills - Software & Programming,Mysql,4
-nodejs,Technical Skills - Software & Programming,Nodejs,4
-oracle,Technical Skills - Software & Programming,Oracle,4
-photoshop,Technical Skills - Software & Programming,Photoshop,4
-plc,Technical Skills - Software & Programming,Plc,4
-postgresql,Technical Skills - Software & Programming,Postgresql,4
-powerbi,Technical Skills - Software & Programming,Powerbi,4
-powershell,Technical Skills - Software & Programming,Powershell,4
-python,Technical Skills - Software & Programming,Python,4
-pytorch,Technical Skills - Software & Programming,Pytorch,4
-quickbooks,Technical Skills - Software & Programming,Quickbooks,4
-salesforce,Technical Skills - Software & Programming,Salesforce,4
-scikit,Technical Skills - Software & Programming,Scikit,4
-selenium,Technical Skills - Software & Programming,Selenium,4
-solidworks,Technical Skills - Software & Programming,Solidworks,4
-splunk,Technical Skills - Software & Programming,Splunk,4
-sql,Technical Skills - Software & Programming,Sql,4
-tableau,Technical Skills - Software & Programming,Tableau,4
-terraform,Technical Skills - Software & Programming,Terraform,4
-typescript,Technical Skills - Software & Programming,Typescript,4
-unix,Technical Skills - Software & Programming,Unix,4
-vmware,Technical Skills - Software & Programming,Vmware,4
-xml,Technical Skills - Software & Programming,Xml,4
-yaml,Technical Skills - Software & Programming,Yaml,4
-process validation,Quality,Process Validation,10
-gmp,Quality,GMP,10
-cgmp,Quality,cGMP,10
-tablet manufacturing,Manufacturing,Tablet Manufacturing,10
-wet granulation,Manufacturing,Wet Granulation,10
-dry granulation,Manufacturing,Dry Granulation,10
-compression,Manufacturing,Compression,9
-coating,Manufacturing,Coating,9
-sap production module,Tools,SAP Production Module,9
-oee,Manufacturing,OEE (Overall Equipment Efficiency),9
-equipment qualification,Quality,Equipment Qualification,9
-equipment calibration,Quality,Equipment Calibration,9
-fda compliance,Quality,FDA Compliance,10
-regulatory compliance,Quality,Regulatory Compliance,9
-sop documentation,Documentation,SOP Documentation,9
-batch manufacturing bmr mfr,Documentation,Batch Manufacturing (BMR/MFR),9
-quality audits,Quality,Quality Audits,8
-change control,Quality,Change Control,8
-deviation management,Quality,Deviation Management,8
+"skill","category","normalized_skill","resume_match_weight","aliases","skill_type","parent_skill"
+"acca","Certifications","Acca","5","","hard","Certifications"
+"acls","Certifications","Acls","5","","hard","Certifications"
+"bls","Certifications","Bls","5","","hard","Certifications"
+"ceh","Certifications","Ceh","5","","hard","Certifications"
+"cissp","Certifications","Cissp","5","","hard","Certifications"
+"cpa","Certifications","Cpa","5","","hard","Certifications"
+"cpr","Certifications","Cpr","5","","hard","Certifications"
+"lean","Certifications","Lean","5","","hard","Certifications"
+"osha","Certifications","Osha","5","","hard","Certifications"
+"aaarated","Domain-Specific / Other","Aaarated","2","","hard","Domain-Specific / Other"
+"aacn","Domain-Specific / Other","Aacn","2","","hard","Domain-Specific / Other"
+"aacsb","Domain-Specific / Other","Aacsb","2","","hard","Domain-Specific / Other"
+"aama","Domain-Specific / Other","Aama","2","","hard","Domain-Specific / Other"
+"aanp","Domain-Specific / Other","Aanp","2","","hard","Domain-Specific / Other"
+"aashto","Domain-Specific / Other","Aashto","2","","hard","Domain-Specific / Other"
+"abdominal","Domain-Specific / Other","Abdominal","2","","hard","Domain-Specific / Other"
+"ablation","Domain-Specific / Other","Ablation","2","","hard","Domain-Specific / Other"
+"ablations","Domain-Specific / Other","Ablations","2","","hard","Domain-Specific / Other"
+"abms","Domain-Specific / Other","Abms","2","","hard","Domain-Specific / Other"
+"aboriginal","Domain-Specific / Other","Aboriginal","2","","hard","Domain-Specific / Other"
+"abpi","Domain-Specific / Other","Abpi","2","","hard","Domain-Specific / Other"
+"abscess","Domain-Specific / Other","Abscess","2","","hard","Domain-Specific / Other"
+"absence","Domain-Specific / Other","Absence","2","","hard","Domain-Specific / Other"
+"absorption","Domain-Specific / Other","Absorption","2","","hard","Domain-Specific / Other"
+"abstract","Domain-Specific / Other","Abstract","2","","hard","Domain-Specific / Other"
+"abstracting","Domain-Specific / Other","Abstracting","2","","hard","Domain-Specific / Other"
+"abstraction","Domain-Specific / Other","Abstraction","2","","hard","Domain-Specific / Other"
+"aca","Domain-Specific / Other","Aca","2","","hard","Domain-Specific / Other"
+"acceleration","Domain-Specific / Other","Acceleration","2","","hard","Domain-Specific / Other"
+"accelerator","Domain-Specific / Other","Accelerator","2","","hard","Domain-Specific / Other"
+"accrual","Domain-Specific / Other","Accrual","2","","hard","Domain-Specific / Other"
+"accruals","Domain-Specific / Other","Accruals","2","","hard","Domain-Specific / Other"
+"acme","Domain-Specific / Other","Acme","2","","hard","Domain-Specific / Other"
+"acoustical","Domain-Specific / Other","Acoustical","2","","hard","Domain-Specific / Other"
+"acoustics","Domain-Specific / Other","Acoustics","2","","hard","Domain-Specific / Other"
+"acquisition","Domain-Specific / Other","Acquisition","2","","hard","Domain-Specific / Other"
+"acquisitions","Domain-Specific / Other","Acquisitions","2","","hard","Domain-Specific / Other"
+"admissions","Domain-Specific / Other","Admissions","2","","hard","Domain-Specific / Other"
+"adolescent","Domain-Specific / Other","Adolescent","2","","hard","Domain-Specific / Other"
+"adolescents","Domain-Specific / Other","Adolescents","2","","hard","Domain-Specific / Other"
+"advertising","Domain-Specific / Other","Advertising","2","","hard","Domain-Specific / Other"
+"advisory","Domain-Specific / Other","Advisory","2","","hard","Domain-Specific / Other"
+"advocacy","Domain-Specific / Other","Advocacy","2","","hard","Domain-Specific / Other"
+"advocate","Domain-Specific / Other","Advocate","2","","hard","Domain-Specific / Other"
+"aerodynamics","Domain-Specific / Other","Aerodynamics","2","","hard","Domain-Specific / Other"
+"aeronautical","Domain-Specific / Other","Aeronautical","2","","hard","Domain-Specific / Other"
+"aeronautics","Domain-Specific / Other","Aeronautics","2","","hard","Domain-Specific / Other"
+"aesthetics","Domain-Specific / Other","Aesthetics","2","","hard","Domain-Specific / Other"
+"aggregate","Domain-Specific / Other","Aggregate","2","","hard","Domain-Specific / Other"
+"aggregation","Domain-Specific / Other","Aggregation","2","","hard","Domain-Specific / Other"
+"agile","Domain-Specific / Other","Agile","2","","hard","Domain-Specific / Other"
+"agility","Domain-Specific / Other","Agility","2","","hard","Domain-Specific / Other"
+"agricultural","Domain-Specific / Other","Agricultural","2","","hard","Domain-Specific / Other"
+"agriculture","Domain-Specific / Other","Agriculture","2","","hard","Domain-Specific / Other"
+"agronomic","Domain-Specific / Other","Agronomic","2","","hard","Domain-Specific / Other"
+"agronomy","Domain-Specific / Other","Agronomy","2","","hard","Domain-Specific / Other"
+"ajax","Domain-Specific / Other","Ajax","2","","hard","Domain-Specific / Other"
+"algorithm","Domain-Specific / Other","Algorithm","2","","hard","Domain-Specific / Other"
+"algorithms","Domain-Specific / Other","Algorithms","2","","hard","Domain-Specific / Other"
+"alignment","Domain-Specific / Other","Alignment","2","","hard","Domain-Specific / Other"
+"allocation","Domain-Specific / Other","Allocation","2","","hard","Domain-Specific / Other"
+"allocations","Domain-Specific / Other","Allocations","2","","hard","Domain-Specific / Other"
+"altium","Domain-Specific / Other","Altium","2","","hard","Domain-Specific / Other"
+"ambulation","Domain-Specific / Other","Ambulation","2","","hard","Domain-Specific / Other"
+"ambulatory","Domain-Specific / Other","Ambulatory","2","","hard","Domain-Specific / Other"
+"analysis","Domain-Specific / Other","Analysis","2","","hard","Domain-Specific / Other"
+"analytics","Domain-Specific / Other","Analytics","2","","hard","Domain-Specific / Other"
+"analyze","Domain-Specific / Other","Analyze","2","","hard","Domain-Specific / Other"
+"analyzers","Domain-Specific / Other","Analyzers","2","","hard","Domain-Specific / Other"
+"anatomy","Domain-Specific / Other","Anatomy","2","","hard","Domain-Specific / Other"
+"anesthesiologist","Domain-Specific / Other","Anesthesiologist","2","","hard","Domain-Specific / Other"
+"anesthesiology","Domain-Specific / Other","Anesthesiology","2","","hard","Domain-Specific / Other"
+"anesthetic","Domain-Specific / Other","Anesthetic","2","","hard","Domain-Specific / Other"
+"animation","Domain-Specific / Other","Animation","2","","hard","Domain-Specific / Other"
+"antimicrobial","Domain-Specific / Other","Antimicrobial","2","","hard","Domain-Specific / Other"
+"apache","Domain-Specific / Other","Apache","2","","hard","Domain-Specific / Other"
+"api","Domain-Specific / Other","Api","2","","hard","Domain-Specific / Other"
+"apics","Domain-Specific / Other","Apics","2","","hard","Domain-Specific / Other"
+"apis","Domain-Specific / Other","Apis","2","","hard","Domain-Specific / Other"
+"apparel","Domain-Specific / Other","Apparel","2","","hard","Domain-Specific / Other"
+"appointments","Domain-Specific / Other","Appointments","2","","hard","Domain-Specific / Other"
+"appraisal","Domain-Specific / Other","Appraisal","2","","hard","Domain-Specific / Other"
+"appraisals","Domain-Specific / Other","Appraisals","2","","hard","Domain-Specific / Other"
+"arcgis","Domain-Specific / Other","Arcgis","2","","hard","Domain-Specific / Other"
+"archaeology","Domain-Specific / Other","Archaeology","2","","hard","Domain-Specific / Other"
+"architects","Domain-Specific / Other","Architects","2","","hard","Domain-Specific / Other"
+"architectural","Domain-Specific / Other","Architectural","2","","hard","Domain-Specific / Other"
+"architecture","Domain-Specific / Other","Architecture","2","","hard","Domain-Specific / Other"
+"archival","Domain-Specific / Other","Archival","2","","hard","Domain-Specific / Other"
+"archiving","Domain-Specific / Other","Archiving","2","","hard","Domain-Specific / Other"
+"ariba","Domain-Specific / Other","Ariba","2","","hard","Domain-Specific / Other"
+"arithmetic","Domain-Specific / Other","Arithmetic","2","","hard","Domain-Specific / Other"
+"arrangement","Domain-Specific / Other","Arrangement","2","","hard","Domain-Specific / Other"
+"assembly","Domain-Specific / Other","Assembly","2","","hard","Domain-Specific / Other"
+"assertiveness","Domain-Specific / Other","Assertiveness","2","","hard","Domain-Specific / Other"
+"assessment","Domain-Specific / Other","Assessment","2","","hard","Domain-Specific / Other"
+"assessments","Domain-Specific / Other","Assessments","2","","hard","Domain-Specific / Other"
+"assurance","Domain-Specific / Other","Assurance","2","","hard","Domain-Specific / Other"
+"asthma","Domain-Specific / Other","Asthma","2","","hard","Domain-Specific / Other"
+"astm","Domain-Specific / Other","Astm","2","","hard","Domain-Specific / Other"
+"astrophysics","Domain-Specific / Other","Astrophysics","2","","hard","Domain-Specific / Other"
+"atlassian","Domain-Specific / Other","Atlassian","2","","hard","Domain-Specific / Other"
+"atomic","Domain-Specific / Other","Atomic","2","","hard","Domain-Specific / Other"
+"autism","Domain-Specific / Other","Autism","2","","hard","Domain-Specific / Other"
+"autodesk","Domain-Specific / Other","Autodesk","2","","hard","Domain-Specific / Other"
+"autoimmune","Domain-Specific / Other","Autoimmune","2","","hard","Domain-Specific / Other"
+"automated","Domain-Specific / Other","Automated","2","","hard","Domain-Specific / Other"
+"automotive","Domain-Specific / Other","Automotive","2","","hard","Domain-Specific / Other"
+"autonomous","Domain-Specific / Other","Autonomous","2","","hard","Domain-Specific / Other"
+"autonomy","Domain-Specific / Other","Autonomy","2","","hard","Domain-Specific / Other"
+"autosar","Domain-Specific / Other","Autosar","2","","hard","Domain-Specific / Other"
+"aviation","Domain-Specific / Other","Aviation","2","","hard","Domain-Specific / Other"
+"avionics","Domain-Specific / Other","Avionics","2","","hard","Domain-Specific / Other"
+"bachelor","Domain-Specific / Other","Bachelor","2","","hard","Domain-Specific / Other"
+"backend","Domain-Specific / Other","Backend","2","","hard","Domain-Specific / Other"
+"backlog","Domain-Specific / Other","Backlog","2","","hard","Domain-Specific / Other"
+"bacteria","Domain-Specific / Other","Bacteria","2","","hard","Domain-Specific / Other"
+"bacterial","Domain-Specific / Other","Bacterial","2","","hard","Domain-Specific / Other"
+"bacteriology","Domain-Specific / Other","Bacteriology","2","","hard","Domain-Specific / Other"
+"baking","Domain-Specific / Other","Baking","2","","hard","Domain-Specific / Other"
+"bankruptcy","Domain-Specific / Other","Bankruptcy","2","","hard","Domain-Specific / Other"
+"bartending","Domain-Specific / Other","Bartending","2","","hard","Domain-Specific / Other"
+"baseline","Domain-Specific / Other","Baseline","2","","hard","Domain-Specific / Other"
+"batch","Domain-Specific / Other","Batch","2","","hard","Domain-Specific / Other"
+"batching","Domain-Specific / Other","Batching","2","","hard","Domain-Specific / Other"
+"benchmarking","Domain-Specific / Other","Benchmarking","2","","hard","Domain-Specific / Other"
+"benchmarks","Domain-Specific / Other","Benchmarks","2","","hard","Domain-Specific / Other"
+"binary","Domain-Specific / Other","Binary","2","","hard","Domain-Specific / Other"
+"bioanalysis","Domain-Specific / Other","Bioanalysis","2","","hard","Domain-Specific / Other"
+"biobased","Domain-Specific / Other","Biobased","2","","hard","Domain-Specific / Other"
+"bioburden","Domain-Specific / Other","Bioburden","2","","hard","Domain-Specific / Other"
+"biocatalysis","Domain-Specific / Other","Biocatalysis","2","","hard","Domain-Specific / Other"
+"biochemical","Domain-Specific / Other","Biochemical","2","","hard","Domain-Specific / Other"
+"biochemistry","Domain-Specific / Other","Biochemistry","2","","hard","Domain-Specific / Other"
+"bioinformatics","Domain-Specific / Other","Bioinformatics","2","","hard","Domain-Specific / Other"
+"biological","Domain-Specific / Other","Biological","2","","hard","Domain-Specific / Other"
+"biologics","Domain-Specific / Other","Biologics","2","","hard","Domain-Specific / Other"
+"biology","Domain-Specific / Other","Biology","2","","hard","Domain-Specific / Other"
+"biomarker","Domain-Specific / Other","Biomarker","2","","hard","Domain-Specific / Other"
+"biomarkers","Domain-Specific / Other","Biomarkers","2","","hard","Domain-Specific / Other"
+"biomass","Domain-Specific / Other","Biomass","2","","hard","Domain-Specific / Other"
+"biomechanics","Domain-Specific / Other","Biomechanics","2","","hard","Domain-Specific / Other"
+"biopharmaceutical","Domain-Specific / Other","Biopharmaceutical","2","","hard","Domain-Specific / Other"
+"biophysics","Domain-Specific / Other","Biophysics","2","","hard","Domain-Specific / Other"
+"biostatistics","Domain-Specific / Other","Biostatistics","2","","hard","Domain-Specific / Other"
+"biotech","Domain-Specific / Other","Biotech","2","","hard","Domain-Specific / Other"
+"biotherapeutics","Domain-Specific / Other","Biotherapeutics","2","","hard","Domain-Specific / Other"
+"blackline","Domain-Specific / Other","Blackline","2","","hard","Domain-Specific / Other"
+"bloomberg","Domain-Specific / Other","Bloomberg","2","","hard","Domain-Specific / Other"
+"blueprints","Domain-Specific / Other","Blueprints","2","","hard","Domain-Specific / Other"
+"boarding","Domain-Specific / Other","Boarding","2","","hard","Domain-Specific / Other"
+"bpm","Domain-Specific / Other","Bpm","2","","hard","Domain-Specific / Other"
+"bpo","Domain-Specific / Other","Bpo","2","","hard","Domain-Specific / Other"
+"branding","Domain-Specific / Other","Branding","2","","hard","Domain-Specific / Other"
+"brazing","Domain-Specific / Other","Brazing","2","","hard","Domain-Specific / Other"
+"buildroot","Domain-Specific / Other","Buildroot","2","","hard","Domain-Specific / Other"
+"bundle","Domain-Specific / Other","Bundle","2","","hard","Domain-Specific / Other"
+"calling","Domain-Specific / Other","Calling","2","","hard","Domain-Specific / Other"
+"cardiac","Domain-Specific / Other","Cardiac","2","","hard","Domain-Specific / Other"
+"cardiopulmonary","Domain-Specific / Other","Cardiopulmonary","2","","hard","Domain-Specific / Other"
+"cardiovascular","Domain-Specific / Other","Cardiovascular","2","","hard","Domain-Specific / Other"
+"caregiving","Domain-Specific / Other","Caregiving","2","","hard","Domain-Specific / Other"
+"carpentry","Domain-Specific / Other","Carpentry","2","","hard","Domain-Specific / Other"
+"casas","Domain-Specific / Other","Casas","2","","hard","Domain-Specific / Other"
+"case","Domain-Specific / Other","Case","2","","hard","Domain-Specific / Other"
+"cataloging","Domain-Specific / Other","Cataloging","2","","hard","Domain-Specific / Other"
+"catering","Domain-Specific / Other","Catering","2","","hard","Domain-Specific / Other"
+"certified","Domain-Specific / Other","Certified","2","","hard","Domain-Specific / Other"
+"chemical","Domain-Specific / Other","Chemical","2","","hard","Domain-Specific / Other"
+"chemicals","Domain-Specific / Other","Chemicals","2","","hard","Domain-Specific / Other"
+"chemistry","Domain-Specific / Other","Chemistry","2","","hard","Domain-Specific / Other"
+"chromatography","Domain-Specific / Other","Chromatography","2","","hard","Domain-Specific / Other"
+"claims","Domain-Specific / Other","Claims","2","","hard","Domain-Specific / Other"
+"classification","Domain-Specific / Other","Classification","2","","hard","Domain-Specific / Other"
+"client","Domain-Specific / Other","Client","2","","hard","Domain-Specific / Other"
+"clustering","Domain-Specific / Other","Clustering","2","","hard","Domain-Specific / Other"
+"cobol","Domain-Specific / Other","Cobol","2","","hard","Domain-Specific / Other"
+"coding","Domain-Specific / Other","Coding","2","","hard","Domain-Specific / Other"
+"cognitive","Domain-Specific / Other","Cognitive","2","","hard","Domain-Specific / Other"
+"collaborate","Domain-Specific / Other","Collaborate","2","","hard","Domain-Specific / Other"
+"collaborative","Domain-Specific / Other","Collaborative","2","","hard","Domain-Specific / Other"
+"collection","Domain-Specific / Other","Collection","2","","hard","Domain-Specific / Other"
+"compensation","Domain-Specific / Other","Compensation","2","","hard","Domain-Specific / Other"
+"compliant","Domain-Specific / Other","Compliant","2","","hard","Domain-Specific / Other"
+"computation","Domain-Specific / Other","Computation","2","","hard","Domain-Specific / Other"
+"computational","Domain-Specific / Other","Computational","2","","hard","Domain-Specific / Other"
+"computeraided","Domain-Specific / Other","Computeraided","2","","hard","Domain-Specific / Other"
+"computerized","Domain-Specific / Other","Computerized","2","","hard","Domain-Specific / Other"
+"computers","Domain-Specific / Other","Computers","2","","hard","Domain-Specific / Other"
+"computing","Domain-Specific / Other","Computing","2","","hard","Domain-Specific / Other"
+"concrete","Domain-Specific / Other","Concrete","2","","hard","Domain-Specific / Other"
+"condenser","Domain-Specific / Other","Condenser","2","","hard","Domain-Specific / Other"
+"configure","Domain-Specific / Other","Configure","2","","hard","Domain-Specific / Other"
+"construction","Domain-Specific / Other","Construction","2","","hard","Domain-Specific / Other"
+"constructive","Domain-Specific / Other","Constructive","2","","hard","Domain-Specific / Other"
+"consulting","Domain-Specific / Other","Consulting","2","","hard","Domain-Specific / Other"
+"control","Domain-Specific / Other","Control","2","","hard","Domain-Specific / Other"
+"controller","Domain-Specific / Other","Controller","2","","hard","Domain-Specific / Other"
+"controllers","Domain-Specific / Other","Controllers","2","","hard","Domain-Specific / Other"
+"controls","Domain-Specific / Other","Controls","2","","hard","Domain-Specific / Other"
+"conveyor","Domain-Specific / Other","Conveyor","2","","hard","Domain-Specific / Other"
+"coordinate","Domain-Specific / Other","Coordinate","2","","hard","Domain-Specific / Other"
+"coordinating","Domain-Specific / Other","Coordinating","2","","hard","Domain-Specific / Other"
+"coordination","Domain-Specific / Other","Coordination","2","","hard","Domain-Specific / Other"
+"counseling","Domain-Specific / Other","Counseling","2","","hard","Domain-Specific / Other"
+"creative","Domain-Specific / Other","Creative","2","","hard","Domain-Specific / Other"
+"credentials","Domain-Specific / Other","Credentials","2","","hard","Domain-Specific / Other"
+"critical","Domain-Specific / Other","Critical","2","","hard","Domain-Specific / Other"
+"crm","Domain-Specific / Other","Crm","2","","hard","Domain-Specific / Other"
+"crossfunctional","Domain-Specific / Other","Crossfunctional","2","","hard","Domain-Specific / Other"
+"cryptography","Domain-Specific / Other","Cryptography","2","","hard","Domain-Specific / Other"
+"csa","Domain-Specific / Other","Csa","2","","hard","Domain-Specific / Other"
+"csat","Domain-Specific / Other","Csat","2","","hard","Domain-Specific / Other"
+"csv","Domain-Specific / Other","Csv","2","","hard","Domain-Specific / Other"
+"customer","Domain-Specific / Other","Customer","2","","hard","Domain-Specific / Other"
+"customercentric","Domain-Specific / Other","Customercentric","2","","hard","Domain-Specific / Other"
+"customeroriented","Domain-Specific / Other","Customeroriented","2","","hard","Domain-Specific / Other"
+"customers","Domain-Specific / Other","Customers","2","","hard","Domain-Specific / Other"
+"cyberark","Domain-Specific / Other","Cyberark","2","","hard","Domain-Specific / Other"
+"cycle","Domain-Specific / Other","Cycle","2","","hard","Domain-Specific / Other"
+"cytometry","Domain-Specific / Other","Cytometry","2","","hard","Domain-Specific / Other"
+"cytotechnologist","Domain-Specific / Other","Cytotechnologist","2","","hard","Domain-Specific / Other"
+"dashboards","Domain-Specific / Other","Dashboards","2","","hard","Domain-Specific / Other"
+"data","Domain-Specific / Other","Data","2","","hard","Domain-Specific / Other"
+"database","Domain-Specific / Other","Database","2","","hard","Domain-Specific / Other"
+"databases","Domain-Specific / Other","Databases","2","","hard","Domain-Specific / Other"
+"datacenter","Domain-Specific / Other","Datacenter","2","","hard","Domain-Specific / Other"
+"datadriven","Domain-Specific / Other","Datadriven","2","","hard","Domain-Specific / Other"
+"datasets","Domain-Specific / Other","Datasets","2","","hard","Domain-Specific / Other"
+"deadline","Domain-Specific / Other","Deadline","2","","hard","Domain-Specific / Other"
+"debugging","Domain-Specific / Other","Debugging","2","","hard","Domain-Specific / Other"
+"decision","Domain-Specific / Other","Decision","2","","hard","Domain-Specific / Other"
+"delegation","Domain-Specific / Other","Delegation","2","","hard","Domain-Specific / Other"
+"dental","Domain-Specific / Other","Dental","2","","hard","Domain-Specific / Other"
+"deployment","Domain-Specific / Other","Deployment","2","","hard","Domain-Specific / Other"
+"designing","Domain-Specific / Other","Designing","2","","hard","Domain-Specific / Other"
+"detail","Domain-Specific / Other","Detail","2","","hard","Domain-Specific / Other"
+"develop","Domain-Specific / Other","Develop","2","","hard","Domain-Specific / Other"
+"developers","Domain-Specific / Other","Developers","2","","hard","Domain-Specific / Other"
+"developmental","Domain-Specific / Other","Developmental","2","","hard","Domain-Specific / Other"
+"dexterity","Domain-Specific / Other","Dexterity","2","","hard","Domain-Specific / Other"
+"diagnosis","Domain-Specific / Other","Diagnosis","2","","hard","Domain-Specific / Other"
+"digital","Domain-Specific / Other","Digital","2","","hard","Domain-Specific / Other"
+"digitalization","Domain-Specific / Other","Digitalization","2","","hard","Domain-Specific / Other"
+"diligence","Domain-Specific / Other","Diligence","2","","hard","Domain-Specific / Other"
+"disaster","Domain-Specific / Other","Disaster","2","","hard","Domain-Specific / Other"
+"discharge","Domain-Specific / Other","Discharge","2","","hard","Domain-Specific / Other"
+"discovery","Domain-Specific / Other","Discovery","2","","hard","Domain-Specific / Other"
+"documentation","Domain-Specific / Other","Documentation","2","","hard","Domain-Specific / Other"
+"drafting","Domain-Specific / Other","Drafting","2","","hard","Domain-Specific / Other"
+"driving","Domain-Specific / Other","Driving","2","","hard","Domain-Specific / Other"
+"drug","Domain-Specific / Other","Drug","2","","hard","Domain-Specific / Other"
+"electricity","Domain-Specific / Other","Electricity","2","","hard","Domain-Specific / Other"
+"electronic","Domain-Specific / Other","Electronic","2","","hard","Domain-Specific / Other"
+"electronics","Domain-Specific / Other","Electronics","2","","hard","Domain-Specific / Other"
+"electrophysiology","Domain-Specific / Other","Electrophysiology","2","","hard","Domain-Specific / Other"
+"email","Domain-Specific / Other","Email","2","","hard","Domain-Specific / Other"
+"embedded","Domain-Specific / Other","Embedded","2","","hard","Domain-Specific / Other"
+"embedding","Domain-Specific / Other","Embedding","2","","hard","Domain-Specific / Other"
+"engineering","Domain-Specific / Other","Engineering","2","","hard","Domain-Specific / Other"
+"entrepreneur","Domain-Specific / Other","Entrepreneur","2","","hard","Domain-Specific / Other"
+"escalation","Domain-Specific / Other","Escalation","2","","hard","Domain-Specific / Other"
+"esthetics","Domain-Specific / Other","Esthetics","2","","hard","Domain-Specific / Other"
+"estimate","Domain-Specific / Other","Estimate","2","","hard","Domain-Specific / Other"
+"estimating","Domain-Specific / Other","Estimating","2","","hard","Domain-Specific / Other"
+"evaluation","Domain-Specific / Other","Evaluation","2","","hard","Domain-Specific / Other"
+"execution","Domain-Specific / Other","Execution","2","","hard","Domain-Specific / Other"
+"facilitation","Domain-Specific / Other","Facilitation","2","","hard","Domain-Specific / Other"
+"facilities","Domain-Specific / Other","Facilities","2","","hard","Domain-Specific / Other"
+"feedback","Domain-Specific / Other","Feedback","2","","hard","Domain-Specific / Other"
+"finance","Domain-Specific / Other","Finance","2","","hard","Domain-Specific / Other"
+"firmware","Domain-Specific / Other","Firmware","2","","hard","Domain-Specific / Other"
+"forklift","Domain-Specific / Other","Forklift","2","","hard","Domain-Specific / Other"
+"formulation","Domain-Specific / Other","Formulation","2","","hard","Domain-Specific / Other"
+"framework","Domain-Specific / Other","Framework","2","","hard","Domain-Specific / Other"
+"frameworks","Domain-Specific / Other","Frameworks","2","","hard","Domain-Specific / Other"
+"gdpr","Domain-Specific / Other","Gdpr","2","","hard","Domain-Specific / Other"
+"genomic","Domain-Specific / Other","Genomic","2","","hard","Domain-Specific / Other"
+"genomics","Domain-Specific / Other","Genomics","2","","hard","Domain-Specific / Other"
+"geographic","Domain-Specific / Other","Geographic","2","","hard","Domain-Specific / Other"
+"getaaa","Domain-Specific / Other","Getaaa","2","","hard","Domain-Specific / Other"
+"gis","Domain-Specific / Other","Gis","2","","hard","Domain-Specific / Other"
+"github","Domain-Specific / Other","Github","2","","hard","Domain-Specific / Other"
+"gitlab","Domain-Specific / Other","Gitlab","2","","hard","Domain-Specific / Other"
+"glp","Domain-Specific / Other","Glp","2","","hard","Domain-Specific / Other"
+"gmp","Domain-Specific / Other","Gmp","2","good manufacturing practices","hard","Domain-Specific / Other"
+"grant","Domain-Specific / Other","Grant","2","","hard","Domain-Specific / Other"
+"graphic","Domain-Specific / Other","Graphic","2","","hard","Domain-Specific / Other"
+"graphics","Domain-Specific / Other","Graphics","2","","hard","Domain-Specific / Other"
+"grooming","Domain-Specific / Other","Grooming","2","","hard","Domain-Specific / Other"
+"guiding","Domain-Specific / Other","Guiding","2","","hard","Domain-Specific / Other"
+"human","Domain-Specific / Other","Human","2","","hard","Domain-Specific / Other"
+"hygiene","Domain-Specific / Other","Hygiene","2","","hard","Domain-Specific / Other"
+"immunoassay","Domain-Specific / Other","Immunoassay","2","","hard","Domain-Specific / Other"
+"innovation","Domain-Specific / Other","Innovation","2","","hard","Domain-Specific / Other"
+"installation","Domain-Specific / Other","Installation","2","","hard","Domain-Specific / Other"
+"instructional","Domain-Specific / Other","Instructional","2","","hard","Domain-Specific / Other"
+"intelligence","Domain-Specific / Other","Intelligence","2","","hard","Domain-Specific / Other"
+"inventories","Domain-Specific / Other","Inventories","2","","hard","Domain-Specific / Other"
+"investigation","Domain-Specific / Other","Investigation","2","","hard","Domain-Specific / Other"
+"ios","Domain-Specific / Other","Ios","2","","hard","Domain-Specific / Other"
+"iot","Domain-Specific / Other","Iot","2","","hard","Domain-Specific / Other"
+"jquery","Domain-Specific / Other","Jquery","2","","hard","Domain-Specific / Other"
+"kinetics","Domain-Specific / Other","Kinetics","2","","hard","Domain-Specific / Other"
+"labeling","Domain-Specific / Other","Labeling","2","","hard","Domain-Specific / Other"
+"laser","Domain-Specific / Other","Laser","2","","hard","Domain-Specific / Other"
+"learning","Domain-Specific / Other","Learning","2","","hard","Domain-Specific / Other"
+"legal","Domain-Specific / Other","Legal","2","","hard","Domain-Specific / Other"
+"machine","Domain-Specific / Other","Machine","2","","hard","Domain-Specific / Other"
+"maintenance","Domain-Specific / Other","Maintenance","2","","hard","Domain-Specific / Other"
+"marketing","Domain-Specific / Other","Marketing","2","","hard","Domain-Specific / Other"
+"metabolomics","Domain-Specific / Other","Metabolomics","2","","hard","Domain-Specific / Other"
+"microscopy","Domain-Specific / Other","Microscopy","2","","hard","Domain-Specific / Other"
+"microsoft","Domain-Specific / Other","Microsoft","2","","hard","Domain-Specific / Other"
+"modeling","Domain-Specific / Other","Modeling","2","","hard","Domain-Specific / Other"
+"modelling","Domain-Specific / Other","Modelling","2","","hard","Domain-Specific / Other"
+"motivating","Domain-Specific / Other","Motivating","2","","hard","Domain-Specific / Other"
+"motivation","Domain-Specific / Other","Motivation","2","","hard","Domain-Specific / Other"
+"narration","Domain-Specific / Other","Narration","2","","hard","Domain-Specific / Other"
+"nist","Domain-Specific / Other","Nist","2","","hard","Domain-Specific / Other"
+"nosql","Domain-Specific / Other","Nosql","2","","hard","Domain-Specific / Other"
+"orchestration","Domain-Specific / Other","Orchestration","2","","hard","Domain-Specific / Other"
+"orthodontic","Domain-Specific / Other","Orthodontic","2","","hard","Domain-Specific / Other"
+"orthopedic","Domain-Specific / Other","Orthopedic","2","","hard","Domain-Specific / Other"
+"outreach","Domain-Specific / Other","Outreach","2","","hard","Domain-Specific / Other"
+"pedagogy","Domain-Specific / Other","Pedagogy","2","","hard","Domain-Specific / Other"
+"performance","Domain-Specific / Other","Performance","2","","hard","Domain-Specific / Other"
+"photography","Domain-Specific / Other","Photography","2","","hard","Domain-Specific / Other"
+"physics","Domain-Specific / Other","Physics","2","","hard","Domain-Specific / Other"
+"pilates","Domain-Specific / Other","Pilates","2","","hard","Domain-Specific / Other"
+"plumbing","Domain-Specific / Other","Plumbing","2","","hard","Domain-Specific / Other"
+"policy","Domain-Specific / Other","Policy","2","","hard","Domain-Specific / Other"
+"postgres","Domain-Specific / Other","Postgres","2","","hard","Domain-Specific / Other"
+"priorities","Domain-Specific / Other","Priorities","2","","hard","Domain-Specific / Other"
+"problem","Domain-Specific / Other","Problem","2","","hard","Domain-Specific / Other"
+"programming","Domain-Specific / Other","Programming","2","","hard","Domain-Specific / Other"
+"protocol","Domain-Specific / Other","Protocol","2","","hard","Domain-Specific / Other"
+"recruiting","Domain-Specific / Other","Recruiting","2","","hard","Domain-Specific / Other"
+"recruitment","Domain-Specific / Other","Recruitment","2","","hard","Domain-Specific / Other"
+"regex","Domain-Specific / Other","Regex","2","","hard","Domain-Specific / Other"
+"remote","Domain-Specific / Other","Remote","2","","hard","Domain-Specific / Other"
+"retail","Domain-Specific / Other","Retail","2","","hard","Domain-Specific / Other"
+"scanning","Domain-Specific / Other","Scanning","2","","hard","Domain-Specific / Other"
+"sharepoint","Domain-Specific / Other","Sharepoint","2","","hard","Domain-Specific / Other"
+"simulation","Domain-Specific / Other","Simulation","2","","hard","Domain-Specific / Other"
+"spectroscopy","Domain-Specific / Other","Spectroscopy","2","","hard","Domain-Specific / Other"
+"spreadsheets","Domain-Specific / Other","Spreadsheets","2","","hard","Domain-Specific / Other"
+"statistics","Domain-Specific / Other","Statistics","2","","hard","Domain-Specific / Other"
+"strategy","Domain-Specific / Other","Strategy","2","","hard","Domain-Specific / Other"
+"supervision","Domain-Specific / Other","Supervision","2","","hard","Domain-Specific / Other"
+"sustainability","Domain-Specific / Other","Sustainability","2","","hard","Domain-Specific / Other"
+"testing","Domain-Specific / Other","Testing","2","","hard","Domain-Specific / Other"
+"time","Domain-Specific / Other","Time","2","","hard","Domain-Specific / Other"
+"transport","Domain-Specific / Other","Transport","2","","hard","Domain-Specific / Other"
+"troubleshooting","Domain-Specific / Other","Troubleshooting","2","","hard","Domain-Specific / Other"
+"usability","Domain-Specific / Other","Usability","2","","hard","Domain-Specific / Other"
+"virtual","Domain-Specific / Other","Virtual","2","","hard","Domain-Specific / Other"
+"visual","Domain-Specific / Other","Visual","2","","hard","Domain-Specific / Other"
+"warehousing","Domain-Specific / Other","Warehousing","2","","hard","Domain-Specific / Other"
+"academia","Engineering & Manufacturing","Academia","3","","hard","Engineering & Manufacturing"
+"academic","Engineering & Manufacturing","Academic","3","","hard","Engineering & Manufacturing"
+"academics","Engineering & Manufacturing","Academics","3","","hard","Engineering & Manufacturing"
+"academy","Engineering & Manufacturing","Academy","3","","hard","Engineering & Manufacturing"
+"aerospace","Engineering & Manufacturing","Aerospace","3","","hard","Engineering & Manufacturing"
+"automation","Engineering & Manufacturing","Automation","3","","hard","Engineering & Manufacturing"
+"bim","Engineering & Manufacturing","Bim","3","","hard","Engineering & Manufacturing"
+"biomaterials","Engineering & Manufacturing","Biomaterials","3","","hard","Engineering & Manufacturing"
+"cad","Engineering & Manufacturing","Cad","3","","hard","Engineering & Manufacturing"
+"cadence","Engineering & Manufacturing","Cadence","3","","hard","Engineering & Manufacturing"
+"calibration","Engineering & Manufacturing","Calibration","3","","hard","Engineering & Manufacturing"
+"calibrations","Engineering & Manufacturing","Calibrations","3","","hard","Engineering & Manufacturing"
+"campaign","Engineering & Manufacturing","Campaign","3","","hard","Engineering & Manufacturing"
+"campaigns","Engineering & Manufacturing","Campaigns","3","","hard","Engineering & Manufacturing"
+"civil","Engineering & Manufacturing","Civil","3","","hard","Engineering & Manufacturing"
+"cleanroom","Engineering & Manufacturing","Cleanroom","3","","hard","Engineering & Manufacturing"
+"drawing","Engineering & Manufacturing","Drawing","3","","hard","Engineering & Manufacturing"
+"drawings","Engineering & Manufacturing","Drawings","3","","hard","Engineering & Manufacturing"
+"electrical","Engineering & Manufacturing","Electrical","3","","hard","Engineering & Manufacturing"
+"electromechanical","Engineering & Manufacturing","Electromechanical","3","","hard","Engineering & Manufacturing"
+"fabrication","Engineering & Manufacturing","Fabrication","3","","hard","Engineering & Manufacturing"
+"geospatial","Engineering & Manufacturing","Geospatial","3","","hard","Engineering & Manufacturing"
+"geotechnical","Engineering & Manufacturing","Geotechnical","3","","hard","Engineering & Manufacturing"
+"hydraulic","Engineering & Manufacturing","Hydraulic","3","","hard","Engineering & Manufacturing"
+"hydraulics","Engineering & Manufacturing","Hydraulics","3","","hard","Engineering & Manufacturing"
+"inspection","Engineering & Manufacturing","Inspection","3","","hard","Engineering & Manufacturing"
+"kaizen","Engineering & Manufacturing","Kaizen","3","","hard","Engineering & Manufacturing"
+"machining","Engineering & Manufacturing","Machining","3","","hard","Engineering & Manufacturing"
+"manufacturing","Engineering & Manufacturing","Manufacturing","3","","hard","Engineering & Manufacturing"
+"materials","Engineering & Manufacturing","Materials","3","","hard","Engineering & Manufacturing"
+"metrology","Engineering & Manufacturing","Metrology","3","","hard","Engineering & Manufacturing"
+"robotics","Engineering & Manufacturing","Robotics","3","","hard","Engineering & Manufacturing"
+"structural","Engineering & Manufacturing","Structural","3","","hard","Engineering & Manufacturing"
+"validation","Engineering & Manufacturing","Validation","3","","hard","Engineering & Manufacturing"
+"welding","Engineering & Manufacturing","Welding","3","","hard","Engineering & Manufacturing"
+"accounting","Finance & Accounting","Accounting","3","","hard","Finance & Accounting"
+"accreditation","Finance & Accounting","Accreditation","3","","hard","Finance & Accounting"
+"accredited","Finance & Accounting","Accredited","3","","hard","Finance & Accounting"
+"asset","Finance & Accounting","Asset","3","","hard","Finance & Accounting"
+"assets","Finance & Accounting","Assets","3","","hard","Finance & Accounting"
+"auditing","Finance & Accounting","Auditing","3","","hard","Finance & Accounting"
+"auditor","Finance & Accounting","Auditor","3","","hard","Finance & Accounting"
+"auditors","Finance & Accounting","Auditors","3","","hard","Finance & Accounting"
+"audits","Finance & Accounting","Audits","3","","hard","Finance & Accounting"
+"banking","Finance & Accounting","Banking","3","","hard","Finance & Accounting"
+"bookkeeping","Finance & Accounting","Bookkeeping","3","","hard","Finance & Accounting"
+"budgeting","Finance & Accounting","Budgeting","3","","hard","Finance & Accounting"
+"compliance","Finance & Accounting","Compliance","3","","hard","Finance & Accounting"
+"cybersecurity","Finance & Accounting","Cybersecurity","3","","hard","Finance & Accounting"
+"devsecops","Finance & Accounting","Devsecops","3","","hard","Finance & Accounting"
+"financial","Finance & Accounting","Financial","3","","hard","Finance & Accounting"
+"financials","Finance & Accounting","Financials","3","","hard","Finance & Accounting"
+"forecasting","Finance & Accounting","Forecasting","3","","hard","Finance & Accounting"
+"fundraising","Finance & Accounting","Fundraising","3","","hard","Finance & Accounting"
+"grants","Finance & Accounting","Grants","3","","hard","Finance & Accounting"
+"invoicing","Finance & Accounting","Invoicing","3","","hard","Finance & Accounting"
+"lending","Finance & Accounting","Lending","3","","hard","Finance & Accounting"
+"mortgage","Finance & Accounting","Mortgage","3","","hard","Finance & Accounting"
+"nonprofit","Finance & Accounting","Nonprofit","3","","hard","Finance & Accounting"
+"payroll","Finance & Accounting","Payroll","3","","hard","Finance & Accounting"
+"reimbursement","Finance & Accounting","Reimbursement","3","","hard","Finance & Accounting"
+"security","Finance & Accounting","Security","3","","hard","Finance & Accounting"
+"anesthesia","Healthcare & Clinical","Anesthesia","3","","hard","Healthcare & Clinical"
+"autoclave","Healthcare & Clinical","Autoclave","3","","hard","Healthcare & Clinical"
+"biomedical","Healthcare & Clinical","Biomedical","3","","hard","Healthcare & Clinical"
+"biopsy","Healthcare & Clinical","Biopsy","3","","hard","Healthcare & Clinical"
+"brachytherapy","Healthcare & Clinical","Brachytherapy","3","","hard","Healthcare & Clinical"
+"cardiology","Healthcare & Clinical","Cardiology","3","","hard","Healthcare & Clinical"
+"catheter","Healthcare & Clinical","Catheter","3","","hard","Healthcare & Clinical"
+"catheterization","Healthcare & Clinical","Catheterization","3","","hard","Healthcare & Clinical"
+"catheters","Healthcare & Clinical","Catheters","3","","hard","Healthcare & Clinical"
+"chemotherapy","Healthcare & Clinical","Chemotherapy","3","","hard","Healthcare & Clinical"
+"chiropractic","Healthcare & Clinical","Chiropractic","3","","hard","Healthcare & Clinical"
+"cytology","Healthcare & Clinical","Cytology","3","","hard","Healthcare & Clinical"
+"dentistry","Healthcare & Clinical","Dentistry","3","","hard","Healthcare & Clinical"
+"diagnostic","Healthcare & Clinical","Diagnostic","3","","hard","Healthcare & Clinical"
+"dialysis","Healthcare & Clinical","Dialysis","3","","hard","Healthcare & Clinical"
+"ehr","Healthcare & Clinical","Ehr","3","","hard","Healthcare & Clinical"
+"emergency","Healthcare & Clinical","Emergency","3","","hard","Healthcare & Clinical"
+"emr","Healthcare & Clinical","Emr","3","","hard","Healthcare & Clinical"
+"epidural","Healthcare & Clinical","Epidural","3","","hard","Healthcare & Clinical"
+"glucose","Healthcare & Clinical","Glucose","3","","hard","Healthcare & Clinical"
+"hematology","Healthcare & Clinical","Hematology","3","","hard","Healthcare & Clinical"
+"hipaa","Healthcare & Clinical","Hipaa","3","","hard","Healthcare & Clinical"
+"histology","Healthcare & Clinical","Histology","3","","hard","Healthcare & Clinical"
+"histopathology","Healthcare & Clinical","Histopathology","3","","hard","Healthcare & Clinical"
+"immunology","Healthcare & Clinical","Immunology","3","","hard","Healthcare & Clinical"
+"inpatient","Healthcare & Clinical","Inpatient","3","","hard","Healthcare & Clinical"
+"laboratory","Healthcare & Clinical","Laboratory","3","","hard","Healthcare & Clinical"
+"laparoscopic","Healthcare & Clinical","Laparoscopic","3","","hard","Healthcare & Clinical"
+"laparoscopy","Healthcare & Clinical","Laparoscopy","3","","hard","Healthcare & Clinical"
+"medical","Healthcare & Clinical","Medical","3","","hard","Healthcare & Clinical"
+"nephrology","Healthcare & Clinical","Nephrology","3","","hard","Healthcare & Clinical"
+"neurology","Healthcare & Clinical","Neurology","3","","hard","Healthcare & Clinical"
+"nursing","Healthcare & Clinical","Nursing","3","","hard","Healthcare & Clinical"
+"nutrition","Healthcare & Clinical","Nutrition","3","","hard","Healthcare & Clinical"
+"occupational","Healthcare & Clinical","Occupational","3","","hard","Healthcare & Clinical"
+"oncology","Healthcare & Clinical","Oncology","3","","hard","Healthcare & Clinical"
+"ophthalmology","Healthcare & Clinical","Ophthalmology","3","","hard","Healthcare & Clinical"
+"paediatric","Healthcare & Clinical","Paediatric","3","","hard","Healthcare & Clinical"
+"paramedicine","Healthcare & Clinical","Paramedicine","3","","hard","Healthcare & Clinical"
+"pathology","Healthcare & Clinical","Pathology","3","","hard","Healthcare & Clinical"
+"pharmacy","Healthcare & Clinical","Pharmacy","3","","hard","Healthcare & Clinical"
+"physical","Healthcare & Clinical","Physical","3","","hard","Healthcare & Clinical"
+"physiotherapy","Healthcare & Clinical","Physiotherapy","3","","hard","Healthcare & Clinical"
+"psychiatry","Healthcare & Clinical","Psychiatry","3","","hard","Healthcare & Clinical"
+"psychology","Healthcare & Clinical","Psychology","3","","hard","Healthcare & Clinical"
+"radiology","Healthcare & Clinical","Radiology","3","","hard","Healthcare & Clinical"
+"rehabilitation","Healthcare & Clinical","Rehabilitation","3","","hard","Healthcare & Clinical"
+"respiratory","Healthcare & Clinical","Respiratory","3","","hard","Healthcare & Clinical"
+"sterilization","Healthcare & Clinical","Sterilization","3","","hard","Healthcare & Clinical"
+"therapy","Healthcare & Clinical","Therapy","3","","hard","Healthcare & Clinical"
+"ultrasound","Healthcare & Clinical","Ultrasound","3","","hard","Healthcare & Clinical"
+"accessioning","IT Infrastructure & Security","Accessioning","3","","tool","IT Infrastructure & Security"
+"ambulance","IT Infrastructure & Security","Ambulance","3","","tool","IT Infrastructure & Security"
+"anaplan","IT Infrastructure & Security","Anaplan","3","","tool","IT Infrastructure & Security"
+"android","IT Infrastructure & Security","Android","3","","tool","IT Infrastructure & Security"
+"anticipation","IT Infrastructure & Security","Anticipation","3","","tool","IT Infrastructure & Security"
+"antimalware","IT Infrastructure & Security","Antimalware","3","","tool","IT Infrastructure & Security"
+"apprenticeship","IT Infrastructure & Security","Apprenticeship","3","","tool","IT Infrastructure & Security"
+"apprenticeships","IT Infrastructure & Security","Apprenticeships","3","","tool","IT Infrastructure & Security"
+"authentication","IT Infrastructure & Security","Authentication","3","","tool","IT Infrastructure & Security"
+"authorization","IT Infrastructure & Security","Authorization","3","","tool","IT Infrastructure & Security"
+"backup","IT Infrastructure & Security","Backup","3","","tool","IT Infrastructure & Security"
+"backups","IT Infrastructure & Security","Backups","3","","tool","IT Infrastructure & Security"
+"balance","IT Infrastructure & Security","Balance","3","","tool","IT Infrastructure & Security"
+"balancing","IT Infrastructure & Security","Balancing","3","","tool","IT Infrastructure & Security"
+"blockchain","IT Infrastructure & Security","Blockchain","3","","tool","IT Infrastructure & Security"
+"caliper","IT Infrastructure & Security","Caliper","3","","tool","IT Infrastructure & Security"
+"calipers","IT Infrastructure & Security","Calipers","3","","tool","IT Infrastructure & Security"
+"cloud","IT Infrastructure & Security","Cloud","3","","tool","IT Infrastructure & Security"
+"cloudbased","IT Infrastructure & Security","Cloudbased","3","","tool","IT Infrastructure & Security"
+"cloudwatch","IT Infrastructure & Security","Cloudwatch","3","","tool","IT Infrastructure & Security"
+"configuration","IT Infrastructure & Security","Configuration","3","","tool","IT Infrastructure & Security"
+"devops","IT Infrastructure & Security","Devops","3","","tool","IT Infrastructure & Security"
+"diplomacy","IT Infrastructure & Security","Diplomacy","3","","tool","IT Infrastructure & Security"
+"discipline","IT Infrastructure & Security","Discipline","3","","tool","IT Infrastructure & Security"
+"dispatcher","IT Infrastructure & Security","Dispatcher","3","","tool","IT Infrastructure & Security"
+"dns","IT Infrastructure & Security","Dns","3","","tool","IT Infrastructure & Security"
+"encryption","IT Infrastructure & Security","Encryption","3","","tool","IT Infrastructure & Security"
+"incident","IT Infrastructure & Security","Incident","3","","tool","IT Infrastructure & Security"
+"landscaping","IT Infrastructure & Security","Landscaping","3","","tool","IT Infrastructure & Security"
+"leadership","IT Infrastructure & Security","Leadership","3","","tool","IT Infrastructure & Security"
+"mentorship","IT Infrastructure & Security","Mentorship","3","","tool","IT Infrastructure & Security"
+"microservices","IT Infrastructure & Security","Microservices","3","","tool","IT Infrastructure & Security"
+"monitoring","IT Infrastructure & Security","Monitoring","3","","tool","IT Infrastructure & Security"
+"multidisciplinary","IT Infrastructure & Security","Multidisciplinary","3","","tool","IT Infrastructure & Security"
+"networking","IT Infrastructure & Security","Networking","3","","tool","IT Infrastructure & Security"
+"ownership","IT Infrastructure & Security","Ownership","3","","tool","IT Infrastructure & Security"
+"planning","IT Infrastructure & Security","Planning","3","","tool","IT Infrastructure & Security"
+"routing","IT Infrastructure & Security","Routing","3","","tool","IT Infrastructure & Security"
+"scripting","IT Infrastructure & Security","Scripting","3","","tool","IT Infrastructure & Security"
+"server","IT Infrastructure & Security","Server","3","","tool","IT Infrastructure & Security"
+"serverless","IT Infrastructure & Security","Serverless","3","","tool","IT Infrastructure & Security"
+"shipping","IT Infrastructure & Security","Shipping","3","","tool","IT Infrastructure & Security"
+"virtualization","IT Infrastructure & Security","Virtualization","3","","tool","IT Infrastructure & Security"
+"wireless","IT Infrastructure & Security","Wireless","3","","tool","IT Infrastructure & Security"
+"bioprocess","Operations & Logistics","Bioprocess","2","","hard","Operations & Logistics"
+"capacity","Operations & Logistics","Capacity","2","","hard","Operations & Logistics"
+"contract","Operations & Logistics","Contract","2","","hard","Operations & Logistics"
+"contracting","Operations & Logistics","Contracting","2","","hard","Operations & Logistics"
+"contractors","Operations & Logistics","Contractors","2","","hard","Operations & Logistics"
+"contracts","Operations & Logistics","Contracts","2","","hard","Operations & Logistics"
+"inventory","Operations & Logistics","Inventory","2","","hard","Operations & Logistics"
+"kanban","Operations & Logistics","Kanban","2","","hard","Operations & Logistics"
+"logistics","Operations & Logistics","Logistics","2","","hard","Operations & Logistics"
+"negotiation","Operations & Logistics","Negotiation","2","","hard","Operations & Logistics"
+"optimization","Operations & Logistics","Optimization","2","","hard","Operations & Logistics"
+"procurement","Operations & Logistics","Procurement","2","","hard","Operations & Logistics"
+"quality","Operations & Logistics","Quality","2","","hard","Operations & Logistics"
+"safety","Operations & Logistics","Safety","2","","hard","Operations & Logistics"
+"scheduling","Operations & Logistics","Scheduling","2","","hard","Operations & Logistics"
+"training","Operations & Logistics","Training","2","","hard","Operations & Logistics"
+"vendor","Operations & Logistics","Vendor","2","","hard","Operations & Logistics"
+"workflow","Operations & Logistics","Workflow","2","","hard","Operations & Logistics"
+"accountability","Soft Skills","Accountability","1","","soft","Soft Skills"
+"adaptability","Soft Skills","Adaptability","1","","soft","Soft Skills"
+"analytical","Soft Skills","Analytical","1","","soft","Soft Skills"
+"bioanalytical","Soft Skills","Bioanalytical","1","","soft","Soft Skills"
+"coaching","Soft Skills","Coaching","1","","soft","Soft Skills"
+"collaboration","Soft Skills","Collaboration","1","","soft","Soft Skills"
+"communication","Soft Skills","Communication","1","","soft","Soft Skills"
+"communications","Soft Skills","Communications","1","","soft","Soft Skills"
+"copywriting","Soft Skills","Copywriting","1","","soft","Soft Skills"
+"creativity","Soft Skills","Creativity","1","","soft","Soft Skills"
+"customerfocused","Soft Skills","Customerfocused","1","","soft","Soft Skills"
+"decisionmaking","Soft Skills","Decisionmaking","1","","soft","Soft Skills"
+"ethics","Soft Skills","Ethics","1","","soft","Soft Skills"
+"flexibility","Soft Skills","Flexibility","1","","soft","Soft Skills"
+"innovative","Soft Skills","Innovative","1","","soft","Soft Skills"
+"integrity","Soft Skills","Integrity","1","","soft","Soft Skills"
+"mentoring","Soft Skills","Mentoring","1","","soft","Soft Skills"
+"multitasking","Soft Skills","Multitasking","1","","soft","Soft Skills"
+"organizational","Soft Skills","Organizational","1","","soft","Soft Skills"
+"presentation","Soft Skills","Presentation","1","","soft","Soft Skills"
+"prioritization","Soft Skills","Prioritization","1","","soft","Soft Skills"
+"problemsolving","Soft Skills","Problemsolving","1","","soft","Soft Skills"
+"reporting","Soft Skills","Reporting","1","","soft","Soft Skills"
+"resilience","Soft Skills","Resilience","1","","soft","Soft Skills"
+"telecommunication","Soft Skills","Telecommunication","1","","soft","Soft Skills"
+"writing","Soft Skills","Writing","1","","soft","Soft Skills"
+"adobe","Technical (Software & Programming)","Adobe","4","","tool","Technical (Software & Programming)"
+"Adobe XD","Design Skills","Adobe XD","4","xd","tool","Design Skills"
+"Illustrator","Design Skills","Illustrator","4","adobe illustrator","tool","Design Skills"
+"Photoshop","Design Skills","Photoshop","4","adobe photoshop","tool","Design Skills"
+"Wordpress","Technical (Software & Programming)","Wordpress","4","","tool","Technical (Software & Programming)"
+"alteryx","Technical (Software & Programming)","Alteryx","4","","tool","Technical (Software & Programming)"
+"angularjs","Technical (Software & Programming)","Angularjs","4","angular|angular.js","tool","Technical (Software & Programming)"
+"ReactJS","Technical (Software & Programming)","ReactJS","4","react|react.js","tool","Technical (Software & Programming)"
+"VueJS","Technical (Software & Programming)","VueJS","4 ","vue|vue.js","tool","Technical (Software & Programming)"
+"ansible","Technical (Software & Programming)","Ansible","4","","tool","Technical (Software & Programming)"
+"ansys","Technical (Software & Programming)","Ansys","4","","tool","Technical (Software & Programming)"
+"autocad","Technical (Software & Programming)","Autocad","4","","tool","Technical (Software & Programming)"
+"azure","Technical (Software & Programming)","Azure","4","","tool","Technical (Software & Programming)"
+"canva","Technical (Software & Programming)","Canva","4","","tool","Technical (Software & Programming)"
+"cisco","Technical (Software & Programming)","Cisco","4","","tool","Technical (Software & Programming)"
+"confluence","Technical (Software & Programming)","Confluence","4","","tool","Technical (Software & Programming)"
+"datadog","Technical (Software & Programming)","Datadog","4","","tool","Technical (Software & Programming)"
+"docker","Technical (Software & Programming)","Docker","4","containerization","tool","Technical (Software & Programming)"
+"elasticsearch","Technical (Software & Programming)","Elasticsearch","4","","tool","Technical (Software & Programming)"
+"epic","Technical (Software & Programming)","Epic","4","","tool","Technical (Software & Programming)"
+"excel","Technical (Software & Programming)","Excel","4","microsoft excel","tool","Technical (Software & Programming)"
+"git","Technical (Software & Programming)","Git","4","","tool","Technical (Software & Programming)"
+"golang","Technical (Software & Programming)","Golang","4","","tool","Technical (Software & Programming)"
+"gradle","Technical (Software & Programming)","Gradle","4","","tool","Technical (Software & Programming)"
+"grafana","Technical (Software & Programming)","Grafana","4","","tool","Technical (Software & Programming)"
+"graphql","Technical (Software & Programming)","Graphql","4","graph ql","tool","Technical (Software & Programming)"
+"hadoop","Technical (Software & Programming)","Hadoop","4","","tool","Technical (Software & Programming)"
+"html","Technical (Software & Programming)","Html","4","","tool","Technical (Software & Programming)"
+"java","Technical (Software & Programming)","Java","4","","tool","Technical (Software & Programming)"
+"Core Java","Technical (Software & Programming)","Core Java","4","","tool","Technical (Software & Programming)"
+"Servlets","Technical (Software & Programming)","Servlets","4","","tool","Technical (Software & Programming)"
+"JSP","Technical (Software & Programming)","JSP","4","","tool","Technical (Software & Programming)"
+"JSTL","Technical (Software & Programming)","JSTL","4","","tool","Technical (Software & Programming)"
+"JDBC","Technical (Software & Programming)","JDBC","4","","tool","Technical (Software & Programming)"
+"JMS","Technical (Software & Programming)","JMS","4","","tool","Technical (Software & Programming)"
+"JNDI","Technical (Software & Programming)","JNDI","4","","tool","Technical (Software & Programming)"
+"RMI","Technical (Software & Programming)","RMI","4","","tool","Technical (Software & Programming)"
+"EJB","Technical (Software & Programming)","EJB","4","","tool","Technical (Software & Programming)"
+"Spring MVC","Technical (Software & Programming)","Spring MVC","4","","tool","Technical (Software & Programming)"
+"Spring Boot","Technical (Software & Programming)","Spring Boot","4","","tool","Technical (Software & Programming)"
+"Spring Security","Technical (Software & Programming)","Spring Security","4","","tool","Technical (Software & Programming)"
+"Spring Core","Technical (Software & Programming)","Spring Core","4","","tool","Technical (Software & Programming)"
+"Struts","Technical (Software & Programming)","Struts","4","","tool","Technical (Software & Programming)"
+"JSF","Technical (Software & Programming)","JSF","4","","tool","Technical (Software & Programming)"
+"Hibernate","Technical (Software & Programming)","Hibernate","4","","tool","Technical (Software & Programming)"
+"IBATIS","Technical (Software & Programming)","IBATIS","4","","tool","Technical (Software & Programming)"
+"WebLogic","Technical (Software & Programming)","WebLogic","4","","tool","Technical (Software & Programming)"
+"WebSphere","Technical (Software & Programming)","WebSphere","4","","tool","Technical (Software & Programming)"
+"JBoss","Technical (Software & Programming)","JBoss","4","","tool","Technical (Software & Programming)"
+"Tomcat","Technical (Software & Programming)","Tomcat","4","","tool","Technical (Software & Programming)"
+"Ext JS","Technical (Software & Programming)","Ext JS","4","","tool","Technical (Software & Programming)"
+"Backbone JS","Technical (Software & Programming)","Backbone JS","4","","tool","Technical (Software & Programming)"
+"SASS","Technical (Software & Programming)","SASS","4","","tool","Technical (Software & Programming)"
+"LESS","Technical (Software & Programming)","LESS","4","","tool","Technical (Software & Programming)"
+"DHTML","Technical (Software & Programming)","DHTML","4","","tool","Technical (Software & Programming)"
+"XHTML","Technical (Software & Programming)","XHTML","4","","tool","Technical (Software & Programming)"
+"SOAP","Technical (Software & Programming)","SOAP","4","","tool","Technical (Software & Programming)"
+"JAX-WS","Technical (Software & Programming)","JAX-WS","4","","tool","Technical (Software & Programming)"
+"JAX-RS","Technical (Software & Programming)","JAX-RS","4","","tool","Technical (Software & Programming)"
+"WSDL","Technical (Software & Programming)","WSDL","4","","tool","Technical (Software & Programming)"
+"Axis2","Technical (Software & Programming)","Axis2","4","","tool","Technical (Software & Programming)"
+"Apache CXF","Technical (Software & Programming)","Apache CXF","4","","tool","Technical (Software & Programming)"
+"Maven","Technical (Software & Programming)","Maven","4","","tool","Technical (Software & Programming)"
+"ANT","Technical (Software & Programming)","ANT","4","","tool","Technical (Software & Programming)"
+"SVN","Technical (Software & Programming)","SVN","4","","tool","Technical (Software & Programming)"
+"CVS","Technical (Software & Programming)","CVS","4","","tool","Technical (Software & Programming)"
+"Eclipse","Technical (Software & Programming)","Eclipse","4","","tool","Technical (Software & Programming)"
+"NetBeans","Technical (Software & Programming)","NetBeans","4","","tool","Technical (Software & Programming)"
+"JUnit","Technical (Software & Programming)","JUnit","4","","tool","Technical (Software & Programming)"
+"Mockito","Technical (Software & Programming)","Mockito","4","","tool","Technical (Software & Programming)"
+"Cucumber","Technical (Software & Programming)","Cucumber","4","","tool","Technical (Software & Programming)"
+"Jasmine","Technical (Software & Programming)","Jasmine","4","","tool","Technical (Software & Programming)"
+"Protractor","Technical (Software & Programming)","Protractor","4","","tool","Technical (Software & Programming)"
+"Apache Camel","Technical (Software & Programming)","Apache Camel","4","","tool","Technical (Software & Programming)"
+"Mule ESB","Technical (Software & Programming)","Mule ESB","4","","tool","Technical (Software & Programming)"
+"Drools","Technical (Software & Programming)","Drools","4","","tool","Technical (Software & Programming)"
+"javascript","Technical (Software & Programming)","Javascript","4","js|ecmascript","tool","Technical (Software & Programming)"
+"jenkins","Technical (Software & Programming)","Jenkins","4","ci cd","tool","Technical (Software & Programming)"
+"jira","Technical (Software & Programming)","Jira","4","","tool","Technical (Software & Programming)"
+"json","Technical (Software & Programming)","Json","4","","tool","Technical (Software & Programming)"
+"jupyter","Technical (Software & Programming)","Jupyter","4","","tool","Technical (Software & Programming)"
+"kafka","Technical (Software & Programming)","Kafka","4","","tool","Technical (Software & Programming)"
+"kubernetes","Technical (Software & Programming)","Kubernetes","4","k8s","tool","Technical (Software & Programming)"
+"linux","Technical (Software & Programming)","Linux","4","","tool","Technical (Software & Programming)"
+"matlab","Technical (Software & Programming)","Matlab","4","","tool","Technical (Software & Programming)"
+"meditech","Technical (Software & Programming)","Meditech","4","","tool","Technical (Software & Programming)"
+"mongodb","Technical (Software & Programming)","Mongodb","4","mongo db","tool","Technical (Software & Programming)"
+"mysql","Technical (Software & Programming)","Mysql","4","my sql","tool","Technical (Software & Programming)"
+"nodejs","Technical (Software & Programming)","Nodejs","4","node|node.js","tool","Technical (Software & Programming)"
+"oracle","Technical (Software & Programming)","Oracle","4","","tool","Technical (Software & Programming)"
+"plc","Technical (Software & Programming)","Plc","4","","tool","Technical (Software & Programming)"
+"postgresql","Technical (Software & Programming)","Postgresql","4","postgres","tool","Technical (Software & Programming)"
+"powerbi","Technical (Software & Programming)","Powerbi","4","power bi","tool","Technical (Software & Programming)"
+"powershell","Technical (Software & Programming)","Powershell","4","","tool","Technical (Software & Programming)"
+"python","Technical (Software & Programming)","Python","4","","tool","Technical (Software & Programming)"
+"Django","Technical (Software & Programming)","Python","4","Python","tool","Technical (Software & Programming)"
+"php","Technical (Software & Programming)","Php","4","","tool","Technical (Software & Programming)"
+"Laravel","Technical (Software & Programming)","Laravel","4","","tool","Technical (Software & Programming)"
+"pytorch","Technical (Software & Programming)","Pytorch","4","","tool","Technical (Software & Programming)"
+"quickbooks","Technical (Software & Programming)","Quickbooks","4","","tool","Technical (Software & Programming)"
+"salesforce","Technical (Software & Programming)","Salesforce","4","","tool","Technical (Software & Programming)"
+"scikit","Technical (Software & Programming)","Scikit","4","","tool","Technical (Software & Programming)"
+"selenium","Technical (Software & Programming)","Selenium","4","","tool","Technical (Software & Programming)"
+"solidworks","Technical (Software & Programming)","Solidworks","4","","tool","Technical (Software & Programming)"
+"splunk","Technical (Software & Programming)","Splunk","4","","tool","Technical (Software & Programming)"
+"sql","Technical (Software & Programming)","Sql","4","structured query language","tool","Technical (Software & Programming)"
+"pl/sql","Technical (Software & Programming)","Pl/Sql","4","plsql","tool","Technical (Software & Programming)"
+"tableau","Technical (Software & Programming)","Tableau","4","","tool","Technical (Software & Programming)"
+"terraform","Technical (Software & Programming)","Terraform","4","","tool","Technical (Software & Programming)"
+"typescript","Technical (Software & Programming)","Typescript","4","ts","tool","Technical (Software & Programming)"
+"unix","Technical (Software & Programming)","Unix","4","","tool","Technical (Software & Programming)"
+"vmware","Technical (Software & Programming)","Vmware","4","","tool","Technical (Software & Programming)"
+"xml","Technical (Software & Programming)","Xml","4","","tool","Technical (Software & Programming)"
+"yaml","Technical (Software & Programming)","Yaml","4","","tool","Technical (Software & Programming)"
+"process validation","Quality","Process Validation","10","","hard","Quality"
+"gmp","Quality","GMP","10","good manufacturing practices","hard","Quality"
+"cgmp","Quality","cGMP","10","current good manufacturing practices","hard","Quality"
+"tablet manufacturing","Manufacturing","Tablet Manufacturing","10","","hard","Manufacturing"
+"wet granulation","Manufacturing","Wet Granulation","10","","hard","Manufacturing"
+"dry granulation","Manufacturing","Dry Granulation","10","","hard","Manufacturing"
+"compression","Manufacturing","Compression","9","","hard","Manufacturing"
+"coating","Manufacturing","Coating","9","","hard","Manufacturing"
+"sap production module","Tools","SAP Production Module","9","","tool","Tools"
+"oee","Manufacturing","OEE (Overall Equipment Efficiency)","9","OEE (Overall Equipment Efficiency)","hard","Manufacturing"
+"equipment qualification","Quality","Equipment Qualification","9","","hard","Quality"
+"equipment calibration","Quality","Equipment Calibration","9","","hard","Quality"
+"fda compliance","Quality","FDA Compliance","10","","hard","Quality"
+"regulatory compliance","Quality","Regulatory Compliance","9","","hard","Quality"
+"sop documentation","Documentation","SOP Documentation","9","","hard","Documentation"
+"batch manufacturing bmr mfr","Documentation","Batch Manufacturing (BMR/MFR)","9","Batch Manufacturing (BMR/MFR)","hard","Documentation"
+"quality audits","Quality","Quality Audits","8","","hard","Quality"
+"change control","Quality","Change Control","8","","hard","Quality"
+"deviation management","Quality","Deviation Management","8","","hard","Quality"
+"C","Technical (Software & Programming)","C","4","","tool","Technical (Software & Programming)"
+"C++","Technical (Software & Programming)","C++","4","cpp","tool","Technical (Software & Programming)"
+"C#","Technical (Software & Programming)","C#","4","csharp|dotnet","tool","Technical (Software & Programming)"
+"Kotlin","Technical (Software & Programming)","Kotlin","4","","tool","Technical (Software & Programming)"
+"Swift","Technical (Software & Programming)","Swift","4","","tool","Technical (Software & Programming)"
+"Ruby","Technical (Software & Programming)","Ruby","4","","tool","Technical (Software & Programming)"
+"Scala","Technical (Software & Programming)","Scala","4","","tool","Technical (Software & Programming)"
+"R","Technical (Software & Programming)","R","4","","tool","Technical (Software & Programming)"
+"COBOL","Technical (Software & Programming)","COBOL","4","","tool","Technical (Software & Programming)"
+"Perl","Technical (Software & Programming)","Perl","4","","tool","Technical (Software & Programming)"
+"Shell Scripting","Technical (Software & Programming)","Shell Scripting","4","","tool","Technical (Software & Programming)"
+"Bash","Technical (Software & Programming)","Bash","4","","tool","Technical (Software & Programming)"
+"REST API","Technical (Software & Programming)","REST API","4","restful api","tool","Technical (Software & Programming)"
+"GraphQL","Technical (Software & Programming)","GraphQL","4","graph ql","tool","Technical (Software & Programming)"
+"Microservices","Technical (Software & Programming)","Microservices","4","","tool","Technical (Software & Programming)"
+"Redis","Technical (Software & Programming)","Redis","4","","tool","Technical (Software & Programming)"
+"Cassandra","Technical (Software & Programming)","Cassandra","4","","tool","Technical (Software & Programming)"
+"Elasticsearch","Technical (Software & Programming)","Elasticsearch","4","","tool","Technical (Software & Programming)"
+"RabbitMQ","Technical (Software & Programming)","RabbitMQ","4","","tool","Technical (Software & Programming)"
+"Nginx","Technical (Software & Programming)","Nginx","4","","tool","Technical (Software & Programming)"
+"Apache Spark","Technical (Software & Programming)","Apache Spark","4","","tool","Technical (Software & Programming)"
+"Apache Hadoop","Technical (Software & Programming)","Apache Hadoop","4","","tool","Technical (Software & Programming)"
+"Hive","Technical (Software & Programming)","Hive","4","","tool","Technical (Software & Programming)"
+"Snowflake","Technical (Software & Programming)","Snowflake","4","","tool","Technical (Software & Programming)"
+"Databricks","Technical (Software & Programming)","Databricks","4","","tool","Technical (Software & Programming)"
+"Power Automate","Technical (Software & Programming)","Power Automate","4","","tool","Technical (Software & Programming)"
+"Power Apps","Technical (Software & Programming)","Power Apps","4","","tool","Technical (Software & Programming)"
+"Dynamics 365","Technical (Software & Programming)","Dynamics 365","4","","tool","Technical (Software & Programming)"
+"SAP ABAP","Technical (Software & Programming)","SAP ABAP","4","","tool","Technical (Software & Programming)"
+"SAP HANA","Technical (Software & Programming)","SAP HANA","4","","tool","Technical (Software & Programming)"
+"SAP SD","Technical (Software & Programming)","SAP SD","4","","tool","Technical (Software & Programming)"
+"SAP MM","Technical (Software & Programming)","SAP MM","4","","tool","Technical (Software & Programming)"
+"SAP FI","Technical (Software & Programming)","SAP FI","4","","tool","Technical (Software & Programming)"
+"SAP CO","Technical (Software & Programming)","SAP CO","4","","tool","Technical (Software & Programming)"
+"SAP HR","Technical (Software & Programming)","SAP HR","4","","tool","Technical (Software & Programming)"
+"Figma","Design Skills","Figma","4","figma design","tool","Design Skills"
+"Sketch","Design Skills","Sketch","4","","tool","Design Skills"
+"InVision","Design Skills","InVision","4","","tool","Design Skills"
+"Canva","Design Skills","Canva","4","","tool","Design Skills"
+"CorelDRAW","Design Skills","CorelDRAW","4","","tool","Design Skills"
+"AutoCAD","Design Skills","AutoCAD","4","","tool","Design Skills"
+"Revit","Design Skills","Revit","4","","tool","Design Skills"
+"SketchUp","Design Skills","SketchUp","4","","tool","Design Skills"
+"3ds Max","Design Skills","3ds Max","4","","tool","Design Skills"
+"Blender","Design Skills","Blender","4","","tool","Design Skills"
+"UI Design","Design Skills","UI Design","4","user interface design","tool","Design Skills"
+"UX Design","Design Skills","UX Design","4","user experience design","tool","Design Skills"
+"Wireframing","Design Skills","Wireframing","4","","tool","Design Skills"
+"Prototyping","Design Skills","Prototyping","4","","tool","Design Skills"
+"Typography","Design Skills","Typography","4","","tool","Design Skills"
+"Brand Identity","Design Skills","Brand Identity","4","","tool","Design Skills"
+"Motion Graphics","Design Skills","Motion Graphics","4","","tool","Design Skills"
+"Video Editing","Design Skills","Video Editing","4","","tool","Design Skills"
+"Final Cut Pro","Design Skills","Final Cut Pro","4","","tool","Design Skills"
+"Premiere Pro","Design Skills","Premiere Pro","4","","tool","Design Skills"
+"After Effects","Design Skills","After Effects","4","","tool","Design Skills"
+"network security","IT Infrastructure & Security","Network Security","4","","tool","IT Infrastructure & Security"
+"firewall","IT Infrastructure & Security","Firewall","4","","tool","IT Infrastructure & Security"
+"vpn","IT Infrastructure & Security","VPN","4","","tool","IT Infrastructure & Security"
+"active directory","IT Infrastructure & Security","Active Directory","4","","tool","IT Infrastructure & Security"
+"windows server","IT Infrastructure & Security","Windows Server","4","","tool","IT Infrastructure & Security"
+"linux administration","IT Infrastructure & Security","Linux Administration","4","","tool","IT Infrastructure & Security"
+"patch management","IT Infrastructure & Security","Patch Management","4","","tool","IT Infrastructure & Security"
+"siem","IT Infrastructure & Security","SIEM","4","","tool","IT Infrastructure & Security"
+"penetration testing","IT Infrastructure & Security","Penetration Testing","4","","tool","IT Infrastructure & Security"
+"vulnerability assessment","IT Infrastructure & Security","Vulnerability Assessment","4","","tool","IT Infrastructure & Security"
+"itil","IT Infrastructure & Security","ITIL","4","","tool","IT Infrastructure & Security"
+"service desk","IT Infrastructure & Security","Service Desk","4","","tool","IT Infrastructure & Security"
+"helpdesk","IT Infrastructure & Security","Helpdesk","4","","tool","IT Infrastructure & Security"
+"office 365","IT Infrastructure & Security","Office 365","4","","tool","IT Infrastructure & Security"
+"azure ad","IT Infrastructure & Security","Azure AD","4","","tool","IT Infrastructure & Security"
+"load balancing","IT Infrastructure & Security","Load Balancing","4","","tool","IT Infrastructure & Security"
+"disaster recovery","IT Infrastructure & Security","Disaster Recovery","4","","tool","IT Infrastructure & Security"
+"business continuity","IT Infrastructure & Security","Business Continuity","4","","tool","IT Infrastructure & Security"
+"supply chain management","Operations & Logistics","Supply Chain Management","3","","hard","Operations & Logistics"
+"warehouse management","Operations & Logistics","Warehouse Management","3","","hard","Operations & Logistics"
+"fleet management","Operations & Logistics","Fleet Management","3","","hard","Operations & Logistics"
+"demand planning","Operations & Logistics","Demand Planning","3","","hard","Operations & Logistics"
+"purchase order","Operations & Logistics","Purchase Order","3","","hard","Operations & Logistics"
+"vendor management","Operations & Logistics","Vendor Management","3","","hard","Operations & Logistics"
+"import export","Operations & Logistics","Import Export","3","","hard","Operations & Logistics"
+"customs clearance","Operations & Logistics","Customs Clearance","3","","hard","Operations & Logistics"
+"erp","Operations & Logistics","ERP","3","","hard","Operations & Logistics"
+"sap wm","Operations & Logistics","SAP WM","3","","hard","Operations & Logistics"
+"lean manufacturing","Operations & Logistics","Lean Manufacturing","3","","hard","Operations & Logistics"
+"six sigma","Operations & Logistics","Six Sigma","3","","hard","Operations & Logistics"
+"5s","Operations & Logistics","5S","3","","hard","Operations & Logistics"
+"tpm","Operations & Logistics","TPM","3","","hard","Operations & Logistics"
+"value stream mapping","Operations & Logistics","Value Stream Mapping","3","","hard","Operations & Logistics"
+"financial analysis","Finance & Accounting","Financial Analysis","3","","hard","Finance & Accounting"
+"financial reporting","Finance & Accounting","Financial Reporting","3","","hard","Finance & Accounting"
+"financial modeling","Finance & Accounting","Financial Modeling","3","","hard","Finance & Accounting"
+"variance analysis","Finance & Accounting","Variance Analysis","3","","hard","Finance & Accounting"
+"cost accounting","Finance & Accounting","Cost Accounting","3","","hard","Finance & Accounting"
+"management accounting","Finance & Accounting","Management Accounting","3","","hard","Finance & Accounting"
+"tax preparation","Finance & Accounting","Tax Preparation","3","","hard","Finance & Accounting"
+"gst","Finance & Accounting","GST","3","","hard","Finance & Accounting"
+"tds","Finance & Accounting","TDS","3","","hard","Finance & Accounting"
+"ifrs","Finance & Accounting","IFRS","3","","hard","Finance & Accounting"
+"gaap","Finance & Accounting","GAAP","3","","hard","Finance & Accounting"
+"internal audit","Finance & Accounting","Internal Audit","3","","hard","Finance & Accounting"
+"external audit","Finance & Accounting","External Audit","3","","hard","Finance & Accounting"
+"risk management","Finance & Accounting","Risk Management","3","","hard","Finance & Accounting"
+"treasury management","Finance & Accounting","Treasury Management","3","","hard","Finance & Accounting"
+"investment banking","Finance & Accounting","Investment Banking","3","","hard","Finance & Accounting"
+"equity research","Finance & Accounting","Equity Research","3","","hard","Finance & Accounting"
+"portfolio management","Finance & Accounting","Portfolio Management","3","","hard","Finance & Accounting"
+"credit analysis","Finance & Accounting","Credit Analysis","3","","hard","Finance & Accounting"
+"insurance","Finance & Accounting","Insurance","3","","hard","Finance & Accounting"
+"patient care","Healthcare & Clinical","Patient Care","3","","hard","Healthcare & Clinical"
+"clinical trials","Healthcare & Clinical","Clinical Trials","3","","hard","Healthcare & Clinical"
+"pharmacovigilance","Healthcare & Clinical","Pharmacovigilance","3","","hard","Healthcare & Clinical"
+"drug safety","Healthcare & Clinical","Drug Safety","3","","hard","Healthcare & Clinical"
+"medical coding","Healthcare & Clinical","Medical Coding","3","","hard","Healthcare & Clinical"
+"icd-10","Healthcare & Clinical","ICD-10","3","","hard","Healthcare & Clinical"
+"cpt coding","Healthcare & Clinical","CPT Coding","3","","hard","Healthcare & Clinical"
+"medical billing","Healthcare & Clinical","Medical Billing","3","","hard","Healthcare & Clinical"
+"phlebotomy","Healthcare & Clinical","Phlebotomy","3","","hard","Healthcare & Clinical"
+"ecg","Healthcare & Clinical","ECG","3","","hard","Healthcare & Clinical"
+"vital signs","Healthcare & Clinical","Vital Signs","3","","hard","Healthcare & Clinical"
+"wound care","Healthcare & Clinical","Wound Care","3","","hard","Healthcare & Clinical"
+"infection control","Healthcare & Clinical","Infection Control","3","","hard","Healthcare & Clinical"
+"patient assessment","Healthcare & Clinical","Patient Assessment","3","","hard","Healthcare & Clinical"
+"clinical documentation","Healthcare & Clinical","Clinical Documentation","3","","hard","Healthcare & Clinical"
+"telemedicine","Healthcare & Clinical","Telemedicine","3","","hard","Healthcare & Clinical"
+"mental health","Healthcare & Clinical","Mental Health","3","","hard","Healthcare & Clinical"
+"behavioral health","Healthcare & Clinical","Behavioral Health","3","","hard","Healthcare & Clinical"
+"speech therapy","Healthcare & Clinical","Speech Therapy","3","","hard","Healthcare & Clinical"
+"occupational therapy","Healthcare & Clinical","Occupational Therapy","3","","hard","Healthcare & Clinical"
+"mechanical engineering","Engineering & Manufacturing","Mechanical Engineering","3","","hard","Engineering & Manufacturing"
+"civil engineering","Engineering & Manufacturing","Civil Engineering","3","","hard","Engineering & Manufacturing"
+"electrical engineering","Engineering & Manufacturing","Electrical Engineering","3","","hard","Engineering & Manufacturing"
+"chemical engineering","Engineering & Manufacturing","Chemical Engineering","3","","hard","Engineering & Manufacturing"
+"industrial engineering","Engineering & Manufacturing","Industrial Engineering","3","","hard","Engineering & Manufacturing"
+"product design","Engineering & Manufacturing","Product Design","3","","hard","Engineering & Manufacturing"
+"finite element analysis","Engineering & Manufacturing","Finite Element Analysis","3","","hard","Engineering & Manufacturing"
+"cfd","Engineering & Manufacturing","CFD","3","","hard","Engineering & Manufacturing"
+"plc programming","Engineering & Manufacturing","PLC Programming","3","","hard","Engineering & Manufacturing"
+"scada","Engineering & Manufacturing","SCADA","3","","hard","Engineering & Manufacturing"
+"cnc machining","Engineering & Manufacturing","CNC Machining","3","","hard","Engineering & Manufacturing"
+"sheet metal","Engineering & Manufacturing","Sheet Metal","3","","hard","Engineering & Manufacturing"
+"injection molding","Engineering & Manufacturing","Injection Molding","3","","hard","Engineering & Manufacturing"
+"casting","Engineering & Manufacturing","Casting","3","","hard","Engineering & Manufacturing"
+"forging","Engineering & Manufacturing","Forging","3","","hard","Engineering & Manufacturing"
+"heat treatment","Engineering & Manufacturing","Heat Treatment","3","","hard","Engineering & Manufacturing"
+"ndt","Engineering & Manufacturing","NDT","3","","hard","Engineering & Manufacturing"
+"gd&t","Engineering & Manufacturing","GD&T","3","","hard","Engineering & Manufacturing"
+"tolerance analysis","Engineering & Manufacturing","Tolerance Analysis","3","","hard","Engineering & Manufacturing"
+"bom","Engineering & Manufacturing","BOM","3","","hard","Engineering & Manufacturing"
+"quality management system","Quality","Quality Management System","8","","hard","Quality"
+"iso 9001","Quality","ISO 9001","8","","hard","Quality"
+"iso 14001","Quality","ISO 14001","8","","hard","Quality"
+"iso 45001","Quality","ISO 45001","8","","hard","Quality"
+"iatf 16949","Quality","IATF 16949","8","","hard","Quality"
+"as9100","Quality","AS9100","8","","hard","Quality"
+"fmea","Quality","FMEA","8","","hard","Quality"
+"control plan","Quality","Control Plan","8","","hard","Quality"
+"ppap","Quality","PPAP","8","","hard","Quality"
+"apqp","Quality","APQP","8","","hard","Quality"
+"spc","Quality","SPC","8","","hard","Quality"
+"msa","Quality","MSA","8","","hard","Quality"
+"8d problem solving","Quality","8D Problem Solving","8","","hard","Quality"
+"root cause analysis","Quality","Root Cause Analysis","8","","hard","Quality"
+"corrective action","Quality","Corrective Action","8","","hard","Quality"
+"preventive action","Quality","Preventive Action","8","","hard","Quality"
+"incoming inspection","Quality","Incoming Inspection","8","","hard","Quality"
+"in-process inspection","Quality","In-Process Inspection","8","","hard","Quality"
+"final inspection","Quality","Final Inspection","8","","hard","Quality"
+"customer complaint","Quality","Customer Complaint Handling","7","Customer Complaint Handling","hard","Quality"
+"production planning","Manufacturing","Production Planning","8","","hard","Manufacturing"
+"capacity planning","Manufacturing","Capacity Planning","8","","hard","Manufacturing"
+"material requirement planning","Manufacturing","Material Requirement Planning","8","","hard","Manufacturing"
+"mrp","Manufacturing","MRP","8","","hard","Manufacturing"
+"erp production","Manufacturing","ERP Production","8","","hard","Manufacturing"
+"batch record","Manufacturing","Batch Record","8","","hard","Manufacturing"
+"yield management","Manufacturing","Yield Management","8","","hard","Manufacturing"
+"downtime analysis","Manufacturing","Downtime Analysis","8","","hard","Manufacturing"
+"preventive maintenance","Manufacturing","Preventive Maintenance","8","","hard","Manufacturing"
+"breakdown maintenance","Manufacturing","Breakdown Maintenance","8","","hard","Manufacturing"
+"pmp","Certifications","PMP","5","project management professional","hard","Certifications"
+"prince2","Certifications","PRINCE2","5","","hard","Certifications"
+"six sigma black belt","Certifications","Six Sigma Black Belt","5","","hard","Certifications"
+"six sigma green belt","Certifications","Six Sigma Green Belt","5","","hard","Certifications"
+"aws certified","Certifications","AWS Certified","5","aws certification","hard","Certifications"
+"azure certified","Certifications","Azure Certified","5","microsoft azure certified","hard","Certifications"
+"google cloud certified","Certifications","Google Cloud Certified","5","gcp certified","hard","Certifications"
+"ccna","Certifications","CCNA","5","cisco certified network associate","hard","Certifications"
+"ccnp","Certifications","CCNP","5","cisco certified network professional","hard","Certifications"
+"cisa","Certifications","CISA","5","","hard","Certifications"
+"cism","Certifications","CISM","5","","hard","Certifications"
+"comptia security+","Certifications","CompTIA Security+","5","","hard","Certifications"
+"comptia a+","Certifications","CompTIA A+","5","","hard","Certifications"
+"comptia network+","Certifications","CompTIA Network+","5","","hard","Certifications"
+"itil v4","Certifications","ITIL V4","5","itil 4","hard","Certifications"
+"scrum master","Certifications","Scrum Master","5","","hard","Certifications"
+"csm","Certifications","CSM","5","","hard","Certifications"
+"safe agile","Certifications","SAFe Agile","5","","hard","Certifications"
+"cfa","Certifications","CFA","5","","hard","Certifications"
+"frm","Certifications","FRM","5","","hard","Certifications"
+"ca","Certifications","CA","5","","hard","Certifications"
+"cma","Certifications","CMA","5","","hard","Certifications"
+"cpa","Certifications","CPA","5","","hard","Certifications"
+"team management","Soft Skills","Team Management","2","","soft","Soft Skills"
+"conflict resolution","Soft Skills","Conflict Resolution","2","","soft","Soft Skills"
+"negotiation skills","Soft Skills","Negotiation Skills","2","","soft","Soft Skills"
+"stakeholder management","Soft Skills","Stakeholder Management","2","","soft","Soft Skills"
+"change management","Soft Skills","Change Management","2","","soft","Soft Skills"
+"strategic thinking","Soft Skills","Strategic Thinking","2","","soft","Soft Skills"
+"critical thinking","Soft Skills","Critical Thinking","2","","soft","Soft Skills"
+"decision making","Soft Skills","Decision Making","2","","soft","Soft Skills"
+"problem solving","Soft Skills","Problem Solving","2","","soft","Soft Skills"
+"time management","Soft Skills","Time Management","2","","soft","Soft Skills"
+"project management","Soft Skills","Project Management","2","","soft","Soft Skills"
+"cross functional collaboration","Soft Skills","Cross Functional Collaboration","2","","soft","Soft Skills"
+"customer service","Soft Skills","Customer Service","2","","soft","Soft Skills"
+"public speaking","Soft Skills","Public Speaking","2","","soft","Soft Skills"
+"interpersonal skills","Soft Skills","Interpersonal Skills","2","","soft","Soft Skills"

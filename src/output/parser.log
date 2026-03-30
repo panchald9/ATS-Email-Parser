@@ -1,120 +1,149 @@
-[*] Skill source: auto (dataset first, csv fallback=269 from D:\Ktas Project\ATS\ATS Email Parser\src\Skill.csv)
+[*] Skill source: auto (dataset first, csv fallback=542 from D:\Ktas Project\ATS\ATS Email Parser\src\Skill.csv)
 [*] Processing 41 resume file(s) from: D:\Ktas Project\ATS\ATS Email Parser\Resume
 [*] Workers: 8
 
 #    File                   Name                           Phone          Gender   Email
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-  4    2_pdf.pdf              Sachin Pal                     9569590836     Female   sachinpal09866@gmail.com
-       Address: ● Operating System: Windows (XP,7,10,11), Linux(Ubuntu), ● I...
-       Skills [8]: portfolio, git, html, javascript, linux, mongodb, python, PowerPoint
-  8    4_pdf.pdf              Jyothi Abbagalla               +919392301284  Female   abbagallajyothi97@gmail.com
-       Address: Plot no-10, Shanthi Nagar colony, Vanasthalipuram, Hyderabad...
-       Skills [5]: html, javascript, mysql, python, sql
+  1    1_doc.doc              ❌ Error: Failed to extract from 1_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'
   6    3_pdf.pdf              Bhavika Desai                  +919727911701  Female   patelbhavika846@gmail.com
        Address: Surat , India...
-       Skills [12]: environmental, financial, investment, portfolio, decisionmaking, adobe, angular, angularjs  (+4 more)
+       DOB/Age: ❌ NOT FOUND
+       Skills [17]: financial, decisionmaking, Adobe XD, Illustrator, Photoshop, Wordpress, angularjs, ReactJS  (+9 more)
+  4    2_pdf.pdf              Sachin Pal                     9569590836     Female   sachinpal09866@gmail.com
+       Address: ● Web Development Intern | Coursify, Noida, Uttar Pradesh, D...
+       DOB/Age: ❌ NOT FOUND
+       Skills [14]: ReactJS, git, html, javascript, linux, mongodb, NodeJS, python  (+6 more)
+  8    4_pdf.pdf              Jyothi Abbagalla               +919392301284  Female   abbagallajyothi97@gmail.com
+       Address: JYOTHI ABBAGALLA, Plot no-10, Shanthi Nagar colony, Vanastha...
+       DOB/Age: 1997-04-03 / 28
+       Skills [9]: html, javascript, mysql, python, Django, sql, REST API, Bootstrap  (+1 more)
   2    1_pdf.pdf              Mohammad Saif Ameen            +966500327160  Male     mohdsaifameenpptcipet@gmail.com
-       Address: Etawah Uttar Pradesh – 206124, Pass port no- X 3996378, Mob-...
-       Skills [29]: auditor, Extrusion, Injection Molding, Plastic Processing, Quality Assurance, Internal Auditing, Inspection, Process Parameter Control  (+21 more)
+       Address: Mohammad Saif Ameen, Town-Azad Nagar Bakewar, Etawah Uttar P...
+       DOB/Age: ❌ NOT FOUND
+       Skills [31]: auditor, Extrusion, Injection Molding, Plastic Processing, Quality Assurance, Internal Auditing, Inspection, Process Parameter Control  (+23 more)
   10   5_pdf.pdf              Abhay Nimbargi                 7016393813     Male     abhaymnimbargi@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [7]: academy, manufacturing, materials, discipline, dispatch, Production Scheduling, Production Planning
+       Address: Bangalore, Gujarat...
+       DOB/Age: ❌ NOT FOUND
+       Skills [6]: academy, discipline, vendor management, Production Scheduling, Production Planning, Process Control
   12   7_doc.docx             Jagruti Solanki                9998978289     Female   jagruti_miraj93@yahoo.in
-       Address: Date of Birth : 23 rd January 1993...
-       Skills [6]: adobe, git, html, javascript, photoshop, Excel
-  11   6_doc.docx             Shikha Saxena                  8109819127     Female   ashikhasaxena831@gmail.com
-       Address: ERP : Microsoft Dynamic NAV 2013 R 2, NAV 2016, NAV 2018....
-       Skills [3]: manufacturing, server, sql
-  3    2_doc.docx             Rashmithareddy                 4694434710     Female   rashmitha.java134@gmail.com
-       Address: Passing year - 2009...
-       Skills [19]: cloud, dispatch, scripting, server, angular, html, java, javascript  (+11 more)
+       Address: Others : Problem solving, cross-browser compatibility, cross...
+       DOB/Age: 1993-01-23 / 33
+       Skills [13]: Adobe XD, Illustrator, Photoshop, Wordpress, git, html, javascript, Figma  (+5 more)
   14   9_doc.docx             Sudheer Dixit                  +917838380707  Male     sudhirdixit007@gmail.com
        Address: House No - 61 Lane 2, Rahul Vihar 2 nd, Pratap Vihar Sec - 1...
-       Skills [1]: nodejs
+       DOB/Age: ❌ NOT FOUND
+       Skills [7]: NodeJS, purchase order, ReactJS, Bootstrap, CSS, Visual Studio Code, MS Word
+  16   10_pdf.pdf             Veerndra Singh Rathor          8696767406     Female   veerendrasingh@gmaill.com
+       Address: CURRICULUM VITAE, VEERNDRA SINGH RATHOR, VILL-TONKRA TH-HIND...
+       DOB/Age: 1994-07-15 / 31
+       Skills: ❌ NOT FOUND
+  15   9_pdf.pdf              Himanshu Patel                 6359030080     ❌ N/A    himanshupatel19052002hp@gmail.com
+       Address: Althan,Surat(395017)...
+       DOB/Age: 2002-05-19 / 23
+       Skills [1]: MS Word
+  18   12_doc.doc             ❌ Error: Failed to extract from 12_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'
+  11   6_doc.docx             Shikha Saxena                  8109819127     Female   ashikhasaxena831@gmail.com
+       Address: Bangalore...
+       DOB/Age: 1995-12-29 / 30
+       Skills [5]: server, sql, erp, project management, CSS
+  17   11_pdf.pdf             Siddiki Siraj Ahmad Niyaj Ahm  ❌ NOT FOUND    Female   ❌ NOT FOUND
+       Address: SIDDIKI SIRAJ AHMAD NIYAJ AHMAD, 35 Al momin park nr. Sama s...
+       DOB/Age: 2002-04-01 / 23
+       Skills [1]: medical
   13   8_doc.docx             Madhuri Gore                   9923391330     Female   mkgore17@gmail.com
        Address: At/Post.Ashiv,Tal.Ausa,Dist.Latur-413520....
-       Skills [10]: adobe, azure, git, html, java, javascript, jira, json  (+2 more)
-  18   12_doc.doc             ❌ Error: Failed to extract from 12_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)
-  5    3_doc.docx             Yugesh                         +15156502459   Female   yugeshm4@gmail.com
-       Address: Worked on Log 4 J to validate functionalities and Mockito fr...
-       Skills [22]: security, cloud, server, angularjs, docker, git, html, java  (+14 more)
+       DOB/Age: 1995-11-17 / 30
+       Skills [15]: adobe, Photoshop, Wordpress, azure, git, html, Core Java, JSP  (+7 more)
   19   12_pdf.pdf             Dhruv Panchal                  ❌ NOT FOUND    Male     dp148026@gmail.com
-       Address: Gujrat, India, May 2023 – July 2025, • Faculty Lecturer at C...
-       Skills [1]: cybersecurity
-  9    5_doc.docx             Chenna Kesava                  4696777837     Female   chennakesava231@gmail.com
-       Address: Performed Unit testing, Integration Testing& generating of t...
-       Skills [15]: server, angularjs, html, java, javascript, jenkins, jira, linux  (+7 more)
-  7    4_doc.docx             Avinash G                      9137300694     Male     avinash87.java@gmail.com
-       Address: Experienced in using Log 4 j and good expertise in applicati...
-       Skills [22]: security, networking, server, angularjs, docker, git, gradle, html  (+14 more)
+       Address: Faculty Lecturer, Gujrat, India, May 2023 – July 2025, • Fac...
+       DOB/Age: ❌ NOT FOUND
+       Skills [5]: cybersecurity, pmp, project management, ReactJS, NodeJS
+  3    2_doc.docx             Rashmithareddy                 4694434710     Female   rashmitha.java134@gmail.com
+       Address: ❌ NOT FOUND
+       DOB/Age: ❌ NOT FOUND
+       Skills [52]: cloud, server, ReactJS, html, Core Java, Servlets, JSP, JSTL  (+44 more)
+  22   15_pdf.pdf             Mayank Barot                   +919978463607  Female   mayankbarot775@gmail.com
+       Address: 12 th, 2018, Gujarat, Gujarati, 10 th, 2016, Gujarat, Gujara...
+       DOB/Age: ❌ NOT FOUND
+       Skills [7]: campaign, android, SAP HANA, erp, gst, Regulatory Compliance, Quality Audits
+  20   13_pdf.pdf             Anil                           9616812233     Male     ❌ NOT FOUND
+       Address: Pune...
+       DOB/Age: 1999-07-03 / 26
+       Skills: ❌ NOT FOUND
+  21   14_pdf.pdf             Ajay Kumar                     ❌ NOT FOUND    Male     ajaybhuims@gmail.com
+       Address: S/o -Late Ram Birodhi Singh, Vill- Isiyan, P.O- Baradhi, P.S...
+       DOB/Age: ❌ NOT FOUND
+       Skills [11]: Quality Control, Process Improvement, Manpower Planning, Raw Material Handling, Impact Testing, FDA Compliance, SOP Documentation, Batch Manufacturing (BMR/MFR)  (+3 more)
+  27   20_doc.doc             ❌ Error: Failed to extract from 20_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'
+  28   20_pdf.pdf             Pratik Bhagat                  7764890893     Female   pratikbhagat157@gmail.com
+       Address: CURRICULUM VITAE, Pratik Bhagat, 21 Nadiaon Jio Tawar, Vill ...
+       DOB/Age: 2004-04-02 / 21
+       Skills [4]: organizational, electrical engineering, Production Planning, Process Control
+  25   18_pdf.pdf             Rathod Jigneshkumar S          +918866252027  Female   js.rathod27@gmail.com
+       Address: Koliwada, GOGHALA - DIU (U.T), Diu (DAMAN & DIU) - 362540, +...
+       DOB/Age: 1983-06-28 / 42
+       Skills [7]: drawings, fabrication, hydraulic, welding, root cause analysis, Production Planning, Process Control
   23   16_pdf.pdf             Dipen Vora                     9879469264     Female   dipenvora85@gmail.com
        Address: D/22, Shantidayal Appartment, Nr The HBKapadiya New High Sch...
-       Skills [8]: structural, server, html, linux, oracle, sql, unix, Quality Assurance
-  1    1_doc.doc              Vinay .K. Sail                 9922022435     Male     vinaysail639@gmail.com
-       Address: G-118, CD-Scenic Acres, Near Arlem Circle, Fatorda, Margao...
-       Skills [10]: calibration, manufacturing, materials, validation, audits, budgeting, pharmacy, balance  (+2 more)
-  22   15_pdf.pdf             ❌ NOT FOUND                    +919978463607  Female   mayankbarot775@gmail.com
-       Address: Gujarat, Gujarati, 10 th, 2016, Gujarat, Gujarati...
-       Skills [2]: campaign, android
-  25   18_pdf.pdf             Koliwada                       +918866252027  Female   js.rathod27@gmail.com
-       Address: Diu (DAMAN & DIU) - 362540, +91- 8866252027...
-       Skills [6]: drawings, fabrication, hydraulic, welding, Manufacturing, Production Planning
-  26   19_pdf.pdf             Vishwanath M Pagare            9644637555     Female   ❌ NOT FOUND
-       Address:  Responsible For USFDA, OHZAS ISO -9001, 14001 & Audits For...
-       Skills [5]: civil, audits, Quality Assurance, Manufacturing, Production Planning
-  28   20_pdf.pdf             Pratik Bhagat                  7764890893     Female   pratikbhagat157@gmail.com
-       Address: 21 Nadiaon Jio Tawar, Vill Nadiaon Siwan Bihar, Siwan - 8412...
-       Skills [3]: organizational, Manufacturing, Production Planning
+       DOB/Age: ❌ NOT FOUND
+       Skills [10]: structural, server, html, DHTML, linux, oracle, pl/sql, unix  (+2 more)
   24   17_pdf.pdf             Sujeet Kumar Singh             +919974064212  Male     sujeet.singh_1986@yahoo.co.in
-       Address: 2. Commercial Work, Liaison & Factory Compliance, Independen...
-       Skills [2]: excel, PowerPoint
-  30   22_pdf.pdf             Ketan Trivedi                  +919737795751  Male     ketan_trivedi73@rediffmail.com
-       Address: May-5 2025...
-       Skills [6]: budgeting, forecasting, payroll, discipline, organizational, Manpower Planning
-  31   23_pdf.pdf             Sanjay Kumar Singh             +919318780073  Female   pro_sanjupharma@yahoo.co.in
-       Address: (WHO, GMP ISO 9001 certified), Location : Rou Indore (M.P.),...
-       Skills [8]: manufacturing, validation, Quality Assurance, Quality Control, Raw Material Handling, ISO 9001, Excel, Production Planning
+       Address: 49.00, Mumbai University, VNSGU, Surat, MSU, Baroda, MSU, Ba...
+       DOB/Age: ❌ NOT FOUND
+       Skills [5]: excel, erp, MS Word, Quality Audits, PowerPoint
+  29   21_pdf.pdf             Patel Parthbhai Ganeshbhai     9638002591     Male     ❌ NOT FOUND
+       Address: Indian, Gujarati, Hindi, and English, AT.: -KHUNTEJ ( SARKAR...
+       DOB/Age: 1998-03-14 / 28
+       Skills [1]: time management
   32   24_pdf.pdf             Anoop Kumar                    6306172826     ❌ N/A    anoop1122003@gmail.com
-       Address: Uttar Pradesh - 210505, Mob No. : 6306172826...
+       Address: Hamirpur, Uttar Pradesh - 210505, Mob No. : 6306172826...
+       DOB/Age: 2003-02-11 / 23
        Skills [3]: laboratory, Quality Control, Inspection
   33   25_pdf.pdf             Parool Shah                    9399561691     Male     paroolshah2902@gmail.com
        Address: Atharvo India Pvt.Ltd, Machine Learning Intern, 06/2024 - 07...
-       Skills [9]: asset, configuration, incident, collaboration, jupyter, python, scikit, Manufacturing  (+1 more)
+       DOB/Age: ❌ NOT FOUND
+       Skills [9]: asset, configuration, incident, jupyter, python, scikit, patch management, Production Planning  (+1 more)
+  30   22_pdf.pdf             Ketan Trivedi                  +919737795751  Male     ketan_trivedi73@rediffmail.com
+       Address: Maharashtra, 14001...
+       DOB/Age: ❌ NOT FOUND
+       Skills [1]: Manpower Planning
+  26   19_pdf.pdf             Vishwanath M Pagare            9644637555     Female   ❌ NOT FOUND
+       Address: engineering activities,  Responsible For USFDA, OHZAS ISO -...
+       DOB/Age: ❌ NOT FOUND
+       Skills [10]: civil, OEE (Overall Equipment Efficiency), regulatory compliance, change control, mechanical engineering, Quality Assurance, SOP Documentation, Quality Audits  (+2 more)
   34   26_pdf.pdf             Shruti Srivastava              +919625758950  Female   srivastava.shruti@gmail.com
-       Address:  Secured 3 rd rank in the International Business Language (...
-       Skills [4]: balancing, Quality Control, Process Improvement, Impact Testing
-  27   20_doc.doc             Barsha Santra                  8474936303     Female   santrabarsha836@gmail.com
-       Address: At/Po- IRRIGATION COLONY ROAD,OPP-HORTICULTURE NURSERY GARDE...
-       Skills [4]: hindi, english, justice, Quality Assurance
+       Address: Delhi,  2008 - Certificate Course in Export Management from...
+       DOB/Age: ❌ NOT FOUND
+       Skills [7]: balancing, scrum master, csm, Quality Control, Process Improvement, Impact Testing, Quality Audits
+  5    3_doc.docx             Yugesh                         +15156502459   Female   yugeshm4@gmail.com
+       Address: Hyderabad...
+       DOB/Age: ❌ NOT FOUND
+       Skills [43]: cloud, server, angularjs, docker, git, html, java, JMS  (+35 more)
+  37   30_doc.doc             ❌ Error: Failed to extract from 30_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'
+  31   23_pdf.pdf             Sanjay Kumar Singh             +919318780073  Female   pro_sanjupharma@yahoo.co.in
+       Address: Duration, Oct. 2002 to Feb. 2004, Second Organization :--Wor...
+       DOB/Age: ❌ NOT FOUND
+       Skills [18]: Process Validation, team management, MS Word, Quality Assurance, Quality Control, Raw Material Handling, ISO 9001, cGMP  (+10 more)
+  38   40_doc.doc             ❌ Error: Failed to extract from 40_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'
+  41   160_doc.doc            ❌ Error: Failed to extract from 160_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'
+  36   28_pdf.pdf             Karishma R Marathe             9687759266     Female   karishmamarathe1696@gmail.com
+       Address: Karishma R Marathe, Flat no, 101 B Shantiniketan Kevdi Falia...
+       DOB/Age: 1996-06-16 / 29
+       Skills [1]: Quality Control
+  39   45_doc.doc             ❌ Error: Failed to extract from 45_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'
   35   27_pdf.pdf             Kapil                          ❌ NOT FOUND    Male     ❌ NOT FOUND
-       Address: A 1, Anjanisut Row Bunglows, Manik Nagar, Cidco Ambad Link, ...
-       Skills [7]: english, hindi, tamil, Internal Auditing, Inspection, ISO 14001, ISO 45001
-  37   30_doc.doc             ❌ Error: Failed to extract from 30_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)
-  38   40_doc.doc             ❌ Error: Failed to extract from 40_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)
-  39   45_doc.doc             ❌ Error: Failed to extract from 45_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)
-  40   59_doc.doc             ❌ Error: Failed to extract from 59_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)
-  41   160_doc.doc            ❌ Error: Failed to extract from 160_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)
-  21   14_pdf.pdf             Ajay Kumar                     ❌ NOT FOUND    Male     ajaybhuims@gmail.com
-       Address: May 2010 – May 2016: Shri Baidyanath Ayurveda Bhavan Pvt. Lt...
-       Skills [9]: english, hindi, Quality Control, Process Improvement, Manpower Planning, Raw Material Handling, Impact Testing, Manufacturing  (+1 more)
-  29   21_pdf.pdf             Patel Parthbhai Ganeshbhai     9638002591     Male     ❌ NOT FOUND
-       Address: PATEL PARTHBHAI GANESHBHAI, PATEL GANESHBHAI KANUBHAI, 27 Ye...
-       Skills [7]: cash management, time management, decision make, personal profile, gujarati, hindi, english
-  15   9_pdf.pdf              Himanshu Patel                 6359030080     ❌ N/A    himanshupatel19052002hp@gmail.com
-       Address: D/601 Tirupatishyamvilla...
-       Skills [1]: evaporator
-  16   10_pdf.pdf             Veerndra Singh Rathor          8696767406     Female   veerendrasingh@gmaill.com
-       Address: RAJASTHAN - 323025, Mob No. : 8696767406...
-       Skills [7]: secondary education, PCM, hydrometallurgy, solvent, treatment plant, hindi, english
-  36   28_pdf.pdf             Qc Bsc                         9687759266     ❌ N/A    karishmamarathe1696@gmail.com
-       Address: Flat no, 101 B Shantiniketan Kevdi Falia, Dabhel Daman - 396...
-       Skills [5]: english, hindi, marathi, c, Quality Control
-  20   13_pdf.pdf             Anil                           9616812233     Male     ❌ NOT FOUND
-       Address: Vishal Mega Mart. Varanasi | Jan 2020 - Mar 2020, Date of bi...
-       Skills [16]: detail orient, employee relation, restock shelf, human resource management, resource management, c, mills, dec  (+8 more)
-  17   11_pdf.pdf             Siddiki Siraj Ahmad            ❌ NOT FOUND    Female   ❌ NOT FOUND
-       Address: ❌ NOT FOUND
-       Skills [1]: c
+       Address: Permanent, A 1, Anjanisut Row Bunglows, Manik Nagar, Cidco A...
+       DOB/Age: 1985-07-17 / 40
+       Skills [7]: CSS, Internal Auditing, Inspection, ISO 14001, ISO 45001, Regulatory Compliance, Quality Audits
+  40   59_doc.doc             ❌ Error: Failed to extract from 59_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'
+  7    4_doc.docx             Avinash G                      9137300694     Male     avinash87.java@gmail.com
+       Address: Used Log 4 j for debugging, testing and maintaining the syst...
+       DOB/Age: ❌ NOT FOUND
+       Skills [69]: networking, server, angularjs, docker, git, gradle, html, Core Java  (+61 more)
+  9    5_doc.docx             Chenna Kesava                  4696777837     Female   chennakesava231@gmail.com
+       Address: Hyderabad, Andhra Pradesh...
+       DOB/Age: ❌ NOT FOUND
+       Skills [44]: server, angularjs, ReactJS, html, java, Servlets, JDBC, JMS  (+36 more)
 
 ========================================================================================================================
 💾 Validation report saved → D:\Ktas Project\ATS\ATS Email Parser\src\output\validation_report.json
@@ -122,14 +151,14 @@
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 📊 PROCESSING SUMMARY:
    Total files processed: 41
-   Successfully parsed: 35 (85.4%)
-   Extraction errors: 6 (14.6%)
+   Successfully parsed: 33 (80.5%)
+   Extraction errors: 8 (19.5%)
 
 📋 EXTRACTION QUALITY:
-   Names found: 40/41 (97.6%)
+   Names found: 41/41 (100.0%)
    Emails found: 36/41 (87.8%)
    Phones found: 37/41 (90.2%)
-   Resumes with skills: 35/41 (85.4%)
+   Resumes with skills: 31/41 (75.6%)
 
 💾 Results saved:
    Main output → D:\Ktas Project\ATS\ATS Email Parser\src\output\resume_parsed.json

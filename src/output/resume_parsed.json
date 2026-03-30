@@ -1,23 +1,15 @@
 [
   {
     "file": "1_doc.doc",
-    "name": "Vinay .K. Sail",
-    "contact_number": "9922022435",
-    "email": "vinaysail639@gmail.com",
-    "gender": "Male",
-    "address": "G-118, CD-Scenic Acres, Near Arlem Circle, Fatorda, Margao",
-    "skills": [
-      "calibration",
-      "manufacturing",
-      "materials",
-      "validation",
-      "audits",
-      "budgeting",
-      "pharmacy",
-      "balance",
-      "routing",
-      "Production Planning"
-    ]
+    "name": null,
+    "contact_number": null,
+    "email": null,
+    "gender": null,
+    "address": null,
+    "date_of_birth": null,
+    "age": null,
+    "skills": [],
+    "error": "Failed to extract from 1_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'"
   },
   {
     "file": "1_pdf.pdf",
@@ -25,7 +17,9 @@
     "contact_number": "+966500327160",
     "email": "mohdsaifameenpptcipet@gmail.com",
     "gender": "Male",
-    "address": "Etawah Uttar Pradesh – 206124, Pass port no- X 3996378, Mob-+966500327160, +919033594129",
+    "address": "Mohammad Saif Ameen, Town-Azad Nagar Bakewar, Etawah Uttar Pradesh – 206124, Pass port no- X 3996378, Mob-+966500327160, +919033594129",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
       "auditor",
       "Extrusion",
@@ -51,11 +45,13 @@
       "CPVC",
       "PPR",
       "Drip Irrigation Systems",
+      "Coating",
       "Excel",
+      "MS Word",
       "PowerPoint",
       "Quality Control",
-      "Manufacturing",
-      "Production Planning"
+      "Production Planning",
+      "Process Control"
     ]
   },
   {
@@ -64,27 +60,62 @@
     "contact_number": "4694434710",
     "email": "rashmitha.java134@gmail.com",
     "gender": "Female",
-    "address": "Passing year - 2009",
+    "address": null,
+    "date_of_birth": null,
+    "age": null,
     "skills": [
       "cloud",
-      "dispatch",
-      "scripting",
       "server",
-      "angular",
+      "ReactJS",
       "html",
-      "java",
+      "Core Java",
+      "Servlets",
+      "JSP",
+      "JSTL",
+      "JDBC",
+      "JMS",
+      "JNDI",
+      "RMI",
+      "EJB",
+      "Struts",
+      "JSF",
+      "Hibernate",
+      "WebSphere",
+      "JBoss",
+      "Tomcat",
+      "Ext JS",
+      "Backbone JS",
+      "DHTML",
+      "XHTML",
+      "SOAP",
+      "JAX-WS",
+      "JAX-RS",
+      "WSDL",
+      "Maven",
+      "ANT",
+      "SVN",
+      "CVS",
+      "Eclipse",
+      "JUnit",
+      "Mockito",
+      "Drools",
       "javascript",
       "jenkins",
       "json",
       "kafka",
       "linux",
+      "NodeJS",
       "oracle",
       "python",
-      "sql",
+      "pl/sql",
       "unix",
       "xml",
-      "Manufacturing",
-      "Production Planning"
+      "Shell Scripting",
+      "Cassandra",
+      "Bootstrap",
+      "CSS",
+      "Production Planning",
+      "Process Control"
     ]
   },
   {
@@ -93,15 +124,23 @@
     "contact_number": "9569590836",
     "email": "sachinpal09866@gmail.com",
     "gender": "Female",
-    "address": "● Operating System: Windows (XP,7,10,11), Linux(Ubuntu), ● Interest: Web Designing, Programming",
+    "address": "● Web Development Intern | Coursify, Noida, Uttar Pradesh, Dec 2021- May 2022, 09866",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
-      "portfolio",
+      "ReactJS",
       "git",
       "html",
       "javascript",
       "linux",
       "mongodb",
+      "NodeJS",
       "python",
+      "Bootstrap",
+      "CSS",
+      "Visual Studio Code",
+      "PyCharm",
+      "MS Word",
       "PowerPoint"
     ]
   },
@@ -111,9 +150,10 @@
     "contact_number": "+15156502459",
     "email": "yugeshm4@gmail.com",
     "gender": "Female",
-    "address": "Worked on Log 4 J to validate functionalities and Mockito framework, JUnit for unit testing, Performed automation testing and authored test scripts using Selenium Web Driver, Selenium Grid and JUnit.",
+    "address": "Hyderabad",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
-      "security",
       "cloud",
       "server",
       "angularjs",
@@ -121,6 +161,25 @@
       "git",
       "html",
       "java",
+      "JMS",
+      "Spring MVC",
+      "Spring Boot",
+      "Spring Security",
+      "Struts",
+      "JSF",
+      "Hibernate",
+      "WebLogic",
+      "JBoss",
+      "Tomcat",
+      "SOAP",
+      "JAX-WS",
+      "JAX-RS",
+      "WSDL",
+      "Apache CXF",
+      "SVN",
+      "CVS",
+      "Eclipse",
+      "JUnit",
       "javascript",
       "jenkins",
       "jira",
@@ -130,11 +189,14 @@
       "mysql",
       "oracle",
       "selenium",
-      "sql",
+      "pl/sql",
       "xml",
+      "NodeJS",
+      "Bootstrap",
+      "CSS",
       "Quality Assurance",
-      "Manufacturing",
-      "Production Planning"
+      "Production Planning",
+      "Process Control"
     ]
   },
   {
@@ -144,19 +206,26 @@
     "email": "patelbhavika846@gmail.com",
     "gender": "Female",
     "address": "Surat , India",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
-      "environmental",
       "financial",
-      "investment",
-      "portfolio",
       "decisionmaking",
-      "adobe",
-      "angular",
+      "Adobe XD",
+      "Illustrator",
+      "Photoshop",
+      "Wordpress",
       "angularjs",
+      "ReactJS",
       "html",
+      "SASS",
       "javascript",
       "mysql",
-      "photoshop"
+      "php",
+      "Figma",
+      "Bootstrap",
+      "CSS",
+      "MS Word"
     ]
   },
   {
@@ -165,9 +234,10 @@
     "contact_number": "9137300694",
     "email": "avinash87.java@gmail.com",
     "gender": "Male",
-    "address": "Experienced in using Log 4 j and good expertise in application build tools like ANT, Gradle and Maven.",
+    "address": "Used Log 4 j for debugging, testing and maintaining the system state., Using JIRA to manage the issues/project work flow.",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
-      "security",
       "networking",
       "server",
       "angularjs",
@@ -175,7 +245,50 @@
       "git",
       "gradle",
       "html",
-      "java",
+      "Core Java",
+      "Servlets",
+      "JSP",
+      "JSTL",
+      "JDBC",
+      "JMS",
+      "JNDI",
+      "RMI",
+      "EJB",
+      "Spring MVC",
+      "Spring Boot",
+      "Spring Security",
+      "Spring Core",
+      "Struts",
+      "JSF",
+      "Hibernate",
+      "IBATIS",
+      "WebLogic",
+      "JBoss",
+      "Tomcat",
+      "Ext JS",
+      "Backbone JS",
+      "SASS",
+      "LESS",
+      "DHTML",
+      "XHTML",
+      "SOAP",
+      "JAX-WS",
+      "JAX-RS",
+      "WSDL",
+      "Apache CXF",
+      "Maven",
+      "ANT",
+      "SVN",
+      "CVS",
+      "Eclipse",
+      "JUnit",
+      "Mockito",
+      "Cucumber",
+      "Jasmine",
+      "Protractor",
+      "Apache Camel",
+      "Mule ESB",
+      "Drools",
       "javascript",
       "jenkins",
       "linux",
@@ -183,12 +296,17 @@
       "mysql",
       "oracle",
       "selenium",
-      "sql",
+      "pl/sql",
       "unix",
       "xml",
+      "Cassandra",
+      "ReactJS",
+      "NodeJS",
+      "Bootstrap",
+      "CSS",
       "Quality Assurance",
-      "Manufacturing",
-      "Production Planning"
+      "Production Planning",
+      "Process Control"
     ]
   },
   {
@@ -197,13 +315,19 @@
     "contact_number": "+919392301284",
     "email": "abbagallajyothi97@gmail.com",
     "gender": "Female",
-    "address": "Plot no-10, Shanthi Nagar colony, Vanasthalipuram, Hyderabad-500070, Ph. No:+919392301284.",
+    "address": "JYOTHI ABBAGALLA, Plot no-10, Shanthi Nagar colony, Vanasthalipuram, Hyderabad-500070, Ph. No:+919392301284.",
+    "date_of_birth": "1997-04-03",
+    "age": 28,
     "skills": [
       "html",
       "javascript",
       "mysql",
       "python",
-      "sql"
+      "Django",
+      "sql",
+      "REST API",
+      "Bootstrap",
+      "CSS"
     ]
   },
   {
@@ -212,23 +336,54 @@
     "contact_number": "4696777837",
     "email": "chennakesava231@gmail.com",
     "gender": "Female",
-    "address": "Performed Unit testing, Integration Testing& generating of test cases for web applications using Junit, JenkinsandLog 4 J., Hands-on experience with IDE’s like IBM Eclipse, NetBeans, Spring Tool Suite(STS) and IntelliJ.",
+    "address": "Hyderabad, Andhra Pradesh",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
       "server",
       "angularjs",
+      "ReactJS",
       "html",
       "java",
+      "Servlets",
+      "JDBC",
+      "JMS",
+      "JNDI",
+      "EJB",
+      "Struts",
+      "JSF",
+      "Hibernate",
+      "WebSphere",
+      "Tomcat",
+      "DHTML",
+      "XHTML",
+      "SOAP",
+      "JAX-WS",
+      "JAX-RS",
+      "WSDL",
+      "Maven",
+      "ANT",
+      "SVN",
+      "CVS",
+      "Eclipse",
+      "NetBeans",
+      "JUnit",
       "javascript",
       "jenkins",
       "jira",
       "linux",
       "mysql",
+      "NodeJS",
       "oracle",
-      "sql",
+      "php",
+      "pl/sql",
       "unix",
       "xml",
-      "Manufacturing",
-      "Production Planning"
+      "Cassandra",
+      "Bootstrap",
+      "CSS",
+      "Production Planning",
+      "Process Control"
     ]
   },
   {
@@ -237,15 +392,16 @@
     "contact_number": "7016393813",
     "email": "abhaymnimbargi@gmail.com",
     "gender": "Male",
-    "address": null,
+    "address": "Bangalore, Gujarat",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
       "academy",
-      "manufacturing",
-      "materials",
       "discipline",
-      "dispatch",
+      "vendor management",
       "Production Scheduling",
-      "Production Planning"
+      "Production Planning",
+      "Process Control"
     ]
   },
   {
@@ -254,11 +410,15 @@
     "contact_number": "8109819127",
     "email": "ashikhasaxena831@gmail.com",
     "gender": "Female",
-    "address": "ERP : Microsoft Dynamic NAV 2013 R 2, NAV 2016, NAV 2018.",
+    "address": "Bangalore",
+    "date_of_birth": "1995-12-29",
+    "age": 30,
     "skills": [
-      "manufacturing",
       "server",
-      "sql"
+      "sql",
+      "erp",
+      "project management",
+      "CSS"
     ]
   },
   {
@@ -267,13 +427,22 @@
     "contact_number": "9998978289",
     "email": "jagruti_miraj93@yahoo.in",
     "gender": "Female",
-    "address": "Date of Birth : 23 rd January 1993",
+    "address": "Others : Problem solving, cross-browser compatibility, cross-os compatibility, etc, Educational Qualification, Personal Details, Date of Birth : 23 rd January 1993",
+    "date_of_birth": "1993-01-23",
+    "age": 33,
     "skills": [
-      "adobe",
+      "Adobe XD",
+      "Illustrator",
+      "Photoshop",
+      "Wordpress",
       "git",
       "html",
       "javascript",
-      "photoshop",
+      "Figma",
+      "InVision",
+      "Prototyping",
+      "Bootstrap",
+      "CSS",
       "Excel"
     ]
   },
@@ -284,17 +453,24 @@
     "email": "mkgore17@gmail.com",
     "gender": "Female",
     "address": "At/Post.Ashiv,Tal.Ausa,Dist.Latur-413520.",
+    "date_of_birth": "1995-11-17",
+    "age": 30,
     "skills": [
       "adobe",
+      "Photoshop",
+      "Wordpress",
       "azure",
       "git",
       "html",
-      "java",
+      "Core Java",
+      "JSP",
+      "SVN",
       "javascript",
       "jira",
       "json",
-      "photoshop",
-      "xml"
+      "xml",
+      "ReactJS",
+      "CSS"
     ]
   },
   {
@@ -304,8 +480,16 @@
     "email": "sudhirdixit007@gmail.com",
     "gender": "Male",
     "address": "House No - 61 Lane 2, Rahul Vihar 2 nd, Pratap Vihar Sec - 12, Ghaziabad, 201009, (+91) 78-3838-0707",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
-      "nodejs"
+      "NodeJS",
+      "purchase order",
+      "ReactJS",
+      "Bootstrap",
+      "CSS",
+      "Visual Studio Code",
+      "MS Word"
     ]
   },
   {
@@ -314,9 +498,11 @@
     "contact_number": "6359030080",
     "email": "himanshupatel19052002hp@gmail.com",
     "gender": null,
-    "address": "D/601 Tirupatishyamvilla",
+    "address": "Althan,Surat(395017)",
+    "date_of_birth": "2002-05-19",
+    "age": 23,
     "skills": [
-      "evaporator"
+      "MS Word"
     ]
   },
   {
@@ -325,26 +511,22 @@
     "contact_number": "8696767406",
     "email": "veerendrasingh@gmaill.com",
     "gender": "Female",
-    "address": "RAJASTHAN - 323025, Mob No. : 8696767406",
-    "skills": [
-      "secondary education",
-      "PCM",
-      "hydrometallurgy",
-      "solvent",
-      "treatment plant",
-      "hindi",
-      "english"
-    ]
+    "address": "CURRICULUM VITAE, VEERNDRA SINGH RATHOR, VILL-TONKRA TH-HINDOLI, DIST- BUNDI, RAJASTHAN - 323025, Mob No. : 8696767406",
+    "date_of_birth": "1994-07-15",
+    "age": 31,
+    "skills": []
   },
   {
     "file": "11_pdf.pdf",
-    "name": "Siddiki Siraj Ahmad",
+    "name": "Siddiki Siraj Ahmad Niyaj Ahmad",
     "contact_number": null,
     "email": null,
     "gender": "Female",
-    "address": null,
+    "address": "SIDDIKI SIRAJ AHMAD NIYAJ AHMAD, 35 Al momin park nr. Sama school, Fatehwadi Sarkhej road Ahamadabad, 380055",
+    "date_of_birth": "2002-04-01",
+    "age": 23,
     "skills": [
-      "c"
+      "medical"
     ]
   },
   {
@@ -354,8 +536,10 @@
     "email": null,
     "gender": null,
     "address": null,
+    "date_of_birth": null,
+    "age": null,
     "skills": [],
-    "error": "Failed to extract from 12_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)"
+    "error": "Failed to extract from 12_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'"
   },
   {
     "file": "12_pdf.pdf",
@@ -363,9 +547,15 @@
     "contact_number": null,
     "email": "dp148026@gmail.com",
     "gender": "Male",
-    "address": "Gujrat, India, May 2023 – July 2025, • Faculty Lecturer at C-DAC, guiding students in advanced computing and AI technologies. Experienced in delivering, hands-on learning and real-world AI applications",
+    "address": "Faculty Lecturer, Gujrat, India, May 2023 – July 2025, • Faculty Lecturer at C-DAC, guiding students in advanced computing and AI technologies. Experienced in delivering, hands-on learning and real-world AI applications, 148026",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
-      "cybersecurity"
+      "cybersecurity",
+      "pmp",
+      "project management",
+      "ReactJS",
+      "NodeJS"
     ]
   },
   {
@@ -374,25 +564,10 @@
     "contact_number": "9616812233",
     "email": null,
     "gender": "Male",
-    "address": "Vishal Mega Mart. Varanasi | Jan 2020 - Mar 2020, Date of birth 03/07/1999, Responsible for assisting customers, restocking shelves, maintaining , operating store",
-    "skills": [
-      "detail orient",
-      "employee relation",
-      "restock shelf",
-      "human resource management",
-      "resource management",
-      "c",
-      "mills",
-      "dec",
-      "recruitment processes",
-      "coordinating",
-      "mart",
-      "managed operations",
-      "safe",
-      "working environment",
-      "english",
-      "mit"
-    ]
+    "address": "Pune",
+    "date_of_birth": "1999-07-03",
+    "age": 26,
+    "skills": []
   },
   {
     "file": "14_pdf.pdf",
@@ -400,29 +575,40 @@
     "contact_number": null,
     "email": "ajaybhuims@gmail.com",
     "gender": "Male",
-    "address": "May 2010 – May 2016: Shri Baidyanath Ayurveda Bhavan Pvt. Ltd., Naini, Uttar Pradesh, India as Senior Officer –",
+    "address": "S/o -Late Ram Birodhi Singh, Vill- Isiyan, P.O- Baradhi, P.S.-Chainpur, Dist- Kaimur, Bihar - 821103",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
-      "english",
-      "hindi",
       "Quality Control",
       "Process Improvement",
       "Manpower Planning",
       "Raw Material Handling",
       "Impact Testing",
-      "Manufacturing",
-      "Production Planning"
+      "FDA Compliance",
+      "SOP Documentation",
+      "Batch Manufacturing (BMR/MFR)",
+      "SAP Production Module",
+      "Production Planning",
+      "Process Control"
     ]
   },
   {
     "file": "15_pdf.pdf",
-    "name": null,
+    "name": "Mayank Barot",
     "contact_number": "+919978463607",
     "email": "mayankbarot775@gmail.com",
     "gender": "Female",
-    "address": "Gujarat, Gujarati, 10 th, 2016, Gujarat, Gujarati",
+    "address": "12 th, 2018, Gujarat, Gujarati, 10 th, 2016, Gujarat, Gujarati, 60285",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
       "campaign",
-      "android"
+      "android",
+      "SAP HANA",
+      "erp",
+      "gst",
+      "Regulatory Compliance",
+      "Quality Audits"
     ]
   },
   {
@@ -432,14 +618,18 @@
     "email": "dipenvora85@gmail.com",
     "gender": "Female",
     "address": "D/22, Shantidayal Appartment, Nr The HBKapadiya New High School, Gurukul Road, Memnagar, Ahmedabad-380052",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
       "structural",
       "server",
       "html",
+      "DHTML",
       "linux",
       "oracle",
-      "sql",
+      "pl/sql",
       "unix",
+      "product design",
       "Quality Assurance"
     ]
   },
@@ -449,26 +639,34 @@
     "contact_number": "+919974064212",
     "email": "sujeet.singh_1986@yahoo.co.in",
     "gender": "Male",
-    "address": "2. Commercial Work, Liaison & Factory Compliance, Independently handle the projects., • Liaison with the Government department for the smooth function of Industry.",
+    "address": "49.00, Mumbai University, VNSGU, Surat, MSU, Baroda, MSU, Baroda, 396230",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
       "excel",
+      "erp",
+      "MS Word",
+      "Quality Audits",
       "PowerPoint"
     ]
   },
   {
     "file": "18_pdf.pdf",
-    "name": "Koliwada",
+    "name": "Rathod Jigneshkumar S",
     "contact_number": "+918866252027",
     "email": "js.rathod27@gmail.com",
     "gender": "Female",
-    "address": "Diu (DAMAN & DIU) - 362540, +91- 8866252027",
+    "address": "Koliwada, GOGHALA - DIU (U.T), Diu (DAMAN & DIU) - 362540, +91- 8866252027",
+    "date_of_birth": "1983-06-28",
+    "age": 42,
     "skills": [
       "drawings",
       "fabrication",
       "hydraulic",
       "welding",
-      "Manufacturing",
-      "Production Planning"
+      "root cause analysis",
+      "Production Planning",
+      "Process Control"
     ]
   },
   {
@@ -477,28 +675,33 @@
     "contact_number": "9644637555",
     "email": null,
     "gender": "Female",
-    "address": " Responsible For USFDA, OHZAS ISO -9001, 14001 & Audits Formulation & API Plant.,  Coordinated preventative maintenance schedules, verifying equipment safety and function., 2006-10 Maintenance Trainee.",
+    "address": "engineering activities,  Responsible For USFDA, OHZAS ISO -9001, 14001 & Audits Formulation & API Plant.,  Coordinated preventative maintenance schedules, verifying equipment safety and function., 2006-10 Maintenance Trainee.",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
       "civil",
-      "audits",
+      "OEE (Overall Equipment Efficiency)",
+      "regulatory compliance",
+      "change control",
+      "mechanical engineering",
       "Quality Assurance",
-      "Manufacturing",
-      "Production Planning"
+      "SOP Documentation",
+      "Quality Audits",
+      "Production Planning",
+      "Process Control"
     ]
   },
   {
     "file": "20_doc.doc",
-    "name": "Barsha Santra",
-    "contact_number": "8474936303",
-    "email": "santrabarsha836@gmail.com",
-    "gender": "Female",
-    "address": "At/Po- IRRIGATION COLONY ROAD,OPP-HORTICULTURE NURSERY GARDEN. JEYPORE, DIST-KORAPUT (ODISHA)",
-    "skills": [
-      "hindi",
-      "english",
-      "justice",
-      "Quality Assurance"
-    ]
+    "name": null,
+    "contact_number": null,
+    "email": null,
+    "gender": null,
+    "address": null,
+    "date_of_birth": null,
+    "age": null,
+    "skills": [],
+    "error": "Failed to extract from 20_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'"
   },
   {
     "file": "20_pdf.pdf",
@@ -506,11 +709,14 @@
     "contact_number": "7764890893",
     "email": "pratikbhagat157@gmail.com",
     "gender": "Female",
-    "address": "21 Nadiaon Jio Tawar, Vill Nadiaon Siwan Bihar, Siwan - 841231, Mob No. : 7764890893",
+    "address": "CURRICULUM VITAE, Pratik Bhagat, 21 Nadiaon Jio Tawar, Vill Nadiaon Siwan Bihar, Siwan - 841231, Mob No. : 7764890893",
+    "date_of_birth": "2004-04-02",
+    "age": 21,
     "skills": [
       "organizational",
-      "Manufacturing",
-      "Production Planning"
+      "electrical engineering",
+      "Production Planning",
+      "Process Control"
     ]
   },
   {
@@ -519,15 +725,11 @@
     "contact_number": "9638002591",
     "email": null,
     "gender": "Male",
-    "address": "PATEL PARTHBHAI GANESHBHAI, PATEL GANESHBHAI KANUBHAI, 27 Years, 14/03/1998",
+    "address": "Indian, Gujarati, Hindi, and English, AT.: -KHUNTEJ ( SARKARI KUVA FALIYU ) POST : PARIA, TA –, PARDI DIST.VALSAD (PIN CODE-396145)",
+    "date_of_birth": "1998-03-14",
+    "age": 28,
     "skills": [
-      "cash management",
-      "time management",
-      "decision make",
-      "personal profile",
-      "gujarati",
-      "hindi",
-      "english"
+      "time management"
     ]
   },
   {
@@ -536,13 +738,10 @@
     "contact_number": "+919737795751",
     "email": "ketan_trivedi73@rediffmail.com",
     "gender": "Male",
-    "address": "May-5 2025",
+    "address": "Maharashtra, 14001",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
-      "budgeting",
-      "forecasting",
-      "payroll",
-      "discipline",
-      "organizational",
       "Manpower Planning"
     ]
   },
@@ -552,16 +751,28 @@
     "contact_number": "+919318780073",
     "email": "pro_sanjupharma@yahoo.co.in",
     "gender": "Female",
-    "address": "(WHO, GMP ISO 9001 certified), Location : Rou Indore (M.P.), Employed as : Production Officer",
+    "address": "Duration, Oct. 2002 to Feb. 2004, Second Organization :--Worked with M/S Syncom Formulation India Ltd., (WHO, GMP ISO 9001 certified ), Location : Pithampur Distt: Dhar (M.P), Employed as : Production Officer, 201280",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
-      "manufacturing",
-      "validation",
+      "Process Validation",
+      "team management",
+      "MS Word",
       "Quality Assurance",
       "Quality Control",
       "Raw Material Handling",
       "ISO 9001",
+      "cGMP",
+      "Compression",
+      "Coating",
+      "FDA Compliance",
+      "Batch Manufacturing (BMR/MFR)",
+      "Quality Audits",
+      "Change Control",
+      "Deviation Management",
       "Excel",
-      "Production Planning"
+      "Production Planning",
+      "Process Control"
     ]
   },
   {
@@ -570,7 +781,9 @@
     "contact_number": "6306172826",
     "email": "anoop1122003@gmail.com",
     "gender": null,
-    "address": "Uttar Pradesh - 210505, Mob No. : 6306172826",
+    "address": "Hamirpur, Uttar Pradesh - 210505, Mob No. : 6306172826",
+    "date_of_birth": "2003-02-11",
+    "age": 23,
     "skills": [
       "laboratory",
       "Quality Control",
@@ -584,16 +797,18 @@
     "email": "paroolshah2902@gmail.com",
     "gender": "Male",
     "address": "Atharvo India Pvt.Ltd, Machine Learning Intern, 06/2024 - 07/2024, • Assisted in data collection, cleaning, and preprocessing tasks for machine learning model",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
       "asset",
       "configuration",
       "incident",
-      "collaboration",
       "jupyter",
       "python",
       "scikit",
-      "Manufacturing",
-      "Production Planning"
+      "patch management",
+      "Production Planning",
+      "Process Control"
     ]
   },
   {
@@ -602,12 +817,17 @@
     "contact_number": "+919625758950",
     "email": "srivastava.shruti@gmail.com",
     "gender": "Female",
-    "address": " Secured 3 rd rank in the International Business Language (German) in IIFT",
+    "address": "Delhi,  2008 - Certificate Course in Export Management from, Indian Institute of Foreign Trade – Delhi, 122101",
+    "date_of_birth": null,
+    "age": null,
     "skills": [
       "balancing",
+      "scrum master",
+      "csm",
       "Quality Control",
       "Process Improvement",
-      "Impact Testing"
+      "Impact Testing",
+      "Quality Audits"
     ]
   },
   {
@@ -616,29 +836,29 @@
     "contact_number": null,
     "email": null,
     "gender": "Male",
-    "address": "A 1, Anjanisut Row Bunglows, Manik Nagar, Cidco Ambad Link, Road, Cidco, Nashik.Pin code",
+    "address": "Permanent, A 1, Anjanisut Row Bunglows, Manik Nagar, Cidco Ambad Link, Road, Cidco, Nashik.Pin code, 422010",
+    "date_of_birth": "1985-07-17",
+    "age": 40,
     "skills": [
-      "english",
-      "hindi",
-      "tamil",
+      "CSS",
       "Internal Auditing",
       "Inspection",
       "ISO 14001",
-      "ISO 45001"
+      "ISO 45001",
+      "Regulatory Compliance",
+      "Quality Audits"
     ]
   },
   {
     "file": "28_pdf.pdf",
-    "name": "Qc Bsc",
+    "name": "Karishma R Marathe",
     "contact_number": "9687759266",
     "email": "karishmamarathe1696@gmail.com",
-    "gender": null,
-    "address": "Flat no, 101 B Shantiniketan Kevdi Falia, Dabhel Daman - 396210",
+    "gender": "Female",
+    "address": "Karishma R Marathe, Flat no, 101 B Shantiniketan Kevdi Falia, Dabhel Daman - 396210",
+    "date_of_birth": "1996-06-16",
+    "age": 29,
     "skills": [
-      "english",
-      "hindi",
-      "marathi",
-      "c",
       "Quality Control"
     ]
   },
@@ -649,8 +869,10 @@
     "email": null,
     "gender": null,
     "address": null,
+    "date_of_birth": null,
+    "age": null,
     "skills": [],
-    "error": "Failed to extract from 30_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)"
+    "error": "Failed to extract from 30_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'"
   },
   {
     "file": "40_doc.doc",
@@ -659,8 +881,10 @@
     "email": null,
     "gender": null,
     "address": null,
+    "date_of_birth": null,
+    "age": null,
     "skills": [],
-    "error": "Failed to extract from 40_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)"
+    "error": "Failed to extract from 40_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'"
   },
   {
     "file": "45_doc.doc",
@@ -669,8 +893,10 @@
     "email": null,
     "gender": null,
     "address": null,
+    "date_of_birth": null,
+    "age": null,
     "skills": [],
-    "error": "Failed to extract from 45_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)"
+    "error": "Failed to extract from 45_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'"
   },
   {
     "file": "59_doc.doc",
@@ -679,8 +905,10 @@
     "email": null,
     "gender": null,
     "address": null,
+    "date_of_birth": null,
+    "age": null,
     "skills": [],
-    "error": "Failed to extract from 59_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)"
+    "error": "Failed to extract from 59_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'"
   },
   {
     "file": "160_doc.doc",
@@ -689,7 +917,9 @@
     "email": null,
     "gender": null,
     "address": null,
+    "date_of_birth": null,
+    "age": null,
     "skills": [],
-    "error": "Failed to extract from 160_doc.doc: textract error: antiword missing for .doc support; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)"
+    "error": "Failed to extract from 160_doc.doc: textract not installed (pip install textract for .doc support); pywin32 not available for Word COM fallback: No module named 'win32com'"
   }
 ]
