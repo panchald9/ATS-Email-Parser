@@ -4,8 +4,13 @@ Resume Parser
 Extracts: Name, Contact Number, Email, Gender, Address, Skills
 Supports: PDF, DOCX, DOC
 
-Skills are loaded from:  Skill.csv  (column: 'skill')
+Skills source (default): SkillNer dataset
+Fallback source:         Skill.csv (optional)
 Output saved to:         output/resume_parsed.json
+
+Performance defaults:
+    - Fast-response mode is ON by default (use --full-accuracy to disable)
+    - Skill source default is auto (CSV-first, SkillNer fallback)
 
 Optional speed-ups (install if available):
   pip install spacy && python -m spacy download en_core_web_sm
@@ -17,7 +22,12 @@ import re
 import os
 import csv
 import json
+import sys
 import importlib
+import argparse
+import random
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # ── Core deps ──────────────────────────────────────────────────
 from pdfminer.high_level import extract_text as pdf_extract_text
@@ -37,22 +47,63 @@ except ImportError:
     textract = None
     TEXTRACT_AVAILABLE = False
 
-# ── Optional NLP libs ──────────────────────────────────────────
-try:
-    from names_dataset import NameDataset
-    nd = NameDataset()
-    DATASET_AVAILABLE = True
-except Exception:
-    nd = None
-    DATASET_AVAILABLE = False
+# ── Lazy-loaded name validation dataset ─────────────────────────
+nd = None
+DATASET_AVAILABLE = False
+ND_TOKEN_CACHE = {}
+_ND_CACHE_LOCK = threading.Lock()
 
-try:
-    import spacy
-    nlp = spacy.load('en_core_web_sm')
-    SPACY_AVAILABLE = True
-except Exception:
-    nlp = None
-    SPACY_AVAILABLE = False
+def _ensure_names_dataset_loaded():
+    """Lazy-load names_dataset on first use."""
+    global nd, DATASET_AVAILABLE
+    if nd is not None:
+        return True
+    try:
+        from names_dataset import NameDataset
+        nd = NameDataset()
+        DATASET_AVAILABLE = True
+        return True
+    except Exception:
+        DATASET_AVAILABLE = False
+        return False
+
+# ── Lazy-loaded NLP libs (only load when needed) ────────────
+nlp = None
+skill_extractor = None
+SPACY_AVAILABLE = False
+SKILLNER_AVAILABLE = False
+
+def _ensure_spacy_loaded():
+    """Lazy-load spacy model on first use."""
+    global nlp, SPACY_AVAILABLE
+    if nlp is not None:
+        return True
+    try:
+        import spacy
+        nlp = spacy.load('en_core_web_sm')
+        SPACY_AVAILABLE = True
+        return True
+    except Exception:
+        SPACY_AVAILABLE = False
+        return False
+
+def _ensure_skillner_loaded():
+    """Lazy-load SkillNer and spacy model on first use."""
+    global skill_extractor, SKILLNER_AVAILABLE, nlp
+    if skill_extractor is not None:
+        return True
+    try:
+        if not _ensure_spacy_loaded():
+            return False
+        from spacy.matcher import PhraseMatcher
+        from skillNer.general_params import SKILL_DB
+        from skillNer.skill_extractor_class import SkillExtractor
+        skill_extractor = SkillExtractor(nlp, SKILL_DB, PhraseMatcher)
+        SKILLNER_AVAILABLE = True
+        return True
+    except Exception:
+        SKILLNER_AVAILABLE = False
+        return False
 
 
 # ══════════════════════════════════════════════════════════════
@@ -64,10 +115,26 @@ OUTPUT_JSON    = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'outpu
 VALIDATION_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', 'validation_report.json')
 SUPPORTED_EXTENSIONS = {'.pdf', '.doc', '.docx'}
 
+# Skill extraction source:
+#   dataset -> SkillNer dataset only
+#   csv     -> Skill.csv only
+#   auto    -> CSV first, dataset fallback
+SKILL_SOURCE = 'auto'
+
+# SkillNer performance tuning
+FAST_SKILLNER_MODE = True
+SKILLNER_MAX_TEXT_CHARS = 2200
+
+# ATS section formatting
+ROLE_TARGET = 'general'  # general | fullstack | backend | analyst
+
 # Logging & Error Handling
 ENABLE_VALIDATION = True  # Enable accuracy validation
 ENABLE_DETAILED_LOGGING = True  # Log extraction details
 LOG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', 'parser.log')
+
+# Batch performance tuning
+DEFAULT_MAX_WORKERS = min(8, (os.cpu_count() or 4))
 
 
 # ══════════════════════════════════════════════════════════════
@@ -143,6 +210,49 @@ BAD_CONTEXT_RE = re.compile(
     r')\b'
 )
 
+# Hot-path precompiled regex patterns (used once per resume, many resumes in batch)
+PHONE_LABEL_RE = re.compile(
+    r'(?i)\b(?:mobile|mob|phone|ph|contact|tel|telephone|call|whatsapp)\b\s*[:\-]?\s*([+()0-9][0-9()\s.\-/]{6,25})'
+)
+PHONE_GENERIC_RE = re.compile(
+    r'(?<!\w)(?:\+?\d{1,3}[ \t.\-]?)?(?:\(?\d{2,5}\)?[ \t.\-]?)?\d(?:[\d \t()./\-]{5,}\d)(?!\w)'
+)
+
+EMAIL_DOMAIN_PREFIX_RE = re.compile(
+    r"^([a-z0-9-]{1,30}(?:\.[a-z0-9-]{1,30}){0,2}"
+    r"\.(?:co\.in|org\.in|ac\.in|gov\.in|com|org|net|edu|gov|in|co|io|ai|info|biz|me|us|uk|ca|au|de|fr|jp|sg))",
+    re.I,
+)
+EMAIL_STRICT_RE = re.compile(r"^[a-z0-9][a-z0-9._%+-]{1,63}@[a-z0-9-]+(?:\.[a-z0-9-]+)+$")
+EMAIL_NOISY_PREFIX_RE = re.compile(r"^(?:contact|skills|languages|profile|email|mobile|phone)+", re.I)
+
+GENDER_LABEL_RE = re.compile(r'(?i)\b(?:gender|sex)\b\s*[:\-]?\s*(male|female|m|f)\b')
+GENDER_EARLY_MALE_RE = re.compile(r'\b(?:gender|sex)\b[^\n]{0,24}\b(?:male|m)\b', re.I)
+GENDER_EARLY_FEMALE_RE = re.compile(r'\b(?:gender|sex)\b[^\n]{0,24}\b(?:female|f)\b', re.I)
+
+ADDRESS_LABEL_RE = re.compile(
+    r'(?i)^(?:permanent|current|present|communication|residential)?\s*address\s*[:\-]?\s*(.*)$'
+)
+ADDRESS_STOP_RE = re.compile(
+    r'(?i)^(?:education|skills?|experience|objective|summary|profile|projects?|languages?|'
+    r'declaration|reference|hobbies|strengths|certificates?|achievements?|'
+    r'bachelor|master|diploma|degree|university|college|institute|school|'
+    r'professional\s+experience|technical\s+skills|work\s+experience)\b'
+)
+ADDRESS_CONTACT_RE = re.compile(r'(?i)(?:@|\b(?:phone|mobile|contact|email|tel|whatsapp)\b|https?://)')
+ADDRESS_HINT_RE = re.compile(
+    r'(?i)\b(?:road|rd\.?|street|st\.?|lane|ln\.?|nagar|colony|sector|plot|block|'
+    r'flat|floor|apartment|society|near|taluka|tehsil|dist|district|city|state|india|'
+    r'gujarat|maharashtra|rajasthan|punjab|bihar|kerala|odisha|haryana|pradesh|goa|'
+    r'karnataka|postcode|pincode|zip)\b'
+)
+ADDRESS_NON_RE = re.compile(
+    r'(?i)\b(?:bachelor|master|diploma|degree|university|college|school|institute|cgpa|gpa|'
+    r'certification|training|course|project|client|role|responsibilit\w*|experience|'
+    r'java|python|spring|hibernate|oracle|mysql|sql|javascript|html|css|aws|jira|agile|'
+    r'scrum|methodology|environment|objective|summary|profile|skills?)\b'
+)
+
 COMPANY_HINTS = {
     'pvt','ltd','limited','llp','inc','corp','private','industries',
     'university','college','school','institute','vidyalaya','society',
@@ -160,6 +270,12 @@ NON_NAME_WORDS = {
     'achievements','core','competencies','competency','citizen','citizenship',
     'styrene','acryl','acrylonitrile',
     'previous','employers','then','call','me','cisco','finance',
+}
+
+EMAIL_LOCAL_NON_PERSON_TOKENS = {
+    'admin', 'administrator', 'admission', 'career', 'careers', 'contact', 'cv', 'enquiry',
+    'enquiries', 'hello', 'help', 'hr', 'hrd', 'info', 'mail', 'naukri', 'no', 'noreply',
+    'office', 'recruitment', 'reply', 'resume', 'sales', 'service', 'support', 'team', 'user',
 }
 
 COMMON_MALE_FIRST_NAMES = {
@@ -488,7 +604,12 @@ def dataset_ok(name, min_score=2):
         if len(clean) < 2:
             continue
         try:
-            r = nd.search(clean)
+            r = ND_TOKEN_CACHE.get(clean)
+            if r is None:
+                result = nd.search(clean)
+                with _ND_CACHE_LOCK:
+                    ND_TOKEN_CACHE[clean] = result
+                r = result
             if i == 0:
                 score += 3 if r.get('first_name') else (1 if r.get('last_name') else 0)
             else:
@@ -506,6 +627,91 @@ def accept(name, strict=True, allow_single=False):
     return True
 
 
+def _dataset_first_or_last_hit(token):
+    token = (token or '').strip().lower()
+    if not token:
+        return False, False
+    cached = ND_TOKEN_CACHE.get(token)
+    if cached is not None:
+        if isinstance(cached, tuple) and len(cached) == 2:
+            return cached
+        return bool(cached.get('first_name')), bool(cached.get('last_name'))
+    if not DATASET_AVAILABLE:
+        return False, False
+    try:
+        result = nd.search(token)
+        hit = bool(result.get('first_name')), bool(result.get('last_name'))
+        with _ND_CACHE_LOCK:
+            ND_TOKEN_CACHE[token] = hit
+        return hit
+    except Exception:
+        return False, False
+
+
+def _token_looks_like_first_name(token):
+    t = re.sub(r'[^a-z]', '', token.lower())
+    if len(t) < 3:
+        return False
+    if t in COMMON_MALE_FIRST_NAMES or t in COMMON_FEMALE_FIRST_NAMES:
+        return True
+    first_hit, _ = _dataset_first_or_last_hit(t)
+    return first_hit
+
+
+def _token_looks_like_surname(token):
+    t = re.sub(r'[^a-z]', '', token.lower())
+    if len(t) < 2:
+        return False
+    if t in COMMON_SURNAMES:
+        return True
+    _, last_hit = _dataset_first_or_last_hit(t)
+    return last_hit
+
+
+def _email_local_looks_like_name(local, alpha_chunks):
+    if not alpha_chunks:
+        return False
+
+    if any(part in EMAIL_LOCAL_NON_PERSON_TOKENS for part in alpha_chunks):
+        return False
+
+    if any(part in BLACKLIST or part in NON_NAME_WORDS or part in COMPANY_HINTS for part in alpha_chunks):
+        return False
+
+    compact = re.sub(r'[^a-z0-9]', '', local.lower())
+    if compact:
+        digit_ratio = sum(ch.isdigit() for ch in compact) / len(compact)
+        if len(compact) >= 5 and digit_ratio > 0.35:
+            return False
+
+    if len(alpha_chunks) >= 2:
+        first, second = alpha_chunks[-2], alpha_chunks[-1]
+        if len(first) < 3 or len(second) < 2:
+            return False
+        if _token_looks_like_first_name(first) and len(second) >= 3:
+            return True
+        if _token_looks_like_first_name(second) and len(first) >= 3:
+            return True
+        if _token_looks_like_first_name(first) and _token_looks_like_surname(second):
+            return True
+        return False
+
+    single = alpha_chunks[-1]
+    if len(single) < 6:
+        return False
+
+    if _token_looks_like_first_name(single):
+        return True
+
+    for sur in sorted(COMMON_SURNAMES, key=len, reverse=True):
+        if single.endswith(sur) and len(single) > len(sur) + 2:
+            first_part = single[:-len(sur)]
+            if _token_looks_like_first_name(first_part):
+                return True
+
+    return False
+
+
 def name_from_email(full_text):
     matches = re.finditer(
         r'([A-Za-z][A-Za-z0-9._+-]{2,})@[A-Za-z0-9.-]+\.[A-Za-z]{2,}',
@@ -517,6 +723,11 @@ def name_from_email(full_text):
         alpha_chunks = [re.sub(r'\d+', '', c) for c in chunks]
         alpha_chunks = [c for c in alpha_chunks if len(c) >= 3]
 
+        # Email username fallback is intentionally conservative to avoid
+        # false names like admin/support/hr/team style usernames.
+        if not _email_local_looks_like_name(local, alpha_chunks):
+            continue
+
         if len(alpha_chunks) >= 2:
             c = title_case(' '.join(alpha_chunks[-2:]))
             if accept(c, strict=False):
@@ -524,21 +735,62 @@ def name_from_email(full_text):
 
         if alpha_chunks:
             single = alpha_chunks[-1]
-            if len(single) >= 3:
+            if len(single) >= 3 and _token_looks_like_first_name(single):
                 c = title_case(single)
                 if accept(c, strict=False, allow_single=True):
                     return c
             if len(single) >= 6:
                 for sur in sorted(COMMON_SURNAMES, key=len, reverse=True):
                     if single.endswith(sur) and len(single) > len(sur) + 2:
-                        c = title_case(single[:-len(sur)] + ' ' + sur)
+                        first_part = single[:-len(sur)]
+                        if not _token_looks_like_first_name(first_part):
+                            continue
+                        c = title_case(first_part + ' ' + sur)
                         if accept(c, strict=False):
                             return c
-                for i in range(3, len(single) - 2):
-                    c = title_case(single[:i] + ' ' + single[i:])
-                    if accept(c, strict=False):
-                        return c
     return None
+
+
+def _resolve_process_folder():
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument('--folder', dest='folder', default='')
+    parser.add_argument('--no-validation', action='store_true')
+    parser.add_argument('--skill-source', dest='skill_source', default=SKILL_SOURCE)
+    parser.add_argument('--workers', dest='workers', type=int, default=DEFAULT_MAX_WORKERS)
+    parser.add_argument('--limit', dest='limit', type=int, default=0)
+    parser.add_argument('--random-order', action='store_true')
+    parser.add_argument('--seed', dest='seed', type=int, default=42)
+    parser.add_argument('--role', dest='role', default=ROLE_TARGET)
+    parser.add_argument('--fast-response', dest='fast_response', action='store_true')
+    parser.add_argument('--full-accuracy', dest='fast_response', action='store_false')
+    parser.set_defaults(fast_response=True)
+    args, _ = parser.parse_known_args()
+
+    cli_folder = (args.folder or '').strip().strip('"')
+
+    # Single-folder mode:
+    # 1) Use --folder if provided.
+    # 2) Otherwise use RESUME_FOLDER only.
+    chosen_folder = cli_folder or RESUME_FOLDER
+    source = (args.skill_source or SKILL_SOURCE).strip().lower()
+    if source not in {'dataset', 'csv', 'auto'}:
+        source = SKILL_SOURCE
+    workers = max(1, int(args.workers or 1))
+    limit = max(0, int(args.limit or 0))
+    role = (args.role or ROLE_TARGET).strip().lower()
+    if role not in {'general', 'fullstack', 'backend', 'analyst'}:
+        role = ROLE_TARGET
+    return (
+        chosen_folder,
+        args.no_validation,
+        source,
+        workers,
+        limit,
+        bool(args.random_order),
+        int(args.seed),
+        role,
+        bool(args.fast_response),
+    )
 
 
 # ══════════════════════════════════════════════════════════════
@@ -770,15 +1022,8 @@ def extract_contact_number(text):
     if not segments:
         segments = [t]
 
-    label_pattern = re.compile(
-        r'(?i)\b(?:mobile|mob|phone|ph|contact|tel|telephone|call|whatsapp)\b\s*[:\-]?\s*([+()0-9][0-9()\s.\-/]{6,25})'
-    )
-    generic_pattern = re.compile(
-        r'(?<!\w)(?:\+?\d{1,3}[ \t.\-]?)?(?:\(?\d{2,5}\)?[ \t.\-]?)?\d(?:[\d \t()./\-]{5,}\d)(?!\w)'
-    )
-
     for seg_idx, seg in enumerate(segments):
-        for m in label_pattern.finditer(seg):
+        for m in PHONE_LABEL_RE.finditer(seg):
             raw = m.group(1)
             number = _normalize_phone_candidate(raw)
             if not number:
@@ -787,7 +1032,7 @@ def extract_contact_number(text):
             len_pref = 0 if 10 <= digits_len <= 12 else (1 if digits_len == 13 else 2)
             candidates.append((8, len_pref, digits_len, seg_idx, m.start(), number))
 
-        for m in generic_pattern.finditer(seg):
+        for m in PHONE_GENERIC_RE.finditer(seg):
             raw = m.group(0)
             number = _normalize_phone_candidate(raw)
             if not number:
@@ -826,14 +1071,6 @@ def extract_email_from_resume(text):
     if not text:
         return None
 
-    domain_prefix_pattern = re.compile(
-        r"^([a-z0-9-]{1,30}(?:\.[a-z0-9-]{1,30}){0,2}"
-        r"\.(?:co\.in|org\.in|ac\.in|gov\.in|com|org|net|edu|gov|in|co|io|ai|info|biz|me|us|uk|ca|au|de|fr|jp|sg))",
-        re.I,
-    )
-    strict_email = re.compile(r"^[a-z0-9][a-z0-9._%+-]{1,63}@[a-z0-9-]+(?:\.[a-z0-9-]+)+$")
-    noisy_prefix = re.compile(r"^(?:contact|skills|languages|profile|email|mobile|phone)+", re.I)
-
     def normalize_piece(s):
         s = s.replace("\r", " ").replace("\n", " ").replace("\t", " ")
         s = re.sub(r"(?i)\(\s*at\s*\)|\[\s*at\s*\]|\sat\s", "@", s)
@@ -845,7 +1082,7 @@ def extract_email_from_resume(text):
     def clean_local(local_raw):
         local = local_raw.strip(" ._-+%")
         for _ in range(2):
-            local = noisy_prefix.sub("", local)
+            local = EMAIL_NOISY_PREFIX_RE.sub("", local)
         for _ in range(3):
             lowered = local.lower()
             cut = None
@@ -910,15 +1147,15 @@ def extract_email_from_resume(text):
         if not right_tokens:
             return None
         domain_head = ''.join(right_tokens[:4]).strip('.')
-        dm = domain_prefix_pattern.search(domain_head)
+        dm = EMAIL_DOMAIN_PREFIX_RE.search(domain_head)
         if not dm:
             domain_head = ''.join(right_tokens[:8]).strip('.')
-            dm = domain_prefix_pattern.search(domain_head)
+            dm = EMAIL_DOMAIN_PREFIX_RE.search(domain_head)
         if not dm:
             return None
         domain = dm.group(1).lower()
         email = f"{local.lower()}@{domain}"
-        if not strict_email.match(email):
+        if not EMAIL_STRICT_RE.match(email):
             return None
         if ".." in email or email.endswith("."):
             return None
@@ -1026,12 +1263,8 @@ def extract_gender(text, name=None):
     t = normalize_compact_text(text)
     lines = [re.sub(r'\s+', ' ', line).strip() for line in t.splitlines() if line.strip()]
 
-    label_re = re.compile(
-        r'(?i)\b(?:gender|sex)\b\s*[:\-]?\s*(male|female|m|f)\b'
-    )
-
     for line in lines[:80]:
-        m = label_re.search(line)
+        m = GENDER_LABEL_RE.search(line)
         if not m:
             continue
         raw = m.group(1).lower()
@@ -1042,9 +1275,9 @@ def extract_gender(text, name=None):
 
     # Fallback: gender token near gender/sex labels.
     early = '\n'.join(lines[:35]).lower()
-    if re.search(r'\b(?:gender|sex)\b[^\n]{0,24}\b(?:male|m)\b', early):
+    if GENDER_EARLY_MALE_RE.search(early):
         return 'Male'
-    if re.search(r'\b(?:gender|sex)\b[^\n]{0,24}\b(?:female|f)\b', early):
+    if GENDER_EARLY_FEMALE_RE.search(early):
         return 'Female'
 
     # Last fallback: infer from the extracted candidate name.
@@ -1060,29 +1293,6 @@ def extract_address(text):
     if not lines:
         return None
 
-    label_re = re.compile(
-        r'(?i)^(?:permanent|current|present|communication|residential)?\s*address\s*[:\-]?\s*(.*)$'
-    )
-    stop_re = re.compile(
-        r'(?i)^(?:education|skills?|experience|objective|summary|profile|projects?|languages?|'
-        r'declaration|reference|hobbies|strengths|certificates?|achievements?|'
-        r'bachelor|master|diploma|degree|university|college|institute|school|'
-        r'professional\s+experience|technical\s+skills|work\s+experience)\b'
-    )
-    contact_re = re.compile(r'(?i)(?:@|\b(?:phone|mobile|contact|email|tel|whatsapp)\b|https?://)')
-    hint_re = re.compile(
-        r'(?i)\b(?:road|rd\.?|street|st\.?|lane|ln\.?|nagar|colony|sector|plot|block|'
-        r'flat|floor|apartment|society|near|taluka|tehsil|dist|district|city|state|india|'
-        r'gujarat|maharashtra|rajasthan|punjab|bihar|kerala|odisha|haryana|pradesh|goa|'
-        r'karnataka|postcode|pincode|zip)\b'
-    )
-    non_address_re = re.compile(
-        r'(?i)\b(?:bachelor|master|diploma|degree|university|college|school|institute|cgpa|gpa|'
-        r'certification|training|course|project|client|role|responsibilit\w*|experience|'
-        r'java|python|spring|hibernate|oracle|mysql|sql|javascript|html|css|aws|jira|agile|'
-        r'scrum|methodology|environment|objective|summary|profile|skills?)\b'
-    )
-
     def clean_address(value):
         value = re.sub(r'\s+', ' ', value).strip(' ,;:-')
         if len(value) < 8:
@@ -1093,38 +1303,38 @@ def extract_address(text):
             return None
         if value.count(',') > 6:
             return None
-        if contact_re.search(value):
+        if ADDRESS_CONTACT_RE.search(value):
             return None
         # Count how many non-address keywords appear - reject only if heavily loaded
-        bad_words = len(re.findall(non_address_re, value))
+        bad_words = len(re.findall(ADDRESS_NON_RE, value))
         if bad_words >= 3:
             return None
         # Address should have location hints or numbers
         digit_hits = len(re.findall(r'\d', value))
-        hint_hits = len(hint_re.findall(value))
+        hint_hits = len(ADDRESS_HINT_RE.findall(value))
         if digit_hits == 0 and hint_hits < 1:
             return None
         return value
 
     # First preference: explicit address label.
     for i, line in enumerate(lines[:80]):
-        m = label_re.match(line)
+        m = ADDRESS_LABEL_RE.match(line)
         if not m:
             continue
 
         parts = []
         first = m.group(1).strip()
-        if first and not stop_re.match(first) and not contact_re.search(first):
+        if first and not ADDRESS_STOP_RE.match(first) and not ADDRESS_CONTACT_RE.search(first):
             parts.append(first)
 
         # Capture a few immediate continuation lines.
         for j in range(i + 1, min(i + 5, len(lines))):
             nxt = lines[j]
-            if stop_re.match(nxt):
+            if ADDRESS_STOP_RE.match(nxt):
                 break
-            if contact_re.search(nxt):
+            if ADDRESS_CONTACT_RE.search(nxt):
                 break
-            if non_address_re.search(nxt):
+            if ADDRESS_NON_RE.search(nxt):
                 break
             if len(nxt.split()) <= 1:
                 break
@@ -1138,10 +1348,10 @@ def extract_address(text):
     best = None
     best_score = -1
     for i, line in enumerate(lines[:120]):
-        if stop_re.match(line) or contact_re.search(line):
+        if ADDRESS_STOP_RE.match(line) or ADDRESS_CONTACT_RE.search(line):
             continue
         # Count problematic keywords but don't auto-reject
-        bad_count = len(re.findall(non_address_re, line))
+        bad_count = len(re.findall(ADDRESS_NON_RE, line))
         if bad_count >= 3:
             continue
         
@@ -1150,7 +1360,7 @@ def extract_address(text):
             score += 3
         if ',' in line:
             score += 1
-        if hint_re.search(line):
+        if ADDRESS_HINT_RE.search(line):
             score += 3
         if 2 <= len(line.split()) <= 20:
             score += 1
@@ -1164,9 +1374,9 @@ def extract_address(text):
         parts = [line]
         for j in range(i + 1, min(i + 5, len(lines))):
             nxt = lines[j]
-            if stop_re.match(nxt) or contact_re.search(nxt):
+            if ADDRESS_STOP_RE.match(nxt) or ADDRESS_CONTACT_RE.search(nxt):
                 break
-            bad_nxt = len(re.findall(non_address_re, nxt))
+            bad_nxt = len(re.findall(ADDRESS_NON_RE, nxt))
             if bad_nxt >= 3:
                 break
             if len(nxt.split()) <= 1:
@@ -1222,6 +1432,281 @@ def normalize_skill_key(skill):
     return k
 
 
+# Generic terms that often appear in resume prose and should not be emitted as skills.
+GENERIC_SKILL_STOPWORDS = {
+    'ability', 'abilities', 'analysis', 'analytical', 'application', 'applications',
+    'assurance', 'background', 'batch', 'capability', 'capabilities', 'communication',
+    'compliance', 'control', 'coordination', 'creative', 'data', 'decision', 'delivery',
+    'design', 'development', 'documentation', 'environment', 'evaluation', 'execution',
+    'experience', 'framework', 'frameworks', 'functional', 'implementation', 'improvement',
+    'knowledge', 'leadership', 'learning', 'maintenance', 'management', 'methodology',
+    'methods', 'model', 'modeling', 'modelling', 'monitoring', 'operations', 'optimization',
+    'organizing', 'performance', 'planning', 'problem', 'process', 'processes', 'production',
+    'professional', 'project', 'projects', 'quality', 'reporting', 'research', 'responsibility',
+    'responsibilities', 'safety', 'skills', 'solution', 'solutions', 'strategy', 'support',
+    'systems', 'technical', 'technology', 'testing', 'training', 'troubleshooting', 'work',
+}
+
+# Keep essential one-word technical skills even when generic filtering is active.
+STRONG_SINGLE_WORD_SKILLS = {
+    'aws', 'azure', 'c', 'c#', 'c++', 'cad', 'css', 'excel', 'git', 'go', 'html', 'java',
+    'javascript', 'jira', 'json', 'kafka', 'kubernetes', 'linux', 'matlab', 'mongodb',
+    'mysql', 'oracle', 'php', 'postgresql', 'powerbi', 'powershell', 'python', 'sap',
+    'selenium', 'snowflake', 'sql', 'tableau', 'terraform', 'typescript', 'unix', 'xml', 'yaml',
+}
+
+ATS_CATEGORY_ORDER = [
+    'Programming Languages',
+    'Frameworks & Libraries',
+    'Web Technologies',
+    'Databases',
+    'Cloud & DevOps',
+    'Tools & Platforms',
+    'Testing & QA',
+    'Operating Systems',
+    'Methodologies',
+]
+
+ROLE_CATEGORY_PRIORITY = {
+    'general': ATS_CATEGORY_ORDER,
+    'fullstack': [
+        'Programming Languages',
+        'Frameworks & Libraries',
+        'Web Technologies',
+        'Databases',
+        'Cloud & DevOps',
+        'Tools & Platforms',
+        'Testing & QA',
+        'Operating Systems',
+        'Methodologies',
+    ],
+    'backend': [
+        'Programming Languages',
+        'Frameworks & Libraries',
+        'Databases',
+        'Web Technologies',
+        'Cloud & DevOps',
+        'Tools & Platforms',
+        'Testing & QA',
+        'Operating Systems',
+        'Methodologies',
+    ],
+    'analyst': [
+        'Databases',
+        'Tools & Platforms',
+        'Testing & QA',
+        'Methodologies',
+        'Programming Languages',
+        'Web Technologies',
+        'Cloud & DevOps',
+        'Frameworks & Libraries',
+        'Operating Systems',
+    ],
+}
+
+SKILL_CANONICAL_MAP = {
+    'java script': 'JavaScript',
+    'javascript': 'JavaScript',
+    'node js': 'Node.js',
+    'nodejs': 'Node.js',
+    'node.js': 'Node.js',
+    'reactjs': 'React',
+    'angularjs': 'AngularJS',
+    'html': 'HTML5',
+    'css': 'CSS3',
+    'rest': 'REST APIs',
+    'restful': 'REST APIs',
+    'rest api': 'REST APIs',
+    'rest apis': 'REST APIs',
+    'micro services': 'Microservices',
+    'microservice': 'Microservices',
+    'api': 'APIs',
+    'apis': 'APIs',
+    'ci/cd': 'CI/CD',
+    'cicd': 'CI/CD',
+    'k8s': 'Kubernetes',
+    'postgres': 'PostgreSQL',
+    'postgresql': 'PostgreSQL',
+    'ms sql': 'SQL Server',
+    'mssql': 'SQL Server',
+    'qa': 'Quality Assurance',
+    'junit': 'JUnit',
+}
+
+NOISY_SKILL_TERMS = {
+    'analyze', 'automation', 'backend', 'business', 'case', 'client', 'coding',
+    'collection', 'configure', 'configuration', 'controller', 'controllers', 'cycle',
+    'database', 'databases', 'deploy', 'deployment', 'develop', 'developers',
+    'designing', 'discovery', 'innovative', 'presentation', 'programming', 'routing',
+    'scripting', 'server', 'software', 'time', 'usability', 'validation', 'writing',
+    'analytics', 'architectural', 'architecture', 'asset', 'authentication', 'authorization',
+    'branding', 'certification', 'certified', 'claims', 'collaboration', 'communications',
+    'coordinate', 'crm', 'customer', 'customers', 'dashboards', 'electronic', 'electronics',
+    'feedback', 'financial', 'grooming', 'human', 'intelligence', 'kanban', 'lean',
+    'legal', 'nosql', 'patient', 'policy', 'portfolio', 'priorities', 'protocol', 'retail',
+    'security', 'visual', 'workflow', 'accuracy',
+}
+
+
+def _pretty_skill_name(skill):
+    """Normalize common variants into ATS-friendly canonical skill names."""
+    if not skill:
+        return ''
+    raw = re.sub(r'[`\"\']', '', skill).strip()
+    raw = re.sub(r'\s+', ' ', raw)
+    key = raw.lower()
+    key = re.sub(r'[^a-z0-9+#./\s-]', '', key)
+    key = re.sub(r'\s+', ' ', key).strip()
+    if key in SKILL_CANONICAL_MAP:
+        return SKILL_CANONICAL_MAP[key]
+
+    explicit = {
+        'aws': 'AWS', 'azure': 'Azure', 'sql': 'SQL', 'xml': 'XML', 'json': 'JSON',
+        'yaml': 'YAML', 'jira': 'Jira', 'git': 'Git', 'github': 'GitHub',
+        'linux': 'Linux', 'unix': 'Unix', 'oracle': 'Oracle', 'mysql': 'MySQL',
+        'mongodb': 'MongoDB', 'jenkins': 'Jenkins', 'docker': 'Docker',
+        'kubernetes': 'Kubernetes', 'selenium': 'Selenium', 'python': 'Python',
+        'java': 'Java', 'golang': 'Go', 'go': 'Go', 'apache': 'Apache',
+        'jquery': 'jQuery', 'tableau': 'Tableau', 'confluence': 'Confluence',
+        'sharepoint': 'SharePoint', 'powershell': 'PowerShell', 'hadoop': 'Hadoop',
+        'iot': 'IoT', 'android': 'Android',
+    }
+    if key in explicit:
+        return explicit[key]
+
+    # Keep simple title-cased fallback for unknown terms.
+    return ' '.join(part.capitalize() for part in raw.split())
+
+
+def _is_noise_skill_for_ats(skill):
+    """Filter generic/non-technical tokens before ATS section formatting."""
+    if not skill:
+        return True
+    normalized = normalize_skill_key(skill)
+    if not normalized:
+        return True
+    if normalized in STRONG_SINGLE_WORD_SKILLS:
+        return False
+    if normalized in NOISY_SKILL_TERMS:
+        return True
+    if normalized in BLACKLIST:
+        return True
+    if _is_weak_generic_skill(skill):
+        return True
+    return False
+
+
+def _categorize_skill_ats(pretty_skill):
+    """Map canonical skill names to ATS categories."""
+    s = pretty_skill.lower()
+
+    if s in {'java', 'python', 'javascript', 'sql', 'go', 'c', 'c#', 'c++', 'php', 'typescript'}:
+        return 'Programming Languages'
+    if s in {'spring', 'spring boot', 'hibernate', 'django', 'flask', 'react', 'angular', 'angularjs', 'node.js', 'microservices', 'jquery', 'apache'}:
+        return 'Frameworks & Libraries'
+    if s in {'html5', 'css3', 'ajax', 'rest apis', 'apis', 'json', 'xml', 'yaml', 'soap'}:
+        return 'Web Technologies'
+    if s in {'oracle', 'mysql', 'mongodb', 'postgresql', 'sql server', 'db2', 'dynamodb', 'cassandra'}:
+        return 'Databases'
+    if s in {'aws', 'azure', 'docker', 'kubernetes', 'jenkins', 'ci/cd', 'terraform'}:
+        return 'Cloud & DevOps'
+    if s in {'git', 'github', 'jira', 'confluence', 'sharepoint', 'tableau', 'postman', 'powerbi', 'hadoop', 'iot'}:
+        return 'Tools & Platforms'
+    if s in {'selenium', 'junit', 'quality assurance', 'test automation', 'postman'}:
+        return 'Testing & QA'
+    if s in {'linux', 'unix', 'windows', 'android', 'macos'}:
+        return 'Operating Systems'
+    if s in {'agile', 'scrum', 'kanban', 'sdlc', 'lean', 'waterfall'}:
+        return 'Methodologies'
+
+    return 'Tools & Platforms'
+
+
+def build_ats_skills_section(skills, role='general'):
+    """Create a concise ATS-friendly skills section grouped by category."""
+    role = (role or 'general').strip().lower()
+    if role not in ROLE_CATEGORY_PRIORITY:
+        role = 'general'
+
+    categorized = {cat: [] for cat in ATS_CATEGORY_ORDER}
+    seen = set()
+    for skill in skills or []:
+        if _is_noise_skill_for_ats(skill):
+            continue
+        pretty = _pretty_skill_name(skill)
+        key = normalize_skill_key(pretty)
+        if not pretty or not key or key in seen:
+            continue
+        seen.add(key)
+        cat = _categorize_skill_ats(pretty)
+        if pretty not in categorized[cat]:
+            categorized[cat].append(pretty)
+
+    lines = ['Technical Skills']
+    total_lines = 1
+    for category in ROLE_CATEGORY_PRIORITY[role]:
+        values = categorized.get(category, [])[:8]
+        if not values:
+            continue
+        lines.append(f"- {category}: {', '.join(values)}")
+        total_lines += 1
+        if total_lines >= 10:
+            break
+
+    return '\n'.join(lines)
+
+SKILL_SECTION_HEADER_RE = re.compile(
+    r'(?i)\b('
+    r'technical\s+skills?|core\s+skills?|key\s+skills?|skills?\s*&\s*technolog(?:y|ies)|'
+    r'skills?\s*&\s*tools?|core\s+competenc(?:y|ies)|areas?\s+of\s+(?:expertise|excellence)|'
+    r'technical\s+specifications?|competencies?|technolog(?:y|ies)|tools?|software|'
+    r'expertise|proficien(?:cy|cies)|frameworks?|languages?|certifications?'
+    r')\b'
+)
+
+NON_SKILL_SECTION_HEADER_RE = re.compile(
+    r'(?i)^\s*(?:'
+    r'professional\s+summary|summary|profile|career\s+objective|objective|'
+    r'work\s+experience|professional\s+experience|experience|employment\s+history|'
+    r'education|academic\s+qualification(?:s)?|projects?|internships?|'
+    r'personal\s+details?|contact|declaration|references?|hobbies|interests?|'
+    r'achievements?|awards?|publications?'
+    r')\b'
+)
+
+
+def _is_weak_generic_skill(skill):
+    """Return True when a skill token is too generic for reliable extraction."""
+    if not skill:
+        return True
+
+    normalized = normalize_skill_key(skill)
+    if not normalized:
+        return True
+
+    if normalized in STRONG_SINGLE_WORD_SKILLS:
+        return False
+
+    if normalized in GENERIC_SKILL_STOPWORDS:
+        return True
+
+    words = re.findall(r'[A-Za-z0-9+#]+', skill.lower())
+    if not words:
+        return True
+
+    # Most false positives are single generic words from resume narrative text.
+    if len(words) == 1:
+        w = words[0]
+        if w in STRONG_SINGLE_WORD_SKILLS:
+            return False
+        if w in GENERIC_SKILL_STOPWORDS or w in BLACKLIST:
+            return True
+        if len(w) <= 2:
+            return True
+
+    return False
+
+
 def load_skills_from_csv(csv_path):
     """
     Load skills from CSV.
@@ -1239,7 +1724,7 @@ def load_skills_from_csv(csv_path):
     invalid_count = 0
 
     if not os.path.exists(csv_path):
-        print(f"⚠️  Skills CSV not found: {csv_path}")
+        print(f"[!] Skills CSV not found: {csv_path}")
         return skills
 
     with open(csv_path, mode='r', encoding='utf-8', errors='ignore', newline='') as f:
@@ -1280,12 +1765,29 @@ def load_skills_from_csv(csv_path):
                         skills.append(skill)
 
     if invalid_count > 0:
-        print(f"⚠️  Filtered out {invalid_count} invalid skill entries from CSV")
+        print(f"[!] Filtered out {invalid_count} invalid skill entries from CSV")
 
     return skills
 
 
-def extract_skills_from_resume(text, skills_list):
+def build_skill_matchers(skills_list):
+    """Precompile skill regex patterns once for faster CSV matching across many resumes."""
+    matchers = []
+    seen = set()
+    for skill in skills_list or []:
+        if not skill or _is_weak_generic_skill(skill):
+            continue
+        key = normalize_skill_key(skill)
+        if not key or key in seen:
+            continue
+        escaped = re.escape(skill.strip()).replace(r'\ ', r'\s+')
+        pattern = re.compile(rf'(?<![A-Za-z0-9]){escaped}(?![A-Za-z0-9])', re.IGNORECASE)
+        seen.add(key)
+        matchers.append((key, skill, pattern))
+    return matchers
+
+
+def extract_skills_from_resume(text, skills_list, compiled_skill_matchers=None):
     """
     Return every skill from skills_list that appears in the resume text.
     Uses whole-word / alphanumeric-boundary matching (case-insensitive).
@@ -1293,26 +1795,283 @@ def extract_skills_from_resume(text, skills_list):
     if not text or not skills_list:
         return []
 
-    normalized_text = normalize_compact_text(text)
+    section_text, has_section = _extract_skill_section_text(text)
+    normalized_text = section_text if has_section else normalize_compact_text(text)
     matched_skills = []
     seen = set()
 
-    for skill in skills_list:
-        if not skill:
-            continue
-        escaped = re.escape(skill.strip())
-        escaped = escaped.replace(r'\ ', r'\s+')
-        pattern = re.compile(
-            rf'(?<![A-Za-z0-9]){escaped}(?![A-Za-z0-9])',
-            re.IGNORECASE
-        )
-        if pattern.search(normalized_text):
-            key = normalize_skill_key(skill)
-            if key and key not in seen:
+    if compiled_skill_matchers:
+        for key, skill, pattern in compiled_skill_matchers:
+            if key in seen:
+                continue
+            if pattern.search(normalized_text):
                 seen.add(key)
                 matched_skills.append(skill)
+    else:
+        for skill in skills_list:
+            if not skill:
+                continue
+            if _is_weak_generic_skill(skill):
+                continue
+            escaped = re.escape(skill.strip())
+            escaped = escaped.replace(r'\ ', r'\s+')
+            pattern = re.compile(
+                rf'(?<![A-Za-z0-9]){escaped}(?![A-Za-z0-9])',
+                re.IGNORECASE
+            )
+            if pattern.search(normalized_text):
+                key = normalize_skill_key(skill)
+                if key and key not in seen:
+                    seen.add(key)
+                    matched_skills.append(skill)
 
-    return matched_skills
+    # Remove single-token skills that are subsets of a longer matched phrase.
+    multi_token_sets = [
+        frozenset(re.findall(r'[a-z0-9+#]+', s.lower()))
+        for s in matched_skills
+        if len(re.findall(r'[a-z0-9+#]+', s.lower())) > 1
+    ]
+    filtered = []
+    for skill in matched_skills:
+        tokens = re.findall(r'[a-z0-9+#]+', skill.lower())
+        if len(tokens) <= 1:
+            tok_set = frozenset(tokens)
+            if any(tok_set.issubset(ms) for ms in multi_token_sets):
+                continue
+        filtered.append(skill)
+    return filtered
+
+
+def _extract_skill_text_from_skillner_item(item):
+    if isinstance(item, str):
+        return item
+    if not isinstance(item, dict):
+        return None
+
+    for key in ('doc_node_value', 'skill_name', 'skill', 'name', 'matched_text'):
+        value = item.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+
+    doc_node = item.get('doc_node')
+    if isinstance(doc_node, str) and doc_node.strip():
+        return doc_node.strip()
+
+    return None
+
+
+def _normalize_header_candidate(line):
+    """Normalize extracted PDF lines before section-header checks."""
+    if not line:
+        return ''
+    line = re.sub(r'\s+', ' ', line).strip()
+    line = re.sub(r'^[\W_]+', '', line)
+    line = re.sub(r'[\W_]+$', '', line)
+    return line.strip()
+
+
+def _is_probable_skill_header(line):
+    """Heuristic: detect true skill section headers, avoid body-line false positives."""
+    candidate = _normalize_header_candidate(line)
+    if not candidate:
+        return False
+
+    lower = candidate.lower()
+    if not SKILL_SECTION_HEADER_RE.search(lower):
+        return False
+
+    # Ignore noisy lines that usually come from body prose or contact blocks.
+    if re.search(r'[@]|https?://|\b(?:email|phone|mobile|contact)\b', lower):
+        return False
+
+    strong_header_phrases = re.compile(
+        r'(?i)\b(?:'
+        r'technical\s+skills?|skills?\s*&\s*technolog(?:y|ies)|skills?\s*&\s*tools?|'
+        r'core\s+competenc(?:y|ies)|areas?\s+of\s+(?:expertise|excellence)|'
+        r'technical\s+specifications?'
+        r')\b'
+    )
+    if strong_header_phrases.search(lower):
+        return True
+
+    words = re.findall(r'[A-Za-z0-9+#&/.-]+', candidate)
+    if len(words) <= 8 and (candidate.endswith(':') or candidate.isupper()):
+        return True
+
+    # Accept short title-like headers such as "Skills" or "Technologies".
+    if len(words) <= 4:
+        return True
+
+    return False
+
+
+def _is_probable_non_skill_header(line):
+    """Heuristic: detect section transitions out of skills areas."""
+    candidate = _normalize_header_candidate(line)
+    if not candidate:
+        return False
+
+    lower = candidate.lower()
+    if _is_probable_skill_header(candidate):
+        return False
+
+    if NON_SKILL_SECTION_HEADER_RE.search(lower):
+        words = re.findall(r'[A-Za-z0-9+#&/.-]+', candidate)
+        return len(words) <= 10 or candidate.endswith(':')
+
+    return False
+
+
+def _extract_skill_section_text(text):
+    """Extract only skill-section content when a skills header exists."""
+    if not text:
+        return '', False
+
+    normalized = normalize_compact_text(text)
+    lines = [re.sub(r'\s+', ' ', ln).strip() for ln in normalized.splitlines() if ln.strip()]
+    if not lines:
+        return '', False
+
+    selected = []
+    in_skill_block = False
+    block_budget = 0
+    found_header = False
+    max_lines_per_block = 140
+
+    for line in lines:
+        lower = line.lower()
+
+        if _is_probable_skill_header(line):
+            in_skill_block = True
+            found_header = True
+            block_budget = max_lines_per_block
+            selected.append(line)
+            continue
+
+        if in_skill_block:
+            if _is_probable_non_skill_header(line):
+                in_skill_block = False
+                block_budget = 0
+                continue
+
+            if re.search(r'[@]|https?://|\b(?:phone|mobile|email|contact)\b', lower):
+                continue
+
+            selected.append(line)
+            block_budget -= 1
+            if block_budget <= 0:
+                in_skill_block = False
+
+    return ('\n'.join(selected), found_header and len(selected) > 1)
+
+
+def _build_fast_skillner_text(text):
+    """Return a reduced text focused on skill-heavy sections for faster SkillNer runs."""
+    if not text:
+        return ''
+
+    section_text, has_section = _extract_skill_section_text(text)
+    if has_section:
+        return section_text[:SKILLNER_MAX_TEXT_CHARS]
+
+    normalized = normalize_compact_text(text)
+
+    # Fallback: keep top part if no explicit skill section was detected.
+    return normalized[:SKILLNER_MAX_TEXT_CHARS]
+
+
+def extract_skills_from_dataset(text):
+    """Extract skills using SkillNer dataset pipeline."""
+    if not text:
+        return []
+    
+    # Lazy-load SkillNer on first use
+    if not _ensure_skillner_loaded():
+        return []
+
+    section_text, has_section = _extract_skill_section_text(text)
+    if has_section:
+        text_for_skillner = section_text
+    else:
+        text_for_skillner = _build_fast_skillner_text(text) if FAST_SKILLNER_MODE else text
+
+    try:
+        result = skill_extractor.annotate(text_for_skillner)
+    except Exception:
+        return []
+
+    results = result.get('results', {}) if isinstance(result, dict) else {}
+    candidates = []
+    seen = set()
+
+    for bucket in ('full_matches', 'ngram_scored'):
+        for item in results.get(bucket, []) or []:
+            skill_text = _extract_skill_text_from_skillner_item(item)
+            if not skill_text:
+                continue
+            skill_text = re.sub(r'\s+', ' ', skill_text).strip(" \t\r\n\"'")
+            if not skill_text:
+                continue
+            if _is_weak_generic_skill(skill_text):
+                continue
+            key = normalize_skill_key(skill_text)
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            candidates.append(skill_text)
+
+    return candidates
+
+
+def _extract_resume_record(fname, process_folder, skill_source, skills_list, compiled_skill_matchers=None, role='general', fast_response=False):
+    """Extract all fields for a single resume file."""
+    path = os.path.join(process_folder, fname)
+    try:
+        text = extract_text(path)
+        name = extract_name(text)
+        contact_number = extract_contact_number(text)
+        email = extract_email_from_resume(text)
+        if fast_response:
+            gender = None
+            address = None
+        else:
+            gender = extract_gender(text, name=name)
+            address = extract_address(text)
+
+        if skill_source == 'dataset':
+            matched_skills = extract_skills_from_dataset(text)
+        elif skill_source == 'csv':
+            matched_skills = extract_skills_from_resume(text, skills_list, compiled_skill_matchers)
+        else:
+            # CSV matching is much faster; use it first, then fallback to dataset extraction.
+            matched_skills = extract_skills_from_resume(text, skills_list, compiled_skill_matchers)
+            if not matched_skills:
+                matched_skills = extract_skills_from_dataset(text)
+
+        ats_skills_section = build_ats_skills_section(matched_skills, role=role)
+
+        return {
+            'file': fname,
+            'name': name,
+            'contact_number': contact_number,
+            'email': email,
+            'gender': gender,
+            'address': address,
+            'skills': matched_skills,
+            'skills_section': ats_skills_section,
+        }
+    except Exception as exc:
+        return {
+            'file': fname,
+            'name': None,
+            'contact_number': None,
+            'email': None,
+            'gender': None,
+            'address': None,
+            'skills': [],
+            'skills_section': 'Technical Skills',
+            'error': str(exc),
+        }
 
 
 # ══════════════════════════════════════════════════════════════
@@ -1323,36 +2082,59 @@ def extract_skills_from_resume(text, skills_list):
 # ══════════════════════════════════════════════════════════════
 if __name__ == '__main__':
 
+    (
+        PROCESS_FOLDER,
+        disable_validation,
+        skill_source,
+        max_workers,
+        max_files,
+        random_order,
+        random_seed,
+        role_target,
+        fast_response_mode,
+    ) = _resolve_process_folder()
+    runtime_validation_enabled = ENABLE_VALIDATION and not disable_validation
+    if fast_response_mode:
+        runtime_validation_enabled = False
+
     # ── Import validation module ──────────────────────────────
     try:
-        if ENABLE_VALIDATION:
+        if runtime_validation_enabled:
             from validation import ResumeValidator, print_validation_report
             validator = ResumeValidator()
         else:
             validator = None
     except ImportError:
-        print("⚠️  validation module not found. Running without accuracy checking.")
+        print("[!] validation module not found. Running without accuracy checking.")
         validator = None
     
     # ── Setup logging ─────────────────────────────────────────
     os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
     log_messages = []
     
+    _stdout_buffer = getattr(sys.stdout, 'buffer', None)
     def log_message(msg):
-        """Log to both console and file."""
-        print(msg)
+        try:
+            print(msg)
+        except UnicodeEncodeError:
+            _stdout_buffer.write(msg.encode('utf-8') + b'\n')
         log_messages.append(msg)
     
-    # ── Load skills ───────────────────────────────────────────
-    skills_list = load_skills_from_csv(SKILLS_CSV)
-    results = []
+    # ── Load skills (optional CSV path) ───────────────────────
+    skills_list = []
+    if skill_source in {'csv', 'auto'}:
+        skills_list = load_skills_from_csv(SKILLS_CSV)
+    compiled_skill_matchers = build_skill_matchers(skills_list)
 
-    # Set the folder path for resumes - can be changed here
-    PROCESS_FOLDER = "D:\\Ktas Project\\ATS\\ATS Email Parser\\pending resume"
-    
-    # If folder doesn't exist, use default
-    if not os.path.isdir(PROCESS_FOLDER):
-        PROCESS_FOLDER = RESUME_FOLDER
+    # Pre-load heavy models only when they are likely to be used.
+    if skill_source == 'dataset' or (skill_source == 'auto' and not compiled_skill_matchers):
+        _ensure_skillner_loaded()
+    if not fast_response_mode:
+        _ensure_names_dataset_loaded()
+
+    if fast_response_mode and skill_source == 'auto' and compiled_skill_matchers:
+        skill_source = 'csv'
+    results = []
 
     # ── Discover resume files ─────────────────────────────────
     if not os.path.isdir(PROCESS_FOLDER):
@@ -1365,12 +2147,35 @@ if __name__ == '__main__':
         key=natural_file_sort_key
     )
 
+    if max_files > 0 and len(resume_files) > max_files:
+        if random_order:
+            rng = random.Random(random_seed)
+            resume_files = rng.sample(resume_files, max_files)
+        else:
+            resume_files = resume_files[:max_files]
+
     if not resume_files:
         log_message(f"❌ No supported files (.pdf, .doc, .docx) found in: {PROCESS_FOLDER}")
         raise SystemExit(1)
 
-    log_message(f"📄 Loaded {len(skills_list)} skills from: {SKILLS_CSV}")
-    log_message(f"📂 Processing {len(resume_files)} resume file(s) from: {PROCESS_FOLDER}\n")
+    if skill_source == 'dataset':
+        log_message(f"[*] Skill source: dataset (SkillNer) - available={SKILLNER_AVAILABLE}")
+    elif skill_source == 'csv':
+        log_message(f"[*] Skill source: csv ({len(skills_list)} loaded from {SKILLS_CSV})")
+    else:
+        log_message(
+            f"[*] Skill source: auto (dataset first, csv fallback={len(skills_list)} from {SKILLS_CSV})"
+        )
+    log_message(f"[*] Processing {len(resume_files)} resume file(s) from: {PROCESS_FOLDER}")
+    log_message(f"[*] Workers: {max_workers}\n")
+    if max_files > 0:
+        mode = "random sample" if random_order else "first files"
+        log_message(f"[*] Limit enabled: {len(resume_files)} file(s), mode={mode}, seed={random_seed}")
+    log_message(f"[*] Role target for ATS skill section: {role_target}")
+    if fast_response_mode:
+        log_message("[*] Fast-response mode: ON (validation off, gender/address skipped, csv-preferred in auto)")
+    if disable_validation:
+        log_message("[INFO] Validation disabled via --no-validation")
 
     col_w = {'#': 4, 'file': 22, 'name': 30, 'phone': 14, 'gender': 8, 'email': 38}
     header = (
@@ -1395,84 +2200,117 @@ if __name__ == '__main__':
         'skills_found': 0,
     }
 
-    for i, fname in enumerate(resume_files, 1):
-        path = os.path.join(PROCESS_FOLDER, fname)
-        extraction_error = None
-        
-        try:
-            # Extract all data
-            text            = extract_text(path)
-            name            = extract_name(text)
-            contact_number  = extract_contact_number(text)
-            email           = extract_email_from_resume(text)
-            gender          = extract_gender(text, name=name)
-            address         = extract_address(text)
-            matched_skills  = extract_skills_from_resume(text, skills_list)
+    def _log_record(i, record):
+        fname = record.get('file', '')
+        name = record.get('name')
+        contact_number = record.get('contact_number')
+        gender = record.get('gender')
+        email = record.get('email')
+        address = record.get('address')
+        matched_skills = record.get('skills') or []
 
-            results.append({
-                'file'          : fname,
-                'name'          : name,
-                'contact_number': contact_number,
-                'email'         : email,
-                'gender'        : gender,
-                'address'       : address,
-                'skills'        : matched_skills,
-            })
+        name_col = (name or '❌ NOT FOUND')[:col_w['name'] - 1]
+        phone_col = (contact_number or '❌ NOT FOUND')[:col_w['phone'] - 1]
+        gender_col = (gender or '❌ N/A')[:col_w['gender'] - 1]
+        email_col = email or '❌ NOT FOUND'
 
-            # Update statistics
-            stats['successful'] += 1
-            if not name:
-                stats['missing_name'] += 1
-            if not email:
-                stats['missing_email'] += 1
-            if not contact_number:
-                stats['missing_phone'] += 1
-            if matched_skills:
-                stats['skills_found'] += 1
+        log_message(
+            f"  {i:<{col_w['#']}} "
+            f"{fname:<{col_w['file']}} "
+            f"{name_col:<{col_w['name']}} "
+            f"{phone_col:<{col_w['phone']}} "
+            f"{gender_col:<{col_w['gender']}} "
+            f"{email_col}"
+        )
 
-            # Format output with validation indicators
-            name_col  = (name or '❌ NOT FOUND')[:col_w['name']-1]
-            phone_col = (contact_number or '❌ NOT FOUND')[:col_w['phone']-1]
-            gender_col = (gender or '❌ N/A')[:col_w['gender']-1]
-            email_col = email or '❌ NOT FOUND'
-            
-            log_message(
-                f"  {i:<{col_w['#']}} "
-                f"{fname:<{col_w['file']}} "
-                f"{name_col:<{col_w['name']}} "
-                f"{phone_col:<{col_w['phone']}} "
-                f"{gender_col:<{col_w['gender']}} "
-                f"{email_col}"
+        if address:
+            log_message(f"       Address: {address[:60]}...")
+        else:
+            log_message("       Address: ❌ NOT FOUND")
+
+        if matched_skills:
+            preview = ', '.join(matched_skills[:8])
+            if len(matched_skills) > 8:
+                preview += f"  (+{len(matched_skills) - 8} more)"
+            log_message(f"       Skills [{len(matched_skills)}]: {preview}")
+        else:
+            log_message("       Skills: ❌ NOT FOUND")
+
+    indexed_files = list(enumerate(resume_files, 1))
+    if max_workers <= 1:
+        for i, fname in indexed_files:
+            record = _extract_resume_record(
+                fname,
+                PROCESS_FOLDER,
+                skill_source,
+                skills_list,
+                compiled_skill_matchers,
+                role_target,
+                fast_response_mode,
             )
+            results.append(record)
+            if record.get('error'):
+                stats['errors'] += 1
+                log_message(f"  {i:<{col_w['#']}} {fname:<{col_w['file']}} ❌ Error: {record['error']}")
+                continue
 
-            # Print address and skills on separate lines
-            if address:
-                log_message(f"       Address: {address[:60]}...")
-            else:
-                log_message("       Address: ❌ NOT FOUND")
+            stats['successful'] += 1
+            if not record.get('name'):
+                stats['missing_name'] += 1
+            if not record.get('email'):
+                stats['missing_email'] += 1
+            if not record.get('contact_number'):
+                stats['missing_phone'] += 1
+            if record.get('skills'):
+                stats['skills_found'] += 1
+            _log_record(i, record)
+    else:
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_meta = {
+                executor.submit(
+                    _extract_resume_record,
+                    fname,
+                    PROCESS_FOLDER,
+                    skill_source,
+                    skills_list,
+                    compiled_skill_matchers,
+                    role_target,
+                    fast_response_mode,
+                ): (i, fname)
+                for i, fname in indexed_files
+            }
+            for future in as_completed(future_to_meta):
+                i, fname = future_to_meta[future]
+                try:
+                    record = future.result()
+                except Exception as exc:
+                    record = {
+                        'file': fname,
+                        'name': None,
+                        'contact_number': None,
+                        'email': None,
+                        'gender': None,
+                        'address': None,
+                        'skills': [],
+                        'error': str(exc),
+                    }
 
-            if matched_skills:
-                preview = ', '.join(matched_skills[:8])
-                if len(matched_skills) > 8:
-                    preview += f"  (+{len(matched_skills) - 8} more)"
-                log_message(f"       Skills [{len(matched_skills)}]: {preview}")
-            else:
-                log_message("       Skills: ❌ NOT FOUND")
+                results.append(record)
+                if record.get('error'):
+                    stats['errors'] += 1
+                    log_message(f"  {i:<{col_w['#']}} {fname:<{col_w['file']}} ❌ Error: {record['error']}")
+                    continue
 
-        except Exception as exc:
-            stats['errors'] += 1
-            extraction_error = str(exc)
-            results.append({
-                'file'          : fname,
-                'name'          : None,
-                'contact_number': None,
-                'email'         : None,
-                'gender'        : None,
-                'address'       : None,
-                'skills'        : [],
-                'error'         : extraction_error,
-            })
-            log_message(f"  {i:<{col_w['#']}} {fname:<{col_w['file']}} ❌ Error: {exc}")
+                stats['successful'] += 1
+                if not record.get('name'):
+                    stats['missing_name'] += 1
+                if not record.get('email'):
+                    stats['missing_email'] += 1
+                if not record.get('contact_number'):
+                    stats['missing_phone'] += 1
+                if record.get('skills'):
+                    stats['skills_found'] += 1
+                _log_record(i, record)
 
     # ── Validation & Reports ──────────────────────────────────
     validation_summary = None

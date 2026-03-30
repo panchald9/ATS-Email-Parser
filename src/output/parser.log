@@ -1,162 +1,296 @@
-📄 Loaded 682 skills from: D:\Ktas Project\ATS\ATS Email Parser\src\Skill.csv
-📂 Processing 51 resume file(s) from: D:\Ktas Project\ATS\ATS Email Parser\pending resume
+[*] Skill source: auto (dataset first, csv fallback=682 from D:\Ktas Project\ATS\ATS Email Parser\src\Skill.csv)
+[*] Processing 92 resume file(s) from: D:\Ktas Project\ATS\ATS Email Parser\Resume
+[*] Workers: 8
 
+[INFO] Validation disabled via --no-validation
 #    File                   Name                           Phone          Gender   Email
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-  1    1.pdf                  ❌ NOT FOUND                    ❌ NOT FOUND    ❌ N/A    ❌ NOT FOUND
+  6    8.pdf                  Dharmil Nareshkumar Shah       +17828827014   Male     work.dharmil@gmail.com
+       Address: Gujarat Technological University...
+       Skills [39]: agile, algorithms, alignment, analytics, api, apis, architecture, automated  (+31 more)
+  3    4.pdf                  Vishal Bansilal Sonawane       9552807753     Male     sonawanevishal1449@gmail.com
+       Address: At Post Sonewadi, Tal-Shindkheda. Dist. Dhule Maharashtra 42...
+       Skills [1]: creativity
+  5    7.docx                 Ranjan Kumar Verma             ❌ NOT FOUND    Male     ❌ NOT FOUND
+       Address: Larsen & Toubro Infotech Ltd (South Africa and India) [Sep 2...
+       Skills [46]: acquisition, agile, analyze, business, case, certification, certifications, certified  (+38 more)
+  4    6.docx                 Randy Adams                    ❌ NOT FOUND    Male     randyadams526@yahoo.com
+       Address: 1750 Montgomery Street, San Francisco, California, 94111...
+       Skills [71]: administration, agile, ajax, algorithm, apache, api, apis, architecture  (+63 more)
+  9    11.docx                Ravi Pattar                    7323999510     Female   prasanna@intellyk.com
+       Address: ‘‘Most Significant Contributor’ (For EP 3 R 1.1 release) awa...
+       Skills [42]: absence, agile, apache, backlog, business, catering, certification, certifications  (+34 more)
+  2    3.docx                 Ramteja Motupalli              ❌ NOT FOUND    Male     ❌ NOT FOUND
+       Address: (September 2017 – Current), BroadSoft Inc. worked as Busines...
+       Skills [59]: lean, accuracy, agile, analytics, architecture, backlog, business, certifications  (+51 more)
+  8    10.docx                Rashmithareddy                 4694434710     Male     rashmitha.java134@gmail.com
+       Address: Passing year - 2009...
+       Skills [67]: agile, ajax, ambulatory, apache, api, architecture, assessments, backend  (+59 more)
+  10   12.docx                Ravi Reddy                     4025000041     Female   rvk.reddy240@gmail.com
+       Address: Installed, Configured Cognos 8.4/10 and Talend ETL on single...
+       Skills [70]: administer, administration, agile, ajax, apache, api, apis, architect  (+62 more)
+  13   15.docx                Mehul Panchal                  6466109085     Male     panchalprofessional@gmail.com
+       Address: New York City, NY, Green Card...
+       Skills [33]: accuracy, agile, assessment, automated, backend, bpm, business, case  (+25 more)
+  12   14.docx                Ravikumar Tirumalaraju         7342592421     Male     gopal@infoservicesllc.com
+       Address: Andhra University, Visakhapatnam, AP, India...
+       Skills [64]: administration, administrative, administrator, agile, analytics, apache, architect, architecture  (+56 more)
+  11   13.docx                ❌ NOT FOUND                    +14256159090   ❌ N/A    rpgoudburra@gmail.com
+       Address: An Innovative and passionate Sr. Manager in Automation with ...
+       Skills [60]: accomplishment, accomplishments, administration, agile, algorithms, apache, api, architect  (+52 more)
+  16   18.docx                Kethana Y                      2145016784     Female   ajay@appsboat.com
        Address: ❌ NOT FOUND
-       Skills: ❌ NOT FOUND
-  2    2.pdf                  Mayurcn                        9850828043     Male     mayurcn13@gmail.com
-       Address: MAYUR NAGAR, 9 Mumbai 401209...
-       Skills [17]: advertising, bachelor, customer, finance, marketing, performance, research, retail  (+9 more)
-  3    3.pdf                  Organic Chemistry              8238921564     ❌ N/A    mayankpl456@gmail.com
-       Address: Khanjroli, Ta: Mandvi, Dist:Surat...
-       Skills [10]: analysis, bachelor, chemicals, chemistry, data, calibration, balance, monitoring  (+2 more)
-  4    4.pdf                  Sanjay Joshi                   +918696231056  Male     sanjay9596joshi@gmail.com
-       Address: 26 Alka park Socity Vastrapur railway station road, Jivrajpa...
-       Skills [24]: aggregate, application, business, control, designing, develop, development, email  (+16 more)
-  5    5.docx                 ❌ Error: Failed to extract from 5.docx: python-docx error: Bad CRC-32 for file 'word/media/image1.jpeg'
-  6    6.docx                 Chetansinh Gohil               9265700184     Male     chetangohil88@gmail.com
-       Address: To- Devli, Opp- Union Bank, Navapara, Tal- Kodinar-362720, D...
-       Skills [44]: analysis, api, applications, assessment, assurance, business, chemicals, client  (+36 more)
-  7    7.pdf                  Application Letter             +918460539089  Male     kushwaha_govind@yahoo.com
-       Address: B-103, Sai Darshan Appartment, Krishna Colony, Muktanand Mar...
-       Skills [37]: abilities, accountable, acme, analyze, application, assurance, benchmarking, control  (+29 more)
-  8    8.pdf                  Candidate Name                 9624999100     ❌ N/A    info@qualityhr.co.in
-       Address: 21 Year 0 Month Current CTC, 18.00 LPA, Notice Period, 60 Da...
-       Skills [35]: abilities, accountable, acme, analyze, assurance, benchmarking, control, credentials  (+27 more)
-  9    9.doc                  ❌ Error: Failed to extract from 9.doc: textract not installed (pip install textract for .doc support)
-  10   10.doc                 ❌ Error: Failed to extract from 10.doc: textract not installed (pip install textract for .doc support)
-  11   11.doc                 ❌ Error: Failed to extract from 11.doc: textract not installed (pip install textract for .doc support)
-  12   12.doc                 ❌ Error: Failed to extract from 12.doc: textract not installed (pip install textract for .doc support)
-  13   13.docx                Thanking You                   08938832968    Male     pawan.prod@gmail.com
-       Address: 98/41 A/27 C Tilak Nagar...
-       Skills [19]: application, assurance, biotech, calling, documentation, email, execution, formulation  (+11 more)
-  14   14.pdf                 Ajay Kumar                     ❌ NOT FOUND    Male     ajaybhuims@gmail.com
-       Address: May 2010 – May 2016: Shri Baidyanath Ayurveda Bhavan Pvt. Lt...
-       Skills [46]: accomplishment, administration, analysis, batch, business, client, control, credentials  (+38 more)
-  15   15.pdf                 Sanjay Kumar Singh             +919318780073  Male     pro_sanjupharma@yahoo.co.in
-       Address: (WHO, GMP ISO 9001 certified), Location : Rou Indore (M.P.),...
-       Skills [37]: administrative, batch, capabilities, certified, control, credentials, critical, develop  (+29 more)
-  16   16.doc                 ❌ Error: Failed to extract from 16.doc: textract not installed (pip install textract for .doc support)
-  17   17.pdf                 Candidate Name                 9624999100     ❌ N/A    info@qualityhr.co.in
-       Address: Flat No. 303,Third floor, Jaymin appartment ,dollat nagar, D...
-       Skills [41]: lean, allocation, analysis, assessment, automated, certified, computer, coordinating  (+33 more)
-  18   18.doc                 ❌ Error: Failed to extract from 18.doc: textract not installed (pip install textract for .doc support)
-  19   19.docx                Mr. Deepak B. Gerange          9850362654     Male     gerange_deepak@yahoo.com
-       Address: Vadodara, Gujarat, 392001., Cell No: 9850362654...
-       Skills [57]: administration, allocation, analysis, assurance, batch, capabilities, compliant, control  (+49 more)
-  20   20.docx                ❌ NOT FOUND                    ❌ NOT FOUND    ❌ N/A    ❌ NOT FOUND
-       Address: Confederation of Indian Industry (CII) Kaizen Competition - ...
-       Skills [43]: lean, abilities, accurate, administering, analysis, assessment, assessments, batch  (+35 more)
-  21   21.pdf                 Dilipbhai Parmar               6352193853     Male     dp9213254@gmail.com
-       Address: Mo. 6352193853...
-       Skills [12]: analysis, chemistry, chromatography, consulting, control, creative, data, email  (+4 more)
-  22   22.pdf                 Respected Sir                  +918140131084  Male     manojnehete123@gmail.com
-       Address: 2. FROM 3 RD FEBRUARY – 2021 (PRESENT), Working in SCHOTT-KA...
-       Skills [21]: accuracy, analysis, application, assurance, chemistry, computer, control, creative  (+13 more)
-  23   23.docx                Ramapati Chaurasia             09593263041    Female   ramapati_86@yahoo.co.in
-       Address: Address : Vivek Nagar, Pratapgarh (UP), Date of Birth : 04 t...
-       Skills [45]: lean, acme, analysis, batch, capabilities, control, coordinating, coordination  (+37 more)
-  24   24.pdf                 Shubham Solanki                6264404491     Male     solankishubham261@gmail.com
-       Address: SSTPP MPPGCL dongaliya. Khandwa Madhya Pradesh 450112, Coal ...
-       Skills [23]: analysis, computer, control, controller, email, environment, machine, maintenance  (+15 more)
-  25   25.docx                ❌ NOT FOUND                    ❌ NOT FOUND    ❌ N/A    ❌ NOT FOUND
-       Address: Sr. EXECUTIVE April 2014 to April 2023...
-       Skills [31]: accurate, analysis, api, applications, arrangement, batch, biotech, coordination  (+23 more)
-  26   26.pdf                 Gajendra Kumar                 +919004223335  Male     kgajendra11@gmail.com
-       Address: Dec’95 to Jul’03: Tabuk Pharmaceutical Mfg. Co., Tabuk, Saud...
-       Skills [43]: lean, alignment, allocation, assessment, assessments, assurance, business, capabilities  (+35 more)
-  27   27.pdf                 Jay Donga                      7359930530     Male     jaydonga04@gmail.com
-       Address: 12, Krishna Apartment, Near Vijay Mandap Service, Krishna Na...
-       Skills [32]: certified, client, computer, construction, coordinating, data, design, email  (+24 more)
-  28   28.pdf                 Jayendra D Gurjar              +919099945303  Male     jayendragurjar@gmail.com
-       Address: B.E., Mechanical Engineering, 01/2015, Rajiv Gandhi Proudyog...
-       Skills [33]: allocation, analysis, api, chemical, compliant, control, coordinating, development  (+25 more)
-  29   29.pdf                 Keval Mungra                   +917777978741  Male     mungrakeval123@gmail.com
-       Address: Near Kumkum Soc, Surat, +91 7777978741...
-       Skills [10]: chemical, chemistry, computer, software, audits, compliance, laboratory, quality  (+2 more)
-  30   30.pdf                 Vivekanand Higher Secon        918000017570   Male     gujrat.meetjagani7@gmail.com
+       Skills [24]: biotech, business, cardiovascular, case, client, customer, cycle, dashboards  (+16 more)
+  7    9.docx                 Rao                            2017013757     ❌ N/A    raojavadev7@gmail.com
+       Address: Used Angular 2, TypeScript, Webpack, ES 6 Features to develo...
+       Skills [79]: administration, agile, ajax, analytics, apache, api, apis, architecture  (+71 more)
+  17   19.docx                Kashyap K. Vora                2015326397     ❌ N/A    kashyapkvora@gmail.com
+       Address: Fidelity Investments (FMR) Smithfield, RI Dec 2016 – Current...
+       Skills [101]: lean, administration, aggregate, agile, algorithms, analytics, apache, api  (+93 more)
+  14   16.docx                Reddemma Lankipalle            4846862294     Female   reddemmaqa2_hr3@indeedemail.com
+       Address: Norristown, PA 19403...
+       Skills [52]: administer, administration, administrative, agile, ajax, api, automated, backend  (+44 more)
+  18   20.docx                Santhosh Abraham               +17324235890   Male     santhoshkabraham@gmail.com
+       Address: Sr. Programmer-cum-Analyst - Midwest Imports & Exports Pte L...
+       Skills [32]: agile, architecture, backlog, business, certifications, certified, client, consulting  (+24 more)
+  15   17.docx                Kishore Kotapati               8329067001     ❌ N/A    kishore_kotapati@yahoo.com
+       Address: Masters in Computer Applications(MCA) from University of Mad...
+       Skills [22]: agile, architectural, architecture, business, calling, case, client, crm  (+14 more)
+  19   21.docx                Santhosh Abraham               +17324235890   Male     santhoshkabraham@gmail.com
+       Address: Sr. Programmer-cum-Analyst - Midwest Imports & Exports Pte L...
+       Skills [36]: agile, architecture, backlog, business, certifications, certified, client, consulting  (+28 more)
+  1    2.docx                 Manohar                        6142855486     Male     manohar.r7754@gmail.com
+       Address: AT&T Telecom, Atlanta, GA Sep’16 – Till date, Sr. Java Full ...
+       Skills [86]: administration, agile, ajax, algorithms, analytics, analyze, animation, apache  (+78 more)
+  20   22.docx                Vishal Salman                  4699209532     Male     vishalsalman@gmail.com
+       Address: 3028 1 st Ave, Seattle, WA 98121, 469 920 9532...
+       Skills [57]: accomplishment, agile, algorithms, analytics, architects, automated, business, case  (+49 more)
+  21   23.docx                Jews For Jesus                 2159801011     Male     myvt.me@gmail.com
+       Address: WEG Chicago, IL, USA July 2017 - March 2017...
+       Skills [23]: ajax, api, backend, client, coding, customers, deadline, developers  (+15 more)
+  29   31.pdf                 Sachin Yadav                   +919696728494  Male     sachinyadav969672@gmail.com
+       Address: Uttar Pradesh, Hindi, 10 th, 2016, Uttar Pradesh, Hindi...
+       Skills [4]: assessment, certification, driving, audits
+  24   26.docx                Mitali Barman                  2816577941     Female   mail-prasannak@suntechpros.com
+       Address: Client: UBS,Stamford March 2013 - April 2015, Role: Business...
+       Skills [33]: analyze, backlog, business, case, certification, client, coordinate, customers  (+25 more)
+  23   25.docx                Robinson Edward                ❌ NOT FOUND    Male     ❌ NOT FOUND
+       Address: IT World Build, US Apr 2016 to, Business Analyst, Finance & ...
+       Skills [26]: agile, backend, business, certification, certified, client, customer, cycle  (+18 more)
+  22   24.docx                Spoorti Pandit                 8327758735     Female   asmith@nichesoftsolutions.com
+       Address: Location: Mumbai, India...
+       Skills [21]: allocation, analyze, boarding, bpm, business, case, client, customer  (+13 more)
+  27   29.docx                Sunitha                        6143754373     Female   sruthi@idolsoftconsulting.com
+       Address: DURATION: May 17 to Till Date, ROLE: SR. PROJECT MANAGER...
+       Skills [32]: agile, analytics, architects, architecture, bpm, business, certifications, client  (+24 more)
+  31   33.docx                Saikrishna R Ao                ❌ NOT FOUND    Female   ❌ NOT FOUND
+       Address: Bachelors in Electronics and Communication Engineering from ...
+       Skills [39]: administration, agile, alignment, architecture, business, case, client, compensation  (+31 more)
+  28   30.docx                Sahas Datta                    3177325138     Male     sahas.kf04@gmail.com
+       Address: Data Visualization: Qlikview 11.0, 11.2, Tableau 10.1, 10.2....
+       Skills [53]: accountable, agile, analytics, analyze, architecture, benchmarking, bpm, business  (+45 more)
+  33   35.docx                Sai Kumar                      ❌ NOT FOUND    Female   tushar.k6@yahoo.com
+       Address: Fidelity Investments, South Lake, TX January 2015 to Present...
+       Skills [64]: abstract, agile, ajax, apache, api, apis, architecture, automated  (+56 more)
+  26   28.docx                ❌ NOT FOUND                    ❌ NOT FOUND    ❌ N/A    ❌ NOT FOUND
+       Address: Visa Inc. – Austin, TX October 2016 – Present...
+       Skills [40]: lean, accurate, administration, agile, allocation, analyze, architecture, backlog  (+32 more)
+  25   27.docx                Rohini                         2248012086     Female   rohanuj08@gmail.com
+       Address: Worked on Log 4 j for logging errors, messages and performan...
+       Skills [66]: administration, agile, ajax, allocation, apache, api, apis, architect  (+58 more)
+  30   32.docx                Sahiti K                       2674041719     Female   sahithi.javadev8@gmail.com
+       Address: 267- 404 -1719...
+       Skills [62]: administering, agile, ajax, apache, apis, architecture, automated, backend  (+54 more)
+  32   34.docx                Sai Srinivas                   7086696793     Female   sai.srinivas.2101@gmail.com
+       Address: Strong expertise on Amazon AWS EC 2, S 3, Kinesis and other ...
+       Skills [65]: agile, ajax, analytics, animation, apache, api, apis, architectural  (+57 more)
+  38   40.docx                Santosh Kumar                  4849990237     Male     kumar85aug@gmail.com
+       Address: Hyderabad, India, Jan 2010 to Feb 2013...
+       Skills [28]: absence, agile, analyze, architects, assessment, automated, business, case  (+20 more)
+  35   37.docx                Deepika                        5188059569     Female   chintalapatideepika@gmail.com
+       Address: 518-805-9569...
+       Skills [35]: administering, administration, administrator, agile, business, case, certifications, client  (+27 more)
+  40   42.docx                Saravana Kumar                 ❌ NOT FOUND    Female   ❌ NOT FOUND
+       Address: Certifications: PMP (#1340903), CSM (#000590649), Profession...
+       Skills [18]: agile, architecture, business, certifications, certified, client, customer, digital  (+10 more)
+  36   38.docx                Samir R. Naik                  24719150705    Male     samirrnaik2018@gmail.com
+       Address: DEUTSHE BANK, NJ August 2015 to Present...
+       Skills [47]: lean, agile, analytics, baseline, business, certification, certified, client  (+39 more)
+  37   39.docx                Samir R. Naik                  24719150705    Male     samirrnaik2018@gmail.com
+       Address: DEUTSCHE BANK, NJ August 2015 to Present...
+       Skills [49]: lean, agile, analytics, baseline, boarding, business, certification, certified  (+41 more)
+  34   36.docx                Saiteja                        +19404370150   Male     saitejaatwork@gmail.com
+       Address: +1(940)437-0150...
+       Skills [73]: accuracy, agile, ajax, apache, api, apis, architecture, assessment  (+65 more)
+  39   41.docx                Sarath Kumar                   4693249282     Male     sarathm.java@gmail.com
+       Address: M: 469-324-9282...
+       Skills [58]: abstract, agile, ajax, apache, api, architecture, automated, business  (+50 more)
+  43   45.docx                Shail Tank                     6464429382     Male     anthony.reddy@itmmi.com
+       Address: March 2011- April 2016...
+       Skills [33]: cpr, administration, animation, automated, backend, business, case, client  (+25 more)
+  45   47.docx                ❌ NOT FOUND                    ❌ NOT FOUND    ❌ N/A    ❌ NOT FOUND
+       Address: 2002 – 2010, Senior Software Engineer...
+       Skills [34]: agile, apache, certification, certified, computing, customer, customers, cycle  (+26 more)
+  47   49.docx                Shashank Tiwari                6506001785     Male     shashank.tiwari44@gmail.com
+       Address: Dorset Kaba Security System Pvt Ltd, Delhi, India, Sr. Busin...
+       Skills [25]: agile, architects, architectural, business, case, certification, crm, databases  (+17 more)
+  46   48.docx                Sharath                        +12245728262   Male     sharath1323@gmail.com
+       Address: Implemented various J 2 EE patterns like Singleton Pattern, ...
+       Skills [59]: abstract, abstraction, agile, ajax, apache, api, bundle, business  (+51 more)
+  42   44.docx                ❌ NOT FOUND                    8106207820     ❌ N/A    satishkuduta@gmail.com
+       Address: Strong expertise in development and deployment of web compon...
+       Skills [58]: administrator, agile, ajax, apache, api, architect, architecture, automated  (+50 more)
+  44   46.docx                B Shaker                       7142009052     ❌ N/A    shaker.0516@gmail.com
+       Address: Factset Research Systems, Hyderabad, India, Business Analyst...
+       Skills [62]: agile, ajax, allocation, analytics, apis, architects, architecture, atlassian  (+54 more)
+  41   43.docx                Satish Reddy                   7088311708     Male     satish.reddy.5484@gmail.com
+       Address: Deep knowledge in Angular 2., Sound skill in Swing MVC archi...
+       Skills [62]: agile, ajax, algorithms, apache, api, architects, architecture, autonomy  (+54 more)
+  48   50.docx                Shelly Woods                   2012033169     Male     shelly.woods@hrmediary.com
+       Address: (201) 203-3169...
+       Skills [46]: accurate, agile, ajax, analyze, apache, aviation, backend, case  (+38 more)
+  49   51.docx                Shiuli Mahmud                  ❌ NOT FOUND    Female   ❌ NOT FOUND
+       Address: Ph.D. in Environmental &amp; Resource Engineering (Graduated...
+       Skills [56]: lean, osha, agile, alignment, analyze, architecture, assessment, autonomy  (+48 more)
+  52   54.docx                Smita Kamble                   6303610133     Female   surya@synapsisinc.com
+       Address: State Farm Insurance, Bloomington, IL Mar 2016 – Jun 2017...
+       Skills [27]: accuracy, agile, archiving, business, certifications, certified, customers, database  (+19 more)
+  50   52.docx                Shiva G                        6825939220     ❌ N/A    shivag6600@gmail.com
+       Address: Academy Bank, Kansas City, MO, May 2016 – Present, Java Full...
+       Skills [50]: agile, ajax, algorithm, apache, api, apis, architecture, automated  (+42 more)
+  55   58.docx                Reshma                         9087915644     Female   kr.reshma023@gmail.com
+       Address: (908) 791-5644...
+       Skills [41]: accurate, administrative, agile, analytics, analyze, apparel, assessment, automated  (+33 more)
+  56   59.docx                ❌ NOT FOUND                    ❌ NOT FOUND    ❌ N/A    ❌ NOT FOUND
+       Address: Synctra Solutions, India Jan 2011 - July 2013...
+       Skills [42]: agile, apache, api, apis, architecture, atlassian, boarding, business  (+34 more)
+  51   53.docx                Siddharth                      6464946583     Male     siddhartha.g225@gmail.com
+       Address: Built 5 new web applications using React, Node, and Sass and...
+       Skills [95]: administration, agile, ajax, analytics, analyze, apache, api, apis  (+87 more)
+  53   55.docx                ❌ NOT FOUND                    5156354931     ❌ N/A    sougandh.work@gmail.com
+       Address: Experienced in performing unit testing using JUnit, integrat...
+       Skills [75]: accuracy, agile, ajax, apache, api, apis, architect, architecture  (+67 more)
+  54   56.docx                Spoorthi                       ❌ NOT FOUND    Female   ❌ NOT FOUND
+       Address: Jawaharlal Nehru Technological University (JNTU), India...
+       Skills [40]: accurate, administrator, agile, allocation, api, architect, architecture, bloomberg  (+32 more)
+  58   61.docx                Sivanaga G                     5713462112     Female   sivagatiganti@gmail.com
+       Address: 571-346-2112...
+       Skills [62]: administration, advocacy, agile, ajax, apache, api, architects, architecture  (+54 more)
+  57   60.docx                Saiteja                        5153092734     Male     saiteja@theegiants.com
+       Address: Sravani Ph: (515) 309-2734...
+       Skills [65]: agile, agricultural, ajax, apache, api, architecture, backend, business  (+57 more)
+  60   63.docx                Sudhakar Reddy P               2015353300     Male     psrleo81@gmail.com
+       Address: Operating System : Windows XP/NT/98, Unix, Solaris....
+       Skills [60]: abstract, administrator, aggregate, agile, ajax, apache, api, architect  (+52 more)
+  61   64.docx                Sumanth Manne                  9084844161     Male     msumanth39@gmail.com
+       Address: Client: Vanguard, Malvern, PA July'15 - Dec'16...
+       Skills [77]: accuracy, accurate, administration, agile, ajax, analytics, apache, api  (+69 more)
+  59   62.docx                Highlights                     9253498018     Male     sreevatsan77@gmail.com
+       Address: Ford Direct, Dearborn, MI July 2017- Till Date, Role: Projec...
+       Skills [75]: accuracy, administration, administrator, agile, alignment, analytics, analyze, architectural  (+67 more)
+  62   65.docx                Pradeep Sundar                 4157698565     Male     psundar.sf@gmail.com
+       Address: Jackson National Life, Nashville, TN December 2016 to Presen...
+       Skills [78]: abstract, agile, ajax, allocation, apache, api, apis, architecture  (+70 more)
+  63   66.docx                Syed Zia Ashraf                12035410012    Male     scott@egbsystems.com
+       Address: 2007- Masters in Computer Application from IASE Deemed Rajas...
+       Skills [61]: administration, advertising, agile, api, architect, architecture, backlog, business  (+53 more)
+  65   68.docx                Tanmay Dam                     +16023509460   Male     tanmaydam.14@gmail.com
+       Address: Worked with a 12 member team across 3 locations....
+       Skills [26]: agile, backlog, business, certifications, certified, claims, client, construction  (+18 more)
+  67   70.docx                Tarun                          ❌ NOT FOUND    Male     ❌ NOT FOUND
+       Address: MFS Investment Management, Boston Aug 2014 – Apr 2015, Busin...
+       Skills [48]: agile, ajax, api, architect, business, case, certification, certifications  (+40 more)
+  70   73.docx                Praveen                        7037430795     Male     sutejaswis@gmail.com
+       Address: Prototyping Tools 2, Balsamiq, VISIO...
+       Skills [20]: agile, analyze, business, certifications, cycle, databases, deployment, programming  (+12 more)
+  71   74.docx                Teresa Neetipudi               7734941379     Female   teresaneet.ba@gmail.com
+       Address: Citizens Bank, Philadelphia, PA November 2010 – April 2012, ...
+       Skills [38]: accuracy, agile, analyze, api, assessments, backlog, business, case  (+30 more)
+  66   69.docx                Tarun                          8769046847     Male     ❌ NOT FOUND
+       Address: BANK OF INDIA, Mumbai, India, BOI SECURE OTP...
+       Skills [44]: aggregation, agile, analytics, analyze, apache, api, apis, architecture  (+36 more)
+  68   71.docx                Tarun Nalluri                  8027681105     Male     nalluri.t01@gmail.com
+       Address: Nov 2014 – Till Date, Client Location, NYC, NY...
+       Skills [73]: administering, administrator, agile, ajax, apache, api, architecture, atlassian  (+65 more)
+  64   67.docx                Scjp                           +17188774291   ❌ N/A    mfarhantramboo@gmail.com
+       Address: General Electric- Transportation: Melbourne FL Jun 2016 – De...
+       Skills [58]: administration, agile, ajax, analyze, api, apis, architecture, automated  (+50 more)
+  75   78.docx                Ujvala Bypa                    4158138870     Female   ujvala.b.1@gmail.com
+       Address: Jan 2017 to Till Date, Blackhawk Network Holdings, Pleasanto...
+       Skills [40]: administrative, agile, backlog, blueprints, business, case, client, computing  (+32 more)
+  76   79.docx                Utthan Silawal                 7076536269     Male     usilawal123@gmail.com
+       Address: Barneys - New York, NY Feb ’16 – Present, Sr. Business Analy...
+       Skills [36]: accurate, agile, architecture, backlog, business, case, client, computing  (+28 more)
+  74   77.docx                Mounika Surender               7175595134     Female   smounika.ba@gmail.com
+       Address: Duration:Jan 2016 – Till Date, Role: Sr. Business Analyst...
+       Skills [34]: acquisitions, agile, analyze, assessments, business, case, claims, compensation  (+26 more)
+  69   72.docx                Tarun Reddy                    5023785940     Male     tarundev.work@gmail.com
+       Address: Experienced in using Eureka Servers while deploying in EC 2....
+       Skills [71]: agile, ajax, apache, api, architecture, automated, backend, business  (+63 more)
+  73   76.docx                Uday Maripelly                 8162996342     Male     udaymaripelly4_2pq@indeedemail.com
+       Address: Jersey City, NJ 07306...
+       Skills [45]: accuracy, acquisition, agile, ajax, apache, api, apis, architecture  (+37 more)
+  80   83.docx                Vamshi Teja                    6504173184     Male     vamshiteja50@gmail.com
+       Address: Health edge, Burlington, MA JUL 2015– OCT 2016, Business Ana...
+       Skills [23]: accurate, administer, agile, allocation, business, case, client, coordinate  (+15 more)
+  77   80.docx                Ashok A                        6176814217     Male     ashtechjava12@gmail.com
+       Address: Bachelors in Computer Science from CBIT, Hyderabad, INDIA. (...
+       Skills [50]: abstraction, agile, ajax, apache, architecture, automated, business, calling  (+42 more)
+  83   86.docx                Venkat N                       3146622902     Male     vhealthba@gmail.com
+       Address: Ascension Health, St Louis, MO Aug 2017- Sep 2017...
+       Skills [25]: accurate, agile, allocation, automotive, baseline, business, case, client  (+17 more)
+  72   75.docx                Tushar Patel                   8478098809     Male     tushar_b_patel@yahoo.com
+       Address: JSTL 1.1, XSLT, SoapUI 4.6.3, Hive, Pig...
+       Skills [55]: ajax, algorithm, algorithms, api, apis, architect, architecture, assembly  (+47 more)
+  78   81.docx                Vijetha                        9138903489     Female   reddy.vijethaa@gmail.com
+       Address: Experienced in performing unit testing using JUnit, Mockito ...
+       Skills [67]: agile, ajax, apache, api, apis, architecture, automated, backend  (+59 more)
+  79   82.docx                Vamshi                         ❌ NOT FOUND    Male     ❌ NOT FOUND
+       Address: Used log 4 j for logging and SVN for version control....
+       Skills [73]: administration, aggregation, agile, ajax, apache, api, appointments, architecture  (+65 more)
+  84   87.docx                Brahma Prathi                  9162829259     Female   sam@vishconsultingservices.com
+       Address: Texas State DHHS, Austin, TX Jan 2013 to June 2016, Sr. Busi...
+       Skills [41]: agile, analytics, analyze, business, case, certification, certifications, certified  (+33 more)
+  85   88.docx                Venkata                        3162472160     Female   venkata.s.k310@gmail.com
+       Address: Experienced in developing application using 3-tier architect...
+       Skills [43]: administrative, ajax, apache, api, architecture, business, client, coding  (+35 more)
+  89   92.docx                Vishal S                       7326452590     Male     vishalsingh19851@gmail.com
+       Address: Pune University, Pune India, 2004 – Bachelors of Engineering...
+       Skills [47]: administer, administration, administrator, agile, analytics, analyze, architectural, ariba  (+39 more)
+  92   ~$2.docx               ❌ Error: Failed to extract from ~$2.docx: python-docx error: Package not found at 'D:\Ktas Project\ATS\ATS Email Parser\Resume\~$2.docx'
+  82   85.docx                Varun                          ❌ NOT FOUND    Male     ❌ NOT FOUND
        Address: ❌ NOT FOUND
-       Skills [23]: accuracy, analysis, analyst, assurance, astm, bachelor, chemical, chemistry  (+15 more)
-  31   31.pdf                 Mitesh Thakur                  6351327539     Male     mitesht99@gmail.com
-       Address: GSHSEB, Gujarat, March - 2017, GSHSEB, Gujarat, March – 2015...
-       Skills [26]: analysis, certified, chemicals, critical, email, environment, installation, learning  (+18 more)
-  32   32.pdf                 Mayur Parmar                   +917434979347  Male     parmarmayur154@gmail.com
-       Address: Palanpur, India 385421, Mayur Parmar...
-       Skills [16]: acquisition, control, data, engineering, environment, machine, technical, technology  (+8 more)
-  33   33.pdf                 ❌ NOT FOUND                    ❌ NOT FOUND    ❌ N/A    ❌ NOT FOUND
+       Skills [66]: administration, agile, ajax, apache, api, apis, architecture, business  (+58 more)
+  87   90.docx                Venkata Vikash                 +17328239797   Female   vvikash.zenbsa@gmail.com
+       Address: Chartered Communications, St. Louis August 2014 to May 2015...
+       Skills [57]: accuracy, accurate, agile, analytics, architects, architectural, automated, backlog  (+49 more)
+  81   84.docx                ❌ NOT FOUND                    6016510507     ❌ N/A    varunkumar.work@gmail.com
+       Address: Proficient in Java and J 2 EE technologies including JSP, JD...
+       Skills [73]: administration, agile, ajax, apache, api, apis, architecture, backend  (+65 more)
+  90   93.docx                Vishnu Vardhan                 ❌ NOT FOUND    ❌ N/A    ❌ NOT FOUND
+       Address: Federal Reserve Bank, San Francisco, CA December 2013 – Augu...
+       Skills [43]: accuracy, accurate, administration, agile, analyze, architect, architecture, assessment  (+35 more)
+  86   89.docx                Vijay                          6468015340     Male     b.vijay.m09@gmail.com
        Address: ❌ NOT FOUND
-       Skills: ❌ NOT FOUND
-  34   34.pdf                 Patel Zankruti Bhinang         8511200650     Male     zankrutipatel246@gmail.com
-       Address: 15 th July 2023, Nagpur, Maharashtra.,  National e-conferen...
-       Skills [32]: assessment, biostatistics, certification, design, development, documentation, drug, email  (+24 more)
-  35   35.pdf                 Pawan Prod                     08938832968    Male     pawan.prod@gmail.com
-       Address: 98/41 A/27 C Tilak Nagar, Allahpur ALLAHABAD, U.P. -211006, ...
-       Skills [19]: application, assurance, biotech, calling, documentation, email, execution, formulation  (+11 more)
-  36   36.pdf                 Prajapati Brijeshkumar Kanubh  8128569208     Female   prajapatibrijeshkumar50@gmail.com
-       Address: kumbhavadu faliyu, kareli, Bharucha 391810...
-       Skills [12]: chemical, computer, email, environment, gmp, time, calibration, balance  (+4 more)
-  37   37.pdf                 Patel Prashantbhai Sureshbhai  8347975969     Male     pp5927308@gmail.com
-       Address: BKM VALSAD 72.20%, VNSGU SURAT, P.G SCIENCE...
-       Skills [9]: analysis, analyst, bachelor, chemistry, chromatography, control, glp, audits  (+1 more)
-  38   38.pdf                 Coverletter                    09675727387    Male     jaiprakashmurya039@gmail.com
-       Address: PINCODE. 222143(U.P)...
-       Skills [52]: abilities, allocation, analytics, analyze, assurance, bachelor, biotech, business  (+44 more)
-  39   39.pdf                 Coverletter                    09675727387    Male     jaiprakashmurya039@gmail.com
-       Address: PINCODE. 222143(U.P)...
-       Skills [52]: abilities, allocation, analytics, analyze, assurance, bachelor, biotech, business  (+44 more)
-  40   40.pdf                 Sagar Rana                     9016634132     Male     rana.sagar77777@gmail.com
-       Address: Ahmedabad, Gujarat 382418...
-       Skills [12]: control, driving, engineering, environment, maintenance, technology, automation, electrical  (+4 more)
-  41   41.pdf                 Somya Velani                   9016525692     Female   velanisomya@gmail.com
-       Address: S.S.C | St. Mary’s School | 2017–2018 | Percentage: 78%, T E...
-       Skills [15]: configure, control, design, engineering, maintenance, programming, software, testing  (+7 more)
-  42   42.pdf                 Mr. Anil Suresh Thakare        ❌ NOT FOUND    Male     anilthakare707@gmail.com
-       Address: At -Junone, Post-Bhone, Tal -Amalner, Dist -Jalgaon., Pin Co...
-       Skills [54]: allocation, analysis, assurance, batch, chemical, chemicals, chemistry, chromatography  (+46 more)
-  43   43.pdf                 Rajkumar Bera                  ❌ NOT FOUND    Male     rbera350@gmail.com
-       Address: ACG associated capsules ltd, Dahanu road...
-       Skills [38]: lean, analysis, arrangement, batch, coding, control, creative, customer  (+30 more)
-  44   44.pdf                 Rohit Pandav                   09924277660    Male     rohitpharma007@gmail.com
-       Address: 09924277660 | 07990022368, Date of Birth : 20 th September 1...
-       Skills [50]: lean, automated, batch, business, client, control, controls, customers  (+42 more)
-  45   45.pdf                 Sanjay Vaman Kadam             ❌ NOT FOUND    Male     sanjay18577@rediffmail.com
-       Address: 9. As a Chemist - Quality Control with M/s Emmellen Biotech ...
-       Skills [52]: abilities, acquisition, allocation, analysis, analyst, api, assessment, assurance  (+44 more)
-  46   46.pdf                 Shaik                          +919392675588  Male     hajishaik497@gmail.com
-       Address: Kurnool, Andhra Pradesh, (+91) 9392675588, 2 Apr '04...
-       Skills [35]: accurate, applications, capability, certifications, certified, compliant, customer, designing  (+27 more)
-  47   47.pdf                 Ghosh Basubhrajit              8777869920     Male     subhrajit-ghosh-84b67221asubhrajit367@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [21]: accountancy, bachelor, computer, construction, detail, electrician, electronics, engineering  (+13 more)
-  48   48.pdf                 Sumit Keshri                   +916205142771  Male     keshrisumit0099@gmail.com
-       Address: • Represented the school in the District-Level Quiz Competit...
-       Skills [25]: abilities, application, applications, chemical, collaborative, critical, design, engineering  (+17 more)
-  49   49.pdf                 Vikramji Thakor                9725721360     Female   vikramthakor20@gmail.com
-       Address: MEHSANA , GUJARAT - 384330,  SKILLS,  To Calculate Daily P...
-       Skills [19]: analysis, computer, control, coordination, electrician, engineering, installation, machine  (+11 more)
-  50   50.docx                Tej Ram Sharma                 6284440827     ❌ N/A    tejramsharma333@gmail.com
-       Address: # A-28 GF Anand Homes, Shiwalik Avenue, Sector-125, Kharar, ...
-       Skills [49]: batch, biotech, capability, computer, control, controls, coordinate, coordination  (+41 more)
-  51   51.pdf                 Daksh Uttambhai Patel          +919512377146  Male     dakshpatel5268@gmail.com
-       Address: HSC from Gujarat Secondary and Higher Secondary Education Bo...
-       Skills [27]: adaptable, analysis, backend, collaborative, computer, data, databases, developer  (+19 more)
-
-========================================================================================================================
-💾 Validation report saved → D:\Ktas Project\ATS\ATS Email Parser\src\output\validation_report.json
+       Skills [60]: agile, ajax, analyze, apache, api, apis, architect, architects  (+52 more)
+  88   91.docx                Vinay                          +15153187323   Male     vinay.donthoju1@gmail.com
+       Address: +1 (515)-318-7323...
+       Skills [69]: aca, agile, ajax, allocation, apache, api, apis, architect  (+61 more)
+  91   94.docx                Vishnu J                       +14756554689   ❌ N/A    jammigumpulavishnu452@gmail.com
+       Address: Equifax, St.Louis, Missouri Apr 2016 - Present...
+       Skills [55]: administration, agile, ajax, apache, api, architecture, bpm, business  (+47 more)
 
 ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 📊 PROCESSING SUMMARY:
-   Total files processed: 51
-   Successfully parsed: 44 (86.3%)
-   Extraction errors: 7 (13.7%)
+   Total files processed: 92
+   Successfully parsed: 91 (98.9%)
+   Extraction errors: 1 (1.1%)
 
 📋 EXTRACTION QUALITY:
-   Names found: 47/51 (92.2%)
-   Emails found: 47/51 (92.2%)
-   Phones found: 43/51 (84.3%)
-   Resumes with skills: 42/51 (82.4%)
+   Names found: 85/92 (92.4%)
+   Emails found: 77/92 (83.7%)
+   Phones found: 76/92 (82.6%)
+   Resumes with skills: 91/92 (98.9%)
 
 💾 Results saved:
    Main output → D:\Ktas Project\ATS\ATS Email Parser\src\output\resume_parsed.json
