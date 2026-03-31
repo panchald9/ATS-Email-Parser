@@ -1,116 +1,116 @@
-[*] Skill source: auto (dataset first, csv fallback=559 from D:\Project\ATS\ATS Email Parser\src\Skill.csv)
+[*] Skill source: auto (csv first, dataset fallback | csv=559)
 [*] Processing 30 resume file(s) from: D:\Project\ATS\ATS Email Parser\Resume
 [*] Workers: 8
 
-#    File                   Name                           Phone          Gender   Email
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-  6    3_pdf.pdf              Dhruv Panchal                  +919601945583  Male     dp148026@gmail.com
+#    File                   Name                           Phone          Gender   DOB            Email
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+  7    4_doc.docx             Deepika                        5188059569     Female   ❌ N/A          chintalapatideepika@gmail.com
+       Address: ❌ NOT FOUND
+       Skills [13]: pl/sql, insurance, RMAN, sql*plus, oracle oracle, export import, finance, scripting languages  (+5 more)
+  6    3_pdf.pdf              Dhruv Panchal                  +919601945583  Male     ❌ N/A          dp148026@gmail.com
        Address: Gujrat, India...
-       Skills [5]: cybersecurity, pmp, project management, ReactJS, NodeJS
-  3    2_doc.docx             Sai Kumar                      ❌ NOT FOUND    Female   tushar.k6@yahoo.com
-       Address: ❌ NOT FOUND
-       Skills [60]: drawing, security, cloud, encryption, microservices, server, Wordpress, angularjs  (+52 more)
-  7    4_doc.docx             Deepika                        5188059569     Female   chintalapatideepika@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [8]: scripting, oracle, pl/sql, insurance, NodeJS, Quality Audits, Production Planning, Process Control
-  1    1_doc.docx             Sai Srinivas                   7086696793     Female   sai.srinivas.2101@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [40]: architectural, automation, server, hadoop, html, java, Servlets, JSP  (+32 more)
-  12   6_pdf.pdf              ❌ NOT FOUND                    +919978463607  Female   mayankbarot775@gmail.com
-       Address: 12 th, 2018, Gujarat, Gujarati, 10 th, 2016...
-       Skills [7]: campaign, android, SAP HANA, erp, gst, Regulatory Compliance, Quality Audits
-  9    5_doc.docx             Samir R. Naik                  24719150705    Female   samirrnaik2018@gmail.com
-       Address: Courage of 100% work product audit achieved including the re...
-       Skills [28]: lean, auditor, banking, forecasting, security, cloud, confluence, git  (+20 more)
-  5    3_doc.docx             Saiteja                        +19404370150   Female   saitejaatwork@gmail.com
-       Address: Location: St Louis, MO...
-       Skills [57]: security, cloud, devops, microservices, server, angularjs, ReactJS, docker  (+49 more)
-  14   7_pdf.pdf              Dipen Vora                     9879469264     Female   dipenvora85@gmail.com
-       Address: Gurukul Road, Memnagar, Ahmedabad-380052...
-       Skills [10]: structural, server, html, DHTML, linux, oracle, pl/sql, unix  (+2 more)
-  13   7_doc.docx             ❌ NOT FOUND                    ❌ NOT FOUND    Male     ❌ NOT FOUND
-       Address: ❌ NOT FOUND
-       Skills [11]: Process Validation, cGMP, production planning, Quality Control, Production Scheduling, Raw Material Handling, FDA Compliance, SOP Documentation  (+3 more)
-  15   8_doc.docx             Santosh Kumar                  4849990237     Female   kumar85aug@gmail.com
-       Address: Hyderabad, India...
-       Skills [9]: hipaa, server, organizational, sql, Process Improvement, Change Control, Excel, Production Planning  (+1 more)
-  11   6_doc.docx             Samir R. Naik                  24719150705    Female   samirrnaik2018@gmail.com
-       Address: Courage of 100% work product audit achieved including the re...
-       Skills [28]: lean, auditor, banking, forecasting, security, cloud, confluence, git  (+20 more)
-  18   9_pdf.pdf              Koliwada                       +918866252027  Female   js.rathod27@gmail.com
-       Address: Diu (DAMAN & DIU) - 362540...
-       Skills [9]: drawings, fabrication, hydraulic, welding, mechanical engineering, root cause analysis, preventive maintenance, Production Planning  (+1 more)
-  16   8_pdf.pdf              Sujeet Kumar Singh             +919974064212  Male     sujeet.singh_1986@yahoo.co.in
-       Address: Silvassa, Dadra & Nagar Haveli...
-       Skills [5]: excel, erp, MS Word, Quality Audits, PowerPoint
-  20   10_pdf.pdf             Vishwanath M Pagare            9644637555     Female   ❌ NOT FOUND
-       Address: ❌ NOT FOUND
-       Skills [10]: civil, OEE (Overall Equipment Efficiency), regulatory compliance, change control, mechanical engineering, Quality Assurance, SOP Documentation, Quality Audits  (+2 more)
-  17   9_doc.docx             Sarath Kumar                   4693249282     Female   sarathm.java@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [47]: automation, security, server, angularjs, git, html, Core Java, Servlets  (+39 more)
-  21   11_doc.docx            Saravana Kumar                 ❌ NOT FOUND    Female   ❌ NOT FOUND
-       Address: ❌ NOT FOUND
-       Skills [33]: confluence, java, jira, oracle, sql, quality audits, COBOL, scrum master  (+25 more)
-  22   11_pdf.pdf             Mohammad Saif Ameen            +966500327160  Male     mohdsaifameenpptcipet@gmail.com
-       Address: Intermediate from UTTER PRADESH Board in 2008 with 54.6 %(12...
-       Skills [31]: auditor, Extrusion, Injection Molding, Plastic Processing, Quality Assurance, Internal Auditing, Inspection, Process Parameter Control  (+23 more)
-  24   12_pdf.pdf             Pratik Bhagat                  7764890893     Female   pratikbhagat157@gmail.com
-       Address: Vill Nadiaon Siwan Bihar, Siwan - 841231, Mob No. : 77648908...
-       Skills [4]: organizational, electrical engineering, Production Planning, Process Control
-  26   13_pdf.pdf             Patel Parthbhai Ganeshbhai     9638002591     Male     ❌ NOT FOUND
-       Address: PATEL PARTHBHAI GANESHBHAI, PATEL GANESHBHAI KANUBHAI, 27 Ye...
-       Skills [1]: time management
-  23   12_doc.docx            Satish Reddy                   7088311708     Female   satish.reddy.5484@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [29]: networking, server, html, java, Servlets, JSP, JDBC, JMS  (+21 more)
-  27   14_doc.docx            Shail Tank                     6464429382     Female   anthony.reddy@itmmi.com
-       Address: Managing cross functional teams which are scattered by the g...
-       Skills [26]: cpr, automation, security, android, authentication, server, communications, excel  (+18 more)
-  25   13_doc.docx            ❌ NOT FOUND                    8106207820     Female   satishkuduta@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [28]: server, html, Core Java, Servlets, JSP, JSTL, JDBC, JNDI  (+20 more)
-  28   14_pdf.pdf             Ketan Trivedi                  +919737795751  Male     ketan_trivedi73@rediffmail.com
-       Address: ❌ NOT FOUND
-       Skills [6]: forecasting, payroll, discipline, organizational, team management, Manpower Planning
-  30   15_pdf.pdf             Sanjay Kumar Singh             +919318780073  Female   pro_sanjupharma@yahoo.co.in
-       Address: Windows 98, 2000, XP & NT., CORE COMPETENCIES, • Production ...
-       Skills [18]: Process Validation, team management, MS Word, Quality Assurance, Quality Control, Raw Material Handling, ISO 9001, cGMP  (+10 more)
-  29   15_doc.docx            B Shaker                       7142009052     Female   shaker.0516@gmail.com
-       Address: Factset Research Systems, Hyderabad, India...
-       Skills [24]: server, html, java, javascript, jira, json, mysql, oracle  (+16 more)
-  19   10_doc.docx            Full Name                      4149090756     Male     mounika10200@gmail.com
-       Address: 3401 Custer RD, Suite, 108 Plano, TX 75023...
-       Skills: ❌ NOT FOUND
-  10   5_pdf.pdf              Ajay Kumar                     +918789633232  Male     ajaybhuims@gmail.com
+       Skills [6]: pmp, project management, software engineering, cybersecurity analyst, ReactJS, NodeJS
+  10   5_pdf.pdf              Ajay Kumar                     +918789633232  Female   ❌ N/A          ajaybhuims@gmail.com
        Address: S/o -Late Ram Birodhi Singh, Vill- Isiyan, P.O- Baradhi, P.S...
-       Skills [13]: english, hindi, Quality Control, Process Improvement, Manpower Planning, Raw Material Handling, Impact Testing, FDA Compliance  (+5 more)
-  2    1_pdf.pdf              Veerndra Singh Rathor          8696767406     Female   veerendrasingh@gmaill.com
+       Skills [13]: Process Improvement, Quality Control, english, hindi, Manpower Planning, Raw Material Handling, Impact Testing, FDA Compliance  (+5 more)
+  2    1_pdf.pdf              Veerndra Singh Rathor          8696767406     ❌ N/A    ❌ N/A          veerendrasingh@gmaill.com
        Address: RAJASTHAN - 323025, Mob No. : 8696767406...
        Skills [7]: secondary education, PCM, hydrometallurgy, solvent, treatment plant, hindi, english
-  8    4_pdf.pdf              Anil                           9616812233     Male     ❌ NOT FOUND
+  5    3_doc.docx             Saiteja                        +19404370150   Female   ❌ N/A          saitejaatwork@gmail.com
+       Address: Location: St Louis, MO...
+       Skills [88]: devops, microservices, angularjs, ReactJS, docker, html, Servlets, JSP  (+80 more)
+  12   6_pdf.pdf              ❌ NOT FOUND                    +919978463607  Female   ❌ N/A          mayankbarot775@gmail.com
+       Address: 12 th, 2018, Gujarat, Gujarati, 10 th, 2016...
+       Skills [12]: campaign, android, SAP HANA, erp, gst, account payable, management information, languages gujarati  (+4 more)
+  3    2_doc.docx             Sai Kumar                      ❌ NOT FOUND    ❌ N/A    ❌ N/A          tushar.k6@yahoo.com
+       Address: ❌ NOT FOUND
+       Skills [89]: drawing, security, cloud, encryption, microservices, server, Wordpress, angularjs  (+81 more)
+  8    4_pdf.pdf              Anil                           9616812233     Male     03/07/1999     ❌ NOT FOUND
        Address: ❌ NOT FOUND
        Skills [16]: detail orient, employee relation, restock shelf, human resource management, resource management, c, mills, dec  (+8 more)
-  4    2_pdf.pdf              Siddiki Siraj Ahmad            ❌ NOT FOUND    Female   ❌ NOT FOUND
+  16   8_pdf.pdf              Sujeet Kumar Singh             +919974064212  Female   ❌ N/A          sujeet.singh_1986@yahoo.co.in
+       Address: Silvassa, Dadra & Nagar Haveli...
+       Skills [8]: Enterprise Resource Planning, Mis, excel, erp, commercial software, MS Word, Quality Audits, PowerPoint
+  1    1_doc.docx             Sai Srinivas                   7086696793     ❌ N/A    ❌ N/A          sai.srinivas.2101@gmail.com
+       Address: ❌ NOT FOUND
+       Skills [102]: hadoop, html, Servlets, JSP, JDBC, EJB, Spring Core, Struts  (+94 more)
+  15   8_doc.docx             Santosh Kumar                  4849990237     Female   ❌ N/A          kumar85aug@gmail.com
+       Address: Hyderabad, India...
+       Skills [39]: hipaa, organizational, business analysis, test script, file format, business process, requirement elicitation, system requirement  (+31 more)
+  14   7_pdf.pdf              Dipen Vora                     9879469264     Female   01/09/1985     dipenvora85@gmail.com
+       Address: Gurukul Road, Memnagar, Ahmedabad-380052...
+       Skills [39]: structural, html, DHTML, linux, pl/sql, unix, product design, store procedure  (+31 more)
+  4    2_pdf.pdf              Siddiki Siraj Ahmad            ❌ NOT FOUND    ❌ N/A    ❌ N/A          ❌ NOT FOUND
        Address: ❌ NOT FOUND
        Skills [1]: c
+  19   10_doc.docx            Full Name                      4149090756     ❌ N/A    ❌ N/A          mounika10200@gmail.com
+       Address: 3401 Custer RD, Suite, 108 Plano, TX 75023...
+       Skills: ❌ NOT FOUND
+  22   11_pdf.pdf             Mohammad Saif Ameen            +966500327160  Female   ❌ N/A          mohdsaifameenpptcipet@gmail.com
+       Address: Intermediate from UTTER PRADESH Board in 2008 with 54.6 %(12...
+       Skills [31]: internal auditor, Extrusion, Injection Molding, Plastic Processing, Quality Assurance, Internal Auditing, Inspection, Process Parameter Control  (+23 more)
+  21   11_doc.docx            Saravana Kumar                 ❌ NOT FOUND    ❌ N/A    ❌ N/A          ❌ NOT FOUND
+       Address: ❌ NOT FOUND
+       Skills [50]: confluence, jira, oracle, quality audits, COBOL, scrum master, ibm os/390, z/os mvs  (+42 more)
+  23   12_doc.docx            Satish Reddy                   7088311708     Female   ❌ N/A          satish.reddy.5484@gmail.com
+       Address: ❌ NOT FOUND
+       Skills [55]: networking, html, Servlets, JSP, JDBC, JMS, JNDI, Struts  (+47 more)
+  11   6_doc.docx             Samir R. Naik                  24719150705    Female   ❌ N/A          samirrnaik2018@gmail.com
+       Address: Courage of 100% work product audit achieved including the re...
+       Skills [105]: auditor, forecasting, confluence, git, SVN, jira, oracle, unix  (+97 more)
+  17   9_doc.docx             Sarath Kumar                   4693249282     Female   ❌ N/A          sarathm.java@gmail.com
+       Address: ❌ NOT FOUND
+       Skills [99]: angularjs, git, html, Core Java, Servlets, JSP, JSTL, JDBC  (+91 more)
+  9    5_doc.docx             Samir R. Naik                  24719150705    Female   ❌ N/A          samirrnaik2018@gmail.com
+       Address: Courage of 100% work product audit achieved including the re...
+       Skills [104]: auditor, forecasting, confluence, git, SVN, jira, oracle, unix  (+96 more)
+  18   9_pdf.pdf              Koliwada                       +918866252027  Female   ❌ N/A          js.rathod27@gmail.com
+       Address: Diu (DAMAN & DIU) - 362540...
+       Skills [27]: Instrumentation, Root Cause Analysis, drawings, fabrication, hydraulic, welding, mechanical engineering, preventive maintenance  (+19 more)
+  25   13_doc.docx            Jakarta Ant                    8106207820     Female   ❌ N/A          satishkuduta@gmail.com
+       Address: ❌ NOT FOUND
+       Skills [39]: html, Core Java, Servlets, JSP, JSTL, JDBC, JNDI, RMI  (+31 more)
+  26   13_pdf.pdf             Patel Parthbhai Ganeshbhai     9638002591     Male     ❌ N/A          ❌ NOT FOUND
+       Address: PATEL PARTHBHAI GANESHBHAI, PATEL GANESHBHAI KANUBHAI, 27 Ye...
+       Skills [7]: time management, cash management, decision make, personal profile, gujarati, hindi, english
+  20   10_pdf.pdf             Vishwanath M Pagare            9644637555     Female   ❌ N/A          ❌ NOT FOUND
+       Address: ❌ NOT FOUND
+       Skills [33]: civil, OEE (Overall Equipment Efficiency), regulatory compliance, change control, mechanical engineering, equipment maintenance, vacuum pump, project coordination  (+25 more)
+  24   12_pdf.pdf             Pratik Bhagat                  7764890893     Female   ❌ N/A          pratikbhagat157@gmail.com
+       Address: Vill Nadiaon Siwan Bihar, Siwan - 841231, Mob No. : 77648908...
+       Skills [11]: organizational, electrical engineering, assembly line, graphic design, academic achievement, national service, scheme, hindi  (+3 more)
+  30   15_pdf.pdf             Sanjay Kumar Singh             +919318780073  Female   ❌ N/A          pro_sanjupharma@yahoo.co.in
+       Address: Windows 98, 2000, XP & NT., CORE COMPETENCIES, • Production ...
+       Skills [21]: Excel, Production Planning, Process Validation, team management, pharmaceutical formulation, acid, product development, MS Word  (+13 more)
+  29   15_doc.docx            B Shaker                       7142009052     Female   ❌ N/A          shaker.0516@gmail.com
+       Address: Factset Research Systems, Hyderabad, India...
+       Skills [40]: html, javascript, jira, json, mysql, selenium, pl/sql, tableau  (+32 more)
+  27   14_doc.docx            Shail Tank                     6464429382     Female   ❌ N/A          anthony.reddy@itmmi.com
+       Address: Managing cross functional teams which are scattered by the g...
+       Skills [44]: cpr, automation, security, android, authentication, server, communications, excel  (+36 more)
+  28   14_pdf.pdf             Ketan Trivedi                  +919737795751  ❌ N/A    ❌ N/A          ketan_trivedi73@rediffmail.com
+       Address: ❌ NOT FOUND
+       Skills [18]: forecasting, payroll, discipline, organizational, team management, talent management, performance management, talent acquisition  (+10 more)
+  13   7_doc.docx             ❌ NOT FOUND                    ❌ NOT FOUND    Male     ❌ N/A          ❌ NOT FOUND
+       Address: ❌ NOT FOUND
+       Skills [45]: Process Validation, cGMP, production planning, clean validation, manufacturing process, batch production, production schedule, regulatory requirement  (+37 more)
 
-========================================================================================================================
+=======================================================================================================================================
 💾 Validation report saved → D:\Project\ATS\ATS Email Parser\src\output\validation_report.json
 
-────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 📊 PROCESSING SUMMARY:
-   Total files processed: 30
-   Successfully parsed: 30 (100.0%)
-   Extraction errors: 0 (0.0%)
+   Total files processed : 30
+   Successfully parsed   : 30 (100.0%)
+   Extraction errors     : 0 (0.0%)
 
 📋 EXTRACTION QUALITY:
-   Names found: 27/30 (90.0%)
-   Emails found: 24/30 (80.0%)
-   Phones found: 26/30 (86.7%)
-   Resumes with skills: 29/30 (96.7%)
+   Names found    : 28/30 (93.3%)
+   Emails found   : 24/30 (80.0%)
+   Phones found   : 26/30 (86.7%)
+   DOBs found     : 2/30 (6.7%)
+   With skills    : 29/30 (96.7%)
 
-💾 Results saved:
-   Main output → D:\Project\ATS\ATS Email Parser\src\output\resume_parsed.json
-   Processing log → D:\Project\ATS\ATS Email Parser\src\output\parser.log
+💾 Results saved → D:\Project\ATS\ATS Email Parser\src\output\resume_parsed.json
+   Log saved      → D:\Project\ATS\ATS Email Parser\src\output\parser.log
 ✅ Done.
