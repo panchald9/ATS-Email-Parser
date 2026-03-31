@@ -1,23 +1,3 @@
-"""
-Resume Parser
-=============
-Extracts: Name, Contact Number, Email, Gender, Address, Skills
-Supports: PDF, DOCX, DOC
-
-Skills source (default): SkillNer dataset
-Fallback source:         Skill.csv (optional)
-Output saved to:         output/resume_parsed.json
-
-Performance defaults:
-    - Full extraction is ON by default (use --fast-response for speed mode)
-    - Skill source default is auto (CSV-first, SkillNer fallback)
-
-Optional speed-ups (install if available):
-  pip install spacy && python -m spacy download en_core_web_sm
-  pip install names-dataset
-  pip install textract   # for legacy .doc files
-"""
-
 import re
 import os
 import csv
@@ -27,7 +7,6 @@ import importlib
 import argparse
 import random
 import threading
-from datetime import date, datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # ── Core deps ──────────────────────────────────────────────────
@@ -110,9 +89,8 @@ def _ensure_skillner_loaded():
 # ══════════════════════════════════════════════════════════════
 #  CONFIGURATION  –  edit these paths before running
 # ══════════════════════════════════════════════════════════════
-RESUME_FOLDER  = r"D:\Ktas Project\ATS\ATS Email Parser\Resume"
+RESUME_FOLDER  = r"D:\Project\ATS\ATS Email Parser\Resume"
 SKILLS_CSV     = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Skill.csv')
-ADDRESS_KEYWORDS_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'address_keywords.json')
 OUTPUT_JSON    = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', 'resume_parsed.json')
 VALIDATION_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', 'validation_report.json')
 SUPPORTED_EXTENSIONS = {'.pdf', '.doc', '.docx'}
@@ -122,7 +100,6 @@ SUPPORTED_EXTENSIONS = {'.pdf', '.doc', '.docx'}
 #   csv     -> Skill.csv only
 #   auto    -> CSV first, dataset fallback
 SKILL_SOURCE = 'auto'
-ADDRESS_DB_CACHE = None
 
 # SkillNer performance tuning
 FAST_SKILLNER_MODE = True
@@ -215,7 +192,7 @@ PHONE_LABEL_RE = re.compile(
     r'(?i)\b(?:mobile|mob|phone|ph|contact|tel|telephone|call|whatsapp)\b\s*[:\-]?\s*([+()0-9][0-9()\s.\-/]{6,25})'
 )
 PHONE_GENERIC_RE = re.compile(
-    r'(?<!\w)(?:\+?\d{1,3}[ \t.\-]?)?(?:\(?\d{2,5}\)?[ \t.\-]?)?\d(?:[\d \t()./\-]{5,}\d)(?!\w)'
+    r'(?<!\w)(?:\+?\d{1,3}[ \t.\-]?)?(?:\(?\d{2,5}\)?[ \t.\-]?)?\d(?:[\d \t()\.\-]{5,}\d)(?!\w)'
 )
 
 EMAIL_DOMAIN_PREFIX_RE = re.compile(
@@ -246,27 +223,26 @@ ADDRESS_HINT_RE = re.compile(
     r'gujarat|maharashtra|rajasthan|punjab|bihar|kerala|odisha|haryana|pradesh|goa|'
     r'karnataka|postcode|pincode|zip)\b'
 )
-INDIA_PIN_RE = re.compile(r'(?<!\d)(?:\d{6})(?!\d)')
-US_ZIP_RE = re.compile(r'(?<!\d)(?:\d{5})(?:-\d{4})?(?!\d)')
 ADDRESS_NON_RE = re.compile(
-    r'(?i)\b(?:bachelor|master|diploma|degree|university|college|school|institute|cgpa|gpa|'
+    r'(?i)(?:'
+    r'\b(?:bachelor|master|diploma|degree|b\.com|b\.a|b\.sc|m\.sc|btech|mtech|b\.tech|m\.tech|b\.e|m\.e|'
+    r'university|college|school|institute|cgpa|gpa|graduation|'
     r'certification|training|course|project|client|role|responsibilit\w*|experience|'
     r'java|python|spring|hibernate|oracle|mysql|sql|javascript|html|css|aws|jira|agile|'
-    r'scrum|methodology|environment|objective|summary|profile|skills?)\b'
-)
-ADDRESS_ROLE_DATE_RE = re.compile(
-    r'(?i)\b(?:intern|internship|engineer|executive|assistant|manager|lecturer|faculty|'
-    r'developer|analyst|supervisor|officer|operator|teacher|coordinator|'
-    r'jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|present|till|to)\b'
-)
-ADDRESS_HEADER_RE = re.compile(r'(?i)\b(?:curriculum\s+vitae|bio\s*data|resume)\b')
-
-DOB_LABEL_RE = re.compile(
-    r'(?i)\b(?:date\s*of\s*birth|dob|birth\s*date|d\.o\.b)\b\s*[:\-]?\s*([A-Za-z0-9,./\- ]{6,40})'
-)
-DOB_INLINE_RE = re.compile(
-    r'(?i)(?<!\d)(?:\d{1,2}[./\-]\d{1,2}[./\-]\d{2,4}|\d{4}[./\-]\d{1,2}[./\-]\d{1,2}|'
-    r'\d{1,2}\s+[A-Za-z]{3,9}\s+\d{2,4}|[A-Za-z]{3,9}\s+\d{1,2},?\s+\d{2,4})(?!\d)'
+    r'scrum|methodology|environment|objective|summary|profile|skills?|expertise|strong|'
+    r'knowledge|proficien\w*|skilled|experienced|development|deployment|'
+    r'profess\w*|technical|specialized|migrat\w*|implement\w*|architecture|framework|'
+    r'built|created|developed|designed|managed|handled|responsible|worked|contributed|'
+    r'maintained|monitored|tested|deployed|configur\w*|installed|support\w*|provid\w*|'
+    r'ensur\w*|verif\w*|analyzed|coordinated|september|april|june|july|november|'
+    r'january|february|march|may|december|october|duration|present|coursework|'
+    r'relevant|pvt|ltd|limited|inc|corp|bank|company|corporation|office|factory|'
+    r'plant|bhavan|till|birth|date|certified|certif\w*|apmg|use\s+case|uml|modeling|'
+    r'model\w*|design\w*)\b|'
+    r'\d+\s*-\s*\d+|'  # Match year/number ranges like "2007 - 2009"
+    r'(?:to|–)\s*\d{4}|'  # Match "to 2020" or "– 2020"
+    r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|aug)\s*\d{4}' # Match "Jan 2020"
+    r')'
 )
 
 COMPANY_HINTS = {
@@ -377,11 +353,18 @@ def _normalize_phone_candidate(raw):
     if re.match(r'^(19|20)\d{2}$', digits):
         return None
 
-    year_hits = re.findall(r'(?:19|20)\d{2}', digits)
-    if len(year_hits) >= 2:
-        return None
-    if len(digits) == 12 and digits.startswith('0') and year_hits:
-        return None
+    # Improved: Only reject dates that clearly look like MM/DD/YYYY or DD/MM/YYYY
+    # Don't reject just because year-like patterns appear scattered in the digits
+    # (common in international numbers like +91-9601945583 which has "1960", "1945")
+    # or US numbers like +1(940)437-0150 which have "1940"
+    
+    # Only reject if ALL digits suggest a date format (e.g., 12-digit 01011990)
+    if len(digits) == 12 and digits.startswith('0'):
+        year_hits = re.findall(r'(?:19|20)\d{2}', digits)
+        if year_hits and len(year_hits) >= 2:
+            # Multiple year patterns in a 12-digit number starting with 0
+            # This is likely a date field like (01/01/1990)
+            return None
 
     return f'+{digits}' if cleaned.startswith('+') else digits
 
@@ -1449,219 +1432,6 @@ def extract_gender(text, name=None):
     return _infer_gender_from_name(name)
 
 
-def _parse_dob_candidate(raw):
-    if not raw:
-        return None
-
-    s = re.sub(r'(?i)\b(?:st|nd|rd|th)\b', '', raw)
-    s = re.sub(r'\s+', ' ', s).strip(' ,;:-')
-    if not s or len(s) < 6:
-        return None
-
-    # Try explicit numeric formats first.
-    numeric_formats = (
-        '%d/%m/%Y', '%d-%m-%Y', '%d.%m.%Y',
-        '%d/%m/%y', '%d-%m-%y', '%d.%m.%y',
-        '%Y/%m/%d', '%Y-%m-%d', '%Y.%m.%d',
-    )
-    for fmt in numeric_formats:
-        try:
-            dt = datetime.strptime(s, fmt).date()
-            if dt.year < 1900:
-                continue
-            return dt
-        except Exception:
-            pass
-
-    # Try text month formats.
-    text_formats = (
-        '%d %b %Y', '%d %B %Y', '%d %b %y', '%d %B %y',
-        '%b %d %Y', '%B %d %Y', '%b %d, %Y', '%B %d, %Y',
-        '%b %d %y', '%B %d %y',
-    )
-    for fmt in text_formats:
-        try:
-            dt = datetime.strptime(s, fmt).date()
-            if dt.year < 1900:
-                continue
-            return dt
-        except Exception:
-            pass
-
-    return None
-
-
-def _calculate_age_from_dob(dob_date):
-    if not dob_date:
-        return None
-    today = date.today()
-    if dob_date > today:
-        return None
-    age = today.year - dob_date.year - ((today.month, today.day) < (dob_date.month, dob_date.day))
-    if age < 14 or age > 85:
-        return None
-    return age
-
-
-def extract_date_of_birth_and_age(text):
-    if not text:
-        return None, None
-
-    t = normalize_compact_text(text)
-    lines = [re.sub(r'\s+', ' ', line).strip() for line in t.splitlines() if line.strip()]
-
-    # Priority 1: Explicit DOB labels.
-    for line in lines[:120]:
-        m = DOB_LABEL_RE.search(line)
-        if not m:
-            continue
-
-        rhs = (m.group(1) or '').strip()
-        candidate_tokens = [rhs]
-        candidate_tokens.extend(DOB_INLINE_RE.findall(rhs))
-
-        for candidate in candidate_tokens:
-            dt = _parse_dob_candidate(candidate)
-            if not dt:
-                continue
-            age = _calculate_age_from_dob(dt)
-            if age is None:
-                continue
-            return dt.isoformat(), age
-
-    # Priority 2: Early-page generic date candidates near birth keywords.
-    head = '\n'.join(lines[:80])
-    if re.search(r'(?i)\b(?:dob|date\s*of\s*birth|birth\s*date)\b', head):
-        for candidate in DOB_INLINE_RE.findall(head):
-            dt = _parse_dob_candidate(candidate)
-            if not dt:
-                continue
-            age = _calculate_age_from_dob(dt)
-            if age is None:
-                continue
-            return dt.isoformat(), age
-
-    return None, None
-
-
-def _default_address_keyword_db():
-    return {
-        'states': {
-            'andhra pradesh', 'arunachal pradesh', 'assam', 'bihar', 'chhattisgarh', 'goa', 'gujarat',
-            'haryana', 'himachal pradesh', 'jharkhand', 'karnataka', 'kerala', 'madhya pradesh',
-            'maharashtra', 'manipur', 'meghalaya', 'mizoram', 'nagaland', 'odisha', 'punjab',
-            'rajasthan', 'sikkim', 'tamil nadu', 'telangana', 'tripura', 'uttar pradesh',
-            'uttarakhand', 'west bengal', 'delhi', 'new delhi', 'jammu and kashmir', 'ladakh',
-            'puducherry', 'chandigarh'
-        },
-        'cities': {
-            'ahmedabad', 'surat', 'vadodara', 'rajkot', 'mumbai', 'pune', 'nagpur', 'nashik', 'thane',
-            'navi mumbai', 'delhi', 'new delhi', 'noida', 'gurgaon', 'faridabad', 'ghaziabad', 'bengaluru',
-            'bangalore', 'mysuru', 'mangalore', 'hyderabad', 'secunderabad', 'chennai', 'coimbatore',
-            'madurai', 'kolkata', 'howrah', 'jaipur', 'jodhpur', 'udaipur', 'lucknow', 'kanpur', 'agra',
-            'varanasi', 'patna', 'ranchi', 'bhubaneswar', 'cuttack', 'chandigarh', 'amritsar', 'ludhiana',
-            'indore', 'bhopal', 'raipur', 'visakhapatnam', 'vijayawada', 'kochi', 'thiruvananthapuram'
-        },
-        'address_terms': {
-            'road', 'rd', 'street', 'st', 'lane', 'ln', 'nagar', 'colony', 'sector', 'plot', 'block',
-            'flat', 'floor', 'apartment', 'society', 'near', 'taluka', 'tehsil', 'district', 'city',
-            'state', 'pincode', 'pin code', 'postcode', 'zip'
-        },
-    }
-
-
-def _load_address_keyword_db():
-    global ADDRESS_DB_CACHE
-    if ADDRESS_DB_CACHE is not None:
-        return ADDRESS_DB_CACHE
-
-    base = _default_address_keyword_db()
-    try:
-        with open(ADDRESS_KEYWORDS_JSON, mode='r', encoding='utf-8') as f:
-            raw = json.load(f)
-        states = {str(x).strip().lower() for x in raw.get('states', []) if str(x).strip()}
-        cities = {str(x).strip().lower() for x in raw.get('cities', []) if str(x).strip()}
-        terms = {str(x).strip().lower() for x in raw.get('address_terms', []) if str(x).strip()}
-        if states:
-            base['states'].update(states)
-        if cities:
-            base['cities'].update(cities)
-        if terms:
-            base['address_terms'].update(terms)
-    except Exception:
-        pass
-
-    def _build_patterns(values):
-        return [(v, re.compile(rf'(?<![a-z0-9]){re.escape(v)}(?![a-z0-9])', re.I)) for v in sorted(values)]
-
-    ADDRESS_DB_CACHE = {
-        'states': base['states'],
-        'cities': base['cities'],
-        'address_terms': base['address_terms'],
-        'state_patterns': _build_patterns(base['states']),
-        'city_patterns': _build_patterns(base['cities']),
-    }
-    return ADDRESS_DB_CACHE
-
-
-def _extract_pin_codes(text):
-    pins = []
-    for rx in (INDIA_PIN_RE, US_ZIP_RE):
-        for m in rx.findall(text or ''):
-            code = (m or '').strip()
-            if code and code not in pins:
-                pins.append(code)
-    return pins
-
-
-def _extract_places_from_keywords(text, db):
-    lower = (text or '').lower()
-    city_hits = set()
-    state_hits = set()
-
-    for token, pat in db.get('city_patterns', []):
-        if pat.search(lower):
-            city_hits.add(token)
-    for token, pat in db.get('state_patterns', []):
-        if pat.search(lower):
-            state_hits.add(token)
-
-    return city_hits, state_hits
-
-
-def _extract_places_from_spacy(text, db):
-    city_hits = set()
-    state_hits = set()
-    free_place_hits = set()
-
-    if not text or not _ensure_spacy_loaded():
-        return city_hits, state_hits, free_place_hits
-
-    try:
-        doc = nlp((text or '')[:5000])
-        for ent in doc.ents:
-            if ent.label_ not in {'GPE', 'LOC'}:
-                continue
-            token = re.sub(r'\s+', ' ', ent.text).strip(' ,;:-').lower()
-            if not token or len(token) < 2:
-                continue
-            if token in db.get('states', set()):
-                state_hits.add(token)
-            elif token in db.get('cities', set()):
-                city_hits.add(token)
-            else:
-                free_place_hits.add(token)
-    except Exception:
-        pass
-
-    return city_hits, state_hits, free_place_hits
-
-
-def _format_place_token(token):
-    words = [w for w in token.split() if w]
-    return ' '.join(w[:1].upper() + w[1:] for w in words)
-
-
 def extract_address(text):
     if not text:
         return None
@@ -1671,74 +1441,43 @@ def extract_address(text):
     if not lines:
         return None
 
-    db = _load_address_keyword_db()
-
-    # Step 1: PIN/ZIP regex extraction.
-    pin_codes = _extract_pin_codes(t)
-
-    # Step 2: city/state extraction via spaCy + keyword database.
-    kw_cities, kw_states = _extract_places_from_keywords(t, db)
-    sp_cities, sp_states, sp_free_places = _extract_places_from_spacy(t, db)
-    merged_cities = set(kw_cities) | set(sp_cities)
-    merged_states = set(kw_states) | set(sp_states)
-
     def clean_address(value):
         value = re.sub(r'\s+', ' ', value).strip(' ,;:-')
         if len(value) < 8:
             return None
-        if len(value) > 240:
+        if len(value) > 220:
             return None
-        if len(value.split()) > 34:
+        if len(value.split()) > 35:
             return None
-        if value.count(',') > 7:
+        if value.count(',') > 6:
             return None
         if ADDRESS_CONTACT_RE.search(value):
             return None
-
-        bad_words = len(re.findall(ADDRESS_NON_RE, value))
-        if bad_words >= 3:
+        
+        # *** CRITICAL: Reject employment date patterns BEFORE other checks ***
+        # Match "August 2007", "2007 to 2009", "Aug 2020 - Sep 2021", etc.
+        if re.search(r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|january|february|march|april|june|july|september|october|november|december)[.,\-\s]+\d{4}', value, re.I):
             return None
-
+        # Match patterns like "2007 to 2009", "2020 - present", "August 2007 to September 2009", etc.
+        if re.search(r'(?:\d{4}|(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|january|february|march|april|june|july|september|october|november|december)\s+\d{4})\s*(?:to|–|-|–)\s*(?:\d{4}|present|till|(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|january|february|march|april|june|july|september|october|november|december))', value, re.I):
+            return None
+        
+        # Count how many non-address keywords appear
+        bad_words = len(re.findall(ADDRESS_NON_RE, value))
+        if bad_words >= 1:
+            return None
+        
+        # Address should have strong location indicators
         digit_hits = len(re.findall(r'\d', value))
         hint_hits = len(ADDRESS_HINT_RE.findall(value))
-        has_pin = bool(_extract_pin_codes(value))
-        has_city = any(re.search(rf'(?<![a-z0-9]){re.escape(c)}(?![a-z0-9])', value, re.I) for c in merged_cities)
-        has_state = any(re.search(rf'(?<![a-z0-9]){re.escape(s)}(?![a-z0-9])', value, re.I) for s in merged_states)
-
-        # Reject role/date heavy lines unless they contain clear address markers.
-        if ADDRESS_ROLE_DATE_RE.search(value) and not (has_pin or ADDRESS_HINT_RE.search(value)):
+        # Require either: strong address hints, OR (digit + comma), OR (digit + postal zip code pattern)
+        has_postal = bool(re.search(r'\b\d{3,6}\b', value))
+        if hint_hits == 0 and not has_postal:
             return None
-        if ADDRESS_HEADER_RE.search(value) and not (has_pin or ADDRESS_HINT_RE.search(value)):
-            return None
-
-        strong_marker = has_pin or hint_hits >= 1
-        medium_marker = digit_hits >= 2 and (has_city or has_state)
-        if not (strong_marker or medium_marker):
-            return None
-
         return value
 
-    def score_block(value):
-        score = 0
-        if re.search(r'\d', value):
-            score += 2
-        if ',' in value:
-            score += 1
-        if ADDRESS_HINT_RE.search(value):
-            score += 3
-        if _extract_pin_codes(value):
-            score += 4
-        if any(re.search(rf'(?<![a-z0-9]){re.escape(c)}(?![a-z0-9])', value, re.I) for c in merged_cities):
-            score += 3
-        if any(re.search(rf'(?<![a-z0-9]){re.escape(s)}(?![a-z0-9])', value, re.I) for s in merged_states):
-            score += 3
-        if ADDRESS_ROLE_DATE_RE.search(value):
-            score -= 3
-        score -= len(re.findall(ADDRESS_NON_RE, value))
-        return score
-
-    # Step 3: merge evidence and pick best candidate.
-    for i, line in enumerate(lines[:100]):
+    # First preference: explicit address label.
+    for i, line in enumerate(lines[:80]):
         m = ADDRESS_LABEL_RE.match(line)
         if not m:
             continue
@@ -1746,15 +1485,27 @@ def extract_address(text):
         parts = []
         first = m.group(1).strip()
         if first and not ADDRESS_STOP_RE.match(first) and not ADDRESS_CONTACT_RE.search(first):
-            parts.append(first)
+            bad_first = len(re.findall(ADDRESS_NON_RE, first))
+            if bad_first == 0:
+                # Also reject if contains employment date patterns
+                if not re.search(r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|january|february|march|april|june|july|september|october|november|december)\s+\d{4}', first, re.I):
+                    if not re.search(r'\d{4}\s*(?:to|–|-)\s*(?:\d{4}|present)', first, re.I):
+                        parts.append(first)
 
-        for j in range(i + 1, min(i + 6, len(lines))):
+        # Capture a few immediate continuation lines.
+        for j in range(i + 1, min(i + 4, len(lines))):
             nxt = lines[j]
             if ADDRESS_STOP_RE.match(nxt):
                 break
             if ADDRESS_CONTACT_RE.search(nxt):
                 break
-            if len(re.findall(ADDRESS_NON_RE, nxt)) >= 3:
+            bad_nxt = len(re.findall(ADDRESS_NON_RE, nxt))
+            if bad_nxt >= 1:
+                break
+            # Reject if this line has employment dates
+            if re.search(r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|january|february|march|april|june|july|september|october|november|december)\s+\d{4}', nxt, re.I):
+                break
+            if re.search(r'\d{4}\s*(?:to|–|-)\s*(?:\d{4}|present)', nxt, re.I):
                 break
             if len(nxt.split()) <= 1:
                 break
@@ -1762,58 +1513,64 @@ def extract_address(text):
 
         candidate = clean_address(', '.join(parts))
         if candidate:
-            if pin_codes and not _extract_pin_codes(candidate):
-                candidate = f"{candidate}, {pin_codes[0]}"
             return candidate
 
+    # Fallback: best-scoring address-like line block.
     best = None
     best_score = -1
-    for i, line in enumerate(lines[:140]):
+    for i, line in enumerate(lines[:120]):
         if ADDRESS_STOP_RE.match(line) or ADDRESS_CONTACT_RE.search(line):
             continue
-        if len(re.findall(ADDRESS_NON_RE, line)) >= 3:
+        
+        # *** REJECT: Employment/work dates immediately ***
+        if re.search(r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|january|february|march|april|june|july|september|october|november|december)\s+\d{4}', line, re.I):
+            continue
+        if re.search(r'\d{4}\s*(?:to|–|-)\s*(?:\d{4}|present)', line, re.I):
+            continue
+        
+        # Count problematic keywords - be VERY strict
+        bad_count = len(re.findall(ADDRESS_NON_RE, line))
+        if bad_count >= 1:
+            continue
+        
+        score = 0
+        digit_hits = len(re.findall(r'\d', line))
+        if digit_hits > 0:
+            score += 3
+        if ',' in line:
+            score += 1
+        hint_hits = len(ADDRESS_HINT_RE.findall(line))
+        if hint_hits > 0:
+            score += 5
+        if 2 <= len(line.split()) <= 25:
+            score += 1
+        
+        # Require meaningful address patterns
+        has_postal = bool(re.search(r'\b\d{3,6}\b', line))
+        if has_postal:
+            score += 2
+        
+        if score < 6:
             continue
 
         parts = [line]
-        for j in range(i + 1, min(i + 6, len(lines))):
+        for j in range(i + 1, min(i + 3, len(lines))):
             nxt = lines[j]
             if ADDRESS_STOP_RE.match(nxt) or ADDRESS_CONTACT_RE.search(nxt):
                 break
-            if len(re.findall(ADDRESS_NON_RE, nxt)) >= 3:
+            bad_nxt = len(re.findall(ADDRESS_NON_RE, nxt))
+            if bad_nxt >= 1:
                 break
             if len(nxt.split()) <= 1:
                 break
             parts.append(nxt)
 
-        block = ', '.join(parts)
-        candidate = clean_address(block)
-        if not candidate:
-            continue
-
-        score = score_block(candidate)
-        if score > best_score:
+        candidate = clean_address(', '.join(parts))
+        if candidate and score > best_score:
             best = candidate
             best_score = score
 
-    if best:
-        if pin_codes and not _extract_pin_codes(best):
-            best = f"{best}, {pin_codes[0]}"
-        return best
-
-    fallback_parts = []
-    if merged_cities:
-        fallback_parts.append(_format_place_token(sorted(merged_cities)[0]))
-    elif sp_free_places:
-        fallback_parts.append(_format_place_token(sorted(sp_free_places)[0]))
-    if merged_states:
-        fallback_parts.append(_format_place_token(sorted(merged_states)[0]))
-    if pin_codes:
-        fallback_parts.append(pin_codes[0])
-
-    if fallback_parts:
-        return ', '.join(fallback_parts)
-
-    return None
+    return best
 
 
 # ══════════════════════════════════════════════════════════════
@@ -2451,7 +2208,6 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list, com
         name = extract_name(text)
         contact_number = extract_contact_number(text)
         email = extract_email_from_resume(text)
-        date_of_birth, age = extract_date_of_birth_and_age(text)
         if fast_response:
             gender = None
             address = None
@@ -2482,8 +2238,6 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list, com
             'email': email,
             'gender': gender,
             'address': address,
-            'date_of_birth': date_of_birth,
-            'age': age,
             'skills': matched_skills,
         }
     except Exception as exc:
@@ -2494,8 +2248,6 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list, com
             'email': None,
             'gender': None,
             'address': None,
-            'date_of_birth': None,
-            'age': None,
             'skills': [],
             'error': str(exc),
         }
@@ -2632,8 +2384,6 @@ if __name__ == '__main__':
         gender = record.get('gender')
         email = record.get('email')
         address = record.get('address')
-        dob = record.get('date_of_birth')
-        age = record.get('age')
         matched_skills = record.get('skills') or []
 
         name_col = (name or '❌ NOT FOUND')[:col_w['name'] - 1]
@@ -2654,12 +2404,6 @@ if __name__ == '__main__':
             log_message(f"       Address: {address[:60]}...")
         else:
             log_message("       Address: ❌ NOT FOUND")
-
-        if dob:
-            age_text = str(age) if age is not None else 'N/A'
-            log_message(f"       DOB/Age: {dob} / {age_text}")
-        else:
-            log_message("       DOB/Age: ❌ NOT FOUND")
 
         if matched_skills:
             preview = ', '.join(matched_skills[:8])
@@ -2722,8 +2466,6 @@ if __name__ == '__main__':
                         'email': None,
                         'gender': None,
                         'address': None,
-                        'date_of_birth': None,
-                        'age': None,
                         'skills': [],
                         'error': str(exc),
                     }
@@ -2750,7 +2492,7 @@ if __name__ == '__main__':
     if validator and results:
         validation_summary = validator.validate_batch(results)
         log_message("\n" + "="*120)
-        print_validation_report(validation_summary)
+        # print_validation_report(validation_summary)  # Disabled - unicode error in validation
         
         # Save validation report
         os.makedirs(os.path.dirname(VALIDATION_JSON), exist_ok=True)
