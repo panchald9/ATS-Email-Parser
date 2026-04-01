@@ -1,84 +1,212 @@
 [
   {
-    "file": "Dhruv Panchal.pdf",
-    "name": "Tree Club",
-    "contact_number": "919601945583",
-    "email": "dp148026@gmail.com",
+    "file": "7660868 - Sudheer Dixit.docx",
+    "name": "Sudheer Dixit",
+    "contact_number": "+917838380707",
+    "email": "sudhirdixit007@gmail.com",
     "dob": null,
     "gender": null,
     "address": null,
     "skills": [
-      "cad",
-      "campaigns",
-      "cybersecurity",
-      "mentorship",
-      "Illustrator",
+      "Html",
+      "Bootstrap",
+      "C",
+      "Seo",
+      "Compliance",
+      "Javascript",
+      "Jquery",
+      "Css",
+      "Figma",
+      "agile",
+      "Adobe XD",
       "Photoshop",
-      "solidworks"
-    ],
-    "professional_experience": []
-  },
-  {
-    "file": "Dhruv PanchalResume.pdf",
-    "name": "At Silver Oak",
-    "contact_number": "919601945583",
-    "email": "ownerexperience.dp@gmail.com",
-    "dob": null,
-    "gender": null,
-    "address": null,
-    "skills": [
-      "automation",
-      "android",
-      "authentication",
-      "excel",
-      "html",
-      "javascript",
-      "mysql",
-      "NodeJS",
-      "Django",
-      "solidworks",
-      "REST API",
       "ReactJS",
-      "CSS"
-    ],
-    "professional_experience": []
-  },
-  {
-    "file": "Profile.pdf",
-    "name": "Dhruv Panchal",
-    "contact_number": "9601945583",
-    "email": "dkrp16708@gmail.com",
-    "dob": null,
-    "gender": "Male",
-    "address": "Ahm,guj,india 382481, 9601945583 (Home)",
-    "skills": [
-      "campaign",
-      "excel",
-      "java",
-      "Brand Identity",
-      "ReactJS"
+      "azure",
+      "git",
+      "LESS",
+      "XHTML",
+      "jira",
+      "NodeJS",
+      "Sketch",
+      "purchase order",
+      "team management",
+      "Visual Studio Code",
+      "Angular",
+      "Next.js",
+      "UI/UX Design"
     ],
     "professional_experience": [
       {
-        "company_name": "Kali Tech and Services Pvt. Ltd.",
-        "role": "Full-stack Developer",
+        "company_name": "RSA Tech Pvt Ltd, Hyderabad",
+        "role": "Sr. UI/UX Developer",
         "employment_type": "Full-time",
-        "location": null,
-        "start_date": "January 2026",
-        "end_date": "March 2026",
-        "currently_working": false,
-        "experience_duration": "2m",
-        "duration_text": "January 2026 - March 2026",
+        "location": "Remote",
+        "start_date": "AUG 2023",
+        "end_date": "PRESENT",
+        "currently_working": true,
+        "experience_duration": "2y 8m",
+        "duration_text": "AUG 2023 - PRESENT",
         "ctc": null,
         "notice_period": null,
-        "technologies": [],
-        "responsibilities": []
+        "technologies": [
+          "Javascript",
+          "Html",
+          "CSS"
+        ],
+        "responsibilities": [
+          "Creating UX as per client requirement. Extracting the layout & CSS for designing sites from PSD, Zeplin, and Figma to HTML. Coding using XHTML, HTML, JavaScript & CSS. HTML 5, JavaScript, Jquery & CSS 3. Bootstrap, JavaScript Framework (ReactStrap, ReactUI, Teradata UI, SPA, NgxBootstrap). W 3 C Validation, WCAG & SEO Semantic Code."
+        ]
       },
       {
-        "company_name": "solutions. I combine leadership with strong technical expertise to ensure",
-        "role": null,
+        "company_name": "KiwiTech Pvt Ltd, Delhi",
+        "role": "Asst. Tech Lead",
         "employment_type": "Full-time",
-        "location": "delivering stable, high-quality products.",
+        "location": null,
+        "start_date": "DEC 2010",
+        "end_date": "JULY 2023",
+        "currently_working": false,
+        "experience_duration": "12y 7m",
+        "duration_text": "DEC 2010 - JULY 2023",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [
+          "Javascript",
+          "Html",
+          "CSS"
+        ],
+        "responsibilities": [
+          "Extracting the layout & CSS for designing sites from PSD, Zeplin, and Figma to HTML. Coding using XHTML, HTML, JavaScript & CSS. HTML 5, JavaScript, Jquery & CSS 3. Bootstrap, JavaScript Framework (ReactStrap, ReactUI, Teradata UI, SPA, NgxBootstrap). W 3 C Validation, WCAG & SEO Semantic Code.",
+          "We are working with Developers and front-end and back-end teams to capture requirements for the functional elements of projects.",
+          "I convert design mockups and wireframes into pixel-perfect HTML code using my expertise. I pay careful attention to detail, ensuring that the final output matches the original design precisely. I am skilled in writing clean, organized, and well-commented code that is easy to maintain and collaborate on.",
+          "I have experience in implementing responsive design techniques, making websites adapt and look great on various devices and screen sizes. I utilise media queries and CSS frameworks to create flexible and mobile-friendly layouts that enhance the user experience across different platforms.",
+          "Accessibility is an important aspect of my work. I follow best practices to make websites accessible to users with disabilities, ensuring compliance with WCAG (Web Content Accessibility Guidelines). I strive to build inclusive experiences that cater to a diverse range of users.",
+          "Collaboration is a key part of my workflow. I am comfortable working with designers, back-end developers, and other stakeholders to ensure seamless integration of HTML code into the overall web development process. I can effectively communicate technical concepts and collaborate on achieving project goals.",
+          "HTML developer is to create clean, well-structured, and visually appealing HTML code that brings designs to life on the web while ensuring a seamless and accessible user experience."
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11736381 - Mohit Mishra.pdf",
+    "name": "Mohit Mishra",
+    "contact_number": "8604329815",
+    "email": "mohitmishrams3@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Mysql",
+      "Sql",
+      "Excel",
+      "Power BI",
+      "Etl",
+      "cloud",
+      "server",
+      "azure",
+      "oracle",
+      "python",
+      "KPI",
+      "Data Analytics",
+      "Data Analysis",
+      "Data Warehousing"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Tata Consultancy Services",
+        "role": "Data Analyst",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "04/2022",
+        "end_date": "Present",
+        "currently_working": true,
+        "experience_duration": "4y",
+        "duration_text": "04/2022 - Present",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [
+          "Power BI",
+          "Mysql",
+          "Excel",
+          "SQL"
+        ],
+        "responsibilities": [
+          "Redesigned and maintained ETL processes using SQL Server Integration Services (SSIS) to automate data extraction,",
+          "Optimized SQL query optimization techniques to improve the performance of ETL processes and data retrieval",
+          "Developed visually impactful Power BI reports to track key performance indicators (KPIs) and business metrics,",
+          "analyze previous and present data and published and maintained dashboards on Power BI Service, managing",
+          "Worked closely with finance teams and business users to gather requirements, transform business requirement into",
+          "Troubleshooted data-related issues and maintained the Power BI reports and ensured the accuracy and data in the"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11739739 - Pgdm Aicte Ap.pdf",
+    "name": "Mayank Kumar",
+    "contact_number": "+917983281581",
+    "email": "mayanktarar11@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "analytics",
+      "coordination",
+      "crm",
+      "finance",
+      "formulation",
+      "marketing",
+      "strategy",
+      "cloud",
+      "organizational",
+      "reporting",
+      "excel",
+      "time management",
+      "KPI",
+      "MIS",
+      "Market Research",
+      "Strategic Planning",
+      "Client Coordination",
+      "Performance Monitoring",
+      "Performance Improvement",
+      "Sales Planning",
+      "Service Delivery",
+      "Customer Satisfaction",
+      "Business Analysis",
+      "Data Analytics",
+      "Data Analysis",
+      "Power BI"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11743500 - Vaishnavi Anil Singh.pdf",
+    "name": "Vaishnavi Singh",
+    "contact_number": "7376324034",
+    "email": "vaishnavi9450singh@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Standard Operating Procedure",
+      "Sales",
+      "Compliance",
+      "Tds",
+      "Excel",
+      "Batch Manufacturing",
+      "Quality Control",
+      "team management",
+      "critical thinking",
+      "Quality Assurance",
+      "Raw Material Handling",
+      "SOP Documentation",
+      "Quality Audits"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "❖ Huhtamaki India Ltd Jun’2021–Jan'2022",
+        "role": "Quality Control.",
+        "employment_type": "Full-time",
+        "location": "Umerkoi, Silvassa, D&NH.",
         "start_date": null,
         "end_date": null,
         "currently_working": false,
@@ -90,8 +218,515 @@
         "responsibilities": []
       },
       {
-        "company_name": "Industrial Analytical Services",
-        "role": "React Developer",
+        "company_name": "❖ Shivom Industry Pvt. Ltd.",
+        "role": "QC Chemist.",
+        "employment_type": "Full-time",
+        "location": "Khadoli, Silvassa, D&NH.",
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      },
+      {
+        "company_name": "❖ Rossari BioTech Pvt. Ltd.",
+        "role": "QA/QC Chemist.",
+        "employment_type": "Full-time",
+        "location": "Naroli, D&NH.",
+        "start_date": "2024",
+        "end_date": "Till Date",
+        "currently_working": true,
+        "experience_duration": "2y 3m",
+        "duration_text": "2024–Till Date",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Ensure the execution of corrective actions and compliance with"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11749289 - Akhilesh Kumar Gond.pdf",
+    "name": "Akhilesh Kumar Gond",
+    "contact_number": "+919122940682",
+    "email": "akhileshkumara37641@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "documentation",
+      "welding",
+      "OEE",
+      "tpm",
+      "production planning",
+      "Kanban",
+      "Process Control"
+    ],
+    "professional_experience": [
+      {
+        "company_name": " Company Name: Krishna maruti Ltd.",
+        "role": "Robotic Engineer Trainee (Weld shop)",
+        "employment_type": "Internship",
+        "location": "Mehsana (Gujarat)",
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      },
+      {
+        "company_name": " Company Name: Saini Tata Motors Pvt.Ltd.",
+        "role": "Machine Operator",
+        "employment_type": "Full-time",
+        "location": " Location: Ambala, Haryan",
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11755693 - Hingora Suhel.pdf",
+    "name": "Hingora Suhel",
+    "contact_number": "+918200559569",
+    "email": "suhelhingora2358@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Material Handling",
+      "Distillation",
+      "Compliance",
+      "documentation",
+      "monitoring",
+      "chemical engineering",
+      "natural",
+      "Raw Material Handling",
+      "Production Planning",
+      "Process Control"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "onroll Employee in Natural Petrochemical Pvt Ltd, Bhimasar, Kutch.",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          " I am working as a Production Operator from September 2024 to October-2025 as an",
+          " Batch Process Control handling like Batch Sheet Maintain, Process Formula / Parameter Checking",
+          " Documentation Maintain like Log Sheet, Production reports and Consumption reports."
+        ]
+      },
+      {
+        "company_name": null,
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "2025",
+        "end_date": "till Date",
+        "currently_working": true,
+        "experience_duration": "1y 3m",
+        "duration_text": "2025 To till Date",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786487 - Minhaj Selot.pdf",
+    "name": "Minhaj Selot",
+    "contact_number": "+919898340428",
+    "email": "mselot044@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Troubleshooting"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786488 - Dharmendra Prajapati.pdf",
+    "name": "Dharmendra Jagarnath Prajapati",
+    "contact_number": "9662380200",
+    "email": "dharmendra30140@gmail.com",
+    "dob": "14/05/1999",
+    "gender": null,
+    "address": null,
+    "skills": [
+      "cGMP",
+      "Compliance",
+      "Hplc",
+      "Analytical Method Validation",
+      "Preventive Maintenance",
+      "Quality Control",
+      "coordination",
+      "documentation",
+      "formulation",
+      "testing",
+      "troubleshooting",
+      "calibration",
+      "laboratory",
+      "reporting",
+      "Quality Assurance",
+      "Equipment Calibration",
+      "Production Planning",
+      "Process Control"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Quality Control (LCMS) – Umedica Laboratories Pvt. Ltd.",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      },
+      {
+        "company_name": "Analytical Department – Agrow Allied Venture Pvt. Ltd.",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "2025",
+        "end_date": "Present",
+        "currently_working": true,
+        "experience_duration": "1y 3m",
+        "duration_text": "2025 – Present",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Conduct stability studies, routine analysis, method development, multimedia testing, and analytical",
+          "Operate and maintain analytical instruments including:"
+        ]
+      },
+      {
+        "company_name": "HPLC Systems – Agilent 1280 Series (OpenLab, OpenLab CDS), Shimadzu (Lab solutions), Waters",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Method Development & Validation (AMV) – Developed, optimized, and validated analytical methods",
+          "Instrument Operation & Maintenance – Operated and maintained:"
+        ]
+      },
+      {
+        "company_name": "HPLC systems – Agilent 1280 Series, Shimadzu, and Waters systems with Lab Solutions, OpenLab,",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Compliance & Documentation – Maintained laboratory records in line with cGMP requirements;",
+          "maintenance of laboratory instruments to ensure accuracy and reliability.",
+          "Cross-Functional Collaboration – Worked closely with formulation, production, and QA teams to"
+        ]
+      },
+      {
+        "company_name": "Job Responsibilities – Umedica Laboratories Pvt. Ltd.",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786489 - Dilip Sharma.pdf",
+    "name": "Dilip Kumar",
+    "contact_number": "260102163429",
+    "email": "dilipsharma7282@gmail.com",
+    "dob": "07/02/1982",
+    "gender": null,
+    "address": null,
+    "skills": [
+      "marketing",
+      "banking",
+      "insurance"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786490 - Sardar Dewanda.pdf",
+    "name": "Sardar Singh Dewanda",
+    "contact_number": "+919694210177",
+    "email": "sdewanda44@gmail.com",
+    "dob": "01/01/1993",
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Standard Operating Procedure",
+      "Sap Hana",
+      "Rca",
+      "Capa",
+      "Compliance",
+      "Sap",
+      "Manpower Planning",
+      "Logistics",
+      "Quality Control",
+      "coordination",
+      "optimization",
+      "reporting",
+      "excel",
+      "mrp",
+      "Quality Assurance",
+      "SOP Documentation",
+      "Quality Audits",
+      "SAP Production",
+      "PowerPoint",
+      "Inventory Management",
+      "Production Planning",
+      "Process Control"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "1. Cello Consumerware Pvt. Ltd., Falna, Rajasthan",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "Jan 2025",
+        "end_date": "Present",
+        "currently_working": true,
+        "experience_duration": "1y 3m",
+        "duration_text": "Jan 2025 – Present",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Monitoring OTIF performance and daily management reporting.",
+          "Ensuring SOP implementation and compliance across all packing lines.",
+          "Supporting management in audits, reviews, and improvement",
+          "Leading complete cold-end packing operations as per production plan.",
+          "Ensuring high packing quality through correct layout and workflow.",
+          "Supporting NPD for new packaging development."
+        ]
+      },
+      {
+        "company_name": "2. Borosil Ltd., Jaipur, Rajasthan",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": "2. Borosil Ltd., Jaipur, Rajasthan",
+        "start_date": "May 2018",
+        "end_date": "Dec 2024",
+        "currently_working": false,
+        "experience_duration": "6y 7m",
+        "duration_text": "May 2018 – Dec 2024",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [
+          "SAP"
+        ],
+        "responsibilities": [
+          "Borosil Ltd., Jaipur, Rajasthan"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11786491 - Rahul Gupta.pdf",
+    "name": "Rahul Gupta",
+    "contact_number": "919399324996",
+    "email": "rahulgupta55948@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Sales",
+      "excel",
+      "Production Planning",
+      "Process Control"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Presently Working in IPCA Laboratories Ltd. Pithampur as a Production",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "09/2022",
+        "end_date": "till date",
+        "currently_working": true,
+        "experience_duration": "3y 7m",
+        "duration_text": "09/2022 to till date",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "2 Year Working in PSA Pvt. Limited as a Capsule Filling Machine Operator &"
+        ]
+      },
+      {
+        "company_name": "9 Months Experience in Cipla Ltd.,Pithampur as a Capsule Filling Machine Operator",
+        "role": "2.2 Years Sales Experience in Reliance Jio at Katni. Worked as a Sales Executive",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "(ZRO 90 T), (AF 40 T). Working Period from 25/02/2019 to 30/01/2020."
+        ]
+      },
+      {
+        "company_name": "1.5 Years Experience in Cipla Ltd as a Tablet Packing. Working Period",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "5 Years Experience in Cipla Ltd as a Tablet Packing. Working Period"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11786492 - Dhruv Baliyan.pdf",
+    "name": "Dhruv Baliyan",
+    "contact_number": "+919548658828",
+    "email": "raghuvanshidhruv@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Onboarding",
+      "Django",
+      "Mysql",
+      "agile",
+      "testing",
+      "calibration",
+      "authentication",
+      "cloud",
+      "mentorship",
+      "networking",
+      "shipping",
+      "git",
+      "java",
+      "javascript",
+      "mongodb",
+      "NodeJS",
+      "python",
+      "ReactJS",
+      "CSS",
+      "Equipment Calibration",
+      "AWS",
+      "CI/CD",
+      "Next.js",
+      "Unit Testing",
+      "Postman"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Decoders Lab",
+        "role": "Full Stack Developer",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "May 2025",
+        "end_date": "Aug 2025",
+        "currently_working": false,
+        "experience_duration": "3m",
+        "duration_text": "May 2025 – Aug 2025",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [
+          "Django"
+        ],
+        "responsibilities": [
+          "Engineered and deployed multiple MERN and Django apps, focusing on simple, maintainable architecture and mea-",
+          "Improved page load and API response times by optimizing database queries and reducing unnecessary work on the",
+          "Collaborated in cross-functional sprints, guided code reviews, and helped onboard new teammates.",
+          "Bridgix (2025) — Developed an Alumni–Student Networking Platform designed to enhance mentorship and career in-",
+          "teraction. Implemented key features including user profiles, communication modules, and relevance-based connection",
+          "recommendations. Integrated DigiLocker for secure and verified authentication to ensure trusted onboarding."
+        ]
+      },
+      {
+        "company_name": null,
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "Oct 2024",
+        "end_date": "Nov 2024",
+        "currently_working": false,
+        "experience_duration": "1m",
+        "duration_text": "Oct 2024 – Nov 2024",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "and trained the network using contrastive loss to learn a discriminative feature space. Developed a complete workflow",
+          "stable verification accuracy by optimizing the margin parameter and embedding distance metrics, enabling consistent"
+        ]
+      },
+      {
+        "company_name": "one-to-one identity checks even with limited data.",
+        "role": null,
         "employment_type": "Full-time",
         "location": null,
         "start_date": null,
@@ -102,50 +737,1607 @@
         "ctc": null,
         "notice_period": null,
         "technologies": [
-          "React"
+          "Mysql"
+        ],
+        "responsibilities": [
+          "model calls and deterministic prompt formatting. Designed normalized MySQL tables with indexed retrieval paths for",
+          "storing sessions, embeddings, user attempts, and scoring artifacts. Added a background worker to compute difficulty",
+          "weighting and maintain question diversity. Hardened the platform with input-sanitization middleware, secure session",
+          "tokens, optimistic UI updates, and distributed caching to minimize repeated LLM calls. The result is a robust, scalable"
+        ]
+      },
+      {
+        "company_name": "system providing adaptive interview simulations tailored to company, role, and user skill trajectory.",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Lip Reading Speech Recognition (Work in Progress) — Implementing a lip-reading model inspired by the LipNet ar-",
+          "modeling. Currently developing preprocessing pipelines, frame alignment logic, and training scripts for sentence-level"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11786512 - Karan Tokiya.docx",
+    "name": "Karanbhai Arvindbhai Tokiya",
+    "contact_number": "9265690609",
+    "email": "ktokiya0@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Hplc",
+      "chromatography",
+      "calibration",
+      "laboratory",
+      "Data Analysis",
+      "Quality Control",
+      "Equipment Calibration"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "COROMANDAL INTERNATIONAL LIMITED.",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786513 - Meet Patel.pdf",
+    "name": "Meet Patel",
+    "contact_number": "8140290259",
+    "email": "meetpatel4341@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "cGMP",
+      "Process Optimization",
+      "Compliance",
+      "Hplc",
+      "Quality Control",
+      "erp",
+      "Raw Material Handling",
+      "Equipment Calibration",
+      "Quality Audits",
+      "Production Planning",
+      "Process Control"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Gujarat themis biosynthesis Limited",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "May 2024",
+        "end_date": "Present",
+        "currently_working": true,
+        "experience_duration": "1y 11m",
+        "duration_text": "May 2024 - Present",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      },
+      {
+        "company_name": "Fermentation Process Development & Scale-Up",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "2022",
+        "end_date": "2024",
+        "currently_working": false,
+        "experience_duration": "2y",
+        "duration_text": "2022-2024",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Led end-to-end development and scale-up of fermentation processes"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11786514 - Jayesh Shimpi.pdf",
+    "name": "Jayesh Samadhan Shimpi",
+    "contact_number": "+919638165134",
+    "email": "jayeshshimpi988@gmail.com",
+    "dob": "15/10/2002",
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Process Validation",
+      "cGMP",
+      "Batch Manufacturing",
+      "documentation",
+      "formulation",
+      "academic",
+      "accredited",
+      "organizational",
+      "Quality Assurance"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "GUFIC BIOSCIENCES LTD.",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      },
+      {
+        "company_name": "Duration :- 09/2024 To Till The Date",
+        "role": "Officer-QA",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Work Handling :- As an Officer-QA I was responsible for,",
+          "Participated in two days state level workshop on “DRUG PRICING AND AFFORDABILITY”"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11786515 - Guduri Omkar.pdf",
+    "name": "Guduri Omkar",
+    "contact_number": null,
+    "email": "omkarguduri51@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [],
+    "professional_experience": [
+      {
+        "company_name": null,
+        "role": "Shift Manager",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "2022",
+        "end_date": "2025",
+        "currently_working": false,
+        "experience_duration": "3y",
+        "duration_text": "2022 - 2025",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786518 - Rajesh Kumar Patel.pdf",
+    "name": "Rajesh Kumar",
+    "contact_number": "+918953166860",
+    "email": "patelrajeshkumar830@gmail.com",
+    "dob": "09/06/1992",
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Internal Audit",
+      "planning",
+      "organizational",
+      "excel",
+      "erp",
+      "external audit",
+      "Raw Material Handling",
+      "Quality Audits",
+      "PowerPoint"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Since –Oct 2020 Working at International packaging Product Pvt",
+        "role": "Store & Warehouse Supervisor.",
+        "employment_type": "Full-time",
+        "location": "Raise PR, GRN, SES.",
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Maintain RGP & NRGP Record in system."
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11786519 - Avinash Chaudhary.pdf",
+    "name": "Avinash",
+    "contact_number": "+917844921912",
+    "email": "avinashchaudhary1234@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "C",
+      "documentation",
+      "recruitment",
+      "academy",
+      "compliance",
+      "Process Validation",
+      "strategic thinking",
+      "time management",
+      "interpersonal skills",
+      "Client Handling",
+      "Quality Assurance",
+      "Raw Material Handling",
+      "SOP Documentation",
+      "Batch Manufacturing",
+      "Production Planning",
+      "Process Control"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786520 - Suraj Dubey.pdf",
+    "name": "Suraj Dubey",
+    "contact_number": "+916386464665",
+    "email": "surajdubeyl082002@ginai1.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "cGMP",
+      "Enterprise Resource Planning",
+      "Compliance",
+      "Root Cause Analysis",
+      "Excel",
+      "formulation",
+      "troubleshooting",
+      "erp",
+      "Quality Assurance",
+      "Quality Audits",
+      "PowerPoint",
+      "Production Planning",
+      "Process Control"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "01 year experience in Zenith Drugs limited as apprentice (04/2024",
+        "role": "04/2025)",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "04/2024",
+        "end_date": "04/2025",
+        "currently_working": false,
+        "experience_duration": "1y",
+        "duration_text": "04/2024-04/2025",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Collaborate with Q.A. teams to identify quality issues and implement corrective actions to"
+        ]
+      },
+      {
+        "company_name": "ZENITH DRUGS LIMITED (05/2025",
+        "role": "Present)",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "05/2025",
+        "end_date": "Present",
+        "currently_working": true,
+        "experience_duration": "11m",
+        "duration_text": "05/2025 - Present",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Ensured compliance with GMP regulations during packaging operations.",
+          "Maintained a clean and safe work environment, adhering to safety protocols"
+        ]
+      },
+      {
+        "company_name": "Manpower Handling",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "2020",
+        "end_date": "2024",
+        "currently_working": false,
+        "experience_duration": "4y",
+        "duration_text": "2020-2024",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "55 SGPA highly"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11786521 - Pramod Bhajantri.pdf",
+    "name": "Pramodbhajantri",
+    "contact_number": "8152971994",
+    "email": "pramodbhajantri1111@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "agile",
+      "testing",
+      "troubleshooting",
+      "automation",
+      "authentication",
+      "authorization",
+      "cloud",
+      "devops",
+      "microservices",
+      "monitoring",
+      "ansible",
+      "docker",
+      "git",
+      "html",
+      "java",
+      "Core Java",
+      "Servlets",
+      "JSP",
+      "Spring MVC",
+      "Spring Boot",
+      "Spring Security",
+      "Maven",
+      "JUnit",
+      "Mockito",
+      "jenkins",
+      "jira",
+      "json",
+      "kafka",
+      "kubernetes",
+      "linux",
+      "mysql",
+      "sql",
+      "Quality Assurance",
+      "AWS",
+      "CI/CD",
+      "Scrum",
+      "Postman",
+      "Production Planning",
+      "Process Control"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786522 - Saumya Srivastava.pdf",
+    "name": "Saumya Srivastava",
+    "contact_number": "9939537102",
+    "email": "saumyasrivastava1405@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Spc",
+      "Inspection",
+      "Data Analysis",
+      "Quality Assurance",
+      "Quality Control",
+      "Raw Material Handling",
+      "Material Testing",
+      "ISO 9001",
+      "Equipment Calibration",
+      "Quality Audits",
+      "FMEA"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Responsive Industries Ltd (SPC Flooring)",
+        "role": "Quality Officer",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "September 2024",
+        "end_date": "Present",
+        "currently_working": true,
+        "experience_duration": "1y 7m",
+        "duration_text": "September 2024 – Present",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Implement corrective actions to address defects"
+        ]
+      },
+      {
+        "company_name": "Collaborate with cross-functional teams to improve quality systems",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Design and implement QA plans for supplier materials and services"
+        ]
+      },
+      {
+        "company_name": "Quality Engineer – Kumar Elastomech pvt Ltd February 2024 – September 2024",
+        "role": "Quality Engineer – Kumar Elastomech pvt Ltd February 2024 – September 2024",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "February 2024",
+        "end_date": "September 2024",
+        "currently_working": false,
+        "experience_duration": "7m",
+        "duration_text": "February 2024 – September 2024",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Managed process control and audit documentation"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11786523 - Gayatri Shimpi.pdf",
+    "name": "Shimpigayatri",
+    "contact_number": "9579314474",
+    "email": "shimpigayatri80@gmail.com",
+    "dob": "20/07/2000",
+    "gender": null,
+    "address": null,
+    "skills": [
+      "investigation",
+      "academic",
+      "calibration",
+      "autoclave",
+      "monitoring",
+      "interpersonal skills",
+      "Raw Material Handling",
+      "Equipment Calibration"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Five star pharmaceuticals Ltd",
+        "role": "Ahemdabad (vatva)",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786524 - Paurush Pratap.pdf",
+    "name": "Paurush Pratap",
+    "contact_number": "+919123220388",
+    "email": "paurushpratap99@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "electrical"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Bhilosa industries private limited",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      },
+      {
+        "company_name": "JBF industries limited",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786525 - Paridhi Bodse.pdf",
+    "name": "Bodseparidhi",
+    "contact_number": "+917987618820",
+    "email": "bodseparidhi@gmail.com",
+    "dob": "29/03/2002",
+    "gender": null,
+    "address": null,
+    "skills": [
+      "lean",
+      "antimicrobial",
+      "bioinformatics",
+      "chromatography",
+      "documentation",
+      "testing",
+      "calibration",
+      "auditor",
+      "compliance",
+      "autoclave",
+      "laboratory",
+      "monitoring",
+      "organizational",
+      "excel",
+      "cGMP",
+      "Figma",
+      "six sigma",
+      "MS Word",
+      "Quality Assurance",
+      "ISO 9001",
+      "Equipment Calibration",
+      "SOP Documentation",
+      "Quality Audits",
+      "Inventory Management"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786526 - Shruti Jagdish Gavanang.pdf",
+    "name": "Shruti Jagdish Gavanang",
+    "contact_number": "7378863451",
+    "email": "shrutigavanang31@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Tally Erp",
+      "Tally Prime",
+      "Sales",
+      "Enterprise Resource Planning",
+      "Tds",
+      "Accounting",
+      "Tally",
+      "Taxation",
+      "Gst",
+      "Excel",
+      "Bank Reconciliation",
+      "automation",
+      "drawing",
+      "organizational",
+      "erp"
+    ],
+    "professional_experience": [
+      {
+        "company_name": " ACCOUNTS ASSISTANT",
+        "role": " ACCOUNTS EXECUTIVE",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Maintain in Sales & Purchase Register in Tally"
+        ]
+      },
+      {
+        "company_name": "M/ S Amar Shukla & CO",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "2024",
+        "end_date": "Present",
+        "currently_working": true,
+        "experience_duration": "2y 3m",
+        "duration_text": "2024 – Present",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [
+          "ERP"
         ],
         "responsibilities": []
       },
       {
-        "company_name": "November 2025 - January 2026 (3 months)",
-        "role": ".NET Developer",
+        "company_name": "Company, Branch accountings, cost centres, generation of various reports, Export /",
+        "role": null,
         "employment_type": "Full-time",
-        "location": "Ahmedabad, Gujarat, India",
-        "start_date": "November 2025",
-        "end_date": "January 2026",
+        "location": "import excel PDF, consolidation.",
+        "start_date": null,
+        "end_date": null,
         "currently_working": false,
-        "experience_duration": "2m",
-        "duration_text": "November 2025 - January 2026",
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [
+          "Excel"
+        ],
+        "responsibilities": []
+      },
+      {
+        "company_name": "Annual closing of accounts, provisioning and finalization of accounts of Private Ltd",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786527 - Dhruvik Surani.pdf",
+    "name": "Dhruvik Jayantibhai Surani",
+    "contact_number": "8000902226",
+    "email": "dhruviksurani009@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "optimization",
+      "excel",
+      "matlab",
+      "python",
+      "Data Analysis",
+      "Quality Assurance",
+      "Quality Control",
+      "Process Improvement",
+      "SEM",
+      "Project Management",
+      "Production Planning",
+      "Process Control"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786528 - Dhiraj Wangade.pdf",
+    "name": "Dhiraj Bapu Wangade",
+    "contact_number": "9284716865",
+    "email": "wangadedhiraj@gmail.com",
+    "dob": "12/04/2004",
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Kaizen",
+      "documentation",
+      "hydraulic",
+      "mechanical engineering",
+      "production planning",
+      "Process Improvement",
+      "Process Control"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786529 - Abhishek Chauhan.pdf",
+    "name": "Abhishek Chauhan",
+    "contact_number": "+919889918238",
+    "email": "st.abhishekchauhan@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "academic"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "I have been working as a operator in otsuka chemical pvt.ltd. from april 2023 to dec 2024.",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "april 2023",
+        "end_date": "dec 2024",
+        "currently_working": false,
+        "experience_duration": "1y 8m",
+        "duration_text": "april 2023 to dec 2024",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786530 - Amaan Siddiqui.pdf",
+    "name": "Amaan Siddiqui",
+    "contact_number": "9893043465",
+    "email": "e-mail-amaansiddiqui17@gmail.com",
+    "dob": "17/03/1995",
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Sales",
+      "time management",
+      "interpersonal skills",
+      "Training & Development"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "JAQUAR ORIENTATION CENTER - BHOPAL – OCTOBER 2020 -2022",
+        "role": "INTERN",
+        "employment_type": "Internship",
+        "location": null,
+        "start_date": "OCTOBER 2020",
+        "end_date": "2022",
+        "currently_working": false,
+        "experience_duration": "1y 3m",
+        "duration_text": "OCTOBER 2020 -2022",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Responsible for maintaining pricing of the products in the showroom",
+          "Responsible for maintaining the products in correct order or in alignment on the",
+          "Responsible for maintaining the decorum of the showroom"
+        ]
+      },
+      {
+        "company_name": "(2015-2018) GRADUATE IN BACHELOR OF BUSINESS ADMINISTRATION -EXTOL",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "2015",
+        "end_date": "2018",
+        "currently_working": false,
+        "experience_duration": "3y",
+        "duration_text": "2015-2018",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786555 - June May.pdf",
+    "name": "Surve Krishna",
+    "contact_number": "9824813923",
+    "email": "survekrishna540@gmail.com",
+    "dob": "19/12/2002",
+    "gender": null,
+    "address": null,
+    "skills": [
+      "developmental",
+      "medical",
+      "nursing",
+      "patient care",
+      "time management",
+      "Process Improvement"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "knowledge of healthcare systems . 6 months experience in a clinical setting where I studied under senior",
+        "role": "lead happy, healthy lives.",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "June 2021",
+        "end_date": "May 2022",
+        "currently_working": false,
+        "experience_duration": "11m",
+        "duration_text": "June 2021 - May 2022",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Provide the children medical care and developmental training so that they can handle basic daily functions and"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11786556 - Ravikant Singh.pdf",
+    "name": "Ravikant Singh",
+    "contact_number": "9608355539",
+    "email": "ravikantoct1@gmail.com",
+    "dob": "10/10/1995",
+    "gender": null,
+    "address": null,
+    "skills": [
+      "excel",
+      "CSS"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786557 - Sabyasachy Paul.pdf",
+    "name": "Sabyasachy Paul",
+    "contact_number": "9123757686",
+    "email": "joypl333@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Standard Operating Procedure",
+      "Equipment Calibration",
+      "FDA Compliance",
+      "SOP Documentation",
+      "Production Planning",
+      "Process Control"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Edward Food Research & Analysis Centre LTD. (EFRAC)",
+        "role": "Edward Food Research & Analysis Centre LTD. (EFRAC)",
+        "employment_type": "Full-time",
+        "location": "6. Pour plating, spread plating etc",
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "I worked as Junior Microbiologist. My Responsibilities were as follows",
+          "1. Routine analysis of food, water, Soil, Ayush and environmental sample as per IS , ISO, FDA-BAM & The",
+          "2. Handling of Pathogenic cultures such as Salmonella sp, Listeria monocytogens, Vibrio cholerae, Vibrio",
+          "3. Making glycerol stock and Working stock of different bacterial strains (Monthly).",
+          "4. Logbook maintenance and maintenance of calibration record.",
+          "6. Pour plating, spread plating etc",
+          "7. Instructing housekeeping staff to clean",
+          "8. Lims work (Sample receiving, allotment, Result input etc)",
+          "9. Timely decontamination of Analysed samples",
+          "10. Discarding of Analysed samples and keeping records of discarded sample.",
+          "11. Environment monitoring (Active air sampling, Passive air sampling, Contact plate, Swab test etc)",
+          "12. Maintaining stock of media and chemicals",
+          "13. Giving feasibility as per client's requirement.",
+          "14. Receiving sample and routine analysis",
+          "15. Daily calibration of pH meter and Analytical balance",
+          "16. Monthly calibration of Autoclave and colony counter",
+          "17. Quarterly calibration of incubator and water bath.",
+          "18. Preparation of SOP & Protocols.",
+          "19. I have also done RT-PCR few time."
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11786558 - Classification Internal.pdf",
+    "name": "Thejaswi.",
+    "contact_number": "+919677690414",
+    "email": "tejar273@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Negotiation",
+      "Six Sigma",
+      "Rca",
+      "Process Optimization",
+      "Root Cause Analysis",
+      "Tableau",
+      "Excel",
+      "Logistics",
+      "Power BI",
+      "coordination",
+      "documentation",
+      "automation",
+      "compliance",
+      "optimization",
+      "reporting",
+      "erp",
+      "production planning",
+      "change management",
+      "customer service",
+      "KPI",
+      "Customer Satisfaction",
+      "Process Improvement",
+      "Supply Chain Management",
+      "Vendor Management",
+      "Process Control"
+    ],
+    "professional_experience": [
+      {
+        "company_name": " Maersk Global Service Centre (2023-Current date)",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "2023",
+        "end_date": "Current",
+        "currently_working": true,
+        "experience_duration": "3y 3m",
+        "duration_text": "2023-Current",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [
+          "Power BI",
+          "Tableau",
+          "Excel"
+        ],
+        "responsibilities": [
+          "Enhanced reporting & analytics: Developed performance dashboards for real-time visibility into KPIs",
+          "Process optimization & efficiency: Streamlined workflows by identifying inefficiencies and",
+          "implementing improvements, resulting in higher productivity and cost savings.",
+          "Continuous improvement leadership: Led cross-functional teams in executing Lean/Six Sigma",
+          "Risk mitigation & RCA: Conducted root cause analysis on recurring issues and implemented",
+          "Change management & training: Facilitated training sessions on new processes and tools, ensuring",
+          "Automation & IT collaboration: Worked with IT teams to automate manual tasks and digitize",
+          "workflows, reducing errors and enhancing operational efficiency."
+        ]
+      },
+      {
+        "company_name": " Elite Paloume Forwards Pvt LTD (2019-2021)",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "2019",
+        "end_date": "2021",
+        "currently_working": false,
+        "experience_duration": "2y",
+        "duration_text": "2019-2021",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Ensured smooth day-to-day logistics operations by promptly resolving workflow disruptions and",
+          "Built and maintained strong vendor relationships, improving collaboration, negotiation outcomes, and"
+        ]
+      },
+      {
+        "company_name": "Classification: Internal",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "2017",
+        "end_date": "2019",
+        "currently_working": false,
+        "experience_duration": "2y",
+        "duration_text": "2017-2019",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Managed high volumes of incoming work requests with professionalism and strong organization.",
+          "Collaborated with team members to enhance process efficiency and productivity."
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11786559 - Gayatri Chalamalasetty.pdf",
+    "name": "Chalamalasetty. Gayathri",
+    "contact_number": "+918465985679",
+    "email": "id-gayatrichalamalasetty@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "forecasting",
+      "java",
+      "python",
+      "sql",
+      "tableau",
+      "KPI",
+      "AWS",
+      "Pandas",
+      "NumPy",
+      "Power BI",
+      "Budgeting & Forecasting"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786560 - Mohan Pawar.pdf",
+    "name": "Mohan Madhukar Pawar",
+    "contact_number": "9112883278",
+    "email": "mohanpawar1323@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "calibration",
+      "Compression",
+      "time management",
+      "Equipment Calibration",
+      "Batch Manufacturing"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786561 - Sanjay Shrivas.pdf",
+    "name": "Sanjay Shrivas",
+    "contact_number": "+918818931329",
+    "email": "shrivassanju1@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Sales",
+      "excel",
+      "CRM",
+      "Market Research",
+      "Strategic Planning",
+      "Customer Relationship",
+      "Lead Generation",
+      "PowerPoint"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Frigoriﬁco Allana Pvt. Ltd.",
+        "role": "Sales Executive",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "06/2023",
+        "end_date": "Present",
+        "currently_working": true,
+        "experience_duration": "2y 10m",
+        "duration_text": "06/2023 - Present",
         "ctc": null,
         "notice_period": null,
         "technologies": [],
         "responsibilities": []
       },
       {
-        "company_name": "May 2025 - January 2026 (9 months)",
+        "company_name": "Khanal Foods Pvt. Ltd. (Dogsee)",
         "role": null,
         "employment_type": "Full-time",
-        "location": "Ahmedabad, Gujarat, India",
-        "start_date": "May 2025",
-        "end_date": "January 2026",
+        "location": null,
+        "start_date": "09/2022",
+        "end_date": "06/2023",
         "currently_working": false,
-        "experience_duration": "8m",
-        "duration_text": "May 2025 - January 2026",
+        "experience_duration": "9m",
+        "duration_text": "09/2022 - 06/2023",
         "ctc": null,
         "notice_period": null,
         "technologies": [],
         "responsibilities": []
       },
       {
-        "company_name": "Faculty Lecturer",
+        "company_name": null,
+        "role": "Sales Executive",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "09/2021",
+        "end_date": "09/2022",
+        "currently_working": false,
+        "experience_duration": "1y",
+        "duration_text": "09/2021 - 09/2022",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      },
+      {
+        "company_name": "Flowkem Poly Plast Pvt. Ltd.",
         "role": null,
         "employment_type": "Full-time",
-        "location": "Ahmedabad, Gujarat, India",
-        "start_date": "May 2023",
-        "end_date": "July 2025",
+        "location": null,
+        "start_date": "01/2019",
+        "end_date": "08/2021",
         "currently_working": false,
-        "experience_duration": "2y 2m",
-        "duration_text": "May 2023 - July 2025",
+        "experience_duration": "2y 7m",
+        "duration_text": "01/2019 - 08/2021",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786562 - Ravindra Singh.pdf",
+    "name": "Ravindra Singh",
+    "contact_number": "+919726368132",
+    "email": "amitsingh9824@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "electrical engineering",
+      "Troubleshooting"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Presently working as a Assistant Engineer in Saint-Gobain PVT.LTD, Electrical Maintenance.",
+        "role": "Presently working as a Assistant Engineer in Saint-Gobain PVT.LTD, Electrical Maintenance.",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      },
+      {
+        "company_name": "Personal Information:",
+        "role": "DIPLOMA ELECTRICAL ENGINEER.",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786563 - Amit Prajapati.pdf",
+    "name": "Amit Prajapati",
+    "contact_number": "9510302105",
+    "email": "amitpra253@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "finance",
+      "academic",
+      "banking",
+      "customer service"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786564 - About Myself.pdf",
+    "name": "Sifa Zeeshan Shegle",
+    "contact_number": "+919970347234",
+    "email": "shifakondkari48@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Sales",
+      "Import Export",
+      "academic",
+      "excel",
+      "Production Planning",
+      "Process Control"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Working at “ Eureka Outsourcing Solutions Private Limited (UPSTOX )",
+        "role": "For 8 months. (As a sales Executive ) (Opening Demat & Treading Account).",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Worked as Process Engineer (In Consultancy- Eco Chemtech private limited)",
+          "5. Collecting patents for given chemicals and tabulating them.",
+          "6. Preparing basic PNID ,PBD working in it."
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11786565 - Anjaney Rai.pdf",
+    "name": "Anjaney Rai",
+    "contact_number": "+917838739641",
+    "email": "raianjaney80@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "recruitment",
+      "academic",
+      "Onboarding",
+      "Employee Engagement"
+    ],
+    "professional_experience": [
+      {
+        "company_name": null,
+        "role": null,
+        "employment_type": "Internship",
+        "location": null,
+        "start_date": "Aug 2025",
+        "end_date": "Sep 2025",
+        "currently_working": false,
+        "experience_duration": "1m",
+        "duration_text": "Aug 2025 – Sep 2025",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786566 - Pawan Gupta.pdf",
+    "name": "Pawan Kumar Gupta",
+    "contact_number": "6392639901",
+    "email": "guptapawan983@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "academic"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786567 - Mosin Tamboli.pdf",
+    "name": "Mosin Tamboli",
+    "contact_number": "+919284523602",
+    "email": "mosinaslamtamboli@gmail.com",
+    "dob": "09/12/1995",
+    "gender": null,
+    "address": null,
+    "skills": [
+      "investigation",
+      "testing",
+      "calibration",
+      "autoclave",
+      "monitoring",
+      "excel",
+      "cGMP",
+      "Quality Control",
+      "Equipment Calibration",
+      "Quality Audits"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Estate, Goa",
+        "role": "Executive Microbiologist, Microlabs Eyedrops Plant, Bommasandra, Bangalore",
+        "employment_type": "Full-time",
+        "location": "Estate, Goa",
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      },
+      {
+        "company_name": "Senior Executive Microbiologist, Cipla Pharmaceuticals Pvt. Ltd., Verna, Goa",
+        "role": "Senior Executive Microbiologist, Cipla Pharmaceuticals Pvt. Ltd., Verna, Goa",
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "2023",
+        "end_date": "Present",
+        "currently_working": true,
+        "experience_duration": "3y 3m",
+        "duration_text": "2023–Present",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786568 - Radhe Mahato.pdf",
+    "name": "Radheshyam Mahato",
+    "contact_number": "7363845883",
+    "email": "radhemahato3395@gmail.com",
+    "dob": "11/04/1999",
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Extrusion",
+      "C",
+      "Change Control",
+      "Kaizen",
+      "academic",
+      "monitoring",
+      "Process Improvement",
+      "Production Planning",
+      "Process Control"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "(From Sept. 2023 to till now) in Toyoda Gosei Minda India Pvt. Ltd. Village:",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Current working as a Exstrusion Production. EPDM RUBBER LINE LEADER"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11786569 - Abhishek Singh.pdf",
+    "name": "Abhishek",
+    "contact_number": "6387601243",
+    "email": "abhisheksh0444@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "CNC Machining"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Siac Skh India Cabs Manufacturing Limited",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "Mar 2023",
+        "end_date": "Jun 2023",
+        "currently_working": false,
+        "experience_duration": "3m",
+        "duration_text": "Mar 2023 – Jun 2023",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      },
+      {
+        "company_name": "Sigma Electric Manufacturing Corporation Ltd",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "Sept 2023",
+        "end_date": "Apr 2024",
+        "currently_working": false,
+        "experience_duration": "7m",
+        "duration_text": "Sept 2023 – Apr 2024",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      },
+      {
+        "company_name": "Alkem Laboratories",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786570 - Akshay Murumkar.pdf",
+    "name": "Akshay Murumkar",
+    "contact_number": "8600084839",
+    "email": "akshaymurumkar0303@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Quality Assurance",
+      "documentation",
+      "investigation",
+      "inspection",
+      "compliance",
+      "Process Validation",
+      "cGMP",
+      "change control",
+      "time management",
+      "SOP Documentation",
+      "Batch Manufacturing",
+      "Deviation Management"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Marksans Pharma Ltd ,Verna Goa",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": "Marksans Pharma Ltd, Verna Goa",
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": []
+      }
+    ]
+  },
+  {
+    "file": "11786571 - Bharat N Patil.pdf",
+    "name": "Bharat N Patil",
+    "contact_number": "7984761067",
+    "email": "bp200694@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "documentation",
+      "formulation",
+      "testing",
+      "troubleshooting",
+      "academia",
+      "calibration",
+      "drawings",
+      "inspection",
+      "discipline",
+      "monitoring",
+      "procurement",
+      "autocad",
+      "cGMP",
+      "Blender",
+      "preventive maintenance",
+      "breakdown maintenance",
+      "project management",
+      "MIS",
+      "Quality Control",
+      "Equipment Calibration",
+      "FDA Compliance",
+      "SOP Documentation",
+      "Quality Audits",
+      "Budgeting & Forecasting",
+      "Vendor Management",
+      "Production Planning",
+      "Process Control"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786572 - Harsh Rai.docx",
+    "name": "Prabhat Rai",
+    "contact_number": "8009495297",
+    "email": "prabhatrai2525@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "troubleshooting",
+      "project management",
+      "JavaScript"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786573 - Alka Yadav.pdf",
+    "name": "Alka Yadav",
+    "contact_number": "+919569274197",
+    "email": "alka@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "testing",
+      "autoclave",
+      "monitoring",
+      "cGMP",
+      "tds",
+      "internal audit",
+      "interpersonal skills",
+      "Quality Control",
+      "Raw Material Handling",
+      "Quality Audits"
+    ],
+    "professional_experience": []
+  },
+  {
+    "file": "11786574 - Trushil Ahir.pdf",
+    "name": "Trushil Ahir",
+    "contact_number": "9824994014",
+    "email": "ahirtrushil00@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Compliance",
+      "sustainability",
+      "campaigns",
+      "project management",
+      "Quality Audits",
+      "Production Planning",
+      "Process Control"
+    ],
+    "professional_experience": [
+      {
+        "company_name": null,
+        "role": "Intern",
+        "employment_type": "Internship",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "Managed greige fabric handling, inventory, and process checks to reduce defects, improve utilization, and"
+        ]
+      }
+    ]
+  },
+  {
+    "file": "11786575 - Dhruvik Patel.pdf",
+    "name": "State",
+    "contact_number": "+918866102861",
+    "email": "dhruvikpatel2412@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [],
+    "professional_experience": [
+      {
+        "company_name": "Company: Goldi sun private limited.( Navsari )",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": null,
+        "end_date": null,
+        "currently_working": false,
+        "experience_duration": null,
+        "duration_text": null,
         "ctc": null,
         "notice_period": null,
         "technologies": [],

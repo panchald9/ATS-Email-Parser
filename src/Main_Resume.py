@@ -264,6 +264,8 @@ NON_NAME_WORDS = {
     'achievements','core','competencies','competency','citizen','citizenship',
     'styrene','acryl','acrylonitrile',
     'previous','employers','then','call','me','cisco','finance',
+    'tree','club','silver','oak','university','developer','designer','contact',
+    'profile','work','education',
 }
 
 # Header-like words/phrases that should not be accepted as person names.
@@ -1206,6 +1208,33 @@ def _email_local_looks_like_name(local, alpha_chunks):
     return False
 
 
+def _split_compact_name_token(token):
+    token = re.sub(r'[^A-Za-z]', '', token or '').lower()
+    if len(token) < 6:
+        return None
+
+    # Try surname split first: dhruvpanchal -> dhruv + panchal
+    for sur in sorted(COMMON_SURNAMES, key=len, reverse=True):
+        if token.endswith(sur) and len(token) > len(sur) + 2:
+            first = token[:-len(sur)]
+            if _token_looks_like_first_name(first):
+                cand = title_case(f"{first} {sur}")
+                if is_valid(cand):
+                    return cand
+
+    # Try first-name split: pramodbhajantri -> pramod + bhajantri
+    first_names = COMMON_MALE_FIRST_NAMES | COMMON_FEMALE_FIRST_NAMES
+    for fn in sorted(first_names, key=len, reverse=True):
+        if token.startswith(fn) and len(token) > len(fn) + 2:
+            last = token[len(fn):]
+            if len(last) >= 3:
+                cand = title_case(f"{fn} {last}")
+                if is_valid(cand):
+                    return cand
+
+    return None
+
+
 def name_from_email(full_text):
     matches = re.finditer(
         r'([A-Za-z][A-Za-z0-9._+-]{2,})@[A-Za-z0-9.-]+\.[A-Za-z]{2,}',
@@ -1284,6 +1313,17 @@ def extract_name(text):
     compact_text = normalize_compact_text(text)
     norm = [normalize_caps(l) for l in raw]
     full = '\n'.join(norm)
+
+    # Catch merged uppercase headers like "EDUCATIONDHRUVPANCHALDEVELOPER".
+    for line in raw[:6]:
+        m = re.search(
+            r'([A-Z]{6,30})(?=(?:DEVELOPER|DESIGNER|CONTACT|SKILLS|PROFILE|WORK|EXPERIENCE))',
+            line,
+        )
+        if m:
+            compact_candidate = _split_compact_name_token(m.group(1))
+            if compact_candidate and not looks_like_name_header(compact_candidate):
+                return compact_candidate
 
     # FIX: Detect if we're in a "Top Skills" or similar section at the beginning
     # If the first 20 lines contain skill section markers, skip S0.3
@@ -1542,9 +1582,20 @@ def _is_suspicious_extracted_name(name):
 
     noisy_prefixes = (
         'education', 'experience', 'objective', 'summary', 'profile',
-        'skill', 'course', 'graduation', 'internship', 'project', 'faculty'
+        'skill', 'course', 'graduation', 'internship', 'project', 'faculty',
+        'owner', 'contact'
     )
     if any(any(t.startswith(pref) for pref in noisy_prefixes) for t in tokens):
+        return True
+
+    hard_bad_tokens = {
+        'at', 'club', 'tree', 'silver', 'oak', 'university',
+        'developer', 'designer', 'work', 'experience', 'profile', 'contact'
+    }
+    if any(t in hard_bad_tokens for t in tokens):
+        return True
+
+    if len(tokens) >= 2 and any(len(t) <= 2 for t in tokens):
         return True
 
     bad_hits = sum(1 for t in tokens if t in NAME_HEADER_TOKENS or t in NAME_TECHNICAL_TOKENS)
@@ -1590,6 +1641,40 @@ def _derive_name_from_email_local(email_address):
     single = chunks[0].title()
     if is_valid(single, allow_single=True):
         return single
+    return None
+
+
+def _derive_name_from_filename(filename):
+    if not filename:
+        return None
+    base = os.path.splitext(os.path.basename(filename))[0]
+    base = re.sub(r'^\d+\s*[-_ ]*', '', base)
+    base = re.sub(r'(?i)\b(?:resume|cv|profile|biodata)\b', ' ', base)
+    base = re.sub(r'(?i)(resume|profile|biodata|\bcv\b)', ' ', base)
+    base = re.sub(r'[^A-Za-z\s._-]', ' ', base)
+    base = re.sub(r'[._-]+', ' ', base)
+    base = re.sub(r'\s+', ' ', base).strip()
+    if not base:
+        return None
+
+    parts = [p for p in base.split() if p]
+    if not parts:
+        return None
+
+    # Keep first 2-3 useful tokens.
+    cleaned_parts = [p for p in parts if p.lower() not in NAME_HEADER_TOKENS]
+    if not cleaned_parts:
+        return None
+    candidate = ' '.join(cleaned_parts[:3])
+    candidate = title_case(candidate)
+
+    if is_valid(candidate):
+        return candidate
+
+    if len(cleaned_parts) >= 2:
+        candidate2 = title_case(' '.join(cleaned_parts[:2]))
+        if is_valid(candidate2):
+            return candidate2
     return None
 
 
@@ -2219,26 +2304,29 @@ def normalize_skill_key(skill):
 
 
 GENERIC_SKILL_STOPWORDS = {
-    'ability','abilities','analysis','analytical','application','applications',
-    'assurance','background','batch','capability','capabilities','communication',
-    'compliance','control','coordination','creative','data','decision','delivery',
-    'design','development','documentation','environment','evaluation','execution',
-    'experience','framework','frameworks','functional','implementation','improvement',
-    'knowledge','leadership','learning','maintenance','management','methodology',
-    'methods','model','modeling','modelling','monitoring','operations','optimization',
-    'organizing','performance','planning','problem','process','processes','production',
-    'professional','project','projects','quality','reporting','research','responsibility',
-    'responsibilities','safety','skills','solution','solutions','strategy','support',
-    'systems','technical','technology','testing','training','troubleshooting','work',
-    'certification','certifications','manufacturing','materials','balance','routing',
-    # Languages - NOT skills
-    'english','spanish','french','german','italian','portuguese','russian','chinese',
-    'hindi','gujarati','marathi','bengali','telugu','kannada','malayalam','tamil',
-    'urdu','punjabi','arabic','japanese','korean','dutch','swedish','norwegian',
-    'danish','finnish','polish','czech','hungarian','romanian','greek','hebrew',
-    # Section headers that shouldn't be skills
-    'languages','language','certifications','certification','top skills','skills',
-    'strength','strengths','achievement','achievements','personal','profile','summary',
+    # Pure generic descriptors (never a standalone skill)
+    'ability', 'abilities', 'background', 'capability', 'capabilities',
+    'creative', 'decision', 'effective', 'evaluation', 'execution',
+    'experience', 'framework', 'frameworks', 'functional',
+    'improvement', 'knowledge', 'leadership', 'learning',
+    'methodology', 'methods', 'model', 'modeling', 'modelling',
+    'organizing', 'professional', 'responsibility', 'responsibilities',
+    'solution', 'solutions', 'strategic', 'analytical',
+    'technical', 'technology', 'work', 'projects',
+    # Communication / soft-skill category words (too vague alone)
+    'communication', 'teamwork', 'hardworking', 'diligence',
+    'adaptable', 'learner', 'sincere', 'punctual',
+    # Natural languages (these belong in a "Languages" field, not skills)
+    'english', 'spanish', 'french', 'german', 'italian',
+    'portuguese', 'russian', 'chinese', 'hindi', 'gujarati',
+    'marathi', 'bengali', 'telugu', 'kannada', 'malayalam',
+    'tamil', 'urdu', 'punjabi', 'arabic', 'japanese', 'korean',
+    'dutch', 'swedish', 'norwegian', 'danish', 'finnish',
+    'polish', 'czech', 'hungarian', 'romanian', 'greek', 'hebrew',
+    # Section headers that leak through
+    'languages', 'language', 'certifications', 'certification',
+    'top skills', 'skills', 'strength', 'strengths',
+    'achievement', 'achievements', 'personal', 'profile', 'summary',
 }
 
 STRONG_SINGLE_WORD_SKILLS = {
@@ -2246,6 +2334,11 @@ STRONG_SINGLE_WORD_SKILLS = {
     'javascript','jira','json','kafka','kubernetes','linux','matlab','mongodb',
     'mysql','oracle','php','postgresql','powerbi','powershell','python','sap',
     'selenium','snowflake','sql','tableau','terraform','typescript','unix','xml','yaml',
+    # Added missing strong singles
+    'docker', 'kotlin', 'scala', 'rust', 'golang', 'flutter', 'figma',
+    'hplc', 'ansys', 'autocad', 'solidworks', 'catia', 'tally',
+    'pytorch', 'tensorflow', 'keras', 'pandas', 'numpy', 'scikit',
+    'agile', 'scrum', 'seo', 'sem', 'crm', 'erp', 'gst', 'hris',
 }
 
 BUSINESS_SKILL_ALLOWLIST = {
@@ -2256,15 +2349,20 @@ BUSINESS_SKILL_ALLOWLIST = {
     'dataanalysis','dataanalytics','businessanalysis','marketingstrategy',
     'customerrelationship','customerengagement','customersatisfaction',
     'clientcoordination','clientengagement','clienthandling','clientinteraction',
-    'socialmedia','mediamarketing','leadgeneration','realestate',
+    'socialmedia','mediamarketing','leadgeneration','realestate', 'testing',
+    'reporting', 'compliance', 'procurement', 'logistics', 'auditing',
+    'budgeting', 'forecasting', 'onboarding', 'sourcing', 'seo', 'sem',
+    'payroll', 'taxation', 'inspection', 'calibration', 'validation',
+    'documentation',
 }
 
 SKILL_SECTION_HEADER_RE = re.compile(
     r'(?i)\b('
+    r'skills?|'
     r'technical\s+skills?|core\s+skills?|key\s+skills?|skills?\s*&\s*technolog(?:y|ies)|'
     r'skills?\s*&\s*tools?|core\s+competenc(?:y|ies)|areas?\s+of\s+(?:expertise|excellence)|'
     r'technical\s+specifications?|competencies?|technolog(?:y|ies)|tools?|software|'
-    r'expertise|proficien(?:cy|cies)|frameworks?|certifications?'
+    r'expertise|proficien(?:cy|cies)|frameworks?'
     r')\b'
 )
 
@@ -2274,38 +2372,49 @@ NON_SKILL_SECTION_HEADER_RE = re.compile(
     r'work\s+experience|professional\s+experience|experience|employment\s+history|'
     r'education|academic\s+qualification(?:s)?|projects?|internships?|'
     r'personal\s+details?|contact|declaration|references?|hobbies|interests?|'
-    r'achievements?|awards?|publications?|languages?|certifications?'
+    r'achievements?|awards?|publications?'
     r')\b'
+)
+
+# Lines that are pure section headers (standalone words, not "Certification: AWS")
+PURE_SECTION_HEADER_RE = re.compile(
+    r'(?i)^\s*(?:languages?|certifications?|strengths?|hobbies?|interests?)\s*:?\s*$'
 )
 
 
 def _is_weak_generic_skill(skill):
+    """
+    Only block truly generic single words.
+    Multi-word phrases are almost never generic.
+    """
     if not skill:
         return True
     normalized = normalize_skill_key(skill)
     if not normalized:
         return True
+    words = re.findall(r'[A-Za-z0-9+#]+', skill.lower())
+    if not words:
+        return True
+
+    # Always keep allowlisted/strong skills.
     if normalized in BUSINESS_SKILL_ALLOWLIST:
         return False
     if normalized in STRONG_SINGLE_WORD_SKILLS:
         return False
-    if normalized in GENERIC_SKILL_STOPWORDS:
-        return True
-    words = re.findall(r'[A-Za-z0-9+#]+', skill.lower())
-    if not words:
-        return True
-    if len(words) >= 2 and all(len(w) == 1 for w in words):
-        return True
+
+    # Multi-word phrase is weak only if every token is generic.
+    if len(words) >= 2:
+        return all(w in GENERIC_SKILL_STOPWORDS for w in words)
+
     if normalized in {'com', 'iam'}:
         return True
-    if len(words) == 1:
-        w = words[0]
-        if w in STRONG_SINGLE_WORD_SKILLS:
-            return False
-        if w in GENERIC_SKILL_STOPWORDS or w in BLACKLIST:
+
+    if len(words) == 1 and len(words[0]) <= 2 and words[0] not in {'c', 'r', 'go'}:
             return True
-        if len(w) <= 2:
-            return True
+
+    if normalized in GENERIC_SKILL_STOPWORDS:
+        return True
+
     return False
 
 
@@ -2387,6 +2496,7 @@ def build_skill_matchers(skills_list):
 
 
 INFERRED_SKILL_RULES = [
+    # Existing rules preserved
     (r'\bcrm\b|customer\s+relationship\s+management', 'CRM'),
     (r'\bkpi(?:s)?\b|key\s+performance\s+indicator(?:s)?', 'KPI'),
     (r'\bmis\b|management\s+information\s+system(?:s)?', 'MIS'),
@@ -2453,20 +2563,174 @@ INFERRED_SKILL_RULES = [
     (r'\bdry\s+granulation\b', 'Dry Granulation'),
     (r'\bcompression\b', 'Compression'),
     (r'\bcoating\b', 'Coating'),
-    (r'\boee\b|\boverall\s+equipment\s+efficien(?:cy|t)\b', 'OEE (Overall Equipment Efficiency)'),
+    (r'\boee\b|\boverall\s+equipment\s+efficien(?:cy|t)\b', 'OEE'),
     (r'\bequipment\s+calibration\b|\bcalibration\b', 'Equipment Calibration'),
     (r'\bequipment\s+qualification\b', 'Equipment Qualification'),
     (r'\bfda\b', 'FDA Compliance'),
     (r'\bregulatory\s+compliance\b', 'Regulatory Compliance'),
     (r'\bsop\b', 'SOP Documentation'),
-    (r'\bbmr\b|\bmfr\b|\bbatch\s+manufacturing\b', 'Batch Manufacturing (BMR/MFR)'),
+    (r'\bbmr\b|\bmfr\b|\bbatch\s+manufacturing\b', 'Batch Manufacturing'),
     (r'\bquality\s+audit\b|\baudits?\b', 'Quality Audits'),
     (r'\bchange\s+control\b', 'Change Control'),
     (r'\bdeviation\s+management\b|\bdeviation\b', 'Deviation Management'),
-    (r'\bsap\b.*\bproduction\b|\bproduction\b.*\bsap\b', 'SAP Production Module'),
+    (r'\bsap\b.*\bproduction\b|\bproduction\b.*\bsap\b', 'SAP Production'),
     (r'\bexcel\b', 'Excel'),
-    (r'\bword\b', 'MS Word'),
     (r'\bpower\s*point\b|\bpowerpoint\b', 'PowerPoint'),
+
+    # Cloud / DevOps
+    (r'\baws\b|amazon\s+web\s+services', 'AWS'),
+    (r'\bazure\b|microsoft\s+azure', 'Azure'),
+    (r'\bgcp\b|google\s+cloud\s+platform', 'GCP'),
+    (r'\bdocker\b', 'Docker'),
+    (r'\bkubernetes\b|\bk8s\b', 'Kubernetes'),
+    (r'\bterraform\b', 'Terraform'),
+    (r'\bansible\b', 'Ansible'),
+    (r'\bjenkins\b', 'Jenkins'),
+    (r'\bci[/\s]?cd\b|continuous\s+integration|continuous\s+deployment', 'CI/CD'),
+    (r'\bdevops\b', 'DevOps'),
+    (r'\bgit\b|version\s+control', 'Git'),
+    (r'\blinux\b|\bunix\b', 'Linux'),
+
+    # Programming Languages
+    (r'\bpython\b', 'Python'),
+    (r'\bjava\b(?!\s*script)', 'Java'),
+    (r'\bjavascript\b|\bjs\b', 'JavaScript'),
+    (r'\btypescript\b|\bts\b', 'TypeScript'),
+    (r'\bc\+\+\b', 'C++'),
+    (r'\bc#\b|csharp\b', 'C#'),
+    (r'\bphp\b', 'PHP'),
+    (r'\bruby\b', 'Ruby'),
+    (r'\bgo\s+lang\b|\bgolang\b|\bgo\s+programming\b', 'Go'),
+    (r'\bscala\b', 'Scala'),
+    (r'\bkotlin\b', 'Kotlin'),
+    (r'\br\s+programming\b|\br\s+language\b', 'R Programming'),
+    (r'\brust\b', 'Rust'),
+
+    # Web / Mobile
+    (r'\bangular\b', 'Angular'),
+    (r'\bvue(?:\.?\s*js)?\b', 'VueJS'),
+    (r'\bdjango\b', 'Django'),
+    (r'\bflask\b', 'Flask'),
+    (r'\bfastapi\b', 'FastAPI'),
+    (r'\bspring\s*boot\b', 'Spring Boot'),
+    (r'\blaravel\b', 'Laravel'),
+    (r'\bflutter\b', 'Flutter'),
+    (r'\bnext\.?\s*js\b', 'Next.js'),
+
+    # Databases
+    (r'\bmysql\b', 'MySQL'),
+    (r'\bpostgresql\b|\bpostgres\b', 'PostgreSQL'),
+    (r'\bmongodb\b', 'MongoDB'),
+    (r'\bredis\b', 'Redis'),
+    (r'\belasticsearch\b', 'Elasticsearch'),
+    (r'\bsnowflake\b', 'Snowflake'),
+    (r'\bdynamodb\b', 'DynamoDB'),
+
+    # Data / ML
+    (r'\bmachine\s+learning\b', 'Machine Learning'),
+    (r'\bdeep\s+learning\b', 'Deep Learning'),
+    (r'\bnatural\s+language\s+processing\b|\bnlp\b', 'NLP'),
+    (r'\bcomputer\s+vision\b', 'Computer Vision'),
+    (r'\btensorflow\b', 'TensorFlow'),
+    (r'\bpytorch\b', 'PyTorch'),
+    (r'\bscikit[\s\-]?learn\b', 'Scikit-learn'),
+    (r'\bpandas\b', 'Pandas'),
+    (r'\bnumpy\b', 'NumPy'),
+    (r'\bpower\s*bi\b', 'Power BI'),
+    (r'\btableau\b', 'Tableau'),
+    (r'\bhadoop\b', 'Hadoop'),
+    (r'\bapache\s+spark\b|\bspark\b', 'Apache Spark'),
+    (r'\betl\b|extract\s+transform\s+load', 'ETL'),
+    (r'\bdata\s+warehousing\b', 'Data Warehousing'),
+
+    # Finance / Accounting
+    (r'\bfinancial\s+analysis\b|\bfinancial\s+modeling\b', 'Financial Analysis'),
+    (r'\baccounts\s+payable\b', 'Accounts Payable'),
+    (r'\baccounts\s+receivable\b', 'Accounts Receivable'),
+    (r'\bbank\s+reconciliation\b', 'Bank Reconciliation'),
+    (r'\bgst\b', 'GST'),
+    (r'\btds\b', 'TDS'),
+    (r'\btally\b', 'Tally'),
+    (r'\bbudgeting\b|\bforecast(?:ing)?\b', 'Budgeting & Forecasting'),
+    (r'\bcost\s+accounting\b', 'Cost Accounting'),
+    (r'\binternal\s+audit\b|\binternal\s+control\b', 'Internal Audit'),
+    (r'\bifrs\b|\bgaap\b|\bind\s+as\b', 'IFRS/GAAP'),
+
+    # HR
+    (r'\brecruitment\b|\btalent\s+acquisition\b', 'Recruitment'),
+    (r'\bonboarding\b', 'Onboarding'),
+    (r'\bperformance\s+management\b|\bappraisal\b', 'Performance Management'),
+    (r'\bpayroll\b', 'Payroll Processing'),
+    (r'\bhrms\b|\bhris\b', 'HRMS/HRIS'),
+    (r'\bemployee\s+engagement\b', 'Employee Engagement'),
+    (r'\bcompensation\s+and\s+benefits\b|\bc&b\b', 'Compensation & Benefits'),
+    (r'\btraining\s+and\s+development\b|\bl&d\b', 'Training & Development'),
+
+    # Marketing / Digital
+    (r'\bseo\b|search\s+engine\s+optimi', 'SEO'),
+    (r'\bsem\b|search\s+engine\s+market', 'SEM'),
+    (r'\bgoogle\s+ads\b|\bgoogle\s+adwords\b', 'Google Ads'),
+    (r'\bfacebook\s+ads\b|\bmeta\s+ads\b', 'Facebook Ads'),
+    (r'\bemail\s+marketing\b', 'Email Marketing'),
+    (r'\bcontent\s+marketing\b', 'Content Marketing'),
+    (r'\bdigital\s+marketing\b', 'Digital Marketing'),
+    (r'\bgoogle\s+analytics\b', 'Google Analytics'),
+
+    # Design
+    (r'\bfigma\b', 'Figma'),
+    (r'\badobe\s+xd\b', 'Adobe XD'),
+    (r'\bphotoshop\b', 'Photoshop'),
+    (r'\billustrator\b', 'Illustrator'),
+    (r'\bcanva\b', 'Canva'),
+    (r'\bui\s*[/&]\s*ux\b|\bux\s+design\b|\bui\s+design\b', 'UI/UX Design'),
+
+    # Project / Agile
+    (r'\bproject\s+management\b', 'Project Management'),
+    (r'\bagile\b', 'Agile'),
+    (r'\bscrum\b', 'Scrum'),
+    (r'\bkanban\b', 'Kanban'),
+    (r'\bjira\b', 'Jira'),
+    (r'\bconfluence\b', 'Confluence'),
+
+    # Supply Chain / Logistics
+    (r'\bsupply\s+chain\b', 'Supply Chain Management'),
+    (r'\binventory\s+management\b', 'Inventory Management'),
+    (r'\bwarehouse\s+management\b|\bwms\b', 'Warehouse Management'),
+    (r'\bprocurement\b', 'Procurement'),
+    (r'\bvend(?:or|or\s+management)\b', 'Vendor Management'),
+    (r'\blogistics\b', 'Logistics'),
+    (r'\bdemand\s+planning\b', 'Demand Planning'),
+
+    # Testing / QA (IT)
+    (r'\bselenium\b', 'Selenium'),
+    (r'\bapi\s+testing\b', 'API Testing'),
+    (r'\bunit\s+testing\b', 'Unit Testing'),
+    (r'\btest\s+automation\b|\bautomation\s+testing\b', 'Test Automation'),
+    (r'\bperformance\s+testing\b|\bload\s+testing\b', 'Performance Testing'),
+    (r'\bpostman\b', 'Postman'),
+    (r'\bjmeter\b', 'JMeter'),
+
+    # Security
+    (r'\bcybersecurity\b|\bcyber\s+security\b', 'Cybersecurity'),
+    (r'\bpenetration\s+testing\b|\bpen\s+test\b', 'Penetration Testing'),
+    (r'\bethical\s+hacking\b', 'Ethical Hacking'),
+    (r'\bnetwork\s+security\b', 'Network Security'),
+
+    # Manufacturing / Engineering
+    (r'\bautocad\b', 'AutoCAD'),
+    (r'\bsolidworks\b', 'SolidWorks'),
+    (r'\bcatia\b', 'CATIA'),
+    (r'\bansys\b', 'ANSYS'),
+    (r'\blean\s+manufacturing\b', 'Lean Manufacturing'),
+    (r'\bsix\s+sigma\b', 'Six Sigma'),
+    (r'\bfmea\b', 'FMEA'),
+    (r'\b5s\b', '5S Methodology'),
+    (r'\bprecision\s+mach(?:ining)?\b', 'Precision Machining'),
+    (r'\bcnc\b', 'CNC Machining'),
+    (r'\bwelding\b', 'Welding'),
+    (r'\bplc\b', 'PLC'),
+    (r'\bscada\b', 'SCADA'),
+    (r'\bdcs\b', 'DCS'),
 ]
 
 
@@ -2514,14 +2778,13 @@ def cleanup_extracted_skills(text, extracted_skills):
         'equipmentcalibration': 'Equipment Calibration',
         'equipmentqualification': 'Equipment Qualification',
         'sop': 'SOP Documentation',
-        'bmr': 'Batch Manufacturing (BMR/MFR)', 'mfr': 'Batch Manufacturing (BMR/MFR)',
-        'oee': 'OEE (Overall Equipment Efficiency)',
+        'bmr': 'Batch Manufacturing', 'mfr': 'Batch Manufacturing',
+        'oee': 'OEE',
         'rawdatum': 'Raw Data',
         'scikit': 'Scikit-learn', 'scikitlearn': 'Scikit-learn',
         'powerbi': 'Power BI',
         'cnn': 'Convolutional Neural Networks',
-        'lstm': 'LSTM',
-        'rnn': 'RNN',
+        'lstm': 'LSTM', 'rnn': 'RNN',
     }
     weak_exact = {
         'manufacturing','materials','balance','routing','budgeting','pharmacy','portfolio',
@@ -2531,42 +2794,33 @@ def cleanup_extracted_skills(text, extracted_skills):
         'cross','functional','team','teams','crossfunctional','crossfunctionalteams',
     }
     normalized = []
-    seen       = set()
+    seen = set()
     for raw in extracted_skills:
         if not raw:
             continue
         
-        # FIX: Skip section headers combined with items like "languages english"
         raw_lower = raw.lower().strip()
-        if any(header in raw_lower for header in 
-               ['languages ', 'language ', 'certifications ', 'certification ', 'strength ', 'strengths ']):
-            # Check if it's a section header + item pattern
-            if ' ' in raw_lower:
-                parts = raw_lower.split()
-                if parts[0] in ['languages', 'language', 'certifications', 'certification', 'strength', 'strengths']:
-                    # Skip if first word is a section header
-                    continue
-        
-        # FIX: Skip malformed skills like "science generative" or "raw datum" until normalized
+        if any(raw_lower.startswith(h + ' ') for h in
+               ['languages', 'language', 'certifications', 'certification',
+                'strength', 'strengths']):
+            continue
+
         if any(bad in raw_lower for bad in ['science generative', 'raw datum']):
             continue
-        
-        key   = normalize_skill_key(raw)
+
+        key = normalize_skill_key(raw)
         if not key:
             continue
-        
-        # FIX: Remove duplicate words (python python -> python, data data -> data data)
-        skill_base = alias_map.get(key, raw)
-        words = skill_base.split()
-        if len(words) > 1:
-            # Remove duplicate consecutive words
-            unique_words = []
-            for word in words:
-                if not unique_words or unique_words[-1].lower() != word.lower():
-                    unique_words.append(word)
-            skill_base = ' '.join(unique_words)
-        
-        skill     = skill_base
+
+        skill = alias_map.get(key, raw)
+
+        words = skill.split()
+        unique_words = []
+        for word in words:
+            if not unique_words or unique_words[-1].lower() != word.lower():
+                unique_words.append(word)
+        skill = ' '.join(unique_words)
+
         skill_key = normalize_skill_key(skill)
         if not skill_key or skill_key in seen:
             continue
@@ -2574,25 +2828,38 @@ def cleanup_extracted_skills(text, extracted_skills):
             continue
         if _is_weak_generic_skill(skill):
             continue
+
         seen.add(skill_key)
         normalized.append(skill)
-    
-    token_sets = [
-        set(re.findall(r'[a-z0-9+#]+', s.lower()))
+
+    multi_token_sets = [
+        frozenset(re.findall(r'[a-z0-9+#]+', s.lower()))
         for s in normalized
         if len(re.findall(r'[a-z0-9+#]+', s.lower())) > 1
     ]
+
     final_skills = []
     for skill in normalized:
         words = re.findall(r'[a-z0-9+#]+', skill.lower())
+
         if len(words) == 1:
-            token = words[0]
-            if normalize_skill_key(token) in BUSINESS_SKILL_ALLOWLIST:
+            tok = words[0]
+            tok_key = normalize_skill_key(tok)
+
+            if tok in STRONG_SINGLE_WORD_SKILLS or tok_key in BUSINESS_SKILL_ALLOWLIST:
                 final_skills.append(skill)
                 continue
-            if any(token in ts for ts in token_sets):
+
+            if tok in WORK_EXPERIENCE_SKILLS:
+                final_skills.append(skill)
                 continue
+
+            covered = any(tok in ts for ts in multi_token_sets)
+            if covered and len(tok) <= 12 and tok not in STRONG_SINGLE_WORD_SKILLS:
+                continue
+
         final_skills.append(skill)
+
     return final_skills
 
 
@@ -2638,6 +2905,9 @@ def extract_skills_from_resume(text, skills_list, compiled_skill_matchers=None):
             if tokens and normalize_skill_key(tokens[0]) in BUSINESS_SKILL_ALLOWLIST:
                 filtered.append(skill)
                 continue
+            if tokens and tokens[0] in STRONG_SINGLE_WORD_SKILLS:
+                filtered.append(skill)
+                continue
             if any(tok_set.issubset(ms) for ms in multi_token_sets):
                 continue
         filtered.append(skill)
@@ -2673,16 +2943,14 @@ def _is_probable_skill_header(line):
     if not candidate:
         return False
     lower = candidate.lower()
-    
-    # Explicitly exclude "Languages" and "Certifications" alone
-    if lower.strip() in ('languages', 'language', 'certifications', 'certification', 
-                          'strengths', 'strength', 'hobbies', 'hobbies', 'interests'):
+
+    # Pure standalone "Languages", "Certifications" etc. are non-skill section headers.
+    if PURE_SECTION_HEADER_RE.match(line):
         return False
     
-    if not SKILL_SECTION_HEADER_RE.search(lower):
-        return False
     if re.search(r'[@]|https?://|\b(?:email|phone|mobile|contact)\b', lower):
         return False
+
     strong_header_phrases = re.compile(
         r'(?i)\b(?:'
         r'technical\s+skills?|skills?\s*&\s*technolog(?:y|ies)|skills?\s*&\s*tools?|'
@@ -2692,11 +2960,14 @@ def _is_probable_skill_header(line):
     )
     if strong_header_phrases.search(lower):
         return True
+
+    if not SKILL_SECTION_HEADER_RE.search(lower):
+        return False
+
     words = re.findall(r'[A-Za-z0-9+#&/.-]+', candidate)
-    if len(words) <= 8 and (candidate.endswith(':') or candidate.isupper()):
+    if len(words) <= 3 and (candidate.endswith(':') or candidate.isupper() or len(words) <= 2):
         return True
-    if len(words) <= 4:
-        return True
+
     return False
 
 
@@ -2707,6 +2978,11 @@ def _is_probable_non_skill_header(line):
     lower = candidate.lower()
     if _is_probable_skill_header(candidate):
         return False
+
+    # Standalone language/certification/strength section headers end the block.
+    if PURE_SECTION_HEADER_RE.match(line):
+        return True
+
     if NON_SKILL_SECTION_HEADER_RE.search(lower):
         words = re.findall(r'[A-Za-z0-9+#&/.-]+', candidate)
         return len(words) <= 10 or candidate.endswith(':')
@@ -2861,6 +3137,24 @@ TECH_KEYWORDS = {
     'linux', 'django', 'flask', 'fastapi', 'spring', 'hibernate', 'javascript',
     'typescript', 'html', 'css', 'power bi', 'tableau', 'excel', 'sap', 'erp'
 }
+
+EXPERIENCE_INLINE_HEADER_RE = re.compile(
+    r'^\s*(?P<company>[A-Za-z0-9&.,()\'\-/ ]{3,120})'
+    r'(?:,\s*(?P<location>[A-Za-z .&\-/]{2,60}))?\s*[–—-]\s*'
+    r'(?P<role>[A-Za-z0-9./&\-() ]{2,80})\s*$'
+)
+
+EXPERIENCE_LABELED_LINE_RE = re.compile(
+    r'(?i)^\s*(?:'
+    r'company\s*name|organization|organisation|employer|designation|position|role|'
+    r'duration|location|place|employment\s*type|notice\s*period|ctc'
+    r')\s*[:\-–]\s*(.+?)\s*$'
+)
+
+COMPANY_LABEL_RE = re.compile(r'(?i)^\s*(?:company\s*name|organization|organisation|employer)\s*[:\-–]\s*(.+?)\s*$')
+ROLE_LABEL_RE = re.compile(r'(?i)^\s*(?:designation|position|role)\s*[:\-–]\s*(.+?)\s*$')
+LOCATION_LABEL_RE = re.compile(r'(?i)^\s*(?:location|place)\s*[:\-–]\s*(.+?)\s*$')
+DURATION_LABEL_RE = re.compile(r'(?i)^\s*(?:duration|period|tenure)\s*[:\-–]\s*(.+?)\s*$')
 
 
 def _extract_experience_section_lines(text):
@@ -3074,6 +3368,67 @@ def _extract_technologies(text):
     return found
 
 
+def _parse_inline_experience_header(line):
+    if not line:
+        return None
+    m = EXPERIENCE_INLINE_HEADER_RE.match(_clean_experience_line(line))
+    if not m:
+        return None
+    company = re.sub(r'\s+', ' ', m.group('company')).strip(' ,.-')
+    role = re.sub(r'\s+', ' ', m.group('role')).strip(' ,.-')
+    location = (m.group('location') or '').strip(' ,.-') or None
+
+    # Guard to avoid matching normal prose lines.
+    if not company or not role:
+        return None
+    if len(company.split()) > 12 or len(role.split()) > 10:
+        return None
+    if not (COMPANY_HINT_RE.search(company) or ROLE_HINT_RE.search(role)):
+        return None
+
+    return {
+        'company': company,
+        'role': role,
+        'location': location,
+    }
+
+
+def _extract_rich_responsibilities(block, company=None, role=None, duration_text=None):
+    if not block:
+        return []
+    out = []
+    seen = set()
+    company_l = (company or '').lower()
+    role_l = (role or '').lower()
+    duration_l = (duration_text or '').lower()
+
+    for line in block:
+        l = _clean_experience_line(line)
+        if not l or _is_experience_noise_line(l):
+            continue
+        ll = l.lower()
+
+        # Skip metadata-like lines.
+        if EXPERIENCE_LABELED_LINE_RE.match(l):
+            continue
+        if _parse_inline_experience_header(l):
+            continue
+        if DATE_RANGE_RE.search(l):
+            continue
+        if (company_l and ll == company_l) or (role_l and ll == role_l) or (duration_l and ll == duration_l):
+            continue
+        if len(l.split()) < 6:
+            continue
+
+        # Keep bullets and meaningful prose lines.
+        if RESPONSIBILITY_LINE_RE.search(line) or re.search(r'(?i)\b(?:develop|design|build|create|manage|lead|work|implement|optimi|collaborat|maintain|ensure)\w*\b', l):
+            key = ll
+            if key not in seen:
+                seen.add(key)
+                out.append(l)
+    return out
+
+
 def _extract_responsibilities(lines):
     if not lines:
         return []
@@ -3137,6 +3492,36 @@ def extract_professional_experience_profile(text):
         duration_raw = None
 
         for line in block:
+            company_lbl = COMPANY_LABEL_RE.match(line)
+            if company_lbl and company is None:
+                company = _clean_experience_line(company_lbl.group(1))
+
+            role_lbl = ROLE_LABEL_RE.match(line)
+            if role_lbl and role is None:
+                role = _clean_experience_line(role_lbl.group(1))
+
+            location_lbl = LOCATION_LABEL_RE.match(line)
+            if location_lbl and location is None:
+                location = _clean_experience_line(location_lbl.group(1))
+
+            duration_lbl = DURATION_LABEL_RE.match(line)
+            if duration_lbl:
+                s, e, is_current, raw_duration = _extract_date_range(duration_lbl.group(1))
+                if s and e and start_date is None:
+                    start_date = s
+                    end_date = e
+                    currently_working = is_current
+                    duration_raw = raw_duration
+
+            inline_header = _parse_inline_experience_header(line)
+            if inline_header:
+                if company is None:
+                    company = inline_header['company']
+                if role is None:
+                    role = inline_header['role']
+                if location is None and inline_header.get('location'):
+                    location = inline_header['location']
+
             if '|' in line:
                 pieces = [p.strip() for p in line.split('|') if p.strip()]
                 for piece in pieces:
@@ -3165,7 +3550,9 @@ def extract_professional_experience_profile(text):
                 currently_working = is_current
                 duration_raw = raw_duration
 
-        responsibilities = _extract_responsibilities(block)
+        responsibilities = _extract_rich_responsibilities(block, company=company, role=role, duration_text=duration_raw)
+        if not responsibilities:
+            responsibilities = _extract_responsibilities(block)
         technologies = _extract_technologies(block_text)
         experience_duration = _duration_from_range(start_date, end_date, currently_working)
 
@@ -3250,7 +3637,7 @@ def clean_skill_lines(lines):
 # Domain-specific skill keywords for various industries
 # Dynamically build from CSV, but can be extended domain-by-domain
 WORK_EXPERIENCE_SKILLS = {
-    # ═══ Chemical/Process Engineering (PRIMARY FOCUS) ═══
+    # Chemical / Process Engineering
     'hydrometallurgy', 'solvent extraction', 'leaching', 'leaching process',
     'filter press', 'centrifuge filter', 'etp', 'effluent treatment',
     'acid leaching', 'roasting', 'calcination', 'precipitation',
@@ -3260,35 +3647,153 @@ WORK_EXPERIENCE_SKILLS = {
     'thickening', 'filtration', 'membrane separation', 'reverse osmosis',
     'activated carbon', 'ion exchange', 'solvent recovery',
     'metal recovery', 'mineral processing', 'ore processing',
-    
-    # ═══ Equipment & Plant Operations ═══
-    'equipment maintenance', 'plant operations', 'equipment operation',
-    'reactor operation', 'column operation', 'batch processing',
-    'continuous processing', 'process troubleshooting',
-    'instrumentation', 'process control', 'automation',
-    
-    # ═══ Quality & Safety ═══
-    'quality control', 'qc', 'quality assurance', 'qa',
-    'testing', 'analytical laboratory', 'lab testing',
-    'ehs', 'safety management', 'environmental compliance',
-    'sop', 'standard operating procedure',
-    
-    # ═══ Specialized Technical Skills ═══
-    'process optimization', 'process improvement', 'yield optimization',
-    'capacity planning', 'production planning', 'resource management',
-    'troubleshooting', 'root cause analysis', 'failure analysis',
-    'data analysis', 'statistical analysis', 'experimental design',
-    
-    # ═══ Management & Coordination ═══
-    'supervision', 'team leadership', 'project management',
-    'shift supervision', 'production supervision', 'batch management',
-    'documentation', 'compliance management',
-    
-    # ═══ Software/Tools (Industry-specific) ═══
-    'python', 'java', 'c++', 'matlab', 'sql',
-    'excel', 'labview', 'pid control', 'siemens', 'plc',
-    'aspen', 'chemcad', 'hysys', 'honeywell', 'dcs',
-    'scada', 'mis', 'erp', 'sap', 'oracle',
+    'extrusion', 'injection molding', 'blow molding', 'plastic processing',
+    'polymer processing', 'rubber processing', 'compounding',
+    'drip irrigation', 'hdpe', 'upvc', 'cpvc', 'ppr',
+
+    # Pharma / Lab / Healthcare
+    'tablet manufacturing', 'capsule filling', 'wet granulation',
+    'dry granulation', 'compression', 'coating', 'blending',
+    'process validation', 'cleaning validation', 'analytical method validation',
+    'batch manufacturing', 'bmr', 'sop', 'cgmp', 'gmp',
+    'regulatory compliance', 'fda compliance', 'who compliance',
+    'stability testing', 'dissolution testing', 'hplc', 'gc', 'uv vis',
+    'spectrophotometry', 'titration', 'microbiology testing',
+    'equipment calibration', 'equipment qualification', 'iq oq pq',
+    'change control', 'deviation management', 'capa',
+    'quality audit', 'internal audit', 'oee',
+    'pharmacovigilance', 'clinical trials', 'drug regulatory affairs',
+    'medical coding', 'medical writing',
+
+    # Quality / Safety / Environment
+    'quality control', 'quality assurance', 'qa qc',
+    'iso 9001', 'iso 14001', 'iso 45001', 'ohsas 18001',
+    'spc', 'statistical process control', 'six sigma', 'lean manufacturing',
+    'kaizen', '5s', 'fmea', 'root cause analysis', 'rca',
+    'inspection', 'non destructive testing', 'ndt',
+    'ehs', 'health safety environment', 'hse',
+    'fire safety', 'hazop', 'risk assessment',
+    'environmental compliance', 'waste management',
+
+    # Manufacturing / Production / Operations
+    'production planning', 'production scheduling', 'capacity planning',
+    'inventory management', 'warehouse management', 'supply chain management',
+    'procurement', 'vendor management', 'purchase management',
+    'logistics', 'dispatch', 'material handling',
+    'erp', 'sap', 'sap mm', 'sap pp', 'sap sd', 'sap fi',
+    'oracle erp', 'tally', 'tally erp',
+    'plant operations', 'equipment maintenance', 'preventive maintenance',
+    'corrective maintenance', 'breakdown maintenance', 'tpm',
+    'autocad', 'solidworks', 'catia', 'pro e', 'ansys',
+    'process optimization', 'yield optimization', 'cost reduction',
+    'shift management', 'manpower planning',
+
+    # Information Technology / Software
+    'python', 'java', 'c', 'c++', 'c#', 'javascript', 'typescript',
+    'php', 'ruby', 'go', 'golang', 'rust', 'swift', 'kotlin',
+    'r programming', 'scala', 'perl', 'bash', 'shell scripting', 'powershell',
+    'html', 'css', 'html5', 'css3', 'sass', 'less',
+    'react', 'reactjs', 'react native', 'angular', 'vue', 'vuejs',
+    'nodejs', 'express', 'django', 'flask', 'fastapi', 'spring boot',
+    'hibernate', 'laravel', 'asp net', 'dotnet', '.net',
+    'jquery', 'bootstrap', 'tailwind', 'next js', 'nuxt js',
+    'sql', 'mysql', 'postgresql', 'oracle', 'mssql', 'sqlite',
+    'mongodb', 'cassandra', 'redis', 'elasticsearch', 'dynamodb',
+    'nosql', 'hbase', 'couchdb',
+    'aws', 'azure', 'gcp', 'google cloud', 'heroku', 'digitalocean',
+    'docker', 'kubernetes', 'terraform', 'ansible', 'chef', 'puppet',
+    'jenkins', 'gitlab ci', 'github actions', 'ci cd', 'devops',
+    'linux', 'unix', 'windows server', 'ubuntu', 'centos', 'rhel',
+    'git', 'svn', 'jira', 'confluence', 'trello', 'bitbucket',
+    'rest api', 'restful api', 'graphql', 'soap', 'api development',
+    'microservices', 'monolithic architecture', 'serverless',
+    'kafka', 'rabbitmq', 'activemq', 'celery', 'redis queue',
+    'agile', 'scrum', 'kanban', 'waterfall', 'sdlc', 'sprint planning',
+    'unit testing', 'integration testing', 'selenium', 'pytest', 'junit',
+    'postman', 'swagger', 'api testing', 'load testing', 'jmeter',
+    'vs code', 'visual studio', 'eclipse', 'intellij', 'pycharm',
+    'android development', 'ios development', 'flutter', 'xamarin',
+    'machine learning', 'deep learning', 'artificial intelligence',
+    'natural language processing', 'nlp', 'computer vision',
+    'tensorflow', 'pytorch', 'keras', 'scikit learn', 'opencv',
+    'data science', 'data analysis', 'data visualization',
+    'pandas', 'numpy', 'matplotlib', 'seaborn', 'plotly',
+    'power bi', 'tableau', 'qlikview', 'looker', 'metabase',
+    'excel', 'advanced excel', 'pivot table', 'vlookup', 'macros',
+    'hadoop', 'spark', 'hive', 'pig', 'mapreduce', 'databricks',
+    'etl', 'data pipeline', 'data warehousing', 'data modeling',
+    'snowflake', 'redshift', 'bigquery', 'azure synapse',
+    'cybersecurity', 'network security', 'penetration testing',
+    'ethical hacking', 'siem', 'vulnerability assessment',
+    'sap abap', 'sap hana', 'sap basis',
+    'salesforce', 'crm', 'hubspot', 'zoho crm',
+
+    # Data / Analytics / Business Intelligence
+    'business analysis', 'business intelligence', 'bi',
+    'data analytics', 'predictive analytics', 'statistical analysis',
+    'regression analysis', 'time series analysis', 'a b testing',
+    'kpi reporting', 'mis reporting', 'dashboard creation',
+    'requirement gathering', 'use case documentation', 'brd', 'fsd',
+    'uml', 'process mapping', 'gap analysis', 'swot analysis',
+
+    # Finance / Accounting
+    'financial analysis', 'financial modeling', 'financial reporting',
+    'budgeting', 'forecasting', 'variance analysis',
+    'accounts payable', 'accounts receivable', 'general ledger',
+    'bank reconciliation', 'bookkeeping', 'accounting',
+    'gst', 'tds', 'income tax', 'taxation', 'auditing',
+    'ifrs', 'gaap', 'ind as',
+    'cost accounting', 'management accounting', 'credit analysis',
+    'risk management', 'internal control', 'compliance',
+    'investment analysis', 'portfolio management', 'equity research',
+    'fx trading', 'derivatives', 'treasury management',
+    'tally prime', 'quickbooks', 'zoho books', 'sap fico',
+
+    # Human Resources
+    'recruitment', 'talent acquisition', 'sourcing', 'screening',
+    'onboarding', 'offboarding', 'employee engagement',
+    'performance management', 'appraisal', 'kra setting',
+    'payroll processing', 'payroll management', 'statutory compliance',
+    'pf', 'esic', 'gratuity', 'leave management',
+    'hris', 'hrms', 'darwin box', 'successfactors', 'workday',
+    'training and development', 'learning and development', 'l&d',
+    'grievance handling', 'employee relations', 'hr policy',
+    'compensation and benefits', 'salary benchmarking',
+    'manpower planning', 'headcount planning',
+
+    # Sales / Marketing / Business Development
+    'sales', 'business development', 'lead generation',
+    'client acquisition', 'key account management', 'crm management',
+    'cold calling', 'negotiation', 'proposal writing',
+    'market research', 'competitor analysis', 'brand management',
+    'digital marketing', 'social media marketing', 'seo', 'sem',
+    'google ads', 'facebook ads', 'meta ads', 'linkedin marketing',
+    'email marketing', 'content marketing', 'influencer marketing',
+    'campaign management', 'google analytics', 'hubspot',
+    'e commerce', 'amazon seller', 'flipkart seller',
+    'channel sales', 'distribution management', 'retail management',
+
+    # Project Management / General
+    'project management', 'project planning', 'project coordination',
+    'stakeholder management', 'risk management', 'budget management',
+    'vendor coordination', 'contract management', 'sow',
+    'ms project', 'asana', 'monday com', 'smartsheet',
+    'pmp', 'prince2', 'capm',
+    'communication skills', 'presentation skills', 'team leadership',
+    'cross functional collaboration', 'problem solving',
+
+    # Design / Creative
+    'graphic design', 'ui design', 'ux design', 'ui ux',
+    'figma', 'adobe xd', 'sketch', 'invision',
+    'photoshop', 'illustrator', 'indesign', 'canva',
+    'video editing', 'premiere pro', 'after effects', 'final cut pro',
+    'motion graphics', '3d modeling', 'blender', 'maya',
+
+    # Logistics / Supply Chain
+    'import export', 'customs clearance', 'freight forwarding',
+    'shipping', 'fleet management', 'route planning',
+    'cold chain', 'warehouse operations', 'wms',
+    'demand planning', 's&op', 'forecasting', 'order management',
 }
 
 
@@ -3431,6 +3936,11 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list,
                 email_fallback_name = name_from_email(text)
                 if email_fallback_name and not _is_suspicious_extracted_name(email_fallback_name):
                     name = email_fallback_name
+
+        if _is_suspicious_extracted_name(name):
+            filename_name = _derive_name_from_filename(fname)
+            if filename_name and not _is_suspicious_extracted_name(filename_name):
+                name = filename_name
         contact_number = extract_contact_number(text)
         dob            = extract_dob(text)           # ← NEW
 
