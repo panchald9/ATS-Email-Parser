@@ -1,62 +1,62 @@
 {
-  "timestamp": "2026-04-01T11:10:10.068015",
+  "timestamp": "2026-04-01T13:28:02.843061",
   "config": {
     "mode": "quality",
-    "folder": "D:\\Project\\ATS\\ATS Email Parser\\Testing Resume",
+    "folder": "D:\\Project\\ATS\\ATS Email Parser\\Resume",
     "limit": 0,
     "workers": 1,
     "ground_truth": "D:\\Project\\ATS\\ATS Email Parser\\src\\ground_truth.json",
     "parsed_json": "D:\\Project\\ATS\\ATS Email Parser\\src\\output\\resume_parsed.json"
   },
   "quality": {
-    "total_records": 50,
-    "average_score": 83.63,
-    "min_score": 0.0,
-    "max_score": 96.25,
+    "total_records": 1,
+    "average_score": 95.0,
+    "min_score": 95.0,
+    "max_score": 95.0,
     "quality_distribution": {
-      "excellent": 33,
-      "good": 7,
-      "fair": 5,
-      "poor": 5
+      "excellent": 1,
+      "good": 0,
+      "fair": 0,
+      "poor": 0
     },
     "quality_percentage": {
-      "excellent": 66.0,
-      "good": 14.0,
-      "fair": 10.0,
-      "poor": 10.0
+      "excellent": 100.0,
+      "good": 0.0,
+      "fair": 0.0,
+      "poor": 0.0
     },
     "field_extraction_rates": {
       "name": {
-        "found": 45,
-        "total": 50,
-        "pct": 90.0
+        "found": 1,
+        "total": 1,
+        "pct": 100.0
       },
       "email": {
-        "found": 41,
-        "total": 50,
-        "pct": 82.0
+        "found": 1,
+        "total": 1,
+        "pct": 100.0
       },
       "phone": {
-        "found": 41,
-        "total": 50,
-        "pct": 82.0
+        "found": 1,
+        "total": 1,
+        "pct": 100.0
       },
       "gender": {
-        "found": 39,
-        "total": 50,
-        "pct": 78.0
+        "found": 0,
+        "total": 1,
+        "pct": 0.0
       },
       "address": {
-        "found": 29,
-        "total": 50,
-        "pct": 58.0
+        "found": 0,
+        "total": 1,
+        "pct": 0.0
       },
       "skills": {
-        "found": 46,
-        "total": 50,
-        "pct": 92.0
+        "found": 1,
+        "total": 1,
+        "pct": 100.0
       }
     },
-    "poor_record_count": 5
+    "poor_record_count": 0
   }
 }

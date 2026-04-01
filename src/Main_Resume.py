@@ -7,6 +7,7 @@ import importlib
 import argparse
 import random
 import threading
+from datetime import date
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # ── Core deps ──────────────────────────────────────────────────
@@ -86,7 +87,7 @@ def _ensure_skillner_loaded():
 # ══════════════════════════════════════════════════════════════
 #  CONFIGURATION
 # ══════════════════════════════════════════════════════════════
-RESUME_FOLDER  = r"D:\Project\ATS\ATS Email Parser\Testing Resume"
+RESUME_FOLDER  = r"D:\Project\ATS\ATS Email Parser\Bulk_Resumes_1775020050"
 SKILLS_CSV     = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Skill.csv')
 OUTPUT_JSON    = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', 'resume_parsed.json')
 VALIDATION_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', 'validation_report.json')
@@ -185,7 +186,6 @@ PHONE_LABEL_RE = re.compile(
 PHONE_GENERIC_RE = re.compile(
     r'(?<!\w)(?:\+?\d{1,3}[ \t.\-]?)?(?:\(?\d{2,5}\)?[ \t.\-]?)?\d(?:[\d \t()\.\-]{5,}\d)(?!\w)'
 )
-
 EMAIL_DOMAIN_PREFIX_RE = re.compile(
     r"^([a-z0-9-]{1,30}(?:\.[a-z0-9-]{1,30}){0,2}"
     r"\.(?:co\.in|org\.in|ac\.in|gov\.in|com|org|net|edu|gov|in|co|io|ai|info|biz|me|us|uk|ca|au|de|fr|jp|sg))",
@@ -194,7 +194,7 @@ EMAIL_DOMAIN_PREFIX_RE = re.compile(
 EMAIL_STRICT_RE = re.compile(r"^[a-z0-9][a-z0-9._%+-]{1,63}@[a-z0-9-]+(?:\.[a-z0-9-]+)+$")
 EMAIL_NOISY_PREFIX_RE = re.compile(r"^(?:contact|skills|languages|profile|email|mobile|phone)+", re.I)
 
-GENDER_LABEL_RE = re.compile(r'(?i)\b(?:gender|sex)\b\s*[:\-]?\s*(male|female|m|f)\b')
+GENDER_LABEL_RE = re.compile(r'(?i)\b(?:gender|sex)\b\s*[:\-]?\s*(male|female|m|f|man|woman|boy|girl)\b')
 GENDER_EARLY_MALE_RE = re.compile(r'\b(?:gender|sex)\b[^\n]{0,24}\b(?:male|m)\b', re.I)
 GENDER_EARLY_FEMALE_RE = re.compile(r'\b(?:gender|sex)\b[^\n]{0,24}\b(?:female|f)\b', re.I)
 
@@ -1685,18 +1685,49 @@ def extract_email_from_resume(text):
 
 
 # ══════════════════════════════════════════════════════════════
-#  GENDER EXTRACTION  (improved)
+#  GENDER EXTRACTION  (v2 — higher accuracy)
 # ══════════════════════════════════════════════════════════════
+
+# Relation patterns: S/O = son of (Male), D/O = daughter of (Female),
+# W/O = wife of (Female), H/O = husband of (Male)
+RELATION_CODE_RE = re.compile(
+    r'(?i)\b(?:'
+    r'(?:s[/\.]?o|son\s+of)\s*[:\-]?\s*(?:mr\.?\s+)?[A-Z]'
+    r'|(?:d[/\.]?o|daughter\s+of)\s*[:\-]?\s*(?:mr\.?\s+)?[A-Z]'
+    r'|(?:w[/\.]?o|wife\s+of)\s*[:\-]?\s*(?:mr\.?\s+)?[A-Z]'
+    r'|(?:h[/\.]?o|husband\s+of)\s*[:\-]?\s*(?:mrs?\.?\s+)?[A-Z]'
+    r')'
+)
+
+RELATION_MALE_RE   = re.compile(r'(?i)\b(?:s[/\.]?o|son\s+of)\b')
+RELATION_FEMALE_RE = re.compile(r'(?i)\b(?:(?:d[/\.]?o|daughter\s+of)|(?:w[/\.]?o|wife\s+of))\b')
+RELATION_MALE2_RE  = re.compile(r'(?i)\b(?:h[/\.]?o|husband\s+of)\b')
+
+MARITAL_FEMALE_RE = re.compile(
+    r'(?i)\b(?:housewife|married\s+woman|single\s+woman|unmarried\s+woman|'
+    r'working\s+woman|business\s+woman|businesswoman)\b'
+)
+MARITAL_MALE_RE = re.compile(
+    r'(?i)\b(?:married\s+man|single\s+man|unmarried\s+man|'
+    r'businessman|business\s+man)\b'
+)
+
+KAUR_RE  = re.compile(r'(?i)\bkaur\b')
+
+PROFILE_FEMALE_RE = re.compile(
+    r'(?i)\b(?:female\s+candidate|female\s+applicant|she\s+is\s+(?:a|an)|'
+    r'looking\s+for\s+(?:a\s+)?female|female\s+professional)\b'
+)
+PROFILE_MALE_RE = re.compile(
+    r'(?i)\b(?:male\s+candidate|male\s+applicant|he\s+is\s+(?:a|an)|'
+    r'looking\s+for\s+(?:a\s+)?male|male\s+professional)\b'
+)
+
+
 def _infer_gender_from_name(name):
     """
     Infer gender from the candidate's name.
-
-    FIX 1: Removed unreliable consonant-ending heuristic that caused
-            ~20-30% wrong guesses for ambiguous names.
-    FIX 2: Expanded male/female name lists for Indian subcontinent coverage.
-    FIX 3: Added ben/bhen/bai (Gujarati female) and bhai (male) suffix checks.
-    FIX 4: Title check covers kumari/km (Indian female honorifics).
-    FIX 5: Returns None on uncertainty instead of a forced guess.
+    Returns 'Male', 'Female', or None.
     """
     if not name:
         return None
@@ -1717,6 +1748,10 @@ def _infer_gender_from_name(name):
     if first in female_titles:
         return 'Female'
 
+    # Sikh surname "Kaur" is exclusively female
+    if 'kaur' in tokens:
+        return 'Female'
+
     # Gujarati/Indian cultural suffixes are highly reliable
     full_joined = ' '.join(tokens)
     if re.search(r'\b\w+(?:ben|bhen|bai)\b', full_joined):
@@ -1733,8 +1768,16 @@ def _infer_gender_from_name(name):
     if check in COMMON_FEMALE_FIRST_NAMES:
         return 'Female'
 
+    # Also check last token (surname can sometimes reveal gender)
+    if len(tokens) > 1:
+        last = tokens[-1]
+        if last in COMMON_MALE_FIRST_NAMES and last not in COMMON_FEMALE_FIRST_NAMES:
+            return 'Male'
+        if last in COMMON_FEMALE_FIRST_NAMES and last not in COMMON_MALE_FIRST_NAMES:
+            return 'Female'
+
     # Suffix heuristics — ordered from most specific to most general
-    if any(check.endswith(s) for s in ('kumar', 'singh', 'bhai', 'veer', 'vir')):
+    if any(check.endswith(s) for s in ('kumar', 'bhai', 'veer', 'vir')):
         return 'Male'
     if check.endswith('ben') or check.endswith('bhen') or check.endswith('bai'):
         return 'Female'
@@ -1743,17 +1786,12 @@ def _infer_gender_from_name(name):
     if any(check.endswith(s) for s in ('raj', 'deep', 'esh', 'nath', 'kant', 'dev', 'prakash', 'teja')):
         return 'Male'
 
-    # Dataset lookup for names not in our curated lists
+    # Dataset lookup
     if DATASET_AVAILABLE:
-        is_first, is_last = _dataset_first_or_last_hit(check)
-        if is_first and not is_last:
-            # The dataset confirmed it's primarily a first name;
-            # do a secondary lookup for gender-specific first-name
-            # lists to decide direction.
-            pass  # Already checked above; fall through to None
+        is_first, _ = _dataset_first_or_last_hit(check)
+        if is_first:
+            pass
 
-    # FIX: Removed the unreliable consonant-ending heuristic.
-    # Returning None is correct: "uncertain" is better than a wrong guess.
     return None
 
 
@@ -1766,33 +1804,54 @@ def _infer_gender_from_text_context(text):
     if not t:
         return None
 
-    # Direct self-identification statements
-    if re.search(r'\b(?:i\s*am|im|i\'m)\s+male\b', t):
+    # ── Pass A: Explicit relation codes (most reliable in Indian resumes) ──
+    if RELATION_MALE_RE.search(t):
         return 'Male'
-    if re.search(r'\b(?:i\s*am|im|i\'m)\s+female\b', t):
+    if RELATION_FEMALE_RE.search(t):
+        return 'Female'
+    if RELATION_MALE2_RE.search(t):
+        return 'Male'
+
+    # ── Pass B: Marital status phrases ──────────────────────────
+    if MARITAL_FEMALE_RE.search(t):
+        return 'Female'
+    if MARITAL_MALE_RE.search(t):
+        return 'Male'
+
+    # ── Pass C: Profile/candidate description phrases ───────────
+    if PROFILE_FEMALE_RE.search(t):
+        return 'Female'
+    if PROFILE_MALE_RE.search(t):
+        return 'Male'
+
+    # ── Pass D: Direct self-identification ──────────────────────
+    if re.search(r'\b(?:i\s*am|im|i\'m)\s+(?:a\s+)?male\b', t):
+        return 'Male'
+    if re.search(r'\b(?:i\s*am|im|i\'m)\s+(?:a\s+)?female\b', t):
         return 'Female'
 
+    # ── Pass E: Honorific/title cues (weighted) ─────────────────
     male_score   = 0
     female_score = 0
 
-    # Honorific/title cues
-    male_score   += len(re.findall(r'\b(?:mr\.?|mister|sir|shri|shree)\b', t)) * 2
-    female_score += len(re.findall(r'\b(?:mrs\.?|ms\.?|miss|madam|smt|kumari)\b', t)) * 2
+    male_score   += len(re.findall(r'\b(?:mr\.?|mister|sir|shri|shree)\b', t)) * 3
+    female_score += len(re.findall(r'\b(?:mrs\.?|miss|madam|smt|kumari)\b', t)) * 3
 
-    # Pronoun cues (use only first 3500 chars to avoid section-header noise)
-    head          = t[:3500]
+    # Pronoun cues (first 4000 chars to reduce noise from job descriptions)
+    head = t[:4000]
     male_score   += len(re.findall(r'\b(?:he|him|his)\b', head))
     female_score += len(re.findall(r'\b(?:she|her|hers)\b', head))
 
-    # Gujarati cultural suffix cues in body text
-    if re.search(r'\b\w+(?:ben|bhen|bai)\b', t):
-        female_score += 3
-    if re.search(r'\b\w+bhai\b', t):
-        male_score += 3
-
-    if male_score >= 2 and male_score >= female_score + 1:
+    # ── Pass F: Lower threshold — even 1 strong signal counts ───
+    if male_score >= 1 and female_score == 0:
         return 'Male'
-    if female_score >= 2 and female_score >= male_score + 1:
+    if female_score >= 1 and male_score == 0:
+        return 'Female'
+
+    # Competing signals: require a margin
+    if male_score >= 2 and male_score >= female_score + 2:
+        return 'Male'
+    if female_score >= 2 and female_score >= male_score + 2:
         return 'Female'
 
     return None
@@ -1800,11 +1859,15 @@ def _infer_gender_from_text_context(text):
 
 def extract_gender(text, name=None):
     """
-    Full gender extraction pipeline:
-      1. Explicit 'Gender: Male/Female' label (most reliable)
-      2. Gender/sex keyword near token on same line
-      3. Self-identification cues from narrative text
-      4. Name-based inference (last resort)
+    Full gender extraction pipeline (v2):
+      1. Relation codes: S/O (son of) -> Male, D/O/W/O -> Female
+      2. Explicit 'Gender: Male/Female' label
+      3. Table-style Gender label on separate lines
+      4. Gender/sex keyword near Male/Female token
+      5. Marital status phrases, profile descriptions
+      6. Narrative self-identification / pronoun cues
+      7. Sikh surname "Kaur" -> Female
+      8. Name-based inference (last resort)
     """
     if not text:
         return _infer_gender_from_name(name)
@@ -1812,16 +1875,53 @@ def extract_gender(text, name=None):
     t     = normalize_compact_text(text)
     lines = [re.sub(r'\s+', ' ', line).strip() for line in t.splitlines() if line.strip()]
 
+    def _map_gender_token(token):
+        token = (token or '').strip().lower().rstrip('.)')
+        if token in {'male', 'm', 'man', 'boy'}:
+            return 'Male'
+        if token in {'female', 'f', 'woman', 'girl'}:
+            return 'Female'
+        return None
+
+    # Pass 0: Relation codes (S/O, D/O, W/O) — very common in Indian resumes
+    # Check first 60 lines only (personal details section)
+    early_text_raw = '\n'.join(lines[:60]).lower()
+    if RELATION_MALE_RE.search(early_text_raw):
+        return 'Male'
+    if RELATION_FEMALE_RE.search(early_text_raw):
+        return 'Female'
+    if RELATION_MALE2_RE.search(early_text_raw):
+        return 'Male'
+
+    # Pass 0b: Sikh surname Kaur in the name field
+    if name and KAUR_RE.search(name):
+        return 'Female'
+
     # Pass 1: explicit labeled gender field
     for line in lines[:80]:
         m = GENDER_LABEL_RE.search(line)
         if not m:
             continue
-        raw = m.group(1).lower()
-        if raw in {'male', 'm'}:
-            return 'Male'
-        if raw in {'female', 'f'}:
-            return 'Female'
+        mapped = _map_gender_token(m.group(1))
+        if mapped:
+            return mapped
+
+    # Pass 1b: table-style rows where value is on the next line
+    for i, line in enumerate(lines[:80]):
+        if not re.fullmatch(r'(?i)(?:gender|sex)\s*[:\-]?', line):
+            continue
+        for j in range(i + 1, min(i + 3, len(lines))):
+            nxt = lines[j]
+            standalone = re.fullmatch(r'(?i)(male|female|m|f|man|woman|boy|girl)\.?', nxt)
+            if standalone:
+                mapped = _map_gender_token(standalone.group(1))
+                if mapped:
+                    return mapped
+            inline = re.search(r'(?i)\b(male|female|m|f|man|woman|boy|girl)\b', nxt)
+            if inline and len(nxt.split()) <= 5:
+                mapped = _map_gender_token(inline.group(1))
+                if mapped:
+                    return mapped
 
     # Pass 2: gender keyword near Male/Female token
     early = '\n'.join(lines[:35]).lower()
@@ -1830,12 +1930,22 @@ def extract_gender(text, name=None):
     if GENDER_EARLY_FEMALE_RE.search(early):
         return 'Female'
 
-    # Pass 3: narrative self-identification
+    # Pass 3: marital status + profile phrase cues
+    if MARITAL_FEMALE_RE.search(t.lower()):
+        return 'Female'
+    if MARITAL_MALE_RE.search(t.lower()):
+        return 'Male'
+    if PROFILE_FEMALE_RE.search(t.lower()):
+        return 'Female'
+    if PROFILE_MALE_RE.search(t.lower()):
+        return 'Male'
+
+    # Pass 4: narrative self-identification + pronouns (improved threshold)
     inferred = _infer_gender_from_text_context(t)
     if inferred:
         return inferred
 
-    # Pass 4: name-based inference (weakest signal)
+    # Pass 5: name-based inference (weakest signal)
     return _infer_gender_from_name(name)
 
 
@@ -2047,6 +2157,17 @@ STRONG_SINGLE_WORD_SKILLS = {
     'selenium','snowflake','sql','tableau','terraform','typescript','unix','xml','yaml',
 }
 
+BUSINESS_SKILL_ALLOWLIST = {
+    'crm','kpi','mis','hr','finance','analytics','marketing','coordination','booking',
+    'strategy','automation','optimization','design','campaign','recruitment',
+    'hiring','formulation','salesplanning','servicedelivery','strategicplanning',
+    'marketresearch','performanceimprovement','performancemonitoring','portoperation',
+    'dataanalysis','dataanalytics','businessanalysis','marketingstrategy',
+    'customerrelationship','customerengagement','customersatisfaction',
+    'clientcoordination','clientengagement','clienthandling','clientinteraction',
+    'socialmedia','mediamarketing','leadgeneration','realestate',
+}
+
 SKILL_SECTION_HEADER_RE = re.compile(
     r'(?i)\b('
     r'technical\s+skills?|core\s+skills?|key\s+skills?|skills?\s*&\s*technolog(?:y|ies)|'
@@ -2073,6 +2194,8 @@ def _is_weak_generic_skill(skill):
     normalized = normalize_skill_key(skill)
     if not normalized:
         return True
+    if normalized in BUSINESS_SKILL_ALLOWLIST:
+        return False
     if normalized in STRONG_SINGLE_WORD_SKILLS:
         return False
     if normalized in GENERIC_SKILL_STOPWORDS:
@@ -2128,7 +2251,12 @@ def load_skills_from_csv(csv_path):
                     words = re.findall(r'[A-Za-z0-9+#]+', candidate.lower())
                     if has_weight_col and weight <= 2 and len(words) == 1:
                         w = words[0]
-                        if w not in STRONG_SINGLE_WORD_SKILLS and len(w) <= 12:
+                        w_key = normalize_skill_key(w)
+                        if (
+                            w not in STRONG_SINGLE_WORD_SKILLS
+                            and w_key not in BUSINESS_SKILL_ALLOWLIST
+                            and len(w) <= 12
+                        ):
                             continue
                     key = normalize_skill_key(candidate)
                     if key and key not in seen:
@@ -2168,6 +2296,31 @@ def build_skill_matchers(skills_list):
 
 
 INFERRED_SKILL_RULES = [
+    (r'\bcrm\b|customer\s+relationship\s+management', 'CRM'),
+    (r'\bkpi(?:s)?\b|key\s+performance\s+indicator(?:s)?', 'KPI'),
+    (r'\bmis\b|management\s+information\s+system(?:s)?', 'MIS'),
+    (r'\bmarket\s+research\b', 'Market Research'),
+    (r'\bstrateg(?:y|ic\s+planning)\b', 'Strategic Planning'),
+    (r'\bclient\s+coordination\b', 'Client Coordination'),
+    (r'\bclient\s+engagement\b', 'Client Engagement'),
+    (r'\bclient\s+interaction\b', 'Client Interaction'),
+    (r'\bclient\s+handling\b', 'Client Handling'),
+    (r'\bperformance\s+monitoring\b', 'Performance Monitoring'),
+    (r'\bperformance\s+improvement\b', 'Performance Improvement'),
+    (r'\bsales\s+planning\b', 'Sales Planning'),
+    (r'\bservice\s+delivery\b', 'Service Delivery'),
+    (r'\bport\s+operation(?:s)?\b', 'Port Operation'),
+    (r'\bcustomer\s+satisfaction\b', 'Customer Satisfaction'),
+    (r'\bcustomer\s+engagement\b', 'Customer Engagement'),
+    (r'\bcustomer\s+relationship\b', 'Customer Relationship'),
+    (r'\bsocial\s+media\b', 'Social Media'),
+    (r'\blead\s+generation\b', 'Lead Generation'),
+    (r'\bmedia\s+marketing\b', 'Media Marketing'),
+    (r'\bmarketing\s+strategy\b', 'Marketing Strategy'),
+    (r'\breal\s+estate\b', 'Real Estate'),
+    (r'\bbusiness\s+analysis\b', 'Business Analysis'),
+    (r'\bdata\s+analytics\b', 'Data Analytics'),
+    (r'\bdata\s+analysis\b', 'Data Analysis'),
     (r'\breact(?:\.?\s*js)?\b', 'ReactJS'),
     (r'\bnode(?:\.?\s*js)?\b', 'NodeJS'),
     (r'\bbootstrap\b', 'Bootstrap'),
@@ -2343,6 +2496,9 @@ def cleanup_extracted_skills(text, extracted_skills):
         words = re.findall(r'[a-z0-9+#]+', skill.lower())
         if len(words) == 1:
             token = words[0]
+            if normalize_skill_key(token) in BUSINESS_SKILL_ALLOWLIST:
+                final_skills.append(skill)
+                continue
             if any(token in ts for ts in token_sets):
                 continue
         final_skills.append(skill)
@@ -2388,6 +2544,9 @@ def extract_skills_from_resume(text, skills_list, compiled_skill_matchers=None):
         tokens = re.findall(r'[a-z0-9+#]+', skill.lower())
         if len(tokens) <= 1:
             tok_set = frozenset(tokens)
+            if tokens and normalize_skill_key(tokens[0]) in BUSINESS_SKILL_ALLOWLIST:
+                filtered.append(skill)
+                continue
             if any(tok_set.issubset(ms) for ms in multi_token_sets):
                 continue
         filtered.append(skill)
@@ -2508,6 +2667,364 @@ def _build_fast_skillner_text(text):
 
 
 # ══════════════════════════════════════════════════════════════
+#  PROFESSIONAL EXPERIENCE EXTRACTION (ATS STYLE)
+# ══════════════════════════════════════════════════════════════
+EXPERIENCE_START_RE = re.compile(
+    r'(?i)\b(?:work\s+experience|professional\s+experience|employment\s+history|'
+    r'experience|work\s+history)\b'
+)
+
+EXPERIENCE_END_RE = re.compile(
+    r'(?i)^\s*(?:education|skills?|projects?|certifications?|languages?|'
+    r'declaration|references?|hobbies|interests?|objective|summary|profile|'
+    r'personal\s+details?)\b'
+)
+
+EXPERIENCE_HEADER_ONLY_RE = re.compile(
+    r'(?i)^\s*(?:work\s+experience|professional\s+experience|employment\s+history|'
+    r'experience|work\s+history)\s*:?\s*$'
+)
+
+MAJOR_SECTION_HEADER_RE = re.compile(
+    r'(?i)^\s*(?:education|skills?|technical\s+skills?|projects?|certifications?|languages?|'
+    r'declaration|references?|hobbies|interests?|objective|summary|profile|personal\s+details?)\s*:?\s*$'
+)
+
+EMPLOYMENT_TYPE_RE = {
+    'Internship': re.compile(r'(?i)\b(?:intern|internship|trainee)\b'),
+    'Contract': re.compile(r'(?i)\b(?:contract|consultant|consulting)\b'),
+    'Freelance': re.compile(r'(?i)\b(?:freelance|freelancer)\b'),
+}
+
+ROLE_HINT_RE = re.compile(
+    r'(?i)\b(?:engineer|developer|manager|analyst|intern|consultant|officer|'
+    r'executive|lead|architect|specialist|coordinator|administrator|tester|'
+    r'designer|supervisor|associate|programmer)\b'
+)
+
+COMPANY_HINT_RE = re.compile(
+    r'(?i)\b(?:pvt\.?|ltd\.?|limited|inc\.?|corp\.?|llp|technologies|solutions|'
+    r'systems|services|company|industries|private)\b'
+)
+
+DATE_RANGE_RE = re.compile(
+    r'(?i)\b('
+    r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{4}'
+    r'|\d{1,2}[/-]\d{4}'
+    r'|\d{4}'
+    r')\s*(?:to|till|until|\-|–|—)\s*('
+    r'present|current|till\s+date|'
+    r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{4}'
+    r'|\d{1,2}[/-]\d{4}'
+    r'|\d{4}'
+    r')\b'
+)
+
+CTC_RE = re.compile(
+    r'(?i)\b(?:ctc|current\s+ctc|expected\s+ctc|salary|compensation)\b\s*[:\-]?\s*'
+    r'([\u20b9$]?\s*\d+(?:[\.,]\d+)?\s*(?:lpa|lakhs?|lacs?|k|m|per\s+annum|pa)?)'
+)
+
+NOTICE_RE = re.compile(
+    r'(?i)\bnotice\s+period\b\s*[:\-]?\s*'
+    r'(immediate|\d+\s*(?:days?|weeks?|months?))\b'
+)
+
+RESPONSIBILITY_LINE_RE = re.compile(
+    r'^\s*(?:[-•*]|\d+\.|[a-z]\))\s*\S+'
+)
+
+TECH_KEYWORDS = {
+    'python', 'java', 'sql', 'mysql', 'postgresql', 'oracle', 'react', 'node',
+    'nodejs', 'aws', 'azure', 'gcp', 'docker', 'kubernetes', 'jenkins', 'git',
+    'linux', 'django', 'flask', 'fastapi', 'spring', 'hibernate', 'javascript',
+    'typescript', 'html', 'css', 'power bi', 'tableau', 'excel', 'sap', 'erp'
+}
+
+
+def _extract_experience_section_lines(text):
+    if not text:
+        return []
+    normalized = normalize_compact_text(text)
+    lines = [re.sub(r'\s+', ' ', ln).strip() for ln in normalized.splitlines() if ln.strip()]
+    section = []
+    capture = False
+    for line in lines:
+        low = line.lower()
+        if EXPERIENCE_HEADER_ONLY_RE.search(low):
+            capture = True
+            continue
+        if capture and MAJOR_SECTION_HEADER_RE.search(low):
+            break
+        if capture:
+            section.append(line)
+
+    # Fallback for resumes without clean headers.
+    if not section:
+        for idx, line in enumerate(lines):
+            if EXPERIENCE_START_RE.search(line) and len(line.split()) <= 5:
+                for tail in lines[idx + 1:]:
+                    if MAJOR_SECTION_HEADER_RE.search(tail):
+                        break
+                    section.append(tail)
+                break
+    return section
+
+
+def _looks_like_company(line):
+    if not line or len(line) < 3:
+        return False
+    if COMPANY_HINT_RE.search(line):
+        return True
+    if '|' in line and DATE_RANGE_RE.search(line):
+        return True
+    if re.search(r'(?i)\b(?:worked\s+at|employer|organization)\b', line):
+        return True
+    words = re.findall(r'[A-Za-z&.]+', line)
+    if 1 <= len(words) <= 8:
+        # Title-heavy compact line often signals employer name.
+        title_like = sum(1 for w in words if w[:1].isupper())
+        if (
+            title_like >= max(2, len(words) - 1)
+            and ROLE_HINT_RE.search(line) is None
+            and not re.search(r'(?i)\b(?:using|with|for|and|improved|developed|responsible)\b', line)
+            and '.' not in line
+        ):
+            return True
+    return False
+
+
+def _looks_like_role(line):
+    if not line:
+        return False
+    if len(line.split()) > 16:
+        return False
+    return bool(ROLE_HINT_RE.search(line))
+
+
+def _parse_month_year(token):
+    if not token:
+        return None
+    t = token.strip().lower()
+    if t in {'present', 'current', 'till date'}:
+        today = date.today()
+        return today.year, today.month
+    ym = re.match(r'^(\d{1,2})[/-](\d{4})$', t)
+    if ym:
+        month = int(ym.group(1))
+        year = int(ym.group(2))
+        if 1 <= month <= 12:
+            return year, month
+        return None
+    y = re.match(r'^(\d{4})$', t)
+    if y:
+        return int(y.group(1)), 1
+    m = re.match(
+        r'^(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*(\d{4})$',
+        t
+    )
+    if m:
+        month_key = m.group(1)[:3]
+        month = MONTH_MAP.get(month_key)
+        year = int(m.group(2))
+        if month and 1 <= month <= 12:
+            return year, month
+    return None
+
+
+def _extract_date_range(line):
+    if not line:
+        return (None, None, False, None)
+    m = DATE_RANGE_RE.search(line)
+    if not m:
+        return (None, None, False, None)
+    start_raw = re.sub(r'\s+', ' ', m.group(1)).strip()
+    end_raw = re.sub(r'\s+', ' ', m.group(2)).strip()
+    is_current = bool(re.match(r'(?i)^(present|current|till\s+date)$', end_raw))
+    return (start_raw, end_raw, is_current, m.group(0).strip())
+
+
+def _duration_from_range(start_raw, end_raw, is_current):
+    start = _parse_month_year(start_raw)
+    end = _parse_month_year(end_raw)
+    if not start or not end:
+        return None
+    start_months = start[0] * 12 + start[1]
+    end_months = end[0] * 12 + end[1]
+    months = end_months - start_months
+    if months < 0:
+        return None
+    years = months // 12
+    rem = months % 12
+    if years and rem:
+        return f"{years}y {rem}m"
+    if years:
+        return f"{years}y"
+    return f"{rem}m"
+
+
+def _extract_ctc(text):
+    if not text:
+        return None
+    m = CTC_RE.search(text)
+    return m.group(1).strip() if m else None
+
+
+def _extract_notice_period(text):
+    if not text:
+        return None
+    m = NOTICE_RE.search(text)
+    return m.group(1).strip() if m else None
+
+
+def _extract_location_from_line(line):
+    if not line:
+        return None
+    if re.search(r'(?i)\b(remote|onsite|hybrid)\b', line):
+        return re.search(r'(?i)\b(remote|onsite|hybrid)\b', line).group(1).title()
+    if ',' in line:
+        parts = [p.strip() for p in line.split(',') if p.strip()]
+        if (
+            2 <= len(parts) <= 3
+            and not ROLE_HINT_RE.search(line)
+            and not DATE_RANGE_RE.search(line)
+            and all(len(p.split()) <= 3 for p in parts)
+            and not re.search(r'(?i)\b(?:using|with|for|and|improved|developed|responsible)\b', line)
+        ):
+            return ', '.join(parts)
+    return None
+
+
+def _extract_technologies(text):
+    if not text:
+        return []
+    low = text.lower()
+    found = []
+    seen = set()
+    for tech in sorted(TECH_KEYWORDS, key=len, reverse=True):
+        pattern = r'\b' + re.escape(tech) + r'\b'
+        if re.search(pattern, low):
+            pretty = ' '.join(w.upper() if len(w) <= 3 else w.capitalize() for w in tech.split())
+            key = normalize_skill_key(pretty)
+            if key not in seen:
+                seen.add(key)
+                found.append(pretty)
+    return found
+
+
+def _extract_responsibilities(lines):
+    if not lines:
+        return []
+    out = []
+    seen = set()
+    for line in lines:
+        if not line:
+            continue
+        if RESPONSIBILITY_LINE_RE.search(line):
+            val = re.sub(r'^\s*(?:[-•*]|\d+\.|[a-z]\))\s*', '', line).strip()
+            key = val.lower()
+            if val and key not in seen:
+                seen.add(key)
+                out.append(val)
+    return out
+
+
+def _extract_employment_type(text):
+    if not text:
+        return 'Full-time'
+    for label, pattern in EMPLOYMENT_TYPE_RE.items():
+        if pattern.search(text):
+            return label
+    return 'Full-time'
+
+
+def extract_professional_experience_profile(text):
+    """Extract ATS-style professional experience details from resume text."""
+    section_lines = _extract_experience_section_lines(text)
+    if not section_lines:
+        return []
+
+    blocks = []
+    current = []
+    for line in section_lines:
+        has_date = bool(DATE_RANGE_RE.search(line))
+        has_company = _looks_like_company(line)
+        if current and (has_date or has_company) and len(current) >= 3:
+            blocks.append(current)
+            current = [line]
+            continue
+        current.append(line)
+    if current:
+        blocks.append(current)
+
+    experiences = []
+    for block in blocks:
+        block_text = '\n'.join(block)
+        company = None
+        role = None
+        location = None
+        start_date = None
+        end_date = None
+        currently_working = False
+        duration_raw = None
+
+        for line in block:
+            if '|' in line:
+                pieces = [p.strip() for p in line.split('|') if p.strip()]
+                for piece in pieces:
+                    if role is None and _looks_like_role(piece):
+                        role = piece
+                    s, e, is_current, raw_duration = _extract_date_range(piece)
+                    if s and e and start_date is None:
+                        start_date = s
+                        end_date = e
+                        currently_working = is_current
+                        duration_raw = raw_duration
+                if pieces and company is None:
+                    first_piece = pieces[0]
+                    if _looks_like_company(first_piece):
+                        company = first_piece
+            if company is None and _looks_like_company(line):
+                company = line
+            if role is None and _looks_like_role(line):
+                role = line
+            if location is None:
+                location = _extract_location_from_line(line)
+            s, e, is_current, raw_duration = _extract_date_range(line)
+            if s and e and start_date is None:
+                start_date = s
+                end_date = e
+                currently_working = is_current
+                duration_raw = raw_duration
+
+        responsibilities = _extract_responsibilities(block)
+        technologies = _extract_technologies(block_text)
+        experience_duration = _duration_from_range(start_date, end_date, currently_working)
+
+        # Keep blocks that look like an experience entry.
+        if not any([company, role, start_date, responsibilities]):
+            continue
+
+        experiences.append({
+            'company_name': company,
+            'role': role,
+            'employment_type': _extract_employment_type(block_text),
+            'location': location,
+            'start_date': start_date,
+            'end_date': end_date,
+            'currently_working': currently_working,
+            'experience_duration': experience_duration,
+            'duration_text': duration_raw,
+            'ctc': _extract_ctc(block_text),
+            'notice_period': _extract_notice_period(block_text),
+            'technologies': technologies,
+            'responsibilities': responsibilities,
+        })
+
+    return experiences
+
+
+# ══════════════════════════════════════════════════════════════
 #  WORK EXPERIENCE SKILL EXTRACTION
 #  Extract skills from WORK EXPERIENCE section, not just "Skills" section
 # ══════════════════════════════════════════════════════════════
@@ -2517,35 +3034,7 @@ def get_work_experience_section(text):
     Extract the WORK EXPERIENCE section from resume.
     Skills are often embedded in experience descriptions, not in a dedicated section.
     """
-    if not text:
-        return []
-    
-    normalized = normalize_compact_text(text)
-    lines = [re.sub(r'\s+', ' ', ln).strip() for ln in normalized.splitlines() if ln.strip()]
-    
-    experience_section = []
-    capture = False
-    
-    for line in lines:
-        line_lower = line.lower()
-        
-        # Detect start of work experience section
-        if re.search(r'\b(?:work\s+experience|professional\s+experience|employment|experience)\b', line_lower):
-            capture = True
-            continue
-        
-        # Stop when next major section starts
-        if capture and re.search(
-            r'\b(?:education|personal|skills?|projects?|certifications?|languages?|'
-            r'declaration|references?|achievements?|profile|objective|summary)\b', 
-            line_lower
-        ):
-            break
-        
-        if capture:
-            experience_section.append(line)
-    
-    return experience_section
+    return _extract_experience_section_lines(text)
 
 
 def clean_skill_lines(lines):
@@ -2820,6 +3309,7 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list,
         
         # Final cleanup and deduplication
         matched_skills = cleanup_extracted_skills(text, matched_skills)
+        experience_profile = extract_professional_experience_profile(text)
 
         return {
             'file':           fname,
@@ -2830,6 +3320,7 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list,
             'gender':         gender,
             'address':        address,
             'skills':         matched_skills,
+            'professional_experience': experience_profile,
         }
     except Exception as exc:
         return {
@@ -2841,6 +3332,7 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list,
             'gender':         None,
             'address':        None,
             'skills':         [],
+            'professional_experience': [],
             'error':          str(exc),
         }
 
