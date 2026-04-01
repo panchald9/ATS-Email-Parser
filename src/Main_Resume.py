@@ -11,7 +11,12 @@ from datetime import date
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # ── Core deps ──────────────────────────────────────────────────
-from pdfminer.high_level import extract_text as pdf_extract_text
+try:
+    from pdfminer.high_level import extract_text as pdf_extract_text
+    PDFMINER_AVAILABLE = True
+except ImportError:
+    pdf_extract_text = None
+    PDFMINER_AVAILABLE = False
 
 try:
     _docx_module = importlib.import_module('docx')
@@ -761,6 +766,8 @@ def extract_text(path):
 
     try:
         if ext == '.pdf':
+            if not PDFMINER_AVAILABLE:
+                raise ValueError("pdfminer.six not installed")
             try:
                 text = pdf_extract_text(path)
                 if not text or not text.strip():
