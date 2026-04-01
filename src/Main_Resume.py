@@ -273,6 +273,10 @@ NAME_HEADER_TOKENS = {
     'contacts', 'contact', 'email', 'mail', 'id', 'e',
     'languages', 'language', 'english', 'hindi',
     'hobbies', 'hobby', 'listening', 'music',
+    'about', 'myself', 'course', 'courses', 'graduation', 'sr', 'no',
+    'faculty', 'api', 'rest', 'html', 'javascript', 'python', 'java',
+    'name', 'careear', 'objevctive', 'objective', 'education', 'experience',
+    'excelsheet', 'skills', 'internships', 'and', 'of',
 }
 
 NAME_HEADER_PHRASES = {
@@ -1033,6 +1037,10 @@ def looks_like_name_header(name):
         return True
     if all(w in NAME_HEADER_TOKENS for w in words):
         return True
+    if any(w in {'education', 'experience', 'objective', 'summary', 'profile'} for w in words):
+        return True
+    if len(words) >= 2 and sum(1 for w in words if w in NAME_HEADER_TOKENS) >= 2:
+        return True
     return False
 
 
@@ -1506,6 +1514,82 @@ def extract_name(text):
         if accept(c, strict=True, allow_single=(i < 3)):
             return c
 
+    return None
+
+
+def _is_suspicious_extracted_name(name):
+    if not name:
+        return True
+    lowered = re.sub(r'\s+', ' ', name).strip().lower()
+    if not lowered:
+        return True
+
+    if looks_like_name_header(name):
+        return True
+
+    # Reject obvious section/course-like captures.
+    if re.search(
+        r'(?i)\b(?:education|experience|objective|summary|profile|courses?|'
+        r'graduation|internships?|faculty|project|projects|skills?)\b',
+        lowered,
+    ):
+        return True
+
+    tokens = [re.sub(r'[^a-z]', '', t) for t in lowered.split()]
+    tokens = [t for t in tokens if t]
+    if not tokens:
+        return True
+
+    noisy_prefixes = (
+        'education', 'experience', 'objective', 'summary', 'profile',
+        'skill', 'course', 'graduation', 'internship', 'project', 'faculty'
+    )
+    if any(any(t.startswith(pref) for pref in noisy_prefixes) for t in tokens):
+        return True
+
+    bad_hits = sum(1 for t in tokens if t in NAME_HEADER_TOKENS or t in NAME_TECHNICAL_TOKENS)
+    if bad_hits >= 1:
+        return True
+
+    if len(tokens) == 1 and len(tokens[0]) < 4:
+        return True
+
+    return False
+
+
+def _derive_name_from_email_local(email_address):
+    if not email_address:
+        return None
+    m = re.search(r'([A-Za-z][A-Za-z0-9._+-]{1,})@', email_address)
+    if not m:
+        return None
+    local = m.group(1).lower()
+
+    local = re.sub(r'(?i)^(?:resume|cv|mail|email|id|user)+', '', local)
+    local = re.sub(r'\d+', ' ', local)
+    local = local.replace('_', ' ').replace('.', ' ').replace('-', ' ').replace('+', ' ')
+
+    chunks = [re.sub(r'[^a-z]', '', p) for p in local.split()]
+    chunks = [p for p in chunks if len(p) >= 2]
+    if not chunks:
+        return None
+
+    # Try splitting compact local like "pramodbhajantri" -> "pramod bhajantri".
+    if len(chunks) == 1:
+        one = chunks[0]
+        for sur in sorted(COMMON_SURNAMES, key=len, reverse=True):
+            if one.endswith(sur) and len(one) > len(sur) + 2:
+                chunks = [one[:-len(sur)], sur]
+                break
+
+    if len(chunks) >= 2:
+        candidate = f"{chunks[0].title()} {chunks[1].title()}"
+        if is_valid(candidate):
+            return candidate
+
+    single = chunks[0].title()
+    if is_valid(single, allow_single=True):
+        return single
     return None
 
 
@@ -2687,6 +2771,36 @@ EXPERIENCE_END_RE = re.compile(
     r'personal\s+details?)\b'
 )
 
+EXPERIENCE_NOISE_LINE_RE = re.compile(
+    r'(?i)^\s*(?:'
+    r'job\s*profile|key\s*strengths?|key\s*achievements?|achievement|strengths?|'
+    r'products?\s*handled|instruments?\s*handled|personal\s*profile|personal\s*details?|'
+    r'family\s*details?|father\'?s\s*name|mother\'?s\s*name|marital\s*status|'
+    r'nationality|date\s*of\s*birth|gender|language(?:s)?\s*(?:known)?|hobbies?|'
+    r'academic\s*(?:profile|details?)|academic\s*qualification|education|'
+    r'board\s*/\s*university|degree\s*/\s*course|course|courses|'
+    r'computer\s*proficiency|training\s*&?\s*workshops?|additional\s*qualification|'
+    r'personnel\s*details?|interest\s*&\s*hobbies|project\s*work|references?|declaration'
+    r')\b'
+)
+
+EXPERIENCE_NOISE_VALUE_RE = re.compile(
+    r'(?i)\b(?:father|mother|marital|nationality|dob|date\s*of\s*birth|gender|'
+    r'languages?|hobbies?|declaration|references?|board|university|cgpa|percentage|'
+    r'personal\s*details?|academic\s*profile|skills?|strengths?)\b'
+)
+
+EXPERIENCE_VALID_COMPANY_HINT_RE = re.compile(
+    r'(?i)\b(?:pvt\.?|ltd\.?|limited|inc\.?|corp\.?|llp|technologies|solutions|'
+    r'laboratories|pharma|foods?|industries|services|company|motors|'
+    r'consultancy|consulting|systems|private|group)\b'
+)
+
+EXPERIENCE_INSTRUMENT_LINE_RE = re.compile(
+    r'(?i)\b(?:hplc|gc\b|uv\b|spectrophotometer|viscometer|balance|stirrer|'
+    r'lab\s*oven|colony\s*counter|equipment|instrument(?:s)?)\b'
+)
+
 EXPERIENCE_HEADER_ONLY_RE = re.compile(
     r'(?i)^\s*(?:work\s+experience|professional\s+experience|employment\s+history|'
     r'experience|work\s+history)\s*:?\s*$'
@@ -2764,6 +2878,8 @@ def _extract_experience_section_lines(text):
         if capture and MAJOR_SECTION_HEADER_RE.search(low):
             break
         if capture:
+            if EXPERIENCE_NOISE_LINE_RE.search(low):
+                continue
             section.append(line)
 
     # Fallback for resumes without clean headers.
@@ -2773,13 +2889,45 @@ def _extract_experience_section_lines(text):
                 for tail in lines[idx + 1:]:
                     if MAJOR_SECTION_HEADER_RE.search(tail):
                         break
-                    section.append(tail)
+                    if not EXPERIENCE_NOISE_LINE_RE.search(tail.lower()):
+                        section.append(tail)
                 break
     return section
 
 
+def _clean_experience_line(line):
+    if not line:
+        return ''
+    cleaned = re.sub(r'^\s*[\u2022\u25cf\u25aa\u25ba\u27a2\u2713\uf0b7\-–—*]+\s*', '', line)
+    cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+    return cleaned
+
+
+def _is_experience_noise_line(line):
+    cleaned = _clean_experience_line(line)
+    if not cleaned:
+        return True
+    low = cleaned.lower()
+    if EXPERIENCE_NOISE_LINE_RE.search(low):
+        return True
+    if re.match(r'(?i)^(?:mr|mrs|ms|name|address|gender|dob|date\s*of\s*birth|nationality)\s*[:\-]', cleaned):
+        return True
+    if re.match(r'(?i)^\d{1,2}[./-]\d{1,2}[./-]\d{2,4}$', cleaned):
+        return True
+    return False
+
+
 def _looks_like_company(line):
     if not line or len(line) < 3:
+        return False
+    line = _clean_experience_line(line)
+    if _is_experience_noise_line(line):
+        return False
+    if re.search(r'(?i)^(?:job\s*profile|key\s*strength|products?\s*handled|instruments?\s*handled|personal\s*profile|academic)', line):
+        return False
+    if re.search(r'(?i)\b(?:father\'?s|mother\'?s|marital|nationality|languages?|hobbies?)\b', line):
+        return False
+    if EXPERIENCE_INSTRUMENT_LINE_RE.search(line) and not COMPANY_HINT_RE.search(line):
         return False
     if COMPANY_HINT_RE.search(line):
         return True
@@ -2803,6 +2951,9 @@ def _looks_like_company(line):
 
 def _looks_like_role(line):
     if not line:
+        return False
+    line = _clean_experience_line(line)
+    if _is_experience_noise_line(line):
         return False
     if len(line.split()) > 16:
         return False
@@ -2887,6 +3038,9 @@ def _extract_notice_period(text):
 def _extract_location_from_line(line):
     if not line:
         return None
+    line = _clean_experience_line(line)
+    if _is_experience_noise_line(line):
+        return None
     if re.search(r'(?i)\b(remote|onsite|hybrid)\b', line):
         return re.search(r'(?i)\b(remote|onsite|hybrid)\b', line).group(1).title()
     if ',' in line:
@@ -2897,6 +3051,7 @@ def _extract_location_from_line(line):
             and not DATE_RANGE_RE.search(line)
             and all(len(p.split()) <= 3 for p in parts)
             and not re.search(r'(?i)\b(?:using|with|for|and|improved|developed|responsible)\b', line)
+            and not re.search(r'(?i)\b(?:temperature|pressure|vacuum|process|batch|analysis|testing)\b', line)
         ):
             return ', '.join(parts)
     return None
@@ -2954,6 +3109,9 @@ def extract_professional_experience_profile(text):
     blocks = []
     current = []
     for line in section_lines:
+        line = _clean_experience_line(line)
+        if _is_experience_noise_line(line):
+            continue
         has_date = bool(DATE_RANGE_RE.search(line))
         has_company = _looks_like_company(line)
         if current and (has_date or has_company) and len(current) >= 3:
@@ -2966,6 +3124,9 @@ def extract_professional_experience_profile(text):
 
     experiences = []
     for block in blocks:
+        block = [ln for ln in block if ln and not _is_experience_noise_line(ln)]
+        if not block:
+            continue
         block_text = '\n'.join(block)
         company = None
         role = None
@@ -3009,8 +3170,16 @@ def extract_professional_experience_profile(text):
         experience_duration = _duration_from_range(start_date, end_date, currently_working)
 
         # Keep blocks that look like an experience entry.
-        if not any([company, role, start_date, responsibilities]):
+        strong_company = bool(company and EXPERIENCE_VALID_COMPANY_HINT_RE.search(company))
+        has_signal = bool(start_date or role or strong_company)
+        if not has_signal:
             continue
+
+        if company and EXPERIENCE_NOISE_VALUE_RE.search(company) and not strong_company and not start_date:
+            continue
+
+        if role and EXPERIENCE_NOISE_VALUE_RE.search(role) and not start_date:
+            role = None
 
         experiences.append({
             'company_name': company,
@@ -3252,9 +3421,17 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list,
     path = os.path.join(process_folder, fname)
     try:
         text           = extract_text(path)
-        name           = extract_name(text)
-        contact_number = extract_contact_number(text)
         email          = extract_email_from_resume(text)
+        name           = extract_name(text)
+        if _is_suspicious_extracted_name(name):
+            simple_email_name = _derive_name_from_email_local(email)
+            if simple_email_name and not _is_suspicious_extracted_name(simple_email_name):
+                name = simple_email_name
+            else:
+                email_fallback_name = name_from_email(text)
+                if email_fallback_name and not _is_suspicious_extracted_name(email_fallback_name):
+                    name = email_fallback_name
+        contact_number = extract_contact_number(text)
         dob            = extract_dob(text)           # ← NEW
 
         if fast_response:
