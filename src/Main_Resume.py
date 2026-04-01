@@ -86,7 +86,7 @@ def _ensure_skillner_loaded():
 # ══════════════════════════════════════════════════════════════
 #  CONFIGURATION
 # ══════════════════════════════════════════════════════════════
-RESUME_FOLDER  = r"D:\Project\ATS\ATS Email Parser\Resume"
+RESUME_FOLDER  = r"D:\Project\ATS\ATS Email Parser\Testing Resume"
 SKILLS_CSV     = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Skill.csv')
 OUTPUT_JSON    = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', 'resume_parsed.json')
 VALIDATION_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', 'validation_report.json')
@@ -160,6 +160,7 @@ SKIP_LINES = {
     'education','skills','experience','summary','reliability','key',
     'hobbies','strengths','background','academics','of','j','',
     'overview','history','work','personal','information','city','country',
+    'languages','certifications','certifications','training','top skills',
 }
 
 SECTION_WORDS = re.compile(
@@ -245,7 +246,7 @@ COMMON_SURNAMES = {
     'kumar','singh','patel','yadav','khan','sharma','gupta','verma',
     'pal','tandel','desai','patil','vasava','jogal','shah','mehta',
     'joshi','trivedi','pandya','bhatt','nair','pillai','menon','iyer',
-    'reddy','naidu','rao','mishra','dubey','tiwari','srivastava','chauhan',
+    'reddy','naidu','rao','mishra','dubey','tiwari','srivastava','chauhan','chaubey',
     'rajput','thakur','bose','chatterjee','mukherjee','banerjee','das',
     'sen','ghosh','kapoor','malhotra','khanna','chopra','ahuja','arora',
     'bhatia','sethi','anand','chawla','mehra','suri','walia','gill',
@@ -258,6 +259,27 @@ NON_NAME_WORDS = {
     'achievements','core','competencies','competency','citizen','citizenship',
     'styrene','acryl','acrylonitrile',
     'previous','employers','then','call','me','cisco','finance',
+}
+
+# Header-like words/phrases that should not be accepted as person names.
+NAME_HEADER_TOKENS = {
+    'carrier', 'career', 'objective', 'objectives', 'portfolio', 'governance',
+    'discipline', 'scjp', 'summary', 'profile', 'professional', 'declaration',
+    'contacts', 'contact', 'email', 'mail', 'id', 'e',
+    'languages', 'language', 'english', 'hindi',
+    'hobbies', 'hobby', 'listening', 'music',
+}
+
+NAME_HEADER_PHRASES = {
+    'career objective', 'carrier objective', 'carrier objectives',
+    'portfolio governance', 'professional summary', 'career summary',
+    'email id', 'e-mail id',
+}
+
+NAME_TECHNICAL_TOKENS = {
+    'machine', 'learning', 'java', 'programmer', 'waterfall', 'model',
+    'message', 'biotechnology', 'mscbiotechnology', 'gulp', 'server',
+    'self', 'motivated',
 }
 
 EMAIL_LOCAL_NON_PERSON_TOKENS = {
@@ -285,7 +307,7 @@ COMMON_MALE_FIRST_NAMES = {
     'rajan','ramesh','ravi','rinkal','rishi','ritesh','romil','rupesh',
     'rushabh','sahil','sameer','samir','sandip','sanket','shyam','smit',
     'sujal','suresh','swarup','tej','tejas','utsav','varun','vimal',
-    'viral','vishal','yogesh','zeal','chetan','krupal',
+    'viral','vishal','yogesh','jogesh','zeal','chetan','krupal',
     # Hindi/North Indian
     'abhinav','akhil','amitabh','anand','ankur','anurag','arvind','ashwin',
     'ayush','bharat','deependra','devendra','dheeraj','gaurav','girish',
@@ -307,7 +329,7 @@ COMMON_MALE_FIRST_NAMES = {
     # Western/English common in India
     'alan','alex','andrew','ben','chris','daniel','david','james','john',
     'kevin','mark','michael','paul','peter','richard','robert','ryan',
-    'samuel','steven','thomas','william',
+    'samuel','steven','thomas','william','saiteja',
 }
 
 COMMON_FEMALE_FIRST_NAMES = {
@@ -889,17 +911,44 @@ def sanitize_candidate(candidate):
     c = candidate.strip()
     c = c.split('|')[0]
     c = re.sub(r'\([^)]{0,50}\)', ' ', c)
+    
+    # FIX: Handle names with credentials like "Jamil M, PMP®, PSM"
+    # Remove everything after comma if what follows looks like credentials
     if ',' in c:
-        left, right = c.split(',', 1)
-        if re.fullmatch(r'\s*[A-Z][A-Z0-9\.\-/\s]{1,20}\s*', right or ''):
+        parts = c.split(',')
+        left = parts[0]
+        # Check if remaining parts look like credentials (short uppercase words with symbols)
+        rest = ','.join(parts[1:]).strip()
+        # If the part after comma is mostly uppercase and has credentials pattern, remove it
+        if rest and re.match(r'^[A-Z\s\.\-/®™©]*$', rest):
             c = left
-    c = re.sub(r'(?:\s+|,\s*)(?:[A-Z]{2,5}(?:/[A-Z]{2,5})*)(?:\s*\.?)*$', '', c)
+        elif re.fullmatch(r'\s*[A-Z][A-Z0-9\.\-/\s]{1,20}\s*', rest or ''):
+            c = left
+    
+    # Remove credentials at the end (including special characters like ®, ™, ©)
+    c = re.sub(r'(?:\s+|,\s*)(?:[A-Z]{2,5}(?:/[A-Z]{2,5})*)(?:\s*[®™©\.]*)*$', '', c)
+    # Also catch credentials with special symbols
+    c = re.sub(r'(?:\s+|,\s*)(?:[A-Z]{2,5}[®™©]*(?:\s+[A-Z]{2,5}[®™©]*)*)$', '', c)
+    
     c = re.sub(r'(?i)^\s*(?:full\s+)?name\s*[:\-]\s*', '', c)
     c = re.sub(r'(?i)^\s*resume\s+of\s*', '', c)
     c = re.sub(r'^[\-–—:\.\)\(\[\]\{\}\|\s]+', '', c)
     c = re.sub(r'[\-–—:\.\)\(\[\]\{\}\|\s]+$', '', c)
     c = re.sub(r'\b([a-z])(?=\.)', lambda m: m.group(1).upper(), c)
     c = re.sub(r'\s+', ' ', c)
+    
+    # FIX: Handle single letter middle initials at the end (turn "Jamil M" into "Jamil")
+    # But keep first name if followed by real surname
+    words = c.split()
+    if len(words) > 1:
+        # If last word is single letter (likely middle initial), check if it should be kept
+        if len(words[-1]) == 1 and words[-1].isupper():
+            last_word = words[-1]
+            # If there are at least 2 words before this, and second-to-last is a full name, remove the initial
+            if len(words) >= 3 or (len(words) == 2 and len(words[0]) > 2):
+                # Remove single letter middle initial
+                c = ' '.join(words[:-1])
+    
     if c.isupper() or c.islower():
         c = normalize_name_case(c)
     return c.strip()
@@ -947,6 +996,8 @@ def top_header_candidate(norm_lines):
         if not has_name_case_pattern(line):
             continue
         c = title_case(sanitize_candidate(split_camel(line)))
+        if looks_like_name_header(c):
+            continue
         if accept(c, strict=False, allow_single=True):
             return c
     return None
@@ -959,6 +1010,23 @@ def looks_like_address(line):
         return True
     tokens = [t for t in re.split(r'[^a-z]+', line.lower()) if t]
     return sum(1 for w in tokens if w in BLACKLIST) >= 2
+
+
+def looks_like_name_header(name):
+    if not name:
+        return True
+    lowered = re.sub(r'\s+', ' ', name).strip().lower()
+    if lowered in NAME_HEADER_PHRASES:
+        return True
+    words = [re.sub(r'[^a-z]', '', w) for w in lowered.split()]
+    words = [w for w in words if w]
+    if not words:
+        return True
+    if len(words) == 1 and words[0] in NAME_HEADER_TOKENS:
+        return True
+    if all(w in NAME_HEADER_TOKENS for w in words):
+        return True
+    return False
 
 
 def is_valid(name, allow_single=False):
@@ -980,6 +1048,12 @@ def is_valid(name, allow_single=False):
     if any(ch.isdigit() for ch in name):
         return False
     if re.search(r'[^A-Za-z\s\-\.\']', name):
+        return False
+    if looks_like_name_header(name):
+        return False
+    lower_tokens = [re.sub(r'[^a-z]', '', w.lower()) for w in words]
+    lower_tokens = [w for w in lower_tokens if w]
+    if lower_tokens and any(t in NAME_TECHNICAL_TOKENS for t in lower_tokens):
         return False
     for w in words:
         alpha = re.sub(r'[^A-Za-z]', '', w)
@@ -1196,6 +1270,22 @@ def extract_name(text):
     norm = [normalize_caps(l) for l in raw]
     full = '\n'.join(norm)
 
+    # FIX: Detect if we're in a "Top Skills" or similar section at the beginning
+    # If the first 20 lines contain skill section markers, skip S0.3
+    early_section_text ='\n'.join(norm[:20]).lower()
+    has_early_skill_section = (
+        'top skill' in early_section_text or 
+        re.search(r'\b(?:skill|language|certification|strength)\b', early_section_text) and
+        any(line.lower().strip() in SKIP_LINES for line in norm[:15])
+    )
+    
+    # Find where the skill section ends (if present)
+    start_search_idx = 0
+    if has_early_skill_section:
+        # Skills section typically occupies lines 4-16 in resumes with top skills
+        # Set start_search_idx to skip past it but still catch names that come right after
+        start_search_idx = 15  # Start searching from line 15 to catch names like "Om Dave"
+
     # S-Blob: single-line / heavily merged resumes
     if len(raw) <= 3 or sum(1 for l in raw if len(l) > 120) >= 1:
         m = re.search(
@@ -1208,21 +1298,25 @@ def extract_name(text):
             if accept(c, strict=False):
                 return c
 
-    # S0.3: Strong top-line candidates
-    for i, line in enumerate(norm[:10]):
-        if re.search(r'[@\d]|https?://', line, re.I):
-            continue
-        if line.lower().strip('.,- ') in SKIP_LINES:
-            continue
-        if line_has_bad_context(line):
-            continue
-        if not has_name_case_pattern(line):
-            continue
-        if looks_like_address(line):
-            continue
-        c = title_case(sanitize_candidate(split_camel(line)))
-        if accept(c, strict=False, allow_single=(i < 4)):
-            return c
+    # S0.3: Strong top-line candidates (only if not in skill section)
+    if not has_early_skill_section:
+        for i, line in enumerate(norm[:10]):
+            if re.search(r'[@\d]|https?://', line, re.I):
+                continue
+            line_lower = line.lower().strip('.,- ')
+            if line_lower in SKIP_LINES:
+                continue
+            if line_has_bad_context(line):
+                continue
+            if not has_name_case_pattern(line):
+                continue
+            if looks_like_address(line):
+                continue
+            c = title_case(sanitize_candidate(split_camel(line)))
+            if looks_like_name_header(c):
+                continue
+            if accept(c, strict=False, allow_single=(i < 4)):
+                return c
 
     # S0: Explicit "Name:" label in first 20 lines
     early_text = '\n'.join(norm[:20])
@@ -1235,38 +1329,39 @@ def extract_name(text):
                     return head
             return c
 
-    # S0.1: "Resume of …"
-    for i, line in enumerate(norm[:6]):
-        if re.match(r'^resume\s+of\s*$', line, re.I):
-            if i + 1 < len(norm):
-                c = title_case(sanitize_candidate(norm[i + 1]))
+    # S0.1: "Resume of …"  (skip if in early skill section)
+    if not has_early_skill_section:
+        for i, line in enumerate(norm[:6]):
+            if re.match(r'^resume\s+of\s*$', line, re.I):
+                if i + 1 < len(norm):
+                    c = title_case(sanitize_candidate(norm[i + 1]))
+                    if accept(c, strict=False, allow_single=True):
+                        return c
+            m = re.match(r'^resume\s+of\s+(.+)$', line, re.I)
+            if m:
+                c = title_case(sanitize_candidate(m.group(1)))
                 if accept(c, strict=False, allow_single=True):
                     return c
-        m = re.match(r'^resume\s+of\s+(.+)$', line, re.I)
-        if m:
-            c = title_case(sanitize_candidate(m.group(1)))
-            if accept(c, strict=False, allow_single=True):
-                return c
 
-    # S0.2: Two-line header
-    for i in range(min(len(norm) - 1, 8)):
-        a, b = norm[i], norm[i + 1]
-        if re.search(r'[@\d]', a + b):
-            continue
-        if a.lower().strip('.,- ') in SKIP_LINES or b.lower().strip('.,- ') in SKIP_LINES:
-            continue
-        if line_has_bad_context(a) or line_has_bad_context(b):
-            continue
-        if not (has_name_case_pattern(a) and has_name_case_pattern(b)):
-            continue
-        if looks_like_address(a) or looks_like_address(b):
-            continue
-        ca, cb = sanitize_candidate(a), sanitize_candidate(b)
-        if not ca or not cb:
-            continue
-        combined = f"{title_case(ca)} {title_case(cb)}"
-        if accept(combined, strict=False):
-            return combined
+        # S0.2: Two-line header  (skip if in early skill section)
+        for i in range(min(len(norm) - 1, 8)):
+            a, b = norm[i], norm[i + 1]
+            if re.search(r'[@\d]', a + b):
+                continue
+            if a.lower().strip('.,- ') in SKIP_LINES or b.lower().strip('.,- ') in SKIP_LINES:
+                continue
+            if line_has_bad_context(a) or line_has_bad_context(b):
+                continue
+            if not (has_name_case_pattern(a) and has_name_case_pattern(b)):
+                continue
+            if looks_like_address(a) or looks_like_address(b):
+                continue
+            ca, cb = sanitize_candidate(a), sanitize_candidate(b)
+            if not ca or not cb:
+                continue
+            combined = f"{title_case(ca)} {title_case(cb)}"
+            if accept(combined, strict=False):
+                return combined
 
     # EC1: Whole resume on one line
     if raw and len(raw[0]) > 150:
@@ -1303,7 +1398,7 @@ def extract_name(text):
                     return c
 
     # S2: Line-by-line scan (first 15 lines)
-    for i, line in enumerate(norm[:15]):
+    for i, line in enumerate(norm[start_search_idx:min(start_search_idx + 25, len(norm))], start=start_search_idx):
         if is_spaced(line):
             continue
         if len(line) <= 1:
@@ -1322,16 +1417,24 @@ def extract_name(text):
         spaced = split_camel(line)
         if spaced != line:
             c = title_case(sanitize_candidate(re.sub(r'\s+', ' ', spaced).strip()))
+            if looks_like_name_header(c):
+                continue
             if accept(c, strict=False):
                 return c
 
         clean = title_case(sanitize_candidate(re.sub(r'\s+', ' ', line).strip()))
         if re.match(r'^[A-Za-z][A-Za-z\s\.\-\']{2,45}$', clean):
+            if looks_like_name_header(clean):
+                continue
             if accept(clean, strict=False, allow_single=(i < 4)):
                 return clean
 
         if i + 1 < len(norm):
             nxt = norm[i + 1]
+            # FIX: Skip two-line combinations if both lines are skill items in early section
+            if has_early_skill_section and i < 20:
+                # In early skill section area, don't combine skill items
+                continue
             if (len(nxt) > 1
                     and not is_spaced(nxt)
                     and nxt.lower().strip() not in SKIP_LINES
@@ -1343,6 +1446,8 @@ def extract_name(text):
                     sanitize_candidate(re.sub(r'\s+', ' ', line + ' ' + nxt).strip())
                 )
                 if re.match(r'^[A-Za-z][A-Za-z\s\.\-\']{3,55}$', combined):
+                    if looks_like_name_header(combined):
+                        continue
                     if accept(combined, strict=False):
                         return combined
 
@@ -1754,7 +1859,19 @@ def extract_address(text):
             return None
         if len(value.split()) > 35:
             return None
+        # Avoid long narrative/experience lines being treated as address.
+        if len(value.split()) > 18 and ',' not in value:
+            return None
         if value.count(',') > 6:
+            return None
+        if value.count('.') > 2:
+            return None
+        lower_value = value.lower()
+        non_address_phrases = (
+            'working on', 'upgraded the', 'completes day-to-day', 'conduct various conference',
+            'analyzing the', 'operating systems', 'inventory control', 'responses to it',
+        )
+        if any(p in lower_value for p in non_address_phrases):
             return None
         if ADDRESS_CONTACT_RE.search(value):
             return None
@@ -1913,6 +2030,14 @@ GENERIC_SKILL_STOPWORDS = {
     'responsibilities','safety','skills','solution','solutions','strategy','support',
     'systems','technical','technology','testing','training','troubleshooting','work',
     'certification','certifications','manufacturing','materials','balance','routing',
+    # Languages - NOT skills
+    'english','spanish','french','german','italian','portuguese','russian','chinese',
+    'hindi','gujarati','marathi','bengali','telugu','kannada','malayalam','tamil',
+    'urdu','punjabi','arabic','japanese','korean','dutch','swedish','norwegian',
+    'danish','finnish','polish','czech','hungarian','romanian','greek','hebrew',
+    # Section headers that shouldn't be skills
+    'languages','language','certifications','certification','top skills','skills',
+    'strength','strengths','achievement','achievements','personal','profile','summary',
 }
 
 STRONG_SINGLE_WORD_SKILLS = {
@@ -1927,7 +2052,7 @@ SKILL_SECTION_HEADER_RE = re.compile(
     r'technical\s+skills?|core\s+skills?|key\s+skills?|skills?\s*&\s*technolog(?:y|ies)|'
     r'skills?\s*&\s*tools?|core\s+competenc(?:y|ies)|areas?\s+of\s+(?:expertise|excellence)|'
     r'technical\s+specifications?|competencies?|technolog(?:y|ies)|tools?|software|'
-    r'expertise|proficien(?:cy|cies)|frameworks?|languages?|certifications?'
+    r'expertise|proficien(?:cy|cies)|frameworks?|certifications?'
     r')\b'
 )
 
@@ -1937,7 +2062,7 @@ NON_SKILL_SECTION_HEADER_RE = re.compile(
     r'work\s+experience|professional\s+experience|experience|employment\s+history|'
     r'education|academic\s+qualification(?:s)?|projects?|internships?|'
     r'personal\s+details?|contact|declaration|references?|hobbies|interests?|'
-    r'achievements?|awards?|publications?'
+    r'achievements?|awards?|publications?|languages?|certifications?'
     r')\b'
 )
 
@@ -2066,7 +2191,7 @@ INFERRED_SKILL_RULES = [
     (r'\blaboratory\s+testing\b|\bmaterial\s+testing\b', 'Material Testing'),
     (r'\bmfi\b|\bmelt\s+flow\s+index\b', 'MFI Testing'),
     (r'\btensile\s+strength\b', 'Tensile Testing'),
-    (r'\bimpact\b', 'Impact Testing'),
+    (r'\bimpact\s*(?:test|testing)\b', 'Impact Testing'),
     (r'\bhydro\s*pressure\b', 'Hydro Pressure Testing'),
     (r'\bdensity\b', 'Density Testing'),
     (r'\biso\s*9001(?::?2015)?\b', 'ISO 9001'),
@@ -2147,17 +2272,57 @@ def cleanup_extracted_skills(text, extracted_skills):
         'sop': 'SOP Documentation',
         'bmr': 'Batch Manufacturing (BMR/MFR)', 'mfr': 'Batch Manufacturing (BMR/MFR)',
         'oee': 'OEE (Overall Equipment Efficiency)',
+        'rawdatum': 'Raw Data',
+        'scikit': 'Scikit-learn', 'scikitlearn': 'Scikit-learn',
+        'powerbi': 'Power BI',
+        'cnn': 'Convolutional Neural Networks',
+        'lstm': 'LSTM',
+        'rnn': 'RNN',
     }
-    weak_exact = {'manufacturing','materials','balance','routing','budgeting','pharmacy','portfolio'}
+    weak_exact = {
+        'manufacturing','materials','balance','routing','budgeting','pharmacy','portfolio',
+        'solve','solved','solving', 'collaboration','collaborative','collaborating',
+        'innovation','innovative','innovating', 'www','web', 'credit','linked','creditlinked',
+        'iit','sal','guwahati','ahmedabad','institute','technology','school','university',
+        'cross','functional','team','teams','crossfunctional','crossfunctionalteams',
+    }
     normalized = []
     seen       = set()
     for raw in extracted_skills:
         if not raw:
             continue
+        
+        # FIX: Skip section headers combined with items like "languages english"
+        raw_lower = raw.lower().strip()
+        if any(header in raw_lower for header in 
+               ['languages ', 'language ', 'certifications ', 'certification ', 'strength ', 'strengths ']):
+            # Check if it's a section header + item pattern
+            if ' ' in raw_lower:
+                parts = raw_lower.split()
+                if parts[0] in ['languages', 'language', 'certifications', 'certification', 'strength', 'strengths']:
+                    # Skip if first word is a section header
+                    continue
+        
+        # FIX: Skip malformed skills like "science generative" or "raw datum" until normalized
+        if any(bad in raw_lower for bad in ['science generative', 'raw datum']):
+            continue
+        
         key   = normalize_skill_key(raw)
         if not key:
             continue
-        skill     = alias_map.get(key, raw)
+        
+        # FIX: Remove duplicate words (python python -> python, data data -> data data)
+        skill_base = alias_map.get(key, raw)
+        words = skill_base.split()
+        if len(words) > 1:
+            # Remove duplicate consecutive words
+            unique_words = []
+            for word in words:
+                if not unique_words or unique_words[-1].lower() != word.lower():
+                    unique_words.append(word)
+            skill_base = ' '.join(unique_words)
+        
+        skill     = skill_base
         skill_key = normalize_skill_key(skill)
         if not skill_key or skill_key in seen:
             continue
@@ -2167,6 +2332,7 @@ def cleanup_extracted_skills(text, extracted_skills):
             continue
         seen.add(skill_key)
         normalized.append(skill)
+    
     token_sets = [
         set(re.findall(r'[a-z0-9+#]+', s.lower()))
         for s in normalized
@@ -2257,6 +2423,12 @@ def _is_probable_skill_header(line):
     if not candidate:
         return False
     lower = candidate.lower()
+    
+    # Explicitly exclude "Languages" and "Certifications" alone
+    if lower.strip() in ('languages', 'language', 'certifications', 'certification', 
+                          'strengths', 'strength', 'hobbies', 'hobbies', 'interests'):
+        return False
+    
     if not SKILL_SECTION_HEADER_RE.search(lower):
         return False
     if re.search(r'[@]|https?://|\b(?:email|phone|mobile|contact)\b', lower):

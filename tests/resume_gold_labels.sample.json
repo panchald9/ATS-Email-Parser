@@ -1,0 +1,15 @@
+{
+  "16_pdf.pdf": {
+    "name": "Replace With Expected Name",
+    "email": "replace@example.com",
+    "contact_number": "9876543210",
+    "skills": ["Python", "SQL"],
+    "notes": "Copy this file to resume_gold_labels.json and fill in known values."
+  },
+  "29_pdf.pdf": {
+    "name": "Replace With Expected Name",
+    "email": "replace@example.com",
+    "contact_number": "9876543210",
+    "skills": ["Excel", "Communication"]
+  }
+}
