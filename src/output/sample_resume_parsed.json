@@ -1,0 +1,94 @@
+[
+  {
+    "file": "11709463 - Prashant Singh.pdf",
+    "name": "Prashant Singh",
+    "contact_number": "6393804413",
+    "email": "singh777prashant@gmail.com",
+    "dob": "09/12/2001",
+    "gender": "Male",
+    "address": "Village + Post – Mardah , Distt – ghazipur (UP)",
+    "skills": [
+      "Process Optimization",
+      "Production Planning",
+      "Inventory Management",
+      "Quality Control",
+      "Excel",
+      "Python",
+      "Laboratory equipment"
+    ],
+    "professional_experience": [
+      {
+        "company_name": "Assa polyurathane Pvt Limited",
+        "role": "Quality Control Analyst",
+        "employment_type": "Full-time",
+        "start_date": "Nov 2023",
+        "end_date": "Present",
+        "currently_working": true,
+        "duration_months": "Currently working",
+        "location": null,
+        "technologies": [],
+        "responsibilities": [
+          "Coordinate lab operations and assist in raw material testing",
+          "Ensure adherence to product quality standards and ISO guidelines",
+          "Conduct analysis of finished goods and processing samples",
+          "Serve as Shift Incharge for the quality control",
+          "Continuous monitoring of Quality Parameters",
+          "Making Production Reports & Analysis of Data"
+        ]
+      }
+    ],
+    "education": [
+      {
+        "qualification": "B.Tech",
+        "specialization_branch": "Chemical Engineering",
+        "location": "Lucknow",
+        "passing_year": "2023",
+        "grade_cgpa": "7.6",
+        "mode_of_study": "Full-time",
+        "institute_university": "Abdul Kalam Technical University",
+        "major_subjects": null
+      },
+      {
+        "qualification": "12th",
+        "specialization_branch": null,
+        "location": null,
+        "passing_year": "2018",
+        "grade_cgpa": "80.4%",
+        "mode_of_study": null,
+        "institute_university": "MTI College Mardah",
+        "major_subjects": null
+      },
+      {
+        "qualification": "10th",
+        "specialization_branch": null,
+        "location": null,
+        "passing_year": "2016",
+        "grade_cgpa": "83%",
+        "mode_of_study": null,
+        "institute_university": "MTI College Mardah",
+        "major_subjects": null
+      }
+    ]
+  },
+  {
+    "file": "11719199 - Nilesh Chavda.pdf",
+    "name": "Shivamappartment Vejalpurvast",
+    "contact_number": "+919157538955",
+    "email": "nileshchavda045@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "Documentation",
+      "Marketing",
+      "Recruitment",
+      "Automation",
+      "Accounting",
+      "Bookkeeping",
+      "Compliance",
+      "Payroll"
+    ],
+    "professional_experience": [],
+    "education": []
+  }
+]

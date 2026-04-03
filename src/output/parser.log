@@ -1,174 +1,621 @@
-[*] Skill source: csv (572 loaded from D:\Project\ATS\ATS Email Parser\src\Skill.csv)
-[*] Processing 50 resume file(s) from: D:\Project\ATS\ATS Email Parser\Bulk_Resumes_1775020050
+[*] Skill source: auto (csv first, dataset fallback | csv=572)
+[*] Processing 200 resume file(s) from: D:\Project\ATS\ATS Email Parser\Qulity HR\Bulk_Resumes_1775101335
 [*] Workers: 8
 
-[*] Limit: 50 file(s), mode=first files, seed=42
-[*] Fast-response mode: ON (validation off, gender/address skipped)
 #    File                   Name                           Phone          Gender   DOB            Email
 ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
-  5    11749289 - Akhilesh Kumar Gond.pdf Akhilesh Kumar Gond            +919122940682  ❌ N/A    ❌ N/A          akhileshkumara37641@gmail.com
+  1    11709463 - Prashant Singh.pdf Prashant Singh                 6393804413     Male     12/09/2001     singh777prashant@gmail.com
+       Address: Address:. Village + Post – Mardah , Distt – ghazipur (UP) 23...
+       Skills [13]: Inventory Management, Production Planning, Process Optimization, Quality Control, excel, python, laboratory equipment, test method  (+5 more)
+  4    11726244 - Sonu Kumar Sah.pdf Sonu Kumar Sah                 9801206116     Female   ❌ N/A          sonukumarsah609@gmail.com
+       Address: Siwan , Bihar...
+       Skills [12]: Root Cause Analysis, Autocad, time management, production line, quality control, pdca cycle, problem solve, operations  (+4 more)
+  9    11755693 - Hingora Suhel.pdf Hingora Suhel                  +918200559569  ❌ N/A    ❌ N/A          suhelhingora2358@gmail.com
+       Address: Gujarat State Educational Board, Gandhi Nagar, Gujarat., SSC...
+       Skills [6]: Material Handling, Distillation, Compliance, Raw Material Handling, Production Planning, Process Control
+  7    11743500 - Vaishnavi Anil Singh.pdf Vaishnavi Singh                7376324034     Male     ❌ N/A          vaishnavi9450singh@gmail.com
+       Address: Dist- Ballia (UP) Pin-221716...
+       Skills [14]: Sales, Tds, Compliance, Standard Operating Procedure, Quality Control, Excel, Batch Manufacturing, team management  (+6 more)
+  3    11725204 - Sp.pdf      Prajapati Sunilbhai Jayantibh  8141072976     Male     ❌ N/A          sp4091761@gmail.com
+       Address: 07/04/2022 TO 06/04/2023....
+       Skills [14]: Sap Hana, C, Sap, Excel, academic, interpersonal skills, sap r 3, sap business one  (+6 more)
+  8    11749289 - Akhilesh Kumar Gond.pdf Akhilesh Kumar Gond            +919122940682  Male     ❌ N/A          akhileshkumara37641@gmail.com
+       Address: Darauli , Dist:- Siwan (Bihar) ,Pin code- 841234...
+       Skills [14]: documentation, welding, OEE, tpm, production planning, machine operation, height gauge, teaching  (+6 more)
+  12   11771630 - Bhawani Singh.pdf Bhawani Singh Rathore          +919157837521  Male     22/07/1997     bhawanisingh@gmail.com
        Address: ❌ NOT FOUND
-       Skills [7]: documentation, welding, OEE, tpm, production planning, Kanban, Process Control
-  8    11786488 - Dharmendra Prajapati.pdf Dharmendra Jagarnath Prajapat  9662380200     ❌ N/A    14/05/1999     dharmendra30140@gmail.com
+       Skills [15]: Inspection, Compliance, Quality Control, coordination, reporting, Illustrator, Photoshop, excel  (+7 more)
+  10   11771628 - Rushikesh Madve.docx Raghunath Madve                08007799866    Male     ❌ N/A          rushikeshmadve@gmail.com
+       Address: At & Post: - Badapokharan, Tal: - Dahanu, Dist:- Palghar, Ma...
+       Skills [19]: Sales, Procurement, Inspection, Logistics, Forecasting, discipline, networking, self motivated  (+11 more)
+  13   11771631 - Tanmay Rajput.pdf Tanmay Rajput                  +917378678448  ❌ N/A    ❌ N/A          tanmayrajput28@outlook.com
+       Address: Dist.; Dhule, Maharashtra 425405...
+       Skills [21]: Production Planning, Plant Operations, Distillation, Compliance, Quality Control, coordination, documentation, troubleshooting  (+13 more)
+  5    11736381 - Mohit Mishra.pdf Mohit Mishra                   8604329815     Male     ❌ N/A          mohitmishrams3@gmail.com
+       Address: Prayagraj, India, 2016 –...
+       Skills [32]: Data Analytics, Sql, Power BI, Etl, Excel, Data Analysis, Mysql, optimization  (+24 more)
+  15   11771633 - Amarendra Kantha.pdf Amarendrakantha                9827222809     Female   ❌ N/A          amarendrakantha17@gmail.com
+       Address: Place : Rayagada , Odisha...
+       Skills [10]: Filtration, C, Crm, Titration, time management, self motivated, positive attitude, adaptability  (+2 more)
+  18   11771716 - Klondhe.pdf Kamleshwar Anil Londhe         +919637866403  Male     01/01/2000     klondhe988@gmail.com
+       Address: priority. And I am also Doing Preparation Of (MPSC) Competit...
+       Skills [5]: team leadership, financial management, communication skill, customer management, business management
+  11   11771629 - Pravin Patel.docx Pravin                         9879921289     ❌ N/A    27/06/1972     pravin197227@gmail.com
+       Address: At & Post : Dungri (R.S.) Bazar Area, Near Saw Mills, Dharas...
+       Skills [10]: C, Excel, Autocad, draw solid, r, mills, Quality Control, CNC Machining  (+2 more)
+  17   11771715 - Manjulajk.pdf Manjula                        +918637652299  ❌ N/A    ❌ N/A          manjulajk1995@gmail.com
+       Address: State Board...
+       Skills [11]: academic, software development, quality control, quality assurance, Sec, design manufacturing, c, c++  (+3 more)
+  14   11771632 - Bauajee Jha.doc Store Keeping                  +917405414491  Male     26/07/2001     bauajeejha61@gmail.com
+       Address: 1 st Division...
+       Skills [4]: Excel, c, executive, MS Word
+  2    11719199 - Nilesh Chavda.pdf Shivamappartment Vejalpurvast  +919157538955  ❌ N/A    ❌ N/A          nileshchavda045@gmail.com
        Address: ❌ NOT FOUND
-       Skills [18]: cGMP, Compliance, Hplc, Analytical Method Validation, Preventive Maintenance, Quality Control, coordination, documentation  (+10 more)
-  2    11736381 - Mohit Mishra.pdf Mohit Mishra                   8604329815     ❌ N/A    ❌ N/A          mohitmishrams3@gmail.com
+       Skills [35]: documentation, marketing, recruitment, automation, accounting, bookkeeping, compliance, payroll  (+27 more)
+  24   11771723 - Pravin Patil.pdf Pravin                         7768970503     Male     ❌ N/A          pravinpatil22696@gmail.com
        Address: ❌ NOT FOUND
-       Skills [14]: Mysql, Sql, Excel, Power BI, Etl, cloud, server, azure  (+6 more)
-  3    11739739 - Pgdm Aicte Ap.pdf Mayank Kumar                   +917983281581  ❌ N/A    ❌ N/A          mayanktarar11@gmail.com
+       Skills [2]: critical thinking, Quality Control
+  6    11739739 - Pgdm Aicte Ap.pdf Mayank Kumar                   +917983281581  ❌ N/A    ❌ N/A          mayanktarar11@gmail.com
        Address: ❌ NOT FOUND
-       Skills [26]: analytics, coordination, crm, finance, formulation, marketing, strategy, cloud  (+18 more)
-  4    11743500 - Vaishnavi Anil Singh.pdf Vaishnavi Singh                7376324034     ❌ N/A    ❌ N/A          vaishnavi9450singh@gmail.com
+       Skills [49]: analytics, coordination, crm, finance, formulation, marketing, strategy, cloud  (+41 more)
+  25   11771724 - Anuj Kumar Maurya.pdf Anuj Maurya                    +919305976106  Female   ❌ N/A          anujmaueya9876@gmail.com
+       Address: Pradesh 222202, India...
+       Skills [5]: Quality Control, excel, time management, microsoft office, problem solve
+  16   11771634 - Aman Sharma.pdf Aman Sharma                    7067453150     Male     ❌ N/A          sharmaaman37820@gmail.com
+       Address: Dist, -Morena ,Madhya Pradesh - 476111...
+       Skills [3]: academic, targets, reading
+  27   11771726 - Saini Kamal Savarmal.pdf Saini Kamal Savarmal           +917666041929  ❌ N/A    ❌ N/A          kamalsaini.bsf.99@gmail.com
+       Address:  12 th with 51.23% in 2018 MAHARASHTRA STATE BORAD,  10 th...
+       Skills [8]: Accounting, Dispatch, excel, erp, tally erp, computer platform, Tally, Logistics
+  26   11771725 - Rajveer Singh.pdf Rajveer Singh                  +918619586071  Male     17/05/1991     rajveer.rr497@gmail.com
+       Address: Village - Basantgarh, Teshil - Pindwara, District- Sirohi, R...
+       Skills [12]: Procurement, Sap, erp, inventory management, people management, team build, problem solve, decision make  (+4 more)
+  30   11771729 - Bijendra Kumar.pdf Bijendra Kumar                 8905169922     ❌ N/A    ❌ N/A          kumarbijendra640@gmail.com
+       Address: DUNGRA, VAPI, VALSAD, GUJARAT....
+       Skills [11]: Sales, Dispatch, Tally, Sap, Tally Prime, Excel, Enterprise Resource Planning, erp  (+3 more)
+  29   11771728 - Sunny Sharma.pdf Sunny Ramkishor Sharma         +919974032158  ❌ N/A    07/06/2004     sunnysharma.7279@gmail.com
+       Address: 12 th Commerce, GSEB Gujarat (2021) – 42.14%, 10 th, GSEB Gu...
+       Skills [12]: Sales, Accounting, Tally, excel, erp, gst, public speaking, tally erp  (+4 more)
+  31   11771730 - Onkar Rajegaonkar.docx Onkarraje                      +919370339933  Male     01/05/2001     onkarraje2151@gmail.com
+       Address: B-165 , satyanaryana nagar ,jule solapur, solapur 413004...
+       Skills [16]: Distillation, Standard Operating Procedure, Hazop, Sap, excel, risk management, material balance, manage time  (+8 more)
+  32   11771731 - Vipul Lad.pdf Vipulkumar Lad                 +919737164038  Male     ❌ N/A          ladvipul1989@gmail.com
+       Address: Valsad, Gujarat INDIA...
+       Skills [17]: Sales, Tds, C, Accounting, Import Export, Bank Reconciliation, Forecasting, logistics  (+9 more)
+  20   11771718 - Vk.pdf      Vishnu Kumar                   9568640524     Male     ❌ N/A          vk9568640524@gmail.com
+       Address: UP 281306...
+       Skills [8]: testing, academic, PCM, engineering knowledge, chemistry, teaching, english written, reading
+  34   11771932 - Key Skills.pdf Rakesh Rahi                    +919871567588  Male     ❌ N/A          rakeshrahi@gmail.com
+       Address: Gurgaon, Haryana...
+       Skills [18]: Procurement, Logistics, Sourcing, Go, Negotiation, Cost Reduction, excel, strategic sourcing  (+10 more)
+  33   11771732 - Jyoti Singh.pdf Qualificati Ons                9328796680     Male     ❌ N/A          jyotisingh78748@gmail.com
+       Address:  Permanent Address : Atul 1 st Gate, Shiv palace Apt-107, B...
+       Skills [8]: communication skill, MS Word, Internal Auditing, Excel, PowerPoint, Financial Analysis, Training & Development, SEM
+  21   11771719 - Vijay Kumar.pdf Vijay Kumar                    +917903975406  Male     ❌ N/A          vk2532120@gmail.com
+       Address: SIwan (BIHAR) Pin Code: 841238...
+       Skills [28]: coordination, documentation, academic, medical, physical, planning, organizational, reporting  (+20 more)
+  22   11771721 - Ramesh Mishra.pdf Ramesh Mishra                  7359103960     Male     ❌ N/A          1588.ramesh@gmail.com
        Address: ❌ NOT FOUND
-       Skills [13]: Standard Operating Procedure, Sales, Compliance, Tds, Excel, Batch Manufacturing, Quality Control, team management  (+5 more)
-  6    11755693 - Hingora Suhel.pdf Hingora Suhel                  +918200559569  ❌ N/A    ❌ N/A          suhelhingora2358@gmail.com
+       Skills [32]: Sales, Material Handling, Inspection, Payroll Management, Logistics, Recruitment, Compliance, Statutory Compliance  (+24 more)
+  28   11771727 - Kuldeep Yadav.pdf Kuldeep Kumar                  +919935373117  Male     20/12/1998     kpyadav4656@gmail.com
+       Address: District - Prayagraj, Pin Code - 221508, State - Uttar Prade...
+       Skills [31]: documentation, testing, troubleshooting, academic, drawings, hydraulic, inspection, compliance  (+23 more)
+  40   11771939 - Gaurav Patare.pdf Gaurav Rajendra Patare         8208474075     Male     ❌ N/A          pataregaurav@gmail.com
+       Address: Ghogargaon Newasa 413725...
+       Skills [2]: cGMP, Regulatory Compliance
+  19   11771717 - Pradeep Murmu.pdf Mrf Tyres Dahej                7061529505     ❌ N/A    ❌ N/A          pradeepmurmu108@gmail.com
        Address: ❌ NOT FOUND
-       Skills [10]: Material Handling, Distillation, Compliance, documentation, monitoring, chemical engineering, natural, Raw Material Handling  (+2 more)
-  11   11786491 - Rahul Gupta.pdf Rahul Gupta                    919399324996   ❌ N/A    ❌ N/A          rahulgupta55948@gmail.com
+       Skills [28]: Breakdown Maintenance, Inspection, Problem Solving, C, Preventive Maintenance, Compliance, Tpm, Kaizen  (+20 more)
+  42   11771941 - Kapil Adhikari.docx Kapil Adhikari                 ❌ NOT FOUND    Male     30/07/1990     ❌ NOT FOUND
+       Address: Warehouse Executive, 07/2015 - Current...
+       Skills [9]: Procurement, Warehouse Management, C, Quality Assurance, Accounting, Quality Audits, Inventory Management, Production Planning  (+1 more)
+  43   11771942 - Md Rafiuddin Zamadar.pdf Noida                          8327053292     ❌ N/A    ❌ N/A          zamadarrafi@gmail.com
        Address: ❌ NOT FOUND
-       Skills [4]: Sales, excel, Production Planning, Process Control
-  7    11786487 - Minhaj Selot.pdf Minhaj Selot                   +919898340428  ❌ N/A    ❌ N/A          mselot044@gmail.com
+       Skills [3]: Sales, customer engagement, problem solve
+  44   11771943 - Dinesh Yadav.doc ❌ Error: Failed to extract from 11771943 - Dinesh Yadav.doc: textract error: antiword missing; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)
+  41   11771940 - Roshanee Parmar.pdf Roshanee Parmar                +919664894876  ❌ N/A    ❌ N/A          roshuparmar30@gmail.com
        Address: ❌ NOT FOUND
-       Skills [1]: Troubleshooting
-  9    11786489 - Dilip Sharma.pdf Dilip Kumar                    260102163429   ❌ N/A    07/02/1982     dilipsharma7282@gmail.com
+       Skills [25]: Procurement, Compliance, Vendor Coordination, Root Cause Analysis, documentation, monitoring, excel, quality control  (+17 more)
+  45   11771944 - Ms.pdf      Dedicated To Maximizing        6397731400     Male     ❌ N/A          ms281488@gmail.com
+       Address: Saharanpur, India 247554...
+       Skills [24]: Sales, Production Planning, Procurement, Process Optimization, Logistics, Accounting, Hplc, Sourcing  (+16 more)
+  35   11771933 - Himanshu Pandey.pdf Himanshu Pandey                +916386627854  Male     ❌ N/A          pandey638362@gmai.com
+       Address: Kilvani Naka Shree Krishnan Hospital Silvassa Dadra Nagar Ha...
+       Skills [14]: Tally, Tally Prime, Excel, Enterprise Resource Planning, academic, purchase order, erp, bank statement  (+6 more)
+  47   11771946 - Chanda Pujari.pdf Chandrabhaga Dharmesh Patel    +918128330587  Female   ❌ N/A          pujarichanda8@gmail.com
+       Address: 2002 H.S.C...
+       Skills [33]: Sales, Gst, Accounts Payable, C, Accounting, Compliance, Esic, Dispatch  (+25 more)
+  39   11771938 - Khan Ahmed.pdf Khan Ahmed                     9427606629     Female   07/09/2002     khan1200ahmed@gmail.com
+       Address: OPP IMRAN NAGAR, VAPI....
+       Skills [8]: autocad, r, c, flywheel, editing, CRM, Customer Satisfaction, Inspection
+  37   11771936 - Punit Pandey.docx Punit Pandey                   +919198900111  Male     05/03/1993     punitpandeymail@yahoo.com
+       Address: Pin code -273015...
+       Skills [29]: coordination, cad, calibration, kaizen, robotics, balancing, monitoring, SAP HANA  (+21 more)
+  23   11771722 - Naman Agarwal.pdf Naman Agarwal                  +919648462175  Male     ❌ N/A          csnaman675@gmail.com
+       Address: SEBI LODR Regulations, 2015, SEBI (Insider Trading) Regulati...
+       Skills [33]: C, Onboarding, Ccd, Compliance, Statutory Compliance, Excel, documentation, auditors  (+25 more)
+  36   11771934 - Vivekanand Vishwakarma.pdf Uiet Csjmu Kanpur              +918795065219  ❌ N/A    ❌ N/A          vivekanandvishwakarma2550@gmail.com
+       Address: Barauni Bihar...
+       Skills [41]: testing, organizational, excel, python, tds, chemical engineering, time management, natural  (+33 more)
+  38   11771937 - Ashish Yadav.pdf Application                    9454185084     Male     ❌ N/A          ashish1594yadav@gmail.com
+       Address: JANVI APARTMENT , KUDSAD...
+       Skills [12]: excel, mechanical engineering, c, energetic, justice, synopsis, yarn, refrigeration  (+4 more)
+  46   11771945 - Manish Ghode.pdf Growth                         9209680466     Male     ❌ N/A          manishghode745@gmail.com
+       Address: Nagpur, Maharashtra 441501...
+       Skills [6]: shipping, logistics, growth organization, food products, positive attitude, Vendor Management
+  53   11771952 - Amresh Kumar.pdf Industry Excellence            +919115507793  ❌ N/A    ❌ N/A          amreshme1406@gmail.com
+       Address: materials like SA 210 Gr A 1, SA 213 Gr T 11, T 22 & T 91 an...
+       Skills [16]: Preventive Maintenance, Rca, asset, monitoring, optimization, condition monitor, diesel engine, reliability  (+8 more)
+  52   11771951 - Bolisetti Jnana Sourabh.pdf Bolisetti Jnana Sourabh        7901002673     Male     ❌ N/A          bjsunique02@gmail.com
+       Address: Tuni, India, • Oversaw the monitoring of various molecules a...
+       Skills [15]: Distillation, Solvent Recovery, testing, optimization, chemical engineering, engineering calculation, process optimization, microsoft office  (+7 more)
+  50   11771949 - Pawan Omkar.docx Pawan Omkar                    9399080016     Male     04/05/1999     pawanomkar000@gmail.com
+       Address: Karwar, Darimeta, Pandhurna, Chhindwara (MP) 480334...
+       Skills [21]: Grievance Handling, Recruitment, Onboarding, Compliance, Statutory Compliance, Quality Control, coordination, documentation  (+13 more)
+  48   11771947 - Dharmesh S Patel.pdf Dharmesh                       +918160584022  Male     ❌ N/A          dharmesh040418@gmail.com
+       Address: Khambhat, Dist. Anand, Gujarat, 388620...
+       Skills [39]: Sales, Inventory Management, Procurement, C, Logistics, Accounting, Quality Control, Tally Erp  (+31 more)
+  55   11785742 - Tailor Meet.pdf Tailormeet                     916352515915   ❌ N/A    ❌ N/A          tailormeet00@gmail.com
        Address: ❌ NOT FOUND
-       Skills [3]: marketing, banking, insurance
-  10   11786490 - Sardar Dewanda.pdf Sardar Singh Dewanda           +919694210177  ❌ N/A    01/01/1993     sdewanda44@gmail.com
+       Skills [5]: interpersonal skills, higher certificate, effective team, writing, chemistry computer
+  54   11785741 - Tejas Patat.pdf Ejaspatat                      6356462261     ❌ N/A    25/10/2003     ejaspatat@gmail.com
+       Address: Maljinjava TA: Talala Gir Dist: Gir Somnath...
+       Skills [10]: plc, chemical engineering, batch reactor, production engineering, creativity, c, executive, positive attitude  (+2 more)
+  60   11785747 - Virendra Prajapat.pdf Virendra Prajapati             +919691584357  Male     ❌ N/A          virendra.prajapat9691@gmail.com
+       Address: Location: Ujjain, Madhya Pradesh...
+       Skills [5]: Data Analysis, Troubleshooting, Project Management, Production Planning, Process Control
+  51   11771950 - Sudhir Choudhary.pdf Sudhir Choudhary               +916352346415  Female   ❌ N/A          sudhirchoudhary838@gmail.com
+       Address: by NIFTY 100 Listed Indian Banks....
+       Skills [38]: documentation, sustainability, troubleshooting, campaigns, compliance, planning, organizational, reporting  (+30 more)
+  49   11771948 - Tuhin Banerjee.pdf Tuhin Prasanjit Banerjee       +916355062382  Male     01/04/2003     banerjeet138@gmail.com
+       Address: H-403, Kalpataru and Bhagyodaya Society, Dahad Road...
+       Skills [23]: Logistics, Accounting, Dispatch, Tally, documentation, payroll, networking, customer service  (+15 more)
+  62   11785749 - Tandel Nimesh.pdf Tandel Nimeshkumar Ramanbhai   9998250878     Female   04/02/1994     tandelnimesh141@gmail.com
+       Address: Gujarat,396310...
+       Skills [3]: Effluent Treatment Plant, Filter Press, communication skill
+  64   11785751 - Vishal Bharti.pdf Vishal Bharti                  +918957506772  Male     ❌ N/A          vishalbharti3007@gmail.com
+       Address: Piparsend,Lucknow 226008...
+       Skills [8]: Compliance, time management, analytical skill, problem solve, skills skill, skill analytical, creativity, Quality Audits
+  56   11785743 - About Me.pdf Chaitanya Chinnarii            9440069399     ❌ N/A    ❌ N/A          chaitanya.chinnarii@gmail.com
        Address: ❌ NOT FOUND
-       Skills [22]: Standard Operating Procedure, Sap Hana, Rca, Capa, Compliance, Sap, Manpower Planning, Logistics  (+14 more)
-  12   11786492 - Dhruv Baliyan.pdf Dhruv Baliyan                  +919548658828  ❌ N/A    ❌ N/A          raghuvanshidhruv@gmail.com
+       Skills [20]: Distillation, investigation, troubleshooting, discipline, heat exchanger, process design, problem solve, pressure drop  (+12 more)
+  65   11785752 - Abhishek Swarnkar.pdf Abhishek Kumar Swarnkar        8920929211     Male     12/02/1995     abhirswarnkar@gmail.com
+       Address: Add.- Bhanda, Bhanda, Bhadohi, Uttar Pradesh...
+       Skills [7]: Compliance, Autocad, architectural, Revit, GIS, construction, dec
+  58   11785745 - Chandraprakash Bangde.pdf Resum                          +918140465856  ❌ N/A    ❌ N/A          e-mailid-chandu5bangde@yahoo.co.in
+       Address: Dist-Chhindwara(M.P.)Pin-480105,India...
+       Skills [10]: formulation, c, r, chemistry, dec, customer requirement, Quality Control, MFI Testing  (+2 more)
+  68   11785901 - Pooja Kushwaha.pdf Pooja Kushwaha                 9650632451     Female   ❌ N/A          pooja.kushwaha2589@gmail.com
+       Address: 67/13 Chhuriya Mohalla Tughlakabad village New Delhi -110044...
+       Skills [23]: Inventory Management, Procurement, Vendor Management, Logistics, Sourcing, Compliance, Sap, Contract Management  (+15 more)
+  57   11785744 - Bukya Arun Kumar Naik.pdf Arunkumarnaik                  919392422687   ❌ N/A    ❌ N/A          arunkumarnaik531@gmail.com
        Address: ❌ NOT FOUND
-       Skills [25]: Onboarding, Django, Mysql, agile, testing, calibration, authentication, cloud  (+17 more)
-  15   11786514 - Jayesh Shimpi.pdf Jayesh Samadhan Shimpi         +919638165134  ❌ N/A    15/10/2002     jayeshshimpi988@gmail.com
+       Skills [22]: discipline, optimization, chemical engineering, equipment maintenance, heat exchanger, pressure drop, problem solve, secondary education  (+14 more)
+  67   11785754 - Aman Kumar Goswami.pdf Aman Kumar Goswami             +916261306213  Female   ❌ N/A          rg73796@gmail.com
        Address: ❌ NOT FOUND
-       Skills [9]: Process Validation, cGMP, Batch Manufacturing, documentation, formulation, academic, accredited, organizational  (+1 more)
-  14   11786513 - Meet Patel.pdf Meet Patel                     8140290259     ❌ N/A    ❌ N/A          meetpatel4341@gmail.com
+       Skills [18]: Problem Solving, Grievance Handling, Recruitment, Onboarding, Compliance, Shift Management, Statutory Compliance, Excel  (+10 more)
+  66   11785753 - Piyush Ashok Patil.pdf Piyush Ashok Patil             +919106362501  Male     ❌ N/A          piyush27003@gmail.com
+       Address: • Publication Award, NC-RISES 2024...
+       Skills [41]: Data Science, networking, server, excel, html, java, javascript, mysql  (+33 more)
+  59   11785746 - Ashish Bisht.pdf Ashish Bisht                   7500869239     Male     ❌ N/A          ashishbisht34146@gmail.com
+       Address: Greater Noida 201008 (Uttar-Pradesh), I am currently working...
+       Skills [22]: Accounting, Excel, Enterprise Resource Planning, classification, documentation, academic, asset, erp  (+14 more)
+  74   11785907 - Dhrumi Parkhiya.pdf Dhrumi Parkhiya                +917862985611  Male     ❌ N/A          parakhiyadhrumi2004@gmail.com
+       Address: ¾ officer quarter near k.k.mori chowk veraval, APPLIED POST:...
+       Skills [8]: Tds, Compliance, Dispatch, Sap, goal orient, calculations, writing, Quality Control
+  69   11785902 - Jitendra Rai.pdf Jitendra Kumar Rai             8787223649     ❌ N/A    ❌ N/A          jitendraraihata@gmail.com
+       Address: VILL- KURMAUTA CHAINPUR POST, KURMAUTA MANJHARIA DIST, KUSHI...
+       Skills [5]: academic, chemical engineering, paper mill, organization growth, reading
+  61   11785748 - Kavan0105 Pathak.pdf Kavan Pathak                   9714243130     ❌ N/A    ❌ N/A          kavanpathak101@gmail.com
+       Address: Vadodara, Gujarat India...
+       Skills [57]: Financial Reporting, Linux, Gst, Employee Engagement, Taxation, Problem Solving, Payroll Management, C  (+49 more)
+  76   11785909 - Harsh Gupta.pdf Harsh Gupta                    6392622644     Male     ❌ N/A          harshgupta2861@gmail.com
+       Address:  Suzuki Motors Gujarat Air Washer, VRV system, AHU projects...
+       Skills [18]: Ms Project, Sap, Excel, coordination, documentation, drawing, refrigerant, hvac  (+10 more)
+  75   11785908 - Rohith Rao.pdf Rohith Rao                     7013145754     ❌ N/A    ❌ N/A          jrohithrao2002@gmail.com
        Address: ❌ NOT FOUND
-       Skills [11]: cGMP, Process Optimization, Compliance, Hplc, Quality Control, erp, Raw Material Handling, Equipment Calibration  (+3 more)
-  19   11786520 - Suraj Dubey.pdf Suraj Dubey                    +916386464665  ❌ N/A    ❌ N/A          surajdubeyl082002@ginai1.com
+       Skills [26]: Gap Analysis, excel, python, sql, tableau, Power BI, data pipeline, ETL  (+18 more)
+  72   11785905 - Pratim Rakshit.pdf Pratimrakshit                  +917980532349  ❌ N/A    ❌ N/A          pratimrakshit02@gmail.com
        Address: ❌ NOT FOUND
-       Skills [13]: cGMP, Enterprise Resource Planning, Compliance, Root Cause Analysis, Excel, formulation, troubleshooting, erp  (+5 more)
-  16   11786515 - Guduri Omkar.pdf Guduri Omkar                   ❌ NOT FOUND    ❌ N/A    ❌ N/A          omkarguduri51@gmail.com
+       Skills [46]: analytics, marketing, testing, automation, asset, compliance, monitoring, optimization  (+38 more)
+  70   11785903 - Rohit Khetri.pdf Rohit Kumar Kumawat            7733012064     Male     ❌ N/A          rohitkhetri786@gmail.com
+       Address: Kalwar Road Jhotwara, Jaipur Rajasthan -302012...
+       Skills [45]: coordination, documentation, recruitment, automation, auditing, logistics, optimization, excel  (+37 more)
+  78   11785911 - Himanshu Gupta.pdf Gupta Himanshu                 8112809164     Male     ❌ N/A          gupta2502himanshu@gmail.com
+       Address: Business 360 - Brick & mortar and Ecommerce...
+       Skills [26]: Business Intelligence, Sql, Power BI, Data Visualization, Etl, Python, Tableau, mysql  (+18 more)
+  80   11785913 - Narsireddy Annapureddy.pdf Narsireddy Annapureddy         +918341499839  ❌ N/A    ❌ N/A          annapureddynarsireddy839@gmail.com
+       Address: Guntur, Andhra Pradesh...
+       Skills [13]: html, java, Core Java, JVM, CSS, programming languages, c, polymorphism  (+5 more)
+  81   11785914 - Mohammad Sohail.pdf Mohammad Sohail                919179499764   ❌ N/A    ❌ N/A          sohailmohammad999@gmail.com
+       Address: Pune, Maharashtra...
+       Skills [20]: excel, git, mysql, postgresql, python, sql, tableau, Power BI  (+12 more)
+  84   11785917 - Taha Benbitour.pdf Taha Benbitour                 0772102391     ❌ N/A    ❌ N/A          tahabenbitour@gmail.com
+       Address: street 1 st novembre block 618 N 04/ dar chioukh - djelfa, T...
+       Skills [2]: Data Analysis, Excel
+  82   11785915 - Shiv Dubey.pdf Shivkumar Dubey                8120199785     Male     06/02/2002     dshiv90396@gmail.com
        Address: ❌ NOT FOUND
-       Skills: ❌ NOT FOUND
-  17   11786518 - Rajesh Kumar Patel.pdf Rajesh Kumar                   +918953166860  ❌ N/A    09/06/1992     patelrajeshkumar830@gmail.com
+       Skills [8]: Logistics, Onboarding, coordination, security, office administration, facility management, logbook, guest relations
+  73   11785906 - Vishal Yadav.pdf Vishal Yadav                   39918463058    Male     ❌ N/A          vishalyadav3339@gmail.com
        Address: ❌ NOT FOUND
-       Skills [9]: Internal Audit, planning, organizational, excel, erp, external audit, Raw Material Handling, Quality Audits  (+1 more)
-  18   11786519 - Avinash Chaudhary.pdf Avinash                        +917844921912  ❌ N/A    ❌ N/A          avinashchaudhary1234@gmail.com
+       Skills [23]: automation, electrical, inspection, robotics, cloud, monitoring, control system, smart grid  (+15 more)
+  63   11785750 - Gameontoy.pdf Gandhi Ram Maharana            +919601635855  Male     ❌ N/A          gameontoy@gmail.com
+       Address: Vapi (Gujarat) 396 195...
+       Skills [32]: documentation, monitoring, logistics, reporting, purchase order, internal audit, production planning, production process  (+24 more)
+  85   11785918 - Anjali Thacker.pdf Thacker Anjali                 +919925921056  Female   ❌ N/A          anjalithacker.work@gmail.com
+       Address: Bhuj, India...
+       Skills [16]: Employee Engagement, Recruitment, Compliance, Performance Management, Appraisal, coordination, canva, Strategic Planning  (+8 more)
+  88   11785930 - R L Subrisha.pdf Subrisha                       +916369594767  Female   ❌ N/A          subrisha.5@gmail.com
+       Address: 6/311, Anna Nagar, Ganapathi Nagar, Ayyampatti...
+       Skills [20]: excel, conflict resolution, time management, employee engagement, problem solve, team leadership, event planning, employee relation  (+12 more)
+  79   11785912 - Thakkar Sureshkumar Laljibhai.pdf Thakkar Sureshkumar Laljibhai  +919998220936  Male     10/10/1967     aksharslt@gmail.com
+       Address: Representative (MR) Reports for ISO - 9002 & ISO - 14002 sys...
+       Skills [53]: Compliance, Dispatch, Hazop, coordination, documentation, investigation, testing, electrical  (+45 more)
+  71   11785904 - Shivam Suryawanshi.pdf Village- Ragadgaon             8103406281     ❌ N/A    ❌ N/A          satyamsuryavanshi1234@gmail.com
+       Address: Village- ragadgaon, post- ragadgaon tehsil -multai dist - be...
+       Skills [25]: Material Handling, Problem Solving, C, Sap, banking, chemical engineering, team management, job description  (+17 more)
+  87   11785929 - Ajay Tiwari.pdf Ajay Kumar Tiwari              9755695668     Male     ❌ N/A          ajaytiwari7886@gmail.com
+       Address: VILLAGE-POST PADARI, DISTT REWA MADHYA PRADESH, Pin code- 48...
+       Skills [5]: finance, academic, self motivation, c, positive attitude
+  91   11785933 - Shivharsh Pandey.pdf Shivharsh Pandey               8853423757     Male     31/10/2002     shivharshpandey065@gmail.com
+       Address: 12 th (Science) – ISC, 2019 | RPM Academy, Gorakhpur, 10 th ...
+       Skills [17]: Financial Reporting, Accounting, Sourcing, Recruitment, Compliance, Tally Erp, Tally, Screening  (+9 more)
+  77   11785910 - Manish Saini.pdf Karauta Urf Nebuiya Paratawal  7084110461     ❌ N/A    20/08/1998     manishs7084@gmail.com
+       Address: VERAVAL (SAPAR) DIST RAJKOT-360024, Injection molding depart...
+       Skills [18]: Coating, injection molding, extrusion coating, quality control, new product development, research and development, problem solve, r  (+10 more)
+  94   11785936 - Jayant Rai.pdf Rajiv Gandhi                   7693850747     Male     24/10/2001     raijayant932@gmail.com
+       Address:  City & State - Jabalpur,(M.P.),  Nationality - Indian...
+       Skills [10]: Inventory Management, Inspection, organizational, excel, organizational skill, adaptability, positive attitude, SCADA  (+2 more)
+  92   11785934 - Priti Singh.pdf Priti Singh                    9313078879     ❌ N/A    ❌ N/A          pritisingh2416@gmail.com
+       Address: E-608 Yogi hills society near balaji temple silvassa, (DNH) ...
+       Skills [10]: Sales, coordination, marketing, excel, life sciences, closing, inquiry, broadcasting  (+2 more)
+  86   11785919 - Udayveer Rajpoot.pdf Udayveer Rajput                8223926988     Male     ❌ N/A          rajpootudayveer39@gmail.com
+       Address: Gandhi Nagar ward no.16 Gohad bhind, Madhya Pradesh (MP)...
+       Skills [32]: Coating, Breakdown Maintenance, Problem Solving, Training And Development, Effluent Treatment Plant, Preventive Maintenance, Sap, Excel  (+24 more)
+  83   11785916 - Anthony Promise.pdf Anthony Edosawe Promise        09160216338    ❌ N/A    ❌ N/A          anthonypromise2005@gmail.com
+       Address: No 22 odgobolu Street ketu, Lagos, "Dear Hiring Manager...
+       Skills [10]: excel, sql, data analysis, detail orient, Power BI, r, data visualization, subcategory  (+2 more)
+  97   11785939 - Ashwani Rajput.pdf Ashwani Kumar                  9026358127     Male     ❌ N/A          rajputashwani257@gmail.com
+       Address: to 11/2024 ....
+       Skills [21]: Coating, Inspection, Sap, Excel, Kaizen, metrology, caliper, operating system  (+13 more)
+  90   11785932 - Pratik Patel.pdf Madurai Kamaraj                +919099495976  Female   13/08/1991     pratikpatel2025@gmail.com
+       Address: Gujarat Higher...
+       Skills [17]: Sketch, Hplc, Iso 9001, chromatography, secondary education, iso iec, iso iec 17025, analytical skill  (+9 more)
+  89   11785931 - Susmriti Dolui.pdf Susmriti Dolui                 8967754901     Female   ❌ N/A          doluisusmriti@gmail.com
        Address: ❌ NOT FOUND
-       Skills [16]: C, documentation, recruitment, academy, compliance, Process Validation, strategic thinking, time management  (+8 more)
-  20   11786521 - Pramod Bhajantri.pdf Pramodbhajantri                8152971994     ❌ N/A    ❌ N/A          pramodbhajantri1111@gmail.com
+       Skills [37]: Derivatives, Tds, Hplc, Distillation, chromatography, sustainability, testing, academic  (+29 more)
+  101  11785962 - Mitali Lad.pdf Lad Mitali                     9662900323     Female   ❌ N/A          drvishaljmali@gmail.com
+       Address: Sutharwad Segvi, Valsad 396007...
+       Skills [7]: excel, time management, adaptability, MS Word, PowerPoint, Employee Engagement, SEM
+  96   11785938 - Akash Patel.pdf Akashbhai Nanubhai Patel       +919558866270  Male     10/08/2003     akashpatel6627@gmail.com
+       Address: At & Po Pipalgabhan (Khutiya Amba), Ta- Chikhli, Dist- Navsa...
+       Skills [17]: Hplc, documentation, testing, calibration, critical thinking, laboratory equipment, plastic material, pharmaceuticals  (+9 more)
+  98   11785940 - Akif Raja.pdf Mdakifraza                     +918873720402  ❌ N/A    29/08/2002     mdakifraza12@gmail.com
+       Address: State. Bihar 841214...
+       Skills [38]: Coating, C, Standard Operating Procedure, Kaizen, Cost Reduction, aerospace, caliper, excel  (+30 more)
+  95   11785937 - Gagan Rajpal.docx Gagan                          +918218313372  Male     30/08/1997     rajpalgagan991@gmail.com
+       Address: Rishikesh Uttarakhand, (249204)...
+       Skills [15]: Employee Engagement, Recruitment, Onboarding, Payroll Processing, academic, academy, payroll, hotel management  (+7 more)
+  106  11786487 - Minhaj Selot.pdf Minhaj Selot                   +919898340428  Male     ❌ N/A          mselot044@gmail.com
+       Address: Pin-392001 (GUJARAT) INDIA...
+       Skills [2]: operating system, Troubleshooting
+  93   11785935 - Rohit Shukla.docx Rohit Shukla                   +919729965264  Male     20/10/1984     rohitshukla21@gmail.com
+       Address: • Manage production operations for telecom and optical fiber...
+       Skills [45]: Capa, Inspection, Quality Assurance, Compliance, Ohsas 18001, Root Cause Analysis, Iso 9001, Kaizen  (+37 more)
+  99   11785941 - Ajay Mishra.pdf Ajay Mishra                    +919644899908  Male     ❌ N/A          ajaymishra509@gmail.com
        Address: ❌ NOT FOUND
-       Skills [39]: agile, testing, troubleshooting, automation, authentication, authorization, cloud, devops  (+31 more)
-  23   11786524 - Paurush Pratap.pdf Paurush Pratap                 +919123220388  ❌ N/A    ❌ N/A          paurushpratap99@gmail.com
+       Skills [42]: cGMP, Capa, Effluent Treatment Plant, Preventive Maintenance, Compliance, Tpm, Statutory Compliance, Rca  (+34 more)
+  103  11785964 - Prajapati Tirth.pdf Hsc Gsheb                      7359016681     Male     ❌ N/A          tirthprajapati4774@gmail.com
+       Address: Working as aChemicalPlantSupervisor from August 2025 on ward...
+       Skills [13]: C, academic, organizational, chemical engineering, problem solve, positive attitude, engineering project, research  (+5 more)
+  109  11786490 - Sardar Dewanda.pdf Sardar Singh Dewanda           +919694210177  ❌ N/A    01/01/1993     sdewanda44@gmail.com
        Address: ❌ NOT FOUND
-       Skills [1]: electrical
-  22   11786523 - Gayatri Shimpi.pdf Shimpigayatri                  9579314474     ❌ N/A    20/07/2000     shimpigayatri80@gmail.com
+       Skills [29]: Capa, Sap Hana, Logistics, Manpower Planning, Compliance, Standard Operating Procedure, Rca, Sap  (+21 more)
+  111  11786492 - Dhruv Baliyan.pdf Dhruv Baliyan                  +919548658828  Male     ❌ N/A          raghuvanshidhruv@gmail.com
+       Address: • Prepwise (2025) — Engineered a full-stack interview engine...
+       Skills [28]: Django, agile, testing, cloud, git, java, javascript, mongodb  (+20 more)
+  112  11786512 - Karan Tokiya.docx Karanbhai Arvindbhai Tokiya    9265690609     Male     ❌ N/A          ktokiya0@gmail.com
+       Address: Gas Chromatography (Shimadzu GC-2014, agileunt 8890), HPCL (...
+       Skills [7]: Hplc, laboratory, analytical skill, internet skills, Data Analysis, Quality Control, Equipment Calibration
+  104  11785965 - Paresh Ram.pdf Paresh Ukabhai Ram             +919898891666  Male     ❌ N/A          rhrlpram92@gmai.com
+       Address: 1) An opportunity to obtain an entry level position in the H...
+       Skills [30]: Employee Engagement, Recruitment, Onboarding, Compliance, coordination, documentation, strategy, accounting  (+22 more)
+  107  11786488 - Dharmendra Prajapati.pdf Dharmendra Jagarnath Prajapat  9662380200     Male     14/05/1999     dharmendra30140@gmail.com
+       Address: HPLC Systems – Agilent 1280 Series (OpenLab, OpenLab CDS), S...
+       Skills [31]: cGMP, Hplc, Preventive Maintenance, Compliance, Analytical Method Validation, coordination, documentation, formulation  (+23 more)
+  113  11786513 - Meet Patel.pdf Meet Patel                     8140290259     Male     ❌ N/A          meetpatel4341@gmail.com
+       Address: | 107/1 kumbharwad,dungra,vapi 396193...
+       Skills [22]: cGMP, Process Optimization, Hplc, Compliance, Quality Control, documentation, calibration, erp  (+14 more)
+  105  11785966 - Dnyaneshwar Patil.pdf Akshar Heights                 7878199507     ❌ N/A    27/11/1993     dnyanupatil03@gmail.com
+       Address: Village Dapada, Silvassa, Dadra and Nagar Haveli-396230...
+       Skills [24]: cGMP, Breakdown Maintenance, C, Effluent Treatment, Preventive Maintenance, troubleshooting, academic, monitoring  (+16 more)
+  116  11786518 - Rajesh Kumar Patel.pdf Rajesh Kumar                   +918953166860  Male     09/06/1992     patelrajeshkumar830@gmail.com
+       Address: Mangu Bhai Ki Chawl Room no 03 Rakholi, Silvassa, Pin Code,3...
+       Skills [8]: Internal Audit, planning, excel, erp, enterprise resource, Raw Material Handling, Quality Audits, PowerPoint
+  115  11786515 - Guduri Omkar.pdf Guduri Omkar                   ❌ NOT FOUND    Female   ❌ N/A          omkarguduri51@gmail.com
        Address: ❌ NOT FOUND
-       Skills [8]: investigation, academic, calibration, autoclave, monitoring, interpersonal skills, Raw Material Handling, Equipment Calibration
-  1    7660868 - Sudheer Dixit.docx Sudheer Dixit                  +917838380707  ❌ N/A    ❌ N/A          sudhirdixit007@gmail.com
+       Skills [1]: data entry
+  102  11785963 - Meraj Alam.pdf First Division                 +917710927600  ❌ N/A    ❌ N/A          smraaj56@gmail.com
+       Address: Near Imambada, Malwani Gate No.-7, Malad (west), Mumbai 4000...
+       Skills [31]: troubleshooting, monitoring, optimization, preventive maintenance, time management, standard operating procedure, management system, smart work  (+23 more)
+  110  11786491 - Rahul Gupta.pdf Rahul Gupta                    919399324996   Male     ❌ N/A          rahulgupta55948@gmail.com
+       Address: (ZRO 90 T), (AF 40 T). Working Period from 25/02/2019 to 30/...
+       Skills [7]: Sales, excel, document control, machine operator, sales executive, Production Planning, Process Control
+  108  11786489 - Dilip Sharma.pdf Dilip Kumar                    260102163429   Male     07/02/1982     dilipsharma7282@gmail.com
        Address: ❌ NOT FOUND
-       Skills [26]: Html, Bootstrap, C, Seo, Compliance, Javascript, Jquery, Css  (+18 more)
-  21   11786522 - Saumya Srivastava.pdf Saumya Srivastava              9939537102     ❌ N/A    ❌ N/A          saumyasrivastava1405@gmail.com
+       Skills [9]: marketing, insurance, sale management, technical support, retail banking, executive, ubi, sales  (+1 more)
+  120  11786522 - Saumya Srivastava.pdf Saumya Srivastava              9939537102     ❌ N/A    ❌ N/A          saumyasrivastava1405@gmail.com
+       Address: Muzaffarpur, Bihar...
+       Skills [24]: Spc, Inspection, documentation, calibration, metrology, optimization, fmea, root cause analysis  (+16 more)
+  118  11786520 - Suraj Dubey.pdf Suraj Dubey                    +916386464665  Male     ❌ N/A          surajdubeyl082002@ginai1.com
+       Address: Indore, Madhya Pradesh (452015), (+91) 6386464665...
+       Skills [19]: cGMP, Compliance, formulation, troubleshooting, excel, erp, root cause analysis, good manufacturing practice  (+11 more)
+  117  11786519 - Avinash Chaudhary.pdf Avinash                        +917844921912  ❌ N/A    ❌ N/A          avinashchaudhary1234@gmail.com
+       Address: VAPI, GUJARAT AS an IPQA EXECUTIVE....
+       Skills [21]: documentation, compliance, Process Validation, strategic thinking, time management, creative problem solve, problem solve, production process  (+13 more)
+  114  11786514 - Jayesh Shimpi.pdf Jayesh Samadhan Shimpi         +919638165134  Male     15/10/2002     jayeshshimpi988@gmail.com
+       Address: Nachankheda, Tal. Jamner, Dis. Jalgaon-424206 (Maharashtra)...
+       Skills [11]: documentation, formulation, accredited, organizational, Process Validation, cGMP, time study, research  (+3 more)
+  125  11786527 - Dhruvik Surani.pdf Dhruvik Jayantibhai Surani     8000902226     Male     ❌ N/A          dhruviksurani009@gmail.com
+       Address: 📍 Surat, Gujarat...
+       Skills [18]: optimization, excel, matlab, python, quality assurance, product management, experimental design, VIS  (+10 more)
+  119  11786521 - Pramod Bhajantri.pdf Pramodbhajantri                8152971994     ❌ N/A    ❌ N/A          pramodbhajantri1111@gmail.com
        Address: ❌ NOT FOUND
-       Skills [11]: Spc, Inspection, Data Analysis, Quality Assurance, Quality Control, Raw Material Handling, Material Testing, ISO 9001  (+3 more)
-  24   11786525 - Paridhi Bodse.pdf Bodseparidhi                   +917987618820  ❌ N/A    29/03/2002     bodseparidhi@gmail.com
+       Skills [70]: agile, testing, troubleshooting, automation, authentication, authorization, cloud, devops  (+62 more)
+  124  11786526 - Shruti Jagdish Gavanang.pdf Shruti Jagdish Gavanang        7378863451     Female   ❌ N/A          shrutigavanang31@gmail.com
+       Address: Maharashtra Board, Maharashtra Board...
+       Skills [6]: drawing, organizational, tds, qualifications qualification, consolidation, reading
+  121  11786523 - Gayatri Shimpi.pdf Gayatri Narendra Shimpi        9579314474     Female   20/07/2000     shimpigayatri80@gmail.com
+       Address: At lohara Tal shahada Dist Nandurbar 425444...
+       Skills [17]: investigation, academic, calibration, autoclave, interpersonal skills, purify water, environmental monitoring, team orient  (+9 more)
+  122  11786524 - Paurush Pratap.pdf Paurushpratap                  +919123220388  ❌ N/A    ❌ N/A          paurushpratap99@gmail.com
+       Address: Vill- devardh khurd Post -keodhi Police station - kudra Dist...
+       Skills [2]: r, c
+  123  11786525 - Paridhi Bodse.pdf Bodseparidhi                   +917987618820  Male     29/03/2002     bodseparidhi@gmail.com
        Address: ❌ NOT FOUND
-       Skills [24]: lean, antimicrobial, bioinformatics, chromatography, documentation, testing, calibration, auditor  (+16 more)
-  25   11786526 - Shruti Jagdish Gavanang.pdf Shruti Jagdish Gavanang        7378863451     ❌ N/A    ❌ N/A          shrutigavanang31@gmail.com
+       Skills [40]: Inventory Management, Six Sigma, Figma, Excel, lean, antimicrobial, bioinformatics, chromatography  (+32 more)
+  130  11786556 - Ravikant Singh.pdf Ravikant Singh                 9608355539     Female   10/10/1995     ravikantoct1@gmail.com
+       Address: VILL - DHARAHARA, P.S - KRISHNABRAHAM, POST - TWININGGANJ, D...
+       Skills [7]: excel, microsoft office, information technology, excel microsoft, c, grades grade, CSS
+  133  11786559 - Gayatri Chalamalasetty.pdf Chalamalasetty. Gayathri       +918465985679  ❌ N/A    ❌ N/A          id-gayatrichalamalasetty@gmail.com
+       Address: City -Ongole,State-AP, LinkedIn -www.linkedin.com/in/gayathr...
+       Skills [11]: java, python, sql, Power BI, numpy, pandas, matplotlib, KPI  (+3 more)
+  132  11786558 - Classification Internal.pdf Thejaswi.                      +919677690414  ❌ N/A    ❌ N/A          tejar273@gmail.com
        Address: ❌ NOT FOUND
-       Skills [15]: Tally Erp, Tally Prime, Sales, Enterprise Resource Planning, Tds, Accounting, Tally, Taxation  (+7 more)
-  26   11786527 - Dhruvik Surani.pdf Dhruvik Jayantibhai Surani     8000902226     ❌ N/A    ❌ N/A          dhruviksurani009@gmail.com
+       Skills [35]: Process Optimization, Six Sigma, Logistics, Power BI, Rca, Negotiation, Root Cause Analysis, Excel  (+27 more)
+  127  11786529 - Abhishek Chauhan.pdf Abhishek Chauhan               +919889918238  Male     ❌ N/A          st.abhishekchauhan@gmail.com
+       Address: ▪ 12 th passed from U.P Board with 1 St division with 67.24%...
+       Skills [3]: academic, smart work, dec
+  126  11786528 - Dhiraj Wangade.pdf Dhiraj Bapu Wangade            9284716865     Female   12/04/2004     wangadedhiraj@gmail.com
+       Address: Dist- Ahmednagar...
+       Skills [13]: documentation, hydraulic, kaizen, mechanical engineering, production planning, production line, technical documentation, dec  (+5 more)
+  137  11786563 - Amit Prajapati.pdf Amit Prajapati                 9510302105     Male     ❌ N/A          amitpra253@gmail.com
+       Address: Jayveer Nagar Society Anavada, Patan-384265, 9510302105 •...
+       Skills [2]: customer service, relationship management
+  135  11786561 - Sanjay Shrivas.pdf Sanjay Shrivas                 +918818931329  Male     ❌ N/A          shrivassanju1@gmail.com
+       Address: H.N. 39 New Purushottam Nagar Semra Kalan Bhopal, Madhya Pra...
+       Skills [16]: Sales, crm, excel, interpersonal skills, sale presentation, customer relationship management, relationship management, strategic planning  (+8 more)
+  138  11786564 - About Myself.pdf Sifa Zeeshan Shegle            +919970347234  Female   ❌ N/A          shifakondkari48@gmail.com
+       Address: Future Heights, Flat No-902, Market Yard, Old Panvel, Raigad...
+       Skills [8]: Sales, Import Export, academic, excel, biomass, positive attitude, Production Planning, Process Control
+  136  11786562 - Ravindra Singh.pdf Ravindra Singh                 +919726368132  Male     ❌ N/A          amitsingh9824@gmail.com
+       Address: Anand plastic sarigam, Ta- Umar gam, Dist.- Valsad...
+       Skills [12]: electrical engineering, process control, write communication, internet skills, management, communication skill, supervision, motivation skill  (+4 more)
+  141  11786567 - Mosin Tamboli.pdf Mosin Tamboli                  +919284523602  Male     09/12/1995     mosinaslamtamboli@gmail.com
+       Address: Maharashtra, India - 413534...
+       Skills [5]: excel, Quality Control, cGMP, Equipment Calibration, Quality Audits
+  128  11786530 - Amaan Siddiqui.pdf Amaan Siddiqui                 9893043465     Male     17/03/1995     e-mail-amaansiddiqui17@gmail.com
+       Address: ADDERESS-116, AUGUSTUS KALIYASOAT DAM ROAD, KOLAR ROAD, BHOP...
+       Skills [15]: Sales, time management, interpersonal skills, training and development, relationship building, problem solve, job description, target market  (+7 more)
+  131  11786557 - Sabyasachy Paul.pdf Sabyasachy Paul                9123757686     Male     ❌ N/A          joypl333@gmail.com
+       Address: 61/A/1 Subhashnagar Talpukur Rishra, P.O – Morepukur, Dist- ...
+       Skills [31]: Standard Operating Procedure, chromatography, immunology, discipline, aseptic technique, molecular biology, dna extraction, gel electrophoresis  (+23 more)
+  100  11785961 - Gurmeet Singh.pdf Gur Singh                      ❌ NOT FOUND    ❌ N/A    ❌ N/A          gur143.singh@gmail.com
        Address: ❌ NOT FOUND
-       Skills [12]: optimization, excel, matlab, python, Data Analysis, Quality Assurance, Quality Control, Process Improvement  (+4 more)
-  28   11786529 - Abhishek Chauhan.pdf Abhishek Chauhan               +919889918238  ❌ N/A    ❌ N/A          st.abhishekchauhan@gmail.com
+       Skills [2]: c, r
+  139  11786565 - Anjaney Rai.pdf Anjaney Rai                    +917838739641  ❌ N/A    ❌ N/A          raianjaney80@gmail.com
+       Address: Mob no: (+91) 7838739641 Address: Gorakhpur, U.P, 273413...
+       Skills [12]: recruitment, academic, detail orient, employee engagement, distance learn, hotel management, operation management, decision make  (+4 more)
+  140  11786566 - Pawan Gupta.pdf Pawan Kumar Gupta              6392639901     Male     ❌ N/A          guptapawan983@gmail.com
+       Address: Gorakhpur, District- Gorakhpur U.P. 273015...
+       Skills [2]: academic, operations
+  146  11786572 - Harsh Rai.docx Prabhat Rai                    8009495297     Male     ❌ N/A          prabhatrai2525@gmail.com
+       Address: Pali Khas Bansgoan Gorakhpur,(273403),U.P...
+       Skills [4]: troubleshooting, blueprint reading, JavaScript, Project Management
+  144  11786570 - Akshay Murumkar.pdf Hsc Ssc Multi                  8600084839     ❌ N/A    ❌ N/A          akshaymurumkar0303@gmail.com
+       Address: At- Ratnapur , Ta - Jamkhed , Dist - Ahmednagar. Maharashtra...
+       Skills [10]: r, c, Quality Assurance, Inspection, cGMP, Process Validation, SOP Documentation, Batch Manufacturing  (+2 more)
+  149  11786575 - Dhruvik Patel.pdf Patel Dhruvik Maneshbhai       +918866102861  Male     ❌ N/A          dhruvikpatel2412@gmail.com
+       Address: Via-malvan, Ta-valsad, Dist-valsad 396385...
+       Skills [1]: internet applications
+  142  11786568 - Radhe Mahato.pdf Radheshyam Mahato              7363845883     ❌ N/A    11/04/1999     radhemahato3395@gmail.com
+       Address: Dekavada, Taluka: Detroj (Rampura) Dist.: Ahmedabad, State: ...
+       Skills [14]: Change Control, C, Extrusion, Kaizen, academic, monitoring, production improvement, operating system  (+6 more)
+  134  11786560 - Mohan Pawar.pdf Mohanpawar                     ❌ NOT FOUND    ❌ N/A    ❌ N/A          mohanpawar1323@gmail.com
        Address: ❌ NOT FOUND
-       Skills [1]: academic
-  29   11786530 - Amaan Siddiqui.pdf Amaan Siddiqui                 9893043465     ❌ N/A    17/03/1995     e-mail-amaansiddiqui17@gmail.com
+       Skills [10]: calibration, Compression, time management, QMS, r, sampling, c, Quality Assurance  (+2 more)
+  147  11786573 - Alka Yadav.pdf Alkayadav                      +919569274197  Male     ❌ N/A          548alka@gmail.com
        Address: ❌ NOT FOUND
-       Skills [4]: Sales, time management, interpersonal skills, Training & Development
-  27   11786528 - Dhiraj Wangade.pdf Dhiraj Bapu Wangade            9284716865     ❌ N/A    12/04/2004     wangadedhiraj@gmail.com
+       Skills [7]: tds, GLP, HACCP, poultry, r, beverages, microbiology
+  148  11786574 - Trushil Ahir.pdf Trushil Ahir                   9824994014     ❌ N/A    ❌ N/A          ahirtrushil00@gmail.com
        Address: ❌ NOT FOUND
-       Skills [7]: Kaizen, documentation, hydraulic, mechanical engineering, production planning, Process Improvement, Process Control
-  30   11786555 - June May.pdf Surve Krishna                  9824813923     ❌ N/A    19/12/2002     survekrishna540@gmail.com
+       Skills [32]: sustainability, campaigns, compliance, project management, detail orient, environmental engineering, interdisciplinary collaboration, fossil fuel  (+24 more)
+  143  11786569 - Abhishek Singh.pdf Journey                        6387601243     ❌ N/A    ❌ N/A          abhisheksh0444@gmail.com
        Address: ❌ NOT FOUND
-       Skills [6]: developmental, medical, nursing, patient care, time management, Process Improvement
-  13   11786512 - Karan Tokiya.docx Karanbhai Arvindbhai Tokiya    9265690609     ❌ N/A    ❌ N/A          ktokiya0@gmail.com
+       Skills [5]: mechanical engineer, dec, r, c, CNC Machining
+  152  11786606 - Ankit Kumar Tiwari.docx Ankit Kumar Tiwari             +919122696655  Male     ❌ N/A          rajankitssm@gmai.com
+       Address: Vill-Patadhi,Post-Nad,Police Station-Shivsagar,Dist-Rohtas,B...
+       Skills [7]: Hrms, Recruitment, Onboarding, Excel, time management, skill, HRMS/HRIS
+  155  11786609 - Jaya Anil.pdf Jaya Anil Shejwal              9860675387     Female   02/12/1999     jayashejwal6@gmail.com
+       Address: Year of Passing : 2022 Score : 87.03%...
+       Skills [9]: cGMP, autoclave, ph meter, GLP, instrumentation, air flow, biosafety, incubators  (+1 more)
+  145  11786571 - Bharat N Patil.pdf Bharat N Patil                 7984761067     Male     ❌ N/A          bp200694@gmail.com
+       Address: Flat No.501 Jalak Solitaire Ambernath Thane 421501...
+       Skills [43]: documentation, formulation, testing, troubleshooting, academia, calibration, drawings, inspection  (+35 more)
+  156  11786610 - Vipulkumar Bhadane.pdf Vipulkumar Bhadane             9722889934     Male     ❌ N/A          vipulraje07@gmail.com
+       Address:  Handling of DT apparatus (Lab India, Electrolab),  Karl-F...
+       Skills [23]: documentation, calibration, excel, cGMP, ph meter, GLP, MHRA, QMS  (+15 more)
+  154  11786608 - Tejas Ghoirat.pdf Tejas Vaman Ghoirat            +917721998024  Male     ❌ N/A          ghoirattejas27@gmail.com
+       Address: Pune, India 412408...
+       Skills [44]: coordination, documentation, automation, compliance, payroll, planning, optimization, reporting  (+36 more)
+  159  11786614 - Shruti Yadav.pdf Shruti Yadav                   7754966368     Female   13/10/2002     shrutiy312@gmail.com
        Address: ❌ NOT FOUND
-       Skills [7]: Hplc, chromatography, calibration, laboratory, Data Analysis, Quality Control, Equipment Calibration
-  31   11786556 - Ravikant Singh.pdf Ravikant Singh                 9608355539     ❌ N/A    10/10/1995     ravikantoct1@gmail.com
+       Skills [7]: Quality Control, chromatography, testing, problem solve, team build, gas chromatography, universal testing machine
+  150  11786576 - Sarvesh Kumar.pdf Sarvesh Kumar                  7618448239     Male     02/05/2005     sarvesh143aa@gmail.com
+       Address: BASAI, ISLAM NAGAR, KASHIPUR, UDHAM SINGH NAGAR, UTTRAKHAND,...
+       Skills [3]: mechanical engineering, islam, SEM
+  161  11786616 - Amol Dighole.pdf Amol Dighole                   9960054640     ❌ N/A    ❌ N/A          amoldighole79@gmail.com
        Address: ❌ NOT FOUND
-       Skills [2]: excel, CSS
-  34   11786559 - Gayatri Chalamalasetty.pdf Chalamalasetty. Gayathri       +918465985679  ❌ N/A    ❌ N/A          id-gayatrichalamalasetty@gmail.com
+       Skills [23]: cGMP, Capa, Production Planning, Change Control, Compliance, Process Validation, Sap, Cleaning Validation  (+15 more)
+  151  11786577 - Sabiya Kazi.pdf Arif Kazi                      ❌ NOT FOUND    Male     ❌ N/A          sabiyakazi2002@gmail.com
+       Address: (cid:1886) Pune, Maharashatra, </> GitHub, (cid:5389) 902810...
+       Skills [47]: Data Analytics, Macros, Data Visualization, Vlookup, Excel, classification, academic, mysql  (+39 more)
+  153  11786607 - Vaibhav Pandey.pdf Vaibhav Kumar Pandey           9027057949     ❌ N/A    11/03/2000     vaibhavkumar1132000@gmail.com
+       Address: Village & Post – Tajpur chhaunk , Aghata Tehsil- Bidhuna...
+       Skills [17]: documentation, external audit, job description, manufacturing process, ph meter, PCM, grinding, production report daily  (+9 more)
+  162  11786617 - Chandra Kant.pdf Chandrakant                    +918252714946  Male     ❌ N/A          chandrakant880848@gmail.com
+       Address: Raipura, Fatuha, Patna, Bihar, 803201...
+       Skills [9]: ReactJS, excel, html, java, javascript, microsoft excel, CSS, library  (+1 more)
+  164  11786619 - Raj Nai.pdf Nai Kamlesh                    9537020808     Male     ❌ N/A          kamleshnai155@gmail.com
+       Address: Rambag road...
+       Skills [6]: Equipment Maintenance, team leadership, c, Vendor Management, Production Planning, Process Control
+  165  11786620 - Shubham Mishra.docx Shubham Mishra                 8738055657     Male     07/09/1995     shubham.cms30@gmail.com
        Address: ❌ NOT FOUND
-       Skills [11]: forecasting, java, python, sql, tableau, KPI, AWS, Pandas  (+3 more)
-  32   11786557 - Sabyasachy Paul.pdf Sabyasachy Paul                9123757686     ❌ N/A    ❌ N/A          joypl333@gmail.com
+       Skills [27]: Capa, Hdpe, Inspection, Problem Solving, Extrusion, Compliance, Lean Manufacturing, Quality Control  (+19 more)
+  167  11786622 - Abhishek.pdf Karl Fischer                   +919335929795  ❌ N/A    ❌ N/A          abhishekm7880@gmail.com
+       Address: Azamgarh 276404...
+       Skills [11]: Compliance, Quality Control, documentation, testing, cGMP, regulatory compliance, ph meter, quality assurance  (+3 more)
+  157  11786612 - Patel Hitesh.pdf Patel Hiteshkumar Thakorlal    +919909270271  Male     ❌ N/A          patelhitesh1403@gmail.com
+       Address: Vijalpore Ghelkhadi Dist. Navsari-396445, Gujarat, India....
+       Skills [26]: documentation, testing, inspection, OEE, control plan, corrective action, continuous production, workplace safety  (+18 more)
+  129  11786555 - June May.pdf Survkrishna                    ❌ NOT FOUND    ❌ N/A    ❌ N/A          survkrishna540@gmail.com
        Address: ❌ NOT FOUND
-       Skills [6]: Standard Operating Procedure, Equipment Calibration, FDA Compliance, SOP Documentation, Production Planning, Process Control
-  35   11786560 - Mohan Pawar.pdf Mohan Madhukar Pawar           9112883278     ❌ N/A    ❌ N/A          mohanpawar1323@gmail.com
+       Skills [2]: r, c
+  166  11786621 - Mayur Patel.pdf Mayurmec                       +918866114497  ❌ N/A    ❌ N/A          mayurmec@gmail.com
+       Address: • Logistics & Supply Chain Management | MITSDE, Pune, India ...
+       Skills [35]: Procurement, Inspection, Logistics, Sourcing, Compliance, Solidworks, Negotiation, coordination  (+27 more)
+  163  11786618 - Chandan Kumar.pdf Chandan Kumar                  9199836327     Male     ❌ N/A          chandan.k1704@gmail.com
+       Address: BIHAR - 841506, Mob No. : 9199836327...
+       Skills [4]: academic, relationship manager, experience manager, zoology
+  158  11786613 - Fahad Ahmed.pdf Fahad Ahmed                    9406928249     ❌ N/A    ❌ N/A          fady61814@gmail.com
+       Address: linkedin.com/in/fahad-ahmed-5 a 7 b 63222...
+       Skills [22]: fabrication, autocad, excel, Coating, project management, resource management, strategic planning, metal coating  (+14 more)
+  168  11786623 - Chandra Sekhar Sahu.pdf Chandra Sekhar Sahu            +918144628008  ❌ N/A    ❌ N/A          chandrasahu142@gmail.com
+       Address: • Mayurbhanj, Odisha...
+       Skills [24]: documentation, troubleshooting, reporting, Compression, quality control, machine operation, chemdraw, r  (+16 more)
+  174  11790130 - Yash Patel.pdf M.sc. Chemistry                9725235147     Male     13/06/2003     yashpatel13062003@gmail.com
+       Address: Olgam , darbadiya faliya, Ta – Valsad Dist – Valsad, Mob: 97...
+       Skills [2]: laboratory, analytical skill
+  173  11786637 - Shani Kumar.pdf Shani Kumar                    +918601066361  Female   ❌ N/A          shanik86010@gmail.com
+       Address: HARYANA - 123106...
+       Skills [14]: testing, caliper, excel, height gauge, quality control, performance testing, tools machine, micrometer  (+6 more)
+  169  11786633 - Bhushan Thete.pdf Customers. Actions             9579299090     ❌ N/A    22/11/1998     bhushanthete121@gmail.com
+       Address: 1 st Grade, 2 nd Grade, 1 st Grade...
+       Skills [26]: Market Research, Effluent Treatment Plant, Compliance, Quality Control, testing, inspection, iatf 16949, time management  (+18 more)
+  177  11790133 - Sourabh Baghel.pdf Sourabh Baghel                 8818961013     Male     13/06/2002     sourabhsingh1318@gmail.com
+       Address: New Narshig Nagar Hazira Gwalior....
+       Skills [5]: medical, problemsolving, communicative languages, bilingual, Quality Control
+  172  11786636 - Mdshakil Khan.pdf Rasulpur Newada                7800724184     Male     10/10/2006     shakilkhan@gmail.com
        Address: ❌ NOT FOUND
-       Skills [5]: calibration, Compression, time management, Equipment Calibration, Batch Manufacturing
-  33   11786558 - Classification Internal.pdf Thejaswi.                      +919677690414  ❌ N/A    ❌ N/A          tejar273@gmail.com
+       Skills [2]: electrical engineering, skills basic
+  171  11786635 - Shantanu Rajput.pdf Shantanu Sambhaji Rajput       9921838845     Male     ❌ N/A          rshantanu74@gmail.com
+       Address: Rm no 202, 2 nd Floor Jeet Cottage, Malwani Village, Malad (...
+       Skills [5]: academic, time management, problem solve, chemistry, positive attitude
+  175  11790131 - Jay Patel.docx Jay Rajehbhai Patel            8156048557     Male     ❌ N/A          jayp30319@gmail.com
+       Address: Masat Khadipada,Tipco Road...
+       Skills [5]: disciplined self, self confidence, point internet, management, PowerPoint
+  181  11790220 - Kuldeep Singh.pdf Kuldeep Singh                  +919105672713  Female   ❌ N/A          kuldeepsingh12may@gmail.com
+       Address: 25 Acre Colony, Century Pulp & Paper Mill...
+       Skills [5]: Material Handling, Dispatch, Sap, Enterprise Resource Planning, Raw Material Handling
+  182  11790221 - Sadashiv Andher.pdf Sadashiv Andher                9328894901     ❌ N/A    ❌ N/A          sadashivandher11@gmail.com
+       Address: Post. Bonta (Khoripada) U.T Of Dadra Nagar Haveli, Silvassa-...
+       Skills [6]: excel, gst, problem solve, MS Word, PowerPoint, Tally
+  179  11790135 - Denish Gandhi.pdf Cadenishgandhi                 7405575423     ❌ N/A    ❌ N/A          cadenishgandhi@gmail.com
+       Address: – 6/3015, Joshi Street, M G Road, Navsari, Gujarat...
+       Skills [21]: Tds, Gst, Taxation, Compliance, Income Tax, documentation, excel, erp  (+13 more)
+  170  11786634 - Druve.pdf   Makwana Dhavalkumar Laxmanbha  7802034021     Male     ❌ N/A          druve1285@gamil.com
+       Address: Makwana Street, At & Po Kalak, Ta- Jambusar, Dist-Bharuch-39...
+       Skills [18]: Coating, Material Handling, Preventive Maintenance, Cost Reduction, monitoring, optimization, organizational, organizational skill  (+10 more)
+  180  11790137 - Adarsh Janjirala.pdf Janjirala Adarsh               +917671812449  ❌ N/A    ❌ N/A          adarshjanjirala745@gmail.com
        Address: ❌ NOT FOUND
-       Skills [25]: Negotiation, Six Sigma, Rca, Process Optimization, Root Cause Analysis, Tableau, Excel, Logistics  (+17 more)
-  38   11786563 - Amit Prajapati.pdf Amit Prajapati                 9510302105     ❌ N/A    ❌ N/A          amitpra253@gmail.com
+       Skills [25]: Mongodb, ReactJS, Redis, React Native, microservices, html, Spring Boot, javascript  (+17 more)
+  185  11790224 - Bhusara Ankur.pdf Ankurlbhusara                  7043822058     ❌ N/A    ❌ N/A          ankurbhusara@586gmail.com
        Address: ❌ NOT FOUND
-       Skills [4]: finance, academic, banking, customer service
-  39   11786564 - About Myself.pdf Sifa Zeeshan Shegle            +919970347234  ❌ N/A    ❌ N/A          shifakondkari48@gmail.com
+       Skills [9]: Material Handling, Dispatch, Enterprise Resource Planning, coordination, invoicing, executive, billing, operations  (+1 more)
+  184  11790223 - Manish Desai.pdf Drmanish Desai                 +918454838287  ❌ N/A    ❌ N/A          drmanishdesai66@gmail.com
+       Address: • Achieved sales of 55 KTA for India, Bangladesh, and Sri La...
+       Skills [20]: Sales, Hdpe, Extrusion, Compression, injection molding, blow molding, compression molding, pipe  (+12 more)
+  178  11790134 - Rakshak Raj.pdf Rakshak Raj                    7070907754     Male     ❌ N/A          rakshak2102@gmail.com
+       Address: Bihar - 802316, Mob No. : 7070907754...
+       Skills [3]: academic, board school, motorcycles
+  190  11790229 - Praveen Borude.doc ❌ Error: Failed to extract from 11790229 - Praveen Borude.doc: textract error: antiword missing; Word COM extraction error: (-2147221008, 'CoInitialize has not been called.', None, None)
+  176  11790132 - Vivekkumar Rajeshbhai Valanju.pdf Ojas Patel                     7434911353     ❌ N/A    ❌ N/A          ojas.patel1984@gmail.com
        Address: ❌ NOT FOUND
-       Skills [6]: Sales, Import Export, academic, excel, Production Planning, Process Control
-  42   11786567 - Mosin Tamboli.pdf Mosin Tamboli                  +919284523602  ❌ N/A    09/12/1995     mosinaslamtamboli@gmail.com
+       Skills [14]: chromatography, academic, excel, time management, production process, product quality, operational efficiency, analytical technique  (+6 more)
+  189  11790228 - Sarvesh Pandey.pdf Sarvesh Kumar Pandey           +919569886293  Male     09/10/2002     sarveshpandey956988@gmail.com
+       Address: Place: Uttar Pradesh...
+       Skills [12]: Excel, documentation, discipline, time management, internet research, business communication, typing, positive attitude  (+4 more)
+  188  11790227 - Abhishek Kumar.docx Nagriya Beerpur Saurikh Kanna  9151497364     Male     18/11/2003     abhishekkumar38842@gmail.com
+       Address: Bandha Nagriya Beerpur Saurikh Kannauj (209747), Mob: 915149...
+       Skills [1]: Dispatch
+  192  11790231 - Kavya Kavi.pdf Kavya                          +917892945103  Female   ❌ N/A          kavyajkavi41@gmail.com
+       Address: with ISO 9001 standards. Adept at using precision instrument...
+       Skills [21]: Inspection, Compliance, Quality Control, Dispatch, testing, caliper, excel, erp  (+13 more)
+  187  11790226 - Patel Smit.docx Patel Smitkumar Jayeshbhai     8347763354     Male     25/12/1998     patelsmitj1998@gmail.com
+       Address: Pathri, Dungari Faliya, Valsad-396007...
+       Skills [1]: C
+  193  11790232 - Krishna Yadav.pdf Krishna Yadav                  +919258946446  Male     ❌ N/A          krishnayadav862001@gmail.com
+       Address: 5 S & Shop Floor Safety Practices, Basic Mechanical Maintena...
+       Skills [13]: Compliance, coordination, inspection, reporting, production planning, machine operation, quality control, visual inspection  (+5 more)
+  160  11786615 - Akshay Barve.pdf Akshaybarve                    9529753489     ❌ N/A    ❌ N/A          akshaybarve.7734@gmail.com
+       Address: Sambhajinagar road,At post-Madsangav...
+       Skills [27]: bls, documentation, civil, inspection, server, reporting, excel, html  (+19 more)
+  186  11790225 - Humveer Singh.pdf Humveer Singh                  8218667505     Male     ❌ N/A          gautamsingh8213@gmail.com
+       Address: B 9 Shivpuri Colony, Near Asopa Hospital Gailana Road Sikand...
+       Skills [2]: academic, chemistry
+  196  11790282 - Anil Mewada.pdf Anil Mewada                    7559391808     Male     18/08/2003     anilmewada2003@gmail.com
        Address: ❌ NOT FOUND
-       Skills [10]: investigation, testing, calibration, autoclave, monitoring, excel, cGMP, Quality Control  (+2 more)
-  37   11786562 - Ravindra Singh.pdf Ravindra Singh                 +919726368132  ❌ N/A    ❌ N/A          amitsingh9824@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [2]: electrical engineering, Troubleshooting
-  41   11786566 - Pawan Gupta.pdf Pawan Kumar Gupta              6392639901     ❌ N/A    ❌ N/A          guptapawan983@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [1]: academic
-  44   11786569 - Abhishek Singh.pdf Abhishek                       6387601243     ❌ N/A    ❌ N/A          abhisheksh0444@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [1]: CNC Machining
-  40   11786565 - Anjaney Rai.pdf Anjaney Rai                    +917838739641  ❌ N/A    ❌ N/A          raianjaney80@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [4]: recruitment, academic, Onboarding, Employee Engagement
-  43   11786568 - Radhe Mahato.pdf Radheshyam Mahato              7363845883     ❌ N/A    11/04/1999     radhemahato3395@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [9]: Extrusion, C, Change Control, Kaizen, academic, monitoring, Process Improvement, Production Planning  (+1 more)
-  45   11786570 - Akshay Murumkar.pdf Akshay Murumkar                8600084839     ❌ N/A    ❌ N/A          akshaymurumkar0303@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [12]: Quality Assurance, documentation, investigation, inspection, compliance, Process Validation, cGMP, change control  (+4 more)
-  36   11786561 - Sanjay Shrivas.pdf Sanjay Shrivas                 +918818931329  ❌ N/A    ❌ N/A          shrivassanju1@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [8]: Sales, excel, CRM, Market Research, Strategic Planning, Customer Relationship, Lead Generation, PowerPoint
-  49   11786574 - Trushil Ahir.pdf Trushil Ahir                   9824994014     ❌ N/A    ❌ N/A          ahirtrushil00@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [7]: Compliance, sustainability, campaigns, project management, Quality Audits, Production Planning, Process Control
-  48   11786573 - Alka Yadav.pdf Alka Yadav                     +919569274197  ❌ N/A    ❌ N/A          alka@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [10]: testing, autoclave, monitoring, cGMP, tds, internal audit, interpersonal skills, Quality Control  (+2 more)
-  50   11786575 - Dhruvik Patel.pdf State                          +918866102861  ❌ N/A    ❌ N/A          dhruvikpatel2412@gmail.com
-       Address: ❌ NOT FOUND
-       Skills: ❌ NOT FOUND
-  46   11786571 - Bharat N Patil.pdf Bharat N Patil                 7984761067     ❌ N/A    ❌ N/A          bp200694@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [27]: documentation, formulation, testing, troubleshooting, academia, calibration, drawings, inspection  (+19 more)
-  47   11786572 - Harsh Rai.docx Prabhat Rai                    8009495297     ❌ N/A    ❌ N/A          prabhatrai2525@gmail.com
-       Address: ❌ NOT FOUND
-       Skills [3]: troubleshooting, project management, JavaScript
+       Skills [12]: Sales, Gst, Accounting, Bank Reconciliation, Negotiation, Internal Control, excel, Power BI  (+4 more)
+  195  11790281 - Hardik Patel.pdf Hardik Dhirubhai Patel         9824519268     Male     14/04/1997     hardikpatelv1997@gmail.com
+       Address: 336/A, Mota faliya, At-Vankal, Ta - Chikhli, Dist-Navsari., ...
+       Skills [5]: c, MS Word, Excel, PowerPoint, Tally
+  199  11790285 - Mahatab Ali.pdf Mahatabali                     +919002537845  Male     ❌ N/A          mahatabali2013@gmail.com
+       Address: (DUPCO), Qatar, in an ISO/IEC 17025, accredited laboratory. ...
+       Skills [32]: Inventory Management, Tds, Hplc, Compliance, Standard Operating Procedure, Kaizen, laboratory, sample analysis  (+24 more)
+  183  11790222 - Girish Shinde.pdf Girish Sanjay Shinde           ❌ NOT FOUND    Male     ❌ N/A          girishshinde.mils@gmail.com
+       Address: Maharashtra State...
+       Skills [16]: C, Recruitment, academic, organizational, career development, account development, work environment, recruitment executive  (+8 more)
+  200  11790286 - Vishal Thakur.pdf Clerical Support               +916204836799  Male     ❌ N/A          thakurvishal5816@gmail.com
+       Address: |Permanent Address | ANDAMA,KATRA, MUZAFFARPUR-843321|...
+       Skills [10]: Capa, Change Control, Standard Operating Procedure, Batch Manufacturing, planning, time management, r, Quality Assurance  (+2 more)
+  198  11790284 - Aryan Priyadarshi.pdf Aryan Priyadarshi              8252741255     Male     ❌ N/A          aryanjsr2001@gmail.com
+       Address: 2251 Sastri Nagar Block No 04...
+       Skills [7]: academic, automotive technology, quality inspector, foundry, Quality Assurance, Inspection, Quality Control
+  191  11790230 - Sonika Patel.pdf Patel Sonika                   8780389214     Female   ❌ N/A          sonikapatel1009@gmail.com
+       Address: Internship (Msw) 4 th August 2023/24...
+       Skills [10]: excel, u pass, c, internet typing, management leadership, writing, health services, health service  (+2 more)
+  197  11790283 - Govadekar Vaibhav M.pdf Govadekar Vaibhav              7567802665     Male     ❌ N/A          vaibhavgowadekar@gmail.com
+       Address: Add-591 Gujarat Housing Board, Surti Bhagol, Ta –, Ankleshwa...
+       Skills [15]: Hplc, Quality Control, Sap, laboratory, reporting, ph meter, writing, c  (+7 more)
+  194  11790279 - Pramod Singh.pdf Pramod Singh                   +919826251300  Male     ❌ N/A          bhartipramod6a@gmail.com
+       Address: & Urea Plants of 2200 MTPD & 3850 MTPD, Barauni, Bihar and S...
+       Skills [40]: Aws, Hdpe, Quality Audit, Inspection, Quality Control, Ndt, Autocad, marketing  (+32 more)
+
+=======================================================================================================================================
+💾 Validation report saved → D:\Project\ATS\ATS Email Parser\src\output\validation_report.json
 
 ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 📊 PROCESSING SUMMARY:
-   Total files processed : 50
-   Successfully parsed   : 50 (100.0%)
-   Extraction errors     : 0 (0.0%)
+   Total files processed : 200
+   Successfully parsed   : 198 (99.0%)
+   Extraction errors     : 2 (1.0%)
 
 📋 EXTRACTION QUALITY:
-   Names found    : 50/50 (100.0%)
-   Emails found   : 50/50 (100.0%)
-   Phones found   : 49/50 (98.0%)
-   DOBs found     : 13/50 (26.0%)
-   With skills    : 48/50 (96.0%)
+   Names found    : 200/200 (100.0%)
+   Emails found   : 199/200 (99.5%)
+   Phones found   : 193/200 (96.5%)
+   DOBs found     : 56/200 (28.0%)
+   With skills    : 198/200 (99.0%)
 
 💾 Results saved → D:\Project\ATS\ATS Email Parser\src\output\resume_parsed.json
    Log saved      → D:\Project\ATS\ATS Email Parser\src\output\parser.log
