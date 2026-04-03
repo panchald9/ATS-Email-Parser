@@ -2274,26 +2274,29 @@ def extract_address(text):
 # ══════════════════════════════════════════════════════════════
 EDUCATION_SECTION_RE = re.compile(
     r'(?i)^\s*(?:'
-    r'education|academia\w*|'
+    r'education(?!\s*(?:requirement|preference))|academia\w*|'
     r'educational\s+qualification|'
     r'(?:degree|course|qualification)\s*/\s*(?:course|degree)|'
-    r'qualifications?|board\s*/\s*university|university|institute|'
-    r'(?:school|college|institute)\s+name'
+    r'(?<!work\s)(?<!professional\s)qualifications?(?!\s+for)|'
+    r'board\s*/\s*university|university|institute|'
+    r'(?:school|college|institute)\s+name|'
+    r'academic\s+(?:credentials?|profile|qualification|background)|'
+    r'academic(?!\s+performance)|background\s+educational'
     r')(?:\s+(?:qualification|details?|certificate))?'
 )
 
 DEGREE_PATTERNS = [
-    (r'\b(?:b\.?a|bachelor\s+of\s+arts)\b', 'B.A'),
-    (r'\b(?:b\.?sc|bachelor\s+of\s+science)\b', 'B.Sc'),
-    (r'\b(?:b\.?com|bachelor\s+of\s+commerce)\b', 'B.Com'),
+    (r'\b(?:b\.?a\.?|bachelor\s+of\s+arts)\b', 'B.A'),
+    (r'\b(?:b\.?sc\.?|bachelor\s+of\s+science)\b', 'B.Sc'),
+    (r'\b(?:b\.?com\.?|bachelor\s+of\s+commerce)\b', 'B.Com'),
     (r'\b(?:b\.?tech|btech|bachelor\s+of\s+technology)\b', 'B.Tech'),
-    (r'\b(?:b\.?e|bachelor\s+of\s+engineering)\b', 'B.E'),
-    (r'\b(?:b\.?cs|bachelor\s+of\s+computer\s+science|bcs)\b', 'B.CS'),
-    (r'\b(?:m\.?a|master\s+of\s+arts)\b', 'M.A'),
-    (r'\b(?:m\.?sc|master\s+of\s+science)\b', 'M.Sc'),
-    (r'\b(?:m\.?com|master\s+of\s+commerce)\b', 'M.Com'),
+    (r'\b(?:b\.?e\.?|bachelor\s+of\s+engineering)\b', 'B.E'),
+    (r'\b(?:b\.?cs\.?|bachelor\s+of\s+computer\s+science|bcs)\b', 'B.CS'),
+    (r'\b(?:m\.?a\.?|master\s+of\s+arts)\b', 'M.A'),
+    (r'\b(?:m\.?sc\.?|master\s+of\s+science)\b', 'M.Sc'),
+    (r'\b(?:m\.?com\.?|master\s+of\s+commerce)\b', 'M.Com'),
     (r'\b(?:m\.?tech|mtech|master\s+of\s+technology)\b', 'M.Tech'),
-    (r'\b(?:m\.?e|master\s+of\s+engineering)\b', 'M.E'),
+    (r'\b(?:m\.?e\.?|master\s+of\s+engineering)\b', 'M.E'),
     (r'\b(?:mba|master\s+(?:of\s+)?business\s+administration)\b', 'MBA'),
     (r'\b(?:pgdm|post\s+graduate\s+diploma\s+in\s+management)\b', 'PGDM'),
     (r'\b(?:llb|bachelor\s+of\s+laws)\b', 'LLB'),
@@ -2301,8 +2304,8 @@ DEGREE_PATTERNS = [
     (r'\bphd\b|\bdoctor\s+of\s+philosophy\b', 'PhD'),
     (r'\bdiplomaed?\b', 'Diploma'),
     (r'\bgrad\w*\b', 'Graduate'),
-    (r'\b(?:12th|intermediate|hsc|hs|high\s+school)\b', '12th'),
-    (r'\b(?:10th|ssc|secondary)\b', '10th'),
+    (r'\b(?:12th?|intermediate|h\.?s\.?c|hs|high\s+school)\b', '12th'),
+    (r'\b(?:10th?|s\.?s\.?c|ssc|secondary)\b', '10th'),
 ]
 
 SPECIALIZATION_KEYWORDS = [
@@ -2359,6 +2362,180 @@ def _extract_education_section(text):
             break
     
     return lines[section_start + 1:section_end]
+
+
+def _parse_inline_education_entry(line):
+    """Parse single-line education entries like:
+    - 'S.S.C in 2016 from GSEB with 51%'
+    - '10TH, from MP Board, Passing Year 2019'
+    - 'M.A. (Political Science) - from Kanpur University - 52%'
+    """
+    if not line or len(line.strip()) < 5:
+        return None
+    
+    line = line.strip()
+    
+    result = {
+        'qualification': None,
+        'specialization_branch': None,
+        'location': None,
+        'passing_year': None,
+        'grade_cgpa': None,
+        'mode_of_study': None,
+        'institute_university': None,
+        'major_subjects': None,
+    }
+    
+    # Try to match common inline patterns
+    # Pattern 1: "SSC in 2016 from GSEB with 51%"
+    pattern1 = re.search(
+        r'(s\.?s\.?c|ssc|hsc|12th?|10th?|b\.?(?:tech|sc|a|com|e)|m\.?(?:tech|sc|a|com|e)|diploma|iti|pgdm|mba|phd|llb|llm)'
+        r'[,\s]*\(?([^)]*)\)?\s*'
+        r'(?:in|from|of|at)?\s*'
+        r'(\d{4})?\s*'
+        r'(?:from|at)?\s*'
+        r'([A-Z][A-Za-z\s&\.]*?)?\s*'
+        r'(?:with|:|-)?\s*'
+        r'(\d+\.?\d*%?)?',
+        line, re.I
+    )
+    
+    # Pattern 3: "PGDM(AICTE Approved), Maharaja Agrasen BusinessSchool(MABS), Delhi, BBA, Guru Gobind Singh University"
+    pattern3 = re.search(
+        r'(pgdm|mba|b\.?(?:tech|sc|a|com)|m\.?(?:tech|sc|a|com))'
+        r'\s*\(([^)]*)\)?\s*,\s*'
+        r'([^,\n]+?)(?:\s*\([^)]*\))?(?:,|$)',
+        line, re.I
+    )
+    
+    pattern1_match = bool(pattern1)
+    pattern3_match = bool(pattern3)
+    
+    if pattern1:
+        qual = pattern1.group(1)
+        spec = pattern1.group(2)
+        year = pattern1.group(3)
+        university = pattern1.group(4)
+        grade = pattern1.group(5)
+        
+        # Extract qualification
+        if qual:
+            qual_lower = qual.lower().replace('.', '')
+            for pattern, degree_name in DEGREE_PATTERNS:
+                if re.search(pattern, qual, re.I):
+                    result['qualification'] = degree_name
+                    break
+        
+        # Extract specialization from parentheses
+        if spec and len(spec) < 80:
+            spec_clean = spec.strip()
+            # Filter out junk data and metadata
+            if not any(d in spec_clean.lower() for d in ['year', 'board', 'from', 'pass', 'email', 'il:', 'ghmani']):
+                result['specialization_branch'] = spec_clean
+        
+        # Extract year
+        if year and int(year) >= 1990 and int(year) <= 2030:
+            result['passing_year'] = year
+        
+        # Extract university from captured group or from "from" phrase
+        if not university:
+            # Try to extract from "from XXX University" pattern
+            from_match = re.search(r'from\s+([A-Z][A-Za-z\s&\.\,-]+?)(?:\s+(?:–|–|--|-|with|:|$))', line, re.I)
+            if from_match:
+                university = from_match.group(1)
+        
+        if university:
+            univ_clean = university.strip().rstrip('–-:,')
+            if len(univ_clean) > 3 and not univ_clean.lower().startswith('with') and len(univ_clean) < 100:
+                result['institute_university'] = univ_clean
+        
+        # Extract grade if not found yet
+        if not grade:
+            grade_match = re.search(r'(\d+\.?\d*)\s*%', line)
+            if grade_match:
+                grade = grade_match.group(1) + '%'
+        
+        if grade:
+            result['grade_cgpa'] = grade
+    
+    # Handle Pattern 3: PGDM format
+    if not result['qualification'] and pattern3:
+        qual = pattern3.group(1)
+        spec = pattern3.group(2)
+        universities = pattern3.group(3)
+        
+        if qual:
+            for pattern, degree_name in DEGREE_PATTERNS:
+                if re.search(pattern, qual, re.I):
+                    result['qualification'] = degree_name
+                    break
+        
+        if spec and len(spec) < 80:
+            result['specialization_branch'] = spec.strip()
+        
+        if universities and len(universities) > 3 and len(universities) < 100:
+            result['institute_university'] = universities.strip()
+    
+    # If we have qualification but still missing institute/year from Pattern 1, try Pattern 3
+    elif result['qualification'] and not result['institute_university'] and not result['passing_year'] and pattern3:
+        universities = pattern3.group(3)
+        if universities and len(universities) > 3 and len(universities) < 100:
+            result['institute_university'] = universities.strip()
+    
+    # Pattern 2: "M.A. (Political Science) - from Kanpur University – 52%"
+    pattern2 = re.search(
+        r'(m\.?a\.?|m\.?sc|b\.?a\.?|b\.?sc|b\.?com|b\.?tech|b\.?e\.?|llb|llm|phd|mba|pgdm|diploma|iti)'
+        r'\.?\s*\(([^)]+)\)?\s*'
+        r'(?:from|at|-)?\s*'
+        r'([A-Z][A-Za-z\s&\.,-]*?)\s*'
+        r'(?:–|-|:)?\s*'
+        r'(\d+\.?\d*%)?',
+        line, re.I
+    )
+    
+    if not result['qualification'] and pattern2:
+        qual = pattern2.group(1)
+        spec = pattern2.group(2)
+        university = pattern2.group(3)
+        grade = pattern2.group(4)
+        
+        if qual:
+            for pattern, degree_name in DEGREE_PATTERNS:
+                if re.search(pattern, qual, re.I):
+                    result['qualification'] = degree_name
+                    break
+        
+        if spec and len(spec) < 80:
+            spec_clean = spec.strip()
+            if not any(d in spec_clean.lower() for d in ['year', 'board', 'from', 'pass', 'email', 'il:', 'ghmani', 'unit', 'dahej']):
+                result['specialization_branch'] = spec_clean
+        
+        if university and len(university) > 3:
+            univ_clean = university.strip()
+            if not any(d in univ_clean.lower() for d in ['with', 'passing', 'year', 'email', 'ghmani']) and len(univ_clean) < 100:
+                result['institute_university'] = univ_clean
+        
+        if grade:
+            result['grade_cgpa'] = grade
+    
+    # Extract any year in the line if not found
+    if not result['passing_year']:
+        year_match = re.search(r'\b(19[9][0-9]|20[0-2][0-9])\b', line)
+        if year_match:
+            result['passing_year'] = year_match.group(0)
+    
+    # Extract any percentage if not found
+    if not result['grade_cgpa']:
+        pct_match = re.search(r'(\d+\.?\d*)\s*%', line)
+        if pct_match:
+            result['grade_cgpa'] = pct_match.group(1) + '%'
+    
+    # Only return if we found a qualification AND (a university OR a year)
+    # This prevents false positives from random text
+    if result['qualification'] and (result['institute_university'] or result['passing_year']):
+        return result
+    
+    return None
 
 
 def _parse_education_entry(entry_text):
@@ -2470,71 +2647,342 @@ def _parse_education_entry(entry_text):
     return result
 
 
+def _parse_table_education(section_text):
+    """Parse education from table format with rows of College|University|Grade|Year or similar."""
+    results = []
+    
+    # Split by line breaks and look for rows with education data
+    lines = section_text.split('\n')
+    
+    for line in lines:
+        line = line.strip()
+        if not line or len(line) < 10:
+            continue
+        
+        # Skip header rows (contain keywords like Course, Grade, Year together)
+        if any(re.search(r'\b(?:course|degree|examination|exam|stream|board)\b', line, re.I) for _ in [1]) and \
+           any(re.search(r'\b(?:university|college|school|institute|percentage|grade|year)\b', line, re.I) for _ in [1]):
+            continue
+        
+        # Try to extract from line with multiple pieces of info
+        result = {
+            'qualification': None,
+            'specialization_branch': None,
+            'location': None,
+            'passing_year': None,
+            'grade_cgpa': None,
+            'mode_of_study': None,
+            'institute_university': None,
+            'major_subjects': None,
+        }
+        
+        # Find year in line
+        year_match = re.search(r'\b(19|20)\d{2}\b', line)
+        if year_match:
+            year = year_match.group(0)
+            if 1990 <= int(year) <= 2030:
+                result['passing_year'] = year
+        
+        # Find grade/percentage
+        grade_match = re.search(r'(\d+\.?\d*)\s*%', line)
+        if grade_match:
+            result['grade_cgpa'] = grade_match.group(0).strip()
+        
+        # Find qualification
+        for pattern, degree_name in DEGREE_PATTERNS:
+            if re.search(pattern, line, re.I):
+                result['qualification'] = degree_name
+                break
+        
+        # Find university/college (longest capitalized sequence that's not a common word)
+        # Look for institution names (usually start with capital letters)
+        inst_match = re.search(r'\b([A-Z][A-Za-z\s&\.,-]{5,80}?)(?:\s+(?:Board|University|College|Institute|School|Government|Private)|[\|,]|$)', line)
+        if inst_match:
+            inst_name = inst_match.group(1).strip()
+            qual_str = result['qualification'] or ''
+            if len(inst_name) > 3 and inst_name not in qual_str and not any(d in inst_name.lower() for d in ['year', 'percentage', 'passing', 'stream']):
+                result['institute_university'] = inst_name
+        
+        # Only add if we have at least qualification + (year or institute)
+        if result['qualification'] and (result['passing_year'] or result['institute_university']):
+            results.append(result)
+    
+    return results
+
+
+def _parse_timeline_education(section_lines):
+    """Parse education from timeline format where info appears on consecutive lines.
+    E.g., University name / Year / Degree or Degree / School / Year on separate lines."""
+    results = []
+    
+    i = 0
+    while i < len(section_lines):
+        line = section_lines[i].strip()
+        if not line:
+            i += 1
+            continue
+        
+        # Get next 3 lines for context
+        next_lines = []
+        for j in range(i + 1, min(i + 4, len(section_lines))):
+            next_lines.append(section_lines[j].strip())
+        context = ' '.join([line] + next_lines)
+        
+        # Check if any of these lines has a degree keyword
+        has_degree_in_context = any(re.search(pattern, context, re.I) for pattern, _ in DEGREE_PATTERNS)
+        
+        if not has_degree_in_context:
+            i += 1
+            continue
+        
+        result = {
+            'qualification': None,
+            'specialization_branch': None,
+            'location': None,
+            'passing_year': None,
+            'grade_cgpa': None,
+            'mode_of_study': None,
+            'institute_university': None,
+            'major_subjects': None,
+        }
+        
+        # Parse current line and next 2 lines for all education info
+        j = i
+        parsed_degree_on_line = None
+        
+        for offset in range(min(3, len(section_lines) - i)):
+            check_line = section_lines[i + offset].strip()
+            if not check_line:
+                continue
+            
+            # Find qualification
+            if not result['qualification']:
+                for pattern, degree_name in DEGREE_PATTERNS:
+                    if re.search(pattern, check_line, re.I):
+                        result['qualification'] = degree_name
+                        parsed_degree_on_line = (i + offset)
+                        
+                        # Extract specialization if degree followed by "in"
+                        spec_match = re.search(r'(?:' + pattern + r')\s+(?:in\s+)?([A-Za-z\s]+)(?:\s*,|$)', check_line, re.I)
+                        if spec_match and len(spec_match.group(1)) < 80:
+                            spec = spec_match.group(1).strip()
+                            if spec and not any(x in spec.lower() for x in ['board', 'university', 'college']):
+                                result['specialization_branch'] = spec
+                        break
+            
+            # Find year (any 4-digit number 1990-2030 in this or surrounding lines)
+            if not result['passing_year']:
+                year_match = re.search(r'\b(19|20)\d{2}\b', check_line)
+                if year_match:
+                    year = year_match.group(0)
+                    if 1990 <= int(year) <= 2030:
+                        result['passing_year'] = year
+            
+            # Find grade/percentage
+            if not result['grade_cgpa']:
+                grade_match = re.search(r'(\d+\.?\d*)\s*%', check_line)
+                if grade_match:
+                    result['grade_cgpa'] = grade_match.group(0).strip()
+            
+            # Find institution (usually has capital letters and is longer)
+            if not result['institute_university']:
+                # Look for institution patterns
+                if len(check_line) > 5 and re.search(r'[A-Z][a-z]', check_line):  # Has capital letters
+                    # Avoid lines that are just keywords
+                    is_keyword = any(re.search(pattern, check_line, re.I) for pattern, _ in DEGREE_PATTERNS)
+                    is_year = re.match(r'\d{4}', check_line)
+                    is_percentage = '%' in check_line
+                    
+                    if not is_keyword and not is_year and not is_percentage:
+                        # This looks like an institution name
+                        result['institute_university'] = check_line
+        
+        # Only add if we have at least a qualification
+        if result['qualification'] and (result['institute_university'] or result['passing_year'] or result['grade_cgpa']):
+            results.append(result)
+            # Move past the lines we've consumed
+            if parsed_degree_on_line is not None:
+                i = parsed_degree_on_line + 1
+            else:
+                i += 1
+        else:
+            i += 1
+    
+    return results
+
+
 def extract_education(text):
     """Extract education details from resume text."""
     if not text:
         return []
     
-    section_lines = _extract_education_section(text)
-    if not section_lines:
-        return []
-    
-    # Filter out header lines and empty lines
-    header_keywords = ['course', 'certificate', 'board', 'university', 'year', 'passing', 'cgpa', 'percent', 'school', 'college', 'name']
-    filtered_lines = []
-    
-    for line in section_lines:
-        cleaned = line.strip().lower()
-        # Skip header rows and markers
-        if not cleaned or (any(kw in cleaned for kw in header_keywords) and '/' in line):
-            continue
-        filtered_lines.append(line.strip())
-    
-    if not filtered_lines:
-        return []
-    
-    # Group lines into education entries
-    # Pattern: qualification lines are followed by institute, year, etc.
-    entries = []
-    current_entry_lines = []
-    
-    for line in filtered_lines:
-        if not line:
-            if current_entry_lines:
-                entries.append(current_entry_lines)
-                current_entry_lines = []
-            continue
-        
-        # Check if this line starts a new entry (has a degree keyword or is a qualification)
-        is_degree_line = any(re.search(pattern, line, re.I) for pattern, _ in DEGREE_PATTERNS)
-        
-        if is_degree_line and current_entry_lines:
-            # Start of new entry
-            entries.append(current_entry_lines)
-            current_entry_lines = [line]
-        else:
-            current_entry_lines.append(line)
-    
-    if current_entry_lines:
-        entries.append(current_entry_lines)
-    
-    # Parse each entry
     education_records = []
     seen = set()
     
-    for entry_lines in entries:
-        if not entry_lines:
+    # Strategy 1: Extract from education section
+    section_lines = _extract_education_section(text)
+    if section_lines:
+        # Filter out header lines and empty lines
+        header_keywords = ['course', 'certificate', 'board', 'university', 'year', 'passing', 'cgpa', 'percent', 'school', 'college', 'name']
+        filtered_lines = []
+        
+        for line in section_lines:
+            cleaned = line.strip().lower()
+            # Skip header rows and markers
+            if not cleaned or (any(kw in cleaned for kw in header_keywords) and '/' in line):
+                continue
+            filtered_lines.append(line.strip())
+        
+        if filtered_lines:
+            section_text = '\n'.join(filtered_lines)
+            
+            # Try table parsing first
+            table_results = _parse_table_education(section_text)
+            for result in table_results:
+                if result['qualification']:
+                    key = (result['qualification'], result['institute_university'], result['passing_year'])
+                    if key not in seen:
+                        seen.add(key)
+                        education_records.append(result)
+            
+            # Try timeline parsing if no table results
+            if not table_results:
+                timeline_results = _parse_timeline_education(filtered_lines)
+                for result in timeline_results:
+                    if result['qualification']:
+                        key = (result['qualification'], result['institute_university'], result['passing_year'])
+                        if key not in seen:
+                            seen.add(key)
+                            education_records.append(result)
+            
+            # Fall back to original multi-line grouping
+            if not table_results and not timeline_results:
+                # Group lines into education entries
+                entries = []
+                current_entry_lines = []
+                
+                for line in filtered_lines:
+                    if not line:
+                        if current_entry_lines:
+                            entries.append(current_entry_lines)
+                            current_entry_lines = []
+                        continue
+                    
+                    # Check if this line starts a new entry (has a degree keyword)
+                    is_degree_line = any(re.search(pattern, line, re.I) for pattern, _ in DEGREE_PATTERNS)
+                    
+                    if is_degree_line and current_entry_lines:
+                        entries.append(current_entry_lines)
+                        current_entry_lines = [line]
+                    else:
+                        current_entry_lines.append(line)
+                
+                if current_entry_lines:
+                    entries.append(current_entry_lines)
+                
+                # Parse each entry (multi-line format)
+                for entry_lines in entries:
+                    if not entry_lines:
+                        continue
+                    
+                    entry_text = ' '.join(entry_lines)
+                    parsed = _parse_education_entry(entry_text)
+                    
+                    if parsed and (parsed['qualification'] or parsed['institute_university']):
+                        key = (parsed['qualification'], parsed['institute_university'], parsed['passing_year'])
+                        if key not in seen:
+                            seen.add(key)
+                            education_records.append(parsed)
+    
+    # Strategy 2: Extract inline/bullet point education entries (ONLY if proper markers present)
+    # Look for lines with education patterns that have strong education indicators
+    lines = text.splitlines()
+    
+    for line in lines:
+        if not line.strip():
             continue
         
-        entry_text = ' '.join(entry_lines)
-        parsed = _parse_education_entry(entry_text)
+        # Skip lines that are extremely long (likely tables or malformed data)
+        # but be more lenient for lines with education markers
+        has_edu_marker = any(marker in line.lower() for marker in [
+            'from ', 'at ', 'passing year', 'year', 'board', '%', '–', 
+            'university', 'college', 'institute', 'school', 'iti', 'pgdm', 'mba'
+        ])
         
-        if parsed and (parsed['qualification'] or parsed['institute_university']):
-            # Create a key to avoid duplicates
+        if len(line) > 1000 and not has_edu_marker:  # Skip very long lines without markers
+            continue
+        
+        # For lines with education markers, try to extract even if very long
+        # by detecting education section and truncating at next major section
+        if len(line) > 1000 and has_edu_marker:
+            # Find where the education content likely ends (at next major section keyword)
+            section_keywords = ['work experience', 'projects', 'skills', 'certifications', 'languages', 'contact']
+            edu_end_pos = len(line)
+            for keyword in section_keywords:
+                pos = line.lower().find(keyword)
+                if pos > 0:
+                    edu_end_pos = min(edu_end_pos, pos)
+            line = line[:edu_end_pos]  # Truncate to education section
+        
+        if len(line) > 2000:  # Skip if still too long after truncation
+            continue
+        
+        if not has_edu_marker:
+            continue
+        
+        # Skip if line looks like metadata or contact info
+        if any(skip in line.lower() for skip in ['email', 'phone', 'mobile', 'whatsapp', 'address', 'job', 'role', 'experience']):
+            continue
+        
+        # Try parsing as inline education entry
+        parsed = _parse_inline_education_entry(line)
+        
+        if parsed and parsed['qualification']:
             key = (parsed['qualification'], parsed['institute_university'], parsed['passing_year'])
             if key not in seen:
                 seen.add(key)
                 education_records.append(parsed)
+    
+    # Strategy 3: Fallback - search for education patterns in entire text if no education section found
+    # This helps with resumes that don't have "Education" header or have education data scattered
+    if not education_records or len(education_records) < 2:  # Also try if we found very few records
+        lines = text.splitlines()
+        
+        # Look for lines with strong education markers (degree + context)
+        for i, line in enumerate(lines):
+            if not line.strip() or len(line) > 300:
+                continue
+            
+            # Look for lines with education patterns: degree + (institution/year/grade)
+            has_degree = any(re.search(pattern, line, re.I) for pattern, _ in DEGREE_PATTERNS)
+            if not has_degree:
+                continue
+            
+            # Skip if it's obviously not education context
+            if any(skip in line.lower() for skip in ['requirement', 'prefer', 'responsible', 'manage', 'developed', 'designed', 'handled', 'worked']):
+                continue
+            
+            # Try to parse this line
+            parsed = _parse_inline_education_entry(line)
+            if parsed and parsed['qualification']:
+                key = (parsed['qualification'], parsed['institute_university'], parsed['passing_year'])
+                if key not in seen:
+                    seen.add(key)
+                    education_records.append(parsed)
+                    continue
+            
+            # Also check context of previous and next 2 lines for full education info
+            context_lines = []
+            for j in range(max(0, i-2), min(len(lines), i+3)):
+                context_lines.append(lines[j])
+            
+            context_text = ' '.join(context_lines)
+            parsed = _parse_inline_education_entry(context_text)
+            if parsed and parsed['qualification']:
+                key = (parsed['qualification'], parsed['institute_university'], parsed['passing_year'])
+                if key not in seen:
+                    seen.add(key)
+                    education_records.append(parsed)
     
     return education_records
 
