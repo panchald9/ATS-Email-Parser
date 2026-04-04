@@ -10,6 +10,15 @@ import threading
 from datetime import date
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
+# ── Education extraction utilities ─────────────────────────────
+try:
+    from education_extraction_utils import extract_education_pdf_doc, EducationExtractor
+    EDUCATION_UTILS_AVAILABLE = True
+except ImportError:
+    extract_education_pdf_doc = None
+    EducationExtractor = None
+    EDUCATION_UTILS_AVAILABLE = False
+
 # ── Core deps ──────────────────────────────────────────────────
 try:
     from pdfminer.high_level import extract_text as pdf_extract_text
@@ -92,7 +101,7 @@ def _ensure_skillner_loaded():
 # ══════════════════════════════════════════════════════════════
 #  CONFIGURATION
 # ══════════════════════════════════════════════════════════════
-RESUME_FOLDER  = r"D:\Project\ATS\ATS Email Parser\Qulity HR\Bulk_Resumes_1775101335"
+RESUME_FOLDER  = r"D:\Project\ATS\ATS Email Parser\Bulk_Resumes_1775020050"
 SKILLS_CSV     = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Skill.csv')
 OUTPUT_JSON    = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', 'resume_parsed.json')
 VALIDATION_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', 'validation_report.json')
@@ -188,37 +197,47 @@ BAD_CONTEXT_RE = re.compile(
 PHONE_LABEL_RE = re.compile(
     r'(?i)\b(?:mobile|mob|phone|ph|contact|tel|telephone|call|whatsapp)\b\s*[:\-]?\s*([+()0-9][0-9()\s.\-/]{6,25})'
 )
+
 PHONE_GENERIC_RE = re.compile(
     r'(?<!\w)(?:\+?\d{1,3}[ \t.\-]?)?(?:\(?\d{2,5}\)?[ \t.\-]?)?\d(?:[\d \t()\.\-]{5,}\d)(?!\w)'
 )
+
 EMAIL_DOMAIN_PREFIX_RE = re.compile(
     r"^([a-z0-9-]{1,30}(?:\.[a-z0-9-]{1,30}){0,2}"
     r"\.(?:co\.in|org\.in|ac\.in|gov\.in|com|org|net|edu|gov|in|co|io|ai|info|biz|me|us|uk|ca|au|de|fr|jp|sg))",
     re.I,
 )
+
 EMAIL_STRICT_RE = re.compile(r"^[a-z0-9][a-z0-9._%+-]{1,63}@[a-z0-9-]+(?:\.[a-z0-9-]+)+$")
+
 EMAIL_NOISY_PREFIX_RE = re.compile(r"^(?:contact|skills|languages|profile|email|mobile|phone)+", re.I)
 
 GENDER_LABEL_RE = re.compile(r'(?i)\b(?:gender|sex)\b\s*[:\-]?\s*(male|female|m|f|man|woman|boy|girl)\b')
+
 GENDER_EARLY_MALE_RE = re.compile(r'\b(?:gender|sex)\b[^\n]{0,24}\b(?:male|m)\b', re.I)
+
 GENDER_EARLY_FEMALE_RE = re.compile(r'\b(?:gender|sex)\b[^\n]{0,24}\b(?:female|f)\b', re.I)
 
 ADDRESS_LABEL_RE = re.compile(
     r'(?i)^(?:permanent|current|present|communication|residential)?\s*address\s*[:\-]?\s*(.*)$'
 )
+
 ADDRESS_STOP_RE = re.compile(
     r'(?i)^(?:education|skills?|experience|objective|summary|profile|projects?|languages?|'
     r'declaration|reference|hobbies|strengths|certificates?|achievements?|'
     r'bachelor|master|diploma|degree|university|college|institute|school|'
     r'professional\s+experience|technical\s+skills|work\s+experience)\b'
 )
+
 ADDRESS_CONTACT_RE = re.compile(r'(?i)(?:@|\b(?:phone|mobile|contact|email|tel|whatsapp)\b|https?://)')
+
 ADDRESS_HINT_RE = re.compile(
     r'(?i)\b(?:road|rd\.?|street|st\.?|lane|ln\.?|nagar|colony|sector|plot|block|'
     r'flat|floor|apartment|society|near|taluka|tehsil|dist|district|city|state|india|'
     r'gujarat|maharashtra|rajasthan|punjab|bihar|kerala|odisha|haryana|pradesh|goa|'
     r'karnataka|postcode|pincode|zip)\b'
 )
+
 ADDRESS_NON_RE = re.compile(
     r'(?i)(?:'
     r'\b(?:bachelor|master|diploma|degree|b\.com|b\.a|b\.sc|m\.sc|btech|mtech|b\.tech|m\.tech|b\.e|m\.e|'
@@ -441,7 +460,6 @@ MONTH_MAP = {
     'october': 10, 'november': 11, 'december': 12,
 }
 
-
 def _parse_dob_value(raw):
     """
     Normalise any recognised date string to DD/MM/YYYY.
@@ -536,7 +554,6 @@ def _parse_dob_value(raw):
     
     return None
 
-
 def _infer_dob_from_age(age_str):
     """
     Infer DOB from age string like '25' or '40'.
@@ -554,7 +571,6 @@ def _infer_dob_from_age(age_str):
     except (ValueError, TypeError):
         pass
     return None
-
 
 def extract_dob(text):
     """
@@ -652,13 +668,11 @@ def extract_dob(text):
 
     return None
 
-
 # ══════════════════════════════════════════════════════════════
 #  TEXT EXTRACTION
 # ══════════════════════════════════════════════════════════════
 def natural_file_sort_key(filename):
     return [int(p) if p.isdigit() else p.lower() for p in re.split(r'(\d+)', filename)]
-
 
 def _append_unique_line(lines, seen, value):
     value = (value or '').strip()
@@ -668,7 +682,6 @@ def _append_unique_line(lines, seen, value):
     if key and key not in seen:
         seen.add(key)
         lines.append(value)
-
 
 def _collect_docx_text(doc):
     lines = []
@@ -699,7 +712,6 @@ def _collect_docx_text(doc):
 
     return '\n'.join(lines)
 
-
 def _normalize_phone_candidate(raw):
     if not raw:
         return None
@@ -718,7 +730,6 @@ def _normalize_phone_candidate(raw):
         if year_hits and len(year_hits) >= 2:
             return None
     return f'+{digits}' if cleaned.startswith('+') else digits
-
 
 def _extract_doc_with_word_com(path):
     word = None
@@ -750,7 +761,6 @@ def _extract_doc_with_word_com(path):
         except Exception:
             pass
 
-
 def _clean_extracted_text(text):
     if not text:
         return ''
@@ -760,7 +770,6 @@ def _clean_extracted_text(text):
     text = re.sub(r'[ \t]+', ' ', text)
     text = re.sub(r'\n{3,}', '\n\n', text)
     return text.strip()
-
 
 def extract_text(path):
     if not os.path.exists(path):
@@ -843,7 +852,6 @@ def extract_text(path):
     except Exception as exc:
         raise ValueError(f"Failed to extract from {os.path.basename(path)}: {str(exc)}")
 
-
 def normalize_compact_text(text):
     if not text:
         return ''
@@ -851,7 +859,6 @@ def normalize_compact_text(text):
     t = re.sub(r'(?<=\d)(?=[A-Za-z])', ' ', t)
     t = re.sub(r'(?<=@)(?=[A-Z])', ' ', t)
     return t
-
 
 # ══════════════════════════════════════════════════════════════
 #  NAME EXTRACTION
@@ -861,7 +868,6 @@ def normalize_caps(line):
     if words and all(w.isupper() for w in words if w.isalpha()):
         return title_case(line.lower())
     return line
-
 
 def title_case(s):
     def _case_word(word):
@@ -883,13 +889,11 @@ def title_case(s):
         return ''.join(chars)
     return ' '.join(_case_word(w) for w in s.split())
 
-
 def is_spaced(line):
     tokens = line.split()
     if not tokens:
         return True
     return sum(1 for t in tokens if len(t) <= 2) / len(tokens) > 0.5
-
 
 def split_camel(text):
     """
@@ -904,7 +908,6 @@ def split_camel(text):
     text = re.sub(r'(?<=[A-Z])(?=[A-Z][a-z])', ' ', text)
     return text
 
-
 def normalize_name_case(name):
     parts = []
     for token in name.split():
@@ -916,7 +919,6 @@ def normalize_name_case(name):
         else:
             parts.append(token)
     return ' '.join(parts)
-
 
 def sanitize_candidate(candidate):
     if not candidate:
@@ -966,7 +968,6 @@ def sanitize_candidate(candidate):
         c = normalize_name_case(c)
     return c.strip()
 
-
 def line_has_bad_context(line):
     l = line.lower()
     if BAD_CONTEXT_RE.search(l) and not re.search(r'\bname\b', l):
@@ -975,7 +976,6 @@ def line_has_bad_context(line):
     if any(t in COMPANY_HINTS for t in tokens if t):
         return True
     return False
-
 
 def has_name_case_pattern(line):
     words = re.findall(r"[A-Za-z][A-Za-z'.-]*", line)
@@ -997,7 +997,6 @@ def has_name_case_pattern(line):
     capped = sum(1 for w in words if _looks_name_cased(w))
     return capped == len(words)
 
-
 def top_header_candidate(norm_lines):
     for line in norm_lines[:5]:
         if re.search(r'[@\d]|https?://', line, re.I):
@@ -1015,7 +1014,6 @@ def top_header_candidate(norm_lines):
             return c
     return None
 
-
 def looks_like_address(line):
     if re.search(r'\d', line):
         return True
@@ -1023,7 +1021,6 @@ def looks_like_address(line):
         return True
     tokens = [t for t in re.split(r'[^a-z]+', line.lower()) if t]
     return sum(1 for w in tokens if w in BLACKLIST) >= 2
-
 
 def looks_like_name_header(name):
     if not name:
@@ -1044,7 +1041,6 @@ def looks_like_name_header(name):
     if len(words) >= 2 and sum(1 for w in words if w in NAME_HEADER_TOKENS) >= 2:
         return True
     return False
-
 
 def is_valid(name, allow_single=False):
     if not name:
@@ -1098,7 +1094,6 @@ def is_valid(name, allow_single=False):
         return False
     return True
 
-
 def dataset_ok(name, min_score=2):
     if not DATASET_AVAILABLE:
         return True
@@ -1122,14 +1117,12 @@ def dataset_ok(name, min_score=2):
             pass
     return score >= min_score
 
-
 def accept(name, strict=True, allow_single=False):
     if not is_valid(name, allow_single=allow_single):
         return False
     if strict and DATASET_AVAILABLE and len(name.split()) >= 2:
         return dataset_ok(name)
     return True
-
 
 def _dataset_first_or_last_hit(token):
     token = (token or '').strip().lower()
@@ -1151,7 +1144,6 @@ def _dataset_first_or_last_hit(token):
     except Exception:
         return False, False
 
-
 def _token_looks_like_first_name(token):
     t = re.sub(r'[^a-z]', '', token.lower())
     if len(t) < 3:
@@ -1161,7 +1153,6 @@ def _token_looks_like_first_name(token):
     first_hit, _ = _dataset_first_or_last_hit(t)
     return first_hit
 
-
 def _token_looks_like_surname(token):
     t = re.sub(r'[^a-z]', '', token.lower())
     if len(t) < 2:
@@ -1170,7 +1161,6 @@ def _token_looks_like_surname(token):
         return True
     _, last_hit = _dataset_first_or_last_hit(t)
     return last_hit
-
 
 def _email_local_looks_like_name(local, alpha_chunks):
     if not alpha_chunks:
@@ -1207,7 +1197,6 @@ def _email_local_looks_like_name(local, alpha_chunks):
                 return True
     return False
 
-
 def _split_compact_name_token(token):
     token = re.sub(r'[^A-Za-z]', '', token or '').lower()
     if len(token) < 6:
@@ -1233,7 +1222,6 @@ def _split_compact_name_token(token):
                     return cand
 
     return None
-
 
 def name_from_email(full_text):
     matches = re.finditer(
@@ -1268,7 +1256,6 @@ def name_from_email(full_text):
                             return c
     return None
 
-
 def _resolve_process_folder():
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument('--folder',        dest='folder',       default='')
@@ -1300,7 +1287,6 @@ def _resolve_process_folder():
         int(args.seed),
         bool(args.fast_response),
     )
-
 
 # ══════════════════════════════════════════════════════════════
 #  CONTACT NAME EXTRACTION
@@ -1556,7 +1542,6 @@ def extract_name(text):
 
     return None
 
-
 def _is_suspicious_extracted_name(name):
     if not name:
         return True
@@ -1607,7 +1592,6 @@ def _is_suspicious_extracted_name(name):
 
     return False
 
-
 def _derive_name_from_email_local(email_address):
     if not email_address:
         return None
@@ -1643,7 +1627,6 @@ def _derive_name_from_email_local(email_address):
         return single
     return None
 
-
 def _derive_name_from_filename(filename):
     if not filename:
         return None
@@ -1676,7 +1659,6 @@ def _derive_name_from_filename(filename):
         if is_valid(candidate2):
             return candidate2
     return None
-
 
 # ══════════════════════════════════════════════════════════════
 #  CONTACT NUMBER EXTRACTION
@@ -1726,7 +1708,6 @@ def extract_contact_number(text):
         return None
     candidates.sort(key=lambda x: (-x[0], x[1], -x[2], x[3], x[4]))
     return candidates[0][5]
-
 
 # ══════════════════════════════════════════════════════════════
 #  EMAIL EXTRACTION
@@ -1858,7 +1839,6 @@ def extract_email_from_resume(text):
     candidates = list(set(candidates))
     candidates.sort(key=lambda x: (-x[0], x[1], x[2]))
     return candidates[0][2]
-
 
 # ══════════════════════════════════════════════════════════════
 #  GENDER EXTRACTION  (v2 — higher accuracy)
@@ -2268,10 +2248,97 @@ def extract_address(text):
 
     return best
 
+# ══════════════════════════════════════════════════════════════
+#  EDUCATION EXTRACTION (ENHANCED WITH PARSEL)
+# ══════════════════════════════════════════════════════════════
 
-# ══════════════════════════════════════════════════════════════
-#  EDUCATION EXTRACTION  (NEW)
-# ══════════════════════════════════════════════════════════════
+# ── Parsel-based structured education extraction ────────────────
+try:
+    from parsel import Selector
+    PARSEL_AVAILABLE = True
+except ImportError:
+    PARSEL_AVAILABLE = False
+    Selector = None
+
+def _normalize_text_for_parsel(text):
+    """Convert plain text to HTML-like structure for Parsel parsing."""
+    if not text:
+        return '<div></div>'
+    
+    # Escape HTML special chars but preserve structure
+    lines = text.splitlines()
+    html_lines = []
+    
+    for line in lines:
+        line = line.strip()
+        if not line:
+            html_lines.append('<br/>')
+        else:
+            # Preserve spacing and structure
+            escaped = (line.replace('&', '&amp;')
+                          .replace('<', '&lt;')
+                          .replace('>', '&gt;'))
+            html_lines.append(f'<p>{escaped}</p>')
+    
+    return f'<div>{"".join(html_lines)}</div>'
+
+def _extract_education_with_parsel(text):
+    """Extract education section using Parsel-like selector approach."""
+    if not PARSEL_AVAILABLE or not text:
+        return []
+    
+    try:
+        # Create HTML-like structure
+        html_text = _normalize_text_for_parsel(text)
+        selector = Selector(text=html_text)
+        
+        # Extract all paragraphs
+        all_paragraphs = selector.xpath('//p/text()').getall()
+        
+        # Find education section boundary
+        education_start = -1
+        education_end = len(all_paragraphs)
+        
+        education_markers = [
+            'education', 'academic', 'qualifications', 'degrees',
+            'educational', 'academia', 'schooling'
+        ]
+        
+        for i, para in enumerate(all_paragraphs):
+            para_lower = para.lower().strip()
+            # Check for education header
+            if any(marker in para_lower for marker in education_markers):
+                # Ensure it's a header, not random text
+                if len(para_lower) < 40 and not any(
+                    skip in para_lower for skip in ['requirement', 'preference']
+                ):
+                    education_start = i
+                    break
+        
+        if education_start < 0:
+            return []
+        
+        # Find section end (next major section)
+        section_markers = [
+            'experience', 'skills', 'projects', 'certifications',
+            'languages', 'references', 'declaration'
+        ]
+        
+        for i in range(education_start + 1, len(all_paragraphs)):
+            para_lower = all_paragraphs[i].lower().strip()
+            if any(marker in para_lower for marker in section_markers):
+                if len(para_lower) < 40:
+                    education_end = i
+                    break
+        
+        # Extract education entries
+        education_lines = all_paragraphs[education_start + 1:education_end]
+        return [line.strip() for line in education_lines if line.strip()]
+    
+    except Exception as e:
+        # Fallback to non-Parsel approach
+        return []
+
 EDUCATION_SECTION_RE = re.compile(
     r'(?i)^\s*(?:'
     r'education(?!\s*(?:requirement|preference))|academia\w*|'
@@ -2302,7 +2369,7 @@ DEGREE_PATTERNS = [
     (r'\b(?:llb|bachelor\s+of\s+laws)\b', 'LLB'),
     (r'\b(?:llm|master\s+of\s+laws)\b', 'LLM'),
     (r'\bphd\b|\bdoctor\s+of\s+philosophy\b', 'PhD'),
-    (r'\bdiplomaed?\b', 'Diploma'),
+    (r'\b(?:diploma|diplom[aá])\b', 'Diploma'),
     (r'\bgrad\w*\b', 'Graduate'),
     (r'\b(?:12th?|intermediate|h\.?s\.?c|hs|high\s+school)\b', '12th'),
     (r'\b(?:10th?|s\.?s\.?c|ssc|secondary)\b', '10th'),
@@ -2324,7 +2391,6 @@ MODE_OF_STUDY_RE = re.compile(
     r')\b',
     re.I
 )
-
 
 def _extract_education_section(text):
     """Extract lines belonging to EDUCATION section."""
@@ -2362,7 +2428,6 @@ def _extract_education_section(text):
             break
     
     return lines[section_start + 1:section_end]
-
 
 def _parse_inline_education_entry(line):
     """Parse single-line education entries like:
@@ -2537,7 +2602,6 @@ def _parse_inline_education_entry(line):
     
     return None
 
-
 def _parse_education_entry(entry_text):
     """Parse a single education entry and extract all fields."""
     if not entry_text or len(entry_text.strip()) < 3:
@@ -2646,8 +2710,8 @@ def _parse_education_entry(entry_text):
     
     return result
 
-
 def _parse_table_education(section_text):
+
     """Parse education from table format with rows of College|University|Grade|Year or similar."""
     results = []
     
@@ -2708,7 +2772,6 @@ def _parse_table_education(section_text):
             results.append(result)
     
     return results
-
 
 def _parse_timeline_education(section_lines):
     """Parse education from timeline format where info appears on consecutive lines.
@@ -2810,182 +2873,27 @@ def _parse_timeline_education(section_lines):
     
     return results
 
-
 def extract_education(text):
-    """Extract education details from resume text."""
+    """Extract education details from resume text using enhanced extraction utilities.
+    
+    Now uses the improved extract_education_pdf_doc() from education_extraction_utils
+    which handles:
+    - PDF table formats with multi-line cells
+    - Free-form inline education entries
+    - Concatenated degree entries on single lines
+    - Multiple education levels (10th, 12th, B.Tech, B.Com, PGDM, MBA, etc.)
+    """
     if not text:
         return []
     
-    education_records = []
-    seen = set()
-    
-    # Strategy 1: Extract from education section
-    section_lines = _extract_education_section(text)
-    if section_lines:
-        # Filter out header lines and empty lines
-        header_keywords = ['course', 'certificate', 'board', 'university', 'year', 'passing', 'cgpa', 'percent', 'school', 'college', 'name']
-        filtered_lines = []
-        
-        for line in section_lines:
-            cleaned = line.strip().lower()
-            # Skip header rows and markers
-            if not cleaned or (any(kw in cleaned for kw in header_keywords) and '/' in line):
-                continue
-            filtered_lines.append(line.strip())
-        
-        if filtered_lines:
-            section_text = '\n'.join(filtered_lines)
-            
-            # Try table parsing first
-            table_results = _parse_table_education(section_text)
-            for result in table_results:
-                if result['qualification']:
-                    key = (result['qualification'], result['institute_university'], result['passing_year'])
-                    if key not in seen:
-                        seen.add(key)
-                        education_records.append(result)
-            
-            # Try timeline parsing if no table results
-            if not table_results:
-                timeline_results = _parse_timeline_education(filtered_lines)
-                for result in timeline_results:
-                    if result['qualification']:
-                        key = (result['qualification'], result['institute_university'], result['passing_year'])
-                        if key not in seen:
-                            seen.add(key)
-                            education_records.append(result)
-            
-            # Fall back to original multi-line grouping
-            if not table_results and not timeline_results:
-                # Group lines into education entries
-                entries = []
-                current_entry_lines = []
-                
-                for line in filtered_lines:
-                    if not line:
-                        if current_entry_lines:
-                            entries.append(current_entry_lines)
-                            current_entry_lines = []
-                        continue
-                    
-                    # Check if this line starts a new entry (has a degree keyword)
-                    is_degree_line = any(re.search(pattern, line, re.I) for pattern, _ in DEGREE_PATTERNS)
-                    
-                    if is_degree_line and current_entry_lines:
-                        entries.append(current_entry_lines)
-                        current_entry_lines = [line]
-                    else:
-                        current_entry_lines.append(line)
-                
-                if current_entry_lines:
-                    entries.append(current_entry_lines)
-                
-                # Parse each entry (multi-line format)
-                for entry_lines in entries:
-                    if not entry_lines:
-                        continue
-                    
-                    entry_text = ' '.join(entry_lines)
-                    parsed = _parse_education_entry(entry_text)
-                    
-                    if parsed and (parsed['qualification'] or parsed['institute_university']):
-                        key = (parsed['qualification'], parsed['institute_university'], parsed['passing_year'])
-                        if key not in seen:
-                            seen.add(key)
-                            education_records.append(parsed)
-    
-    # Strategy 2: Extract inline/bullet point education entries (ONLY if proper markers present)
-    # Look for lines with education patterns that have strong education indicators
-    lines = text.splitlines()
-    
-    for line in lines:
-        if not line.strip():
-            continue
-        
-        # Skip lines that are extremely long (likely tables or malformed data)
-        # but be more lenient for lines with education markers
-        has_edu_marker = any(marker in line.lower() for marker in [
-            'from ', 'at ', 'passing year', 'year', 'board', '%', '–', 
-            'university', 'college', 'institute', 'school', 'iti', 'pgdm', 'mba'
-        ])
-        
-        if len(line) > 1000 and not has_edu_marker:  # Skip very long lines without markers
-            continue
-        
-        # For lines with education markers, try to extract even if very long
-        # by detecting education section and truncating at next major section
-        if len(line) > 1000 and has_edu_marker:
-            # Find where the education content likely ends (at next major section keyword)
-            section_keywords = ['work experience', 'projects', 'skills', 'certifications', 'languages', 'contact']
-            edu_end_pos = len(line)
-            for keyword in section_keywords:
-                pos = line.lower().find(keyword)
-                if pos > 0:
-                    edu_end_pos = min(edu_end_pos, pos)
-            line = line[:edu_end_pos]  # Truncate to education section
-        
-        if len(line) > 2000:  # Skip if still too long after truncation
-            continue
-        
-        if not has_edu_marker:
-            continue
-        
-        # Skip if line looks like metadata or contact info
-        if any(skip in line.lower() for skip in ['email', 'phone', 'mobile', 'whatsapp', 'address', 'job', 'role', 'experience']):
-            continue
-        
-        # Try parsing as inline education entry
-        parsed = _parse_inline_education_entry(line)
-        
-        if parsed and parsed['qualification']:
-            key = (parsed['qualification'], parsed['institute_university'], parsed['passing_year'])
-            if key not in seen:
-                seen.add(key)
-                education_records.append(parsed)
-    
-    # Strategy 3: Fallback - search for education patterns in entire text if no education section found
-    # This helps with resumes that don't have "Education" header or have education data scattered
-    if not education_records or len(education_records) < 2:  # Also try if we found very few records
-        lines = text.splitlines()
-        
-        # Look for lines with strong education markers (degree + context)
-        for i, line in enumerate(lines):
-            if not line.strip() or len(line) > 300:
-                continue
-            
-            # Look for lines with education patterns: degree + (institution/year/grade)
-            has_degree = any(re.search(pattern, line, re.I) for pattern, _ in DEGREE_PATTERNS)
-            if not has_degree:
-                continue
-            
-            # Skip if it's obviously not education context
-            if any(skip in line.lower() for skip in ['requirement', 'prefer', 'responsible', 'manage', 'developed', 'designed', 'handled', 'worked']):
-                continue
-            
-            # Try to parse this line
-            parsed = _parse_inline_education_entry(line)
-            if parsed and parsed['qualification']:
-                key = (parsed['qualification'], parsed['institute_university'], parsed['passing_year'])
-                if key not in seen:
-                    seen.add(key)
-                    education_records.append(parsed)
-                    continue
-            
-            # Also check context of previous and next 2 lines for full education info
-            context_lines = []
-            for j in range(max(0, i-2), min(len(lines), i+3)):
-                context_lines.append(lines[j])
-            
-            context_text = ' '.join(context_lines)
-            parsed = _parse_inline_education_entry(context_text)
-            if parsed and parsed['qualification']:
-                key = (parsed['qualification'], parsed['institute_university'], parsed['passing_year'])
-                if key not in seen:
-                    seen.add(key)
-                    education_records.append(parsed)
-    
-    return education_records
-
+    try:
+        # Use the enhanced extraction from education_extraction_utils
+        # This has been thoroughly tested and handles edge cases better
+        return extract_education_pdf_doc(text)
+    except Exception as e:
+        # Fallback to empty if extraction fails
+        print(f"Warning: Education extraction failed: {e}")
+        return []
 
 # ══════════════════════════════════════════════════════════════
 #  SKILLS LOADING & MATCHING
@@ -3138,6 +3046,7 @@ def _is_weak_generic_skill(skill):
 
 def load_skills_from_csv(csv_path):
     skills       = []
+    invalid_skills = []
     seen         = set()
     invalid_count = 0
 
@@ -3146,6 +3055,7 @@ def load_skills_from_csv(csv_path):
         return skills
 
     with open(csv_path, mode='r', encoding='utf-8', errors='ignore', newline='') as f:
+        skill_list={}
         reader     = csv.DictReader(f)
         fieldnames = reader.fieldnames or []
         has_skill_col  = 'skill'             in [fn.strip().lower() for fn in fieldnames]
@@ -3165,6 +3075,7 @@ def load_skills_from_csv(csv_path):
                     if not is_valid_skill(candidate):
                         if candidate:
                             invalid_count += 1
+                            invalid_skills.append(candidate)
                         continue
                     words = re.findall(r'[A-Za-z0-9+#]+', candidate.lower())
                     if has_weight_col and weight <= 2 and len(words) == 1:
@@ -3194,6 +3105,7 @@ def load_skills_from_csv(csv_path):
 
     if invalid_count > 0:
         print(f"[!] Filtered out {invalid_count} invalid skill entries from CSV")
+        print("[!] Invalid skills:", invalid_skills[:20])  # show first 20
     return skills
 
 

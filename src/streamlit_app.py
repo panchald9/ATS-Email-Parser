@@ -126,6 +126,15 @@ def main():
                 else:
                     st.caption("No structured professional experience detected.")
 
+        st.subheader("Education Details")
+        for item in parsed_results:
+            with st.expander(f"{item.get('file')} - education"):
+                education = item.get("education") or []
+                if education:
+                    st.json(education)
+                else:
+                    st.caption("No structured education details detected.")
+
         st.subheader("File-by-File Response")
         for item in parsed_results:
             file_name = item.get("file") or "unknown_file"
