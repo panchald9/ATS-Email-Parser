@@ -7,6 +7,7 @@ import importlib
 import argparse
 import random
 import threading
+import time
 from datetime import date
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -5574,6 +5575,10 @@ if __name__ == '__main__':
             if not record.get('dob'):             stats['missing_dob']   += 1
             if record.get('skills'):              stats['skills_found']  += 1
             _log_record(i, record)
+            
+            # Add 3-second break after every resume
+            log_message("[*] Taking 3-second break...")
+            time.sleep(3)
     else:
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             future_to_meta = {
@@ -5583,6 +5588,7 @@ if __name__ == '__main__':
                 ): (i, fname)
                 for i, fname in indexed_files
             }
+            processed_count = 0
             for future in as_completed(future_to_meta):
                 i, fname = future_to_meta[future]
                 try:
@@ -5594,6 +5600,12 @@ if __name__ == '__main__':
                         'address': None, 'skills': [], 'error': str(exc),
                     }
                 results.append(record)
+                processed_count += 1
+                
+                # Add 3-second break after every resume
+                log_message("[*] Taking 3-second break...")
+                time.sleep(3)
+                
                 if record.get('error'):
                     stats['errors'] += 1
                     log_message(f"  {i:<{col_w['#']}} {fname:<{col_w['file']}} ❌ Error: {record['error']}")
