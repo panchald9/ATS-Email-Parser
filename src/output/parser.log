@@ -1,53 +1,37 @@
 [*] Skill source: auto (csv first, dataset fallback | csv=572)
-[*] Processing 7 resume file(s) from: D:\Project\ATS\ATS Email Parser\Bulk_Resumes_1775020050
+[*] Processing 3 resume file(s) from: D:\Project\ATS\ATS Email Parser\Bulk_Resumes_1775020050
 [*] Workers: 8
 
 #    File                   Name                           Phone          Gender   DOB            Email
 ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 [*] Taking 3-second break...
-  1    11709463 - Prashant Singh.pdf Prashant Singh                 6393804413     Male     12/09/2001     singh777prashant@gmail.com
-       Address: Address:. Village + Post – Mardah , Distt – ghazipur (UP) 23...
-       Skills [13]: Quality Control, Process Optimization, Production Planning, Inventory Management, excel, python, laboratory equipment, test method  (+5 more)
+  3    Profile.pdf            Dhruv Panchal                  9601945583     Male     ❌ N/A          dkrp16708@gmail.com
+       Address: Ahm,guj,india 382481, 9601945583 (Home)...
+       Skills [20]: ReactJS, campaign, campaigns, html, javascript, Brand Identity, creative strategy, web development  (+12 more)
 [*] Taking 3-second break...
-  7    11743500 - Vaishnavi Anil Singh.pdf Vaishnavi Singh                7376324034     Male     ❌ N/A          vaishnavi9450singh@gmail.com
-       Address: Dist- Ballia (UP) Pin-221716...
-       Skills [14]: Quality Control, Sales, Compliance, Tds, Excel, Batch Manufacturing, Standard Operating Procedure, team management  (+6 more)
-[*] Taking 3-second break...
-  4    11726244 - Sonu Kumar Sah.pdf Sonu Kumar Sah                 9801206116     Female   ❌ N/A          sonukumarsah609@gmail.com
-       Address: Siwan , Bihar...
-       Skills [12]: Autocad, Root Cause Analysis, time management, production line, quality control, pdca cycle, problem solve, operations  (+4 more)
-[*] Taking 3-second break...
-  3    11725204 - Sp.pdf      Prajapati Sunilbhai Jayantibh  8141072976     Male     ❌ N/A          sp4091761@gmail.com
-       Address: 07/04/2022 TO 06/04/2023....
-       Skills [14]: Sap Hana, Excel, Sap, C, academic, interpersonal skills, sap r 3, sap business one  (+6 more)
-[*] Taking 3-second break...
-  5    11736381 - Mohit Mishra.pdf Mohit Mishra                   8604329815     Male     ❌ N/A          mohitmishrams3@gmail.com
-       Address: Prayagraj, India, 2016 –...
-       Skills [32]: Mysql, Etl, Data Analytics, Excel, Power BI, Data Analysis, Sql, optimization  (+24 more)
-[*] Taking 3-second break...
-  2    11719199 - Nilesh Chavda.pdf Shivamappartment Vejalpurvast  +919157538955  ❌ N/A    ❌ N/A          nileshchavda045@gmail.com
+  1    Dhruv Panchal.pdf      Dhruv Panchal                  919601945583   Male     ❌ N/A          dp148026@gmail.com
        Address: ❌ NOT FOUND
-       Skills [35]: documentation, marketing, recruitment, automation, accounting, bookkeeping, compliance, payroll  (+27 more)
+       Skills [29]: cad, campaigns, cybersecurity, mentorship, Illustrator, Photoshop, solidworks, team leadership  (+21 more)
 [*] Taking 3-second break...
-  6    11739739 - Pgdm Aicte Ap.pdf Mayank Kumar                   +917983281581  ❌ N/A    ❌ N/A          mayanktarar11@gmail.com
+  2    Dhruv PanchalResume.pdf Dhruv Panchal                  919601945583   Male     ❌ N/A          ownerexperience.dp@gmail.com
        Address: ❌ NOT FOUND
-       Skills [49]: analytics, coordination, crm, finance, formulation, marketing, strategy, cloud  (+41 more)
+       Skills [39]: automation, authentication, excel, html, javascript, mysql, NodeJS, Django  (+31 more)
 
 =======================================================================================================================================
 💾 Validation report saved → D:\Project\ATS\ATS Email Parser\src\output\validation_report.json
 
 ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 📊 PROCESSING SUMMARY:
-   Total files processed : 7
-   Successfully parsed   : 7 (100.0%)
+   Total files processed : 3
+   Successfully parsed   : 3 (100.0%)
    Extraction errors     : 0 (0.0%)
 
 📋 EXTRACTION QUALITY:
-   Names found    : 7/7 (100.0%)
-   Emails found   : 7/7 (100.0%)
-   Phones found   : 7/7 (100.0%)
-   DOBs found     : 1/7 (14.3%)
-   With skills    : 7/7 (100.0%)
+   Names found    : 3/3 (100.0%)
+   Emails found   : 3/3 (100.0%)
+   Phones found   : 3/3 (100.0%)
+   DOBs found     : 0/3 (0.0%)
+   With skills    : 3/3 (100.0%)
 
 💾 Results saved → D:\Project\ATS\ATS Email Parser\src\output\resume_parsed.json
    Log saved      → D:\Project\ATS\ATS Email Parser\src\output\parser.log

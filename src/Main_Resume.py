@@ -2255,7 +2255,8 @@ def extract_address(text):
 
 # ── Parsel-based structured education extraction ────────────────
 try:
-    from parsel import Selector
+    _parsel_module = importlib.import_module('parsel')
+    Selector = _parsel_module.Selector
     PARSEL_AVAILABLE = True
 except ImportError:
     PARSEL_AVAILABLE = False

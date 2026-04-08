@@ -1,10 +1,10 @@
 {
-  "total_resumes": 7,
-  "average_score": 92.76,
-  "min_score": 90.0,
-  "max_score": 95.0,
+  "total_resumes": 3,
+  "average_score": 93.43,
+  "min_score": 92.76,
+  "max_score": 94.71,
   "quality_distribution": {
-    "excellent": 7,
+    "excellent": 3,
     "good": 0,
     "fair": 0,
     "poor": 0
@@ -17,7 +17,7 @@
   },
   "validated_results": [
     {
-      "file": "11709463 - Prashant Singh.pdf",
+      "file": "Profile.pdf",
       "fields": {
         "name": {
           "valid": true,
@@ -40,194 +40,42 @@
           "reason": "Valid gender"
         },
         "address": {
+          "valid": true,
+          "score": 95,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 93.25,
+          "reason": "19/20 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 94.70833333333333,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "Dhruv Panchal.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
           "valid": true,
           "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "13/13 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "11743500 - Vaishnavi Anil Singh.pdf",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
+          "reason": "Valid generic international format"
         },
         "gender": {
           "valid": true,
           "score": 90,
           "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "14/14 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 90.83333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "11726244 - Sonu Kumar Sah.pdf",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 65,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "12/12 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 90.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "11725204 - Sp.pdf",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 92.5,
-          "reason": "13/14 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 90.41666666666667,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "11736381 - Mohit Mishra.pdf",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 95,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "32/32 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 95.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "11719199 - Nilesh Chavda.pdf",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid international format with country code"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
         },
         "address": {
           "valid": false,
@@ -236,16 +84,16 @@
         },
         "skills": {
           "valid": true,
-          "score": 94.0,
-          "reason": "34/35 skills valid"
+          "score": 93.79310344827587,
+          "reason": "28/29 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 94.75,
+      "overall_score": 92.75862068965517,
       "quality_level": "excellent"
     },
     {
-      "file": "11739739 - Pgdm Aicte Ap.pdf",
+      "file": "Dhruv PanchalResume.pdf",
       "fields": {
         "name": {
           "valid": true,
@@ -259,13 +107,13 @@
         },
         "phone": {
           "valid": true,
-          "score": 90,
-          "reason": "Valid international format with country code"
+          "score": 85,
+          "reason": "Valid generic international format"
         },
         "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
         },
         "address": {
           "valid": false,
@@ -274,12 +122,12 @@
         },
         "skills": {
           "valid": true,
-          "score": 95.0,
-          "reason": "49/49 skills valid"
+          "score": 94.1025641025641,
+          "reason": "38/39 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 95.0,
+      "overall_score": 92.82051282051282,
       "quality_level": "excellent"
     }
   ]
