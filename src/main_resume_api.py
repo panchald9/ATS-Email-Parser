@@ -63,7 +63,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-if TRUSTED_HOSTS:
+if TRUSTED_HOSTS and "*" not in TRUSTED_HOSTS:
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=TRUSTED_HOSTS)
 
 
