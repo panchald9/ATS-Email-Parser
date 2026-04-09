@@ -20,6 +20,23 @@ except ImportError:
     EducationExtractor = None
     EDUCATION_UTILS_AVAILABLE = False
 
+# ── Pattern-based extraction for mangled PDFs ────────────────────
+try:
+    from pattern_extraction import extract_jobs_from_patterns, extract_education_from_patterns
+    PATTERN_EXTRACTION_AVAILABLE = True
+except ImportError:
+    extract_jobs_from_patterns = None
+    extract_education_from_patterns = None
+    PATTERN_EXTRACTION_AVAILABLE = False
+
+# ── Image extraction ───────────────────────────────────────────────
+try:
+    from image_extraction import get_resume_image
+    IMAGE_EXTRACTION_AVAILABLE = True
+except ImportError:
+    get_resume_image = None
+    IMAGE_EXTRACTION_AVAILABLE = False
+
 # ── Core deps ──────────────────────────────────────────────────
 try:
     from pdfminer.high_level import extract_text as pdf_extract_text
@@ -102,7 +119,7 @@ def _ensure_skillner_loaded():
 # ══════════════════════════════════════════════════════════════
 #  CONFIGURATION
 # ══════════════════════════════════════════════════════════════
-RESUME_FOLDER  = r"D:\Project\ATS\ATS Email Parser\Bulk_Resumes_1775020050"
+RESUME_FOLDER  = r"D:\Project\ATS\ATS Email Parser\Resume"
 SKILLS_CSV     = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Skill.csv')
 OUTPUT_JSON    = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', 'resume_parsed.json')
 VALIDATION_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', 'validation_report.json')
@@ -860,6 +877,96 @@ def normalize_compact_text(text):
     t = re.sub(r'(?<=\d)(?=[A-Za-z])', ' ', t)
     t = re.sub(r'(?<=@)(?=[A-Z])', ' ', t)
     return t
+
+
+def restore_section_breaks(text):
+    """
+    Fix PDFs where all content is extracted as a single line.
+    Inserts line breaks and spaces before/after major section headers to restore structure.
+    
+    This handles PDFs like "Dhruv Panchal.pdf" where extraction loses formatting.
+    """
+    if not text:
+        return text
+    
+    # Check if text is mostly a single line (indicates mangled extraction)
+    newline_count = text.count('\n')
+    if newline_count >= 5:
+        # Text already has good structure
+        return text
+    
+    # Build a pattern that matches any of the major section headers
+    headers = [
+        'WORK EXPERIENCE', 'PROFESSIONAL EXPERIENCE', 'EMPLOYMENT HISTORY',
+        'EXPERIENCE',
+        'EDUCATION', 'ACADEMIC', 'ACADEMIC QUALIFICATION',
+        'SKILLS', 'TECHNICAL SKILLS', 'CORE SKILLS', 'KEY SKILLS',
+        'PROJECTS', 'PROJECT',
+        'CERTIFICATIONS', 'CERTIFICATION', 'LICENSES',
+        'LANGUAGES',
+        'TRAINING',
+        'ACTIVITIES',
+        'DECLARATION',
+        'REFERENCES', 'REFERENCE',
+        'HOBBIES',
+        'INTERESTS',
+        'PROFILE',
+        'CONTACT',
+        'SUMMARY',
+        'OBJECTIVE',
+    ]
+    
+    # Sort by length (longest first) to match longer headers first  
+    headers_sorted = sorted(set(headers), key=len, reverse=True)
+    
+    # STEP 1: Add spaces/newlines around headers (case-insensitive)
+    result = text
+    for header in headers_sorted:
+        # Create regex pattern that matches this header (case-insensitive)
+        # Use lookahead/lookbehind to check adjacent characters
+        pattern = r'(?i)' + re.escape(header)
+        
+        def add_spacing(match):
+            matched = match.group(0)
+            start_pos = match.start()
+            end_pos = match.end()
+            
+            # Get characters before and after match
+            before_char = result[start_pos-1] if start_pos > 0 else ' '
+            after_char = result[end_pos] if end_pos < len(result) else ' '
+            
+            # Add newline before if there's a letter/digit before (means header is embedded)
+            before_sep = '\n' if before_char.isalnum() else ''
+            # Add space/newline after if there's a letter/digit after
+            after_sep = '\n' if after_char.isalnum() else ''
+            
+            return before_sep + matched + after_sep
+        
+        # Find all matches and positions (to avoid modifying during iteration)
+        matches = list(re.finditer(pattern, result))
+        
+        # Apply replacements from end to beginning (to maintain positions)
+        for match in reversed(matches):
+            start_pos = match.start()
+            end_pos = match.end()
+            
+            before_char = result[start_pos-1] if start_pos > 0 else ' '
+            after_char = result[end_pos] if end_pos < len(result) else ' '
+            
+            before_sep = '\n' if before_char.isalnum() else ''
+            after_sep = '\n' if after_char.isalnum() else ''
+            
+            result = result[:start_pos] + before_sep + match.group(0) + after_sep + result[end_pos:]
+    
+    # STEP 2: Clean up multiple consecutive newlines
+    result = re.sub(r'\n{2,}', '\n', result)
+    
+    # STEP 3: Clean up spaces before newlines
+    result = re.sub(r' +\n', '\n', result)
+    
+    return result
+
+
 
 # ══════════════════════════════════════════════════════════════
 #  NAME EXTRACTION
@@ -2884,6 +2991,8 @@ def extract_education(text):
     - Free-form inline education entries
     - Concatenated degree entries on single lines
     - Multiple education levels (10th, 12th, B.Tech, B.Com, PGDM, MBA, etc.)
+    
+    Falls back to pattern-based extraction for severely mangled PDFs.
     """
     if not text:
         return []
@@ -2891,10 +3000,30 @@ def extract_education(text):
     try:
         # Use the enhanced extraction from education_extraction_utils
         # This has been thoroughly tested and handles edge cases better
-        return extract_education_pdf_doc(text)
+        education = extract_education_pdf_doc(text)
+        if education:
+            return education
+        
+        # FIX: If standard extraction found nothing, try pattern-based extraction
+        if PATTERN_EXTRACTION_AVAILABLE and extract_education_from_patterns:
+            try:
+                pattern_education = extract_education_from_patterns(text)
+                if pattern_education:
+                    return pattern_education
+            except Exception:
+                pass  # Fall through to empty array
+        
+        return []
     except Exception as e:
-        # Fallback to empty if extraction fails
+        # Fallback to pattern-based or empty if extraction fails
         print(f"Warning: Education extraction failed: {e}")
+        if PATTERN_EXTRACTION_AVAILABLE and extract_education_from_patterns:
+            try:
+                pattern_education = extract_education_from_patterns(text)
+                if pattern_education:
+                    return pattern_education
+            except Exception:
+                pass
         return []
 
 # ══════════════════════════════════════════════════════════════
@@ -4959,7 +5088,32 @@ def extract_professional_experience_profile(text):
         })
 
     experiences = _rebalance_experience_responsibilities(experiences)
-    return _repair_cross_block_responsibility_fragments(experiences)
+    experiences = _repair_cross_block_responsibility_fragments(experiences)
+    
+    # FIX: If standard extraction found nothing, try pattern-based extraction for mangled PDFs
+    if not experiences and PATTERN_EXTRACTION_AVAILABLE and extract_jobs_from_patterns:
+        try:
+            pattern_jobs = extract_jobs_from_patterns(text)
+            for pjob in pattern_jobs:
+                experiences.append({
+                    'company_name': pjob.get('company'),
+                    'role': pjob.get('role'),
+                    'employment_type': None,
+                    'location': None,
+                    'start_date': None,
+                    'end_date': None,
+                    'currently_working': False,
+                    'experience_duration': None,
+                    'duration_text': pjob.get('date_range'),
+                    'ctc': None,
+                    'notice_period': None,
+                    'technologies': [],
+                    'responsibilities': [],
+                })
+        except Exception:
+            pass  # Fall back to empty array if pattern extraction fails
+    
+    return experiences
 
 
 # ══════════════════════════════════════════════════════════════
@@ -5301,6 +5455,9 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list,
     path = os.path.join(process_folder, fname)
     try:
         text           = extract_text(path)
+        # FIX: Restore section breaks for mangled PDFs (single-line extraction)
+        text           = restore_section_breaks(text)
+        
         email          = extract_email_from_resume(text)
         name           = extract_name(text)
         if _is_suspicious_extracted_name(name):
@@ -5381,6 +5538,14 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list,
         experience_profile = extract_professional_experience_profile(text)
         education_profile = extract_education(text)
 
+        # Extract image (if available)
+        image = None
+        if IMAGE_EXTRACTION_AVAILABLE and get_resume_image:
+            try:
+                image = get_resume_image(path)
+            except Exception:
+                image = None
+        
         return {
             'file':           fname,
             'name':           name,
@@ -5392,6 +5557,7 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list,
             'skills':         matched_skills,
             'professional_experience': experience_profile,
             'education':      education_profile,    # ← NEW
+            'image':          image,          # ← NEW: Added image support
         }
     except Exception as exc:
         return {
@@ -5405,6 +5571,7 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list,
             'skills':         [],
             'professional_experience': [],
             'education':      [],             # ← NEW
+            'image':          None,           # ← NEW: Added image support
             'error':          str(exc),
         }
 

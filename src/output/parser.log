@@ -1,37 +1,41 @@
 [*] Skill source: auto (csv first, dataset fallback | csv=572)
-[*] Processing 3 resume file(s) from: D:\Project\ATS\ATS Email Parser\Bulk_Resumes_1775020050
+[*] Processing 4 resume file(s) from: D:\Project\ATS\ATS Email Parser\Resume
 [*] Workers: 8
 
 #    File                   Name                           Phone          Gender   DOB            Email
 ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 [*] Taking 3-second break...
-  3    Profile.pdf            Dhruv Panchal                  9601945583     Male     ❌ N/A          dkrp16708@gmail.com
+  4    Profile.pdf            Dhruv Panchal                  9601945583     Male     ❌ N/A          dkrp16708@gmail.com
        Address: Ahm,guj,india 382481, 9601945583 (Home)...
-       Skills [20]: ReactJS, campaign, campaigns, html, javascript, Brand Identity, creative strategy, web development  (+12 more)
+       Skills [18]: ReactJS, campaign, html, javascript, Brand Identity, graphic design, web development, development support  (+10 more)
 [*] Taking 3-second break...
-  1    Dhruv Panchal.pdf      Dhruv Panchal                  919601945583   Male     ❌ N/A          dp148026@gmail.com
+  3    Dhruv_Panchal_CV.pdf   Dhruv Panchal                  +919601945583  Male     ❌ N/A          dp148026@gmail.com
+       Address: Surat, Gujarat, India, linkedin.com/in/panchald 9 a 0 b 263,...
+       Skills [46]: C, Linux, Sprint Planning, ReactJS, Mysql, Flutter, Postgresql, automation  (+38 more)
+[*] Taking 3-second break...
+  1    Dhruv Panchal.pdf      Dhruv Panchal                  +919601945583  Male     ❌ N/A          dp148026@gmail.com
        Address: ❌ NOT FOUND
        Skills [29]: cad, campaigns, cybersecurity, mentorship, Illustrator, Photoshop, solidworks, team leadership  (+21 more)
 [*] Taking 3-second break...
-  2    Dhruv PanchalResume.pdf Dhruv Panchal                  919601945583   Male     ❌ N/A          ownerexperience.dp@gmail.com
+  2    Dhruv PanchalResume.pdf Dhruv Panchal                  919601945583   Male     ❌ N/A          experience.dp148026@gmail.com
        Address: ❌ NOT FOUND
-       Skills [39]: automation, authentication, excel, html, javascript, mysql, NodeJS, Django  (+31 more)
+       Skills [40]: C, Api Development, Flask, Rest Api, Css, Javascript, Django, Solidworks  (+32 more)
 
 =======================================================================================================================================
 💾 Validation report saved → D:\Project\ATS\ATS Email Parser\src\output\validation_report.json
 
 ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 📊 PROCESSING SUMMARY:
-   Total files processed : 3
-   Successfully parsed   : 3 (100.0%)
+   Total files processed : 4
+   Successfully parsed   : 4 (100.0%)
    Extraction errors     : 0 (0.0%)
 
 📋 EXTRACTION QUALITY:
-   Names found    : 3/3 (100.0%)
-   Emails found   : 3/3 (100.0%)
-   Phones found   : 3/3 (100.0%)
-   DOBs found     : 0/3 (0.0%)
-   With skills    : 3/3 (100.0%)
+   Names found    : 4/4 (100.0%)
+   Emails found   : 4/4 (100.0%)
+   Phones found   : 4/4 (100.0%)
+   DOBs found     : 0/4 (0.0%)
+   With skills    : 4/4 (100.0%)
 
 💾 Results saved → D:\Project\ATS\ATS Email Parser\src\output\resume_parsed.json
    Log saved      → D:\Project\ATS\ATS Email Parser\src\output\parser.log

@@ -1,10 +1,10 @@
 {
-  "total_resumes": 3,
-  "average_score": 93.43,
-  "min_score": 92.76,
-  "max_score": 94.71,
+  "total_resumes": 4,
+  "average_score": 93.91,
+  "min_score": 92.83,
+  "max_score": 95.0,
   "quality_distribution": {
-    "excellent": 3,
+    "excellent": 4,
     "good": 0,
     "fair": 0,
     "poor": 0
@@ -46,12 +46,50 @@
         },
         "skills": {
           "valid": true,
-          "score": 93.25,
-          "reason": "19/20 skills valid"
+          "score": 95.0,
+          "reason": "18/18 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 94.70833333333333,
+      "overall_score": 95.0,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "Dhruv_Panchal_CV.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 95,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 94.23913043478261,
+          "reason": "45/46 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 94.03985507246377,
       "quality_level": "excellent"
     },
     {
@@ -69,8 +107,8 @@
         },
         "phone": {
           "valid": true,
-          "score": 85,
-          "reason": "Valid generic international format"
+          "score": 90,
+          "reason": "Valid international format with country code"
         },
         "gender": {
           "valid": true,
@@ -89,7 +127,7 @@
         }
       },
       "warnings": [],
-      "overall_score": 92.75862068965517,
+      "overall_score": 93.75862068965517,
       "quality_level": "excellent"
     },
     {
@@ -122,12 +160,12 @@
         },
         "skills": {
           "valid": true,
-          "score": 94.1025641025641,
-          "reason": "38/39 skills valid"
+          "score": 94.125,
+          "reason": "39/40 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 92.82051282051282,
+      "overall_score": 92.825,
       "quality_level": "excellent"
     }
   ]
