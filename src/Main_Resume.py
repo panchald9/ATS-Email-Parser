@@ -121,6 +121,7 @@ def _ensure_skillner_loaded():
 # ══════════════════════════════════════════════════════════════
 RESUME_FOLDER  = r"D:\Project\ATS\ATS Email Parser\Resume"
 SKILLS_CSV     = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'Skill.csv')
+EDUCATION_CSV  = os.path.join(os.path.dirname(os.path.abspath(__file__)), '03_education.csv')
 OUTPUT_JSON    = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', 'resume_parsed.json')
 VALIDATION_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'output', 'validation_report.json')
 SUPPORTED_EXTENSIONS = {'.pdf', '.doc', '.docx'}
@@ -228,7 +229,11 @@ EMAIL_DOMAIN_PREFIX_RE = re.compile(
 
 EMAIL_STRICT_RE = re.compile(r"^[a-z0-9][a-z0-9._%+-]{1,63}@[a-z0-9-]+(?:\.[a-z0-9-]+)+$")
 
-EMAIL_NOISY_PREFIX_RE = re.compile(r"^(?:contact|skills|languages|profile|email|mobile|phone)+", re.I)
+EMAIL_NOISY_PREFIX_RE = re.compile(
+    r"^(?:(?:contact|skills?|languages?|profile|email|mobile|phone|experience|work|summary|"
+    r"certifications?|portfolio|linkedin|contactinfo)[._\-]*)+",
+    re.I,
+)
 
 GENDER_LABEL_RE = re.compile(r'(?i)\b(?:gender|sex)\b\s*[:\-]?\s*(male|female|m|f|man|woman|boy|girl)\b')
 
@@ -1840,13 +1845,20 @@ def extract_email_from_resume(text):
             lowered = local.lower()
             cut     = None
             for p in ("emailid","email","mailid","contact","skills","skill",
-                      "objective","profile","resume"):
+                      "objective","profile","resume","experience","work",
+                      "summary","certification","certifications","portfolio",
+                      "linkedin","contactinfo"):
                 if lowered.startswith(p) and len(local) > len(p) + 3:
                     cut = len(p)
                     break
             if cut is None:
                 break
             local = local[cut:]
+        local = re.sub(
+            r"(?i)^(?:experience|work|summary|certifications?|portfolio|linkedin|contactinfo)[._\-]*",
+            "",
+            local,
+        )
         local       = re.sub(r"(?i)^s[^a-z0-9]*k[^a-z0-9]*i[^a-z0-9]*l[^a-z0-9]*l[^a-z0-9]*s", "", local)
         looks_noisy = (
             len(local) > 22
@@ -2450,6 +2462,7 @@ def _extract_education_with_parsel(text):
 
 EDUCATION_SECTION_RE = re.compile(
     r'(?i)^\s*(?:'
+    r'(?:imscit|dmcp|ccc)\s+at\b'
     r'education(?!\s*(?:requirement|preference))|academia\w*|'
     r'educational\s+qualification|'
     r'(?:degree|course|qualification)\s*/\s*(?:course|degree)|'
@@ -2482,6 +2495,7 @@ DEGREE_PATTERNS = [
     (r'\bgrad\w*\b', 'Graduate'),
     (r'\b(?:12th?|intermediate|h\.?s\.?c|hs|high\s+school)\b', '12th'),
     (r'\b(?:10th?|s\.?s\.?c|ssc|secondary)\b', '10th'),
+    (r'\b(?:dmcp|ccc|diploma\s+in|certificate\s+in)\b', 'Diploma'),
 ]
 
 SPECIALIZATION_KEYWORDS = [
@@ -2718,15 +2732,25 @@ def _parse_education_entry(entry_text):
     
     entry = entry_text.strip()
     result = {
-        'qualification': None,
-        'specialization_branch': None,
-        'location': None,
-        'passing_year': None,
-        'grade_cgpa': None,
-        'mode_of_study': None,
-        'institute_university': None,
-        'major_subjects': None,
-    }
+            'qualification': None,
+            'specialization_branch': None,
+            'institute_university': None,
+            'start_year': None,          # ← ADD
+            'passing_year': None,
+            'currently_enrolled': False, # ← ADD
+            'grade_cgpa': None,
+            'location': None,
+        }
+    
+    year_range = re.search(r'\b(20\d{2})\s*[-–—]\s*(20\d{2}|present)\b', entry_text, re.I)
+    if year_range:
+        result['start_year'] = year_range.group(1)
+        end = year_range.group(2)
+        if end.lower() == 'present':
+            result['currently_enrolled'] = True
+            result['passing_year'] = None
+        else:
+            result['passing_year'] = end
     
     # Extract qualification (degree) - this is primary
     for pattern, degree_name in DEGREE_PATTERNS:
@@ -2996,20 +3020,170 @@ def extract_education(text):
     """
     if not text:
         return []
-    
+
+    def _sanitize_education_entries(entries):
+        if not entries:
+            return []
+
+        current_year = date.today().year
+        cleaned = []
+        seen = set()
+
+        for item in entries:
+            if not isinstance(item, dict):
+                continue
+
+            qualification = str(item.get('qualification') or '').strip()
+            institute = str(item.get('institute_university') or '').strip()
+            grade = str(item.get('grade_cgpa') or '').strip()
+            year_raw = str(item.get('passing_year') or '').strip()
+
+            year = None
+            if year_raw.isdigit() and len(year_raw) == 4:
+                year = int(year_raw)
+                if year < 1950 or year > current_year + 2:
+                    continue
+
+            q_key = re.sub(r'[^a-z0-9]', '', qualification.lower())
+            institute_lower = institute.lower()
+
+            if institute and not re.search(r'(?i)\b(?:university|college|institute|school|academy|polytechnic|board)\b', institute):
+                # Keep non-keyword institute only if there is strong year signal and no skill noise.
+                if year is None or re.search(r'(?i)\b(?:photoshop|illustrator|creative\s*suite|ui/?ux|management\s*system)\b', institute):
+                    continue
+
+            if re.search(r'(?i)\b(?:photoshop|illustrator|creative\s*suite|ui/?ux)\b', qualification):
+                continue
+
+            # Reject low-signal short forms when no supporting institute/grade/year is present.
+            if q_key in {'ma', 'me', 'ba', 'be', 'bsc', 'msc', 'bcom', 'mcom'} and not institute and not grade and year is None:
+                continue
+
+            if not qualification and not institute and year is None:
+                continue
+
+            row_key = (q_key, institute.lower(), str(year or ''), grade.lower())
+            if row_key in seen:
+                continue
+            seen.add(row_key)
+
+            normalized = dict(item)
+            normalized['qualification'] = qualification or item.get('qualification')
+            normalized['institute_university'] = institute or None
+            normalized['grade_cgpa'] = grade or None
+            normalized['passing_year'] = str(year) if year is not None else None
+            cleaned.append(normalized)
+
+        return cleaned
+
+    def _looks_like_header_line(line, header_terms):
+        low = line.lower().strip(' :-')
+        if not low:
+            return False
+        if len(low.split()) > 6:
+            return False
+        return any(term in low for term in header_terms)
+
+    def _extract_section_lines_first(text_value, start_terms, stop_terms, max_lines=80):
+        lines = [re.sub(r'\s+', ' ', ln).strip() for ln in text_value.splitlines() if ln.strip()]
+        capture = False
+        out = []
+        for line in lines:
+            if not capture and _looks_like_header_line(line, start_terms):
+                capture = True
+                continue
+            if capture and _looks_like_header_line(line, stop_terms):
+                break
+            if capture:
+                out.append(line)
+                if len(out) >= max_lines:
+                    break
+        return out
+
+    def _is_clean_line(line):
+        if not line:
+            return False
+        if len(line) < 3:
+            return False
+        if len(line.split()) > 40 and not re.search(r'(?i)\b(?:university|college|institute|school|academy|bachelor|master|diploma|imsc|imscit)\b', line):
+            return False
+        low = line.lower()
+        if any(tok in low for tok in ['skills', 'creative suite', 'photoshop', 'illustrator', 'ui/ux']):
+            return False
+        return True
+
+    def _parse_education_from_lines(lines):
+        results = []
+        current = {}
+        degree_re = re.compile(r'(?i)\b(?:integrated\s*m\.?sc(?:\.?\s*[a-z ]{0,30})?|imscit|imsc|bachelor(?:\s+of\s+[a-z &]{2,40})?|master(?:\s+of\s+[a-z &]{2,40})?|diploma(?:\s+in\s+[a-z &]{2,40})?|pgdm|phd|associate|12th|10th|b\.?\s*tech|m\.?\s*tech|b\.?\s*sc|m\.?\s*sc|b\.?\s*com|m\.?\s*com)\b')
+        institute_re = re.compile(r'(?i)\b(?:university|college|institute|school|academy|polytechnic)\b')
+
+        for raw in lines:
+            line = raw.strip()
+            if not _is_clean_line(line):
+                continue
+
+            years = re.findall(r'\b(19\d{2}|20\d{2})\b', line)
+            inst_match = re.search(r'(?i)([A-Za-z][A-Za-z0-9&.,\-/ ]{2,80}\b(?:University|College|Institute|School|Academy|Polytechnic)\b)', line)
+            if inst_match and institute_re.search(inst_match.group(1)):
+                current['institute_university'] = re.sub(r'\s+', ' ', inst_match.group(1)).strip(' ,.-')
+
+            deg_match = degree_re.search(line)
+            if deg_match:
+                deg = re.sub(r'\s+', ' ', deg_match.group(0)).strip(' ,.-')
+                if deg.lower() in {'imscit', 'imsc'}:
+                    deg = 'Integrated M.Sc. Information Technology'
+                current['qualification'] = deg
+            if years:
+                current['passing_year'] = years[-1]
+
+            if current.get('qualification') and (current.get('institute_university') or current.get('passing_year')):
+                results.append({
+                    'qualification': current.get('qualification'),
+                    'specialization_branch': None,
+                    'institute_university': current.get('institute_university'),
+                    'passing_year': current.get('passing_year'),
+                    'grade_cgpa': None,
+                    'mode_of_study': None,
+                    'location': None,
+                    'major_subjects': None,
+                })
+                current = {}
+
+        return results
+
     try:
+        # Priority: section-first parsing to avoid picking skills lines as education.
+        edu_lines = _extract_section_lines_first(
+            text,
+            start_terms=['education', 'academic qualification', 'academic'],
+            stop_terms=['experience', 'work experience', 'professional experience', 'skills', 'projects', 'certification', 'languages'],
+        )
+        section_first_education = _parse_education_from_lines(edu_lines)
+        high_quality_section_education = [
+            row for row in section_first_education
+            if row.get('qualification')
+            and row.get('institute_university')
+            and re.search(r'(?i)\b(?:university|college|institute|school|academy|polytechnic)\b', row.get('institute_university') or '')
+        ]
+        if high_quality_section_education:
+            return _sanitize_education_entries(high_quality_section_education)
+
+        if section_first_education:
+            return _sanitize_education_entries(section_first_education)
+
         # Use the enhanced extraction from education_extraction_utils
         # This has been thoroughly tested and handles edge cases better
-        education = extract_education_pdf_doc(text)
+        education = extract_education_pdf_doc(text, education_csv_path=EDUCATION_CSV)
         if education:
-            return education
+            return _sanitize_education_entries(education)
         
         # FIX: If standard extraction found nothing, try pattern-based extraction
         if PATTERN_EXTRACTION_AVAILABLE and extract_education_from_patterns:
             try:
                 pattern_education = extract_education_from_patterns(text)
                 if pattern_education:
-                    return pattern_education
+                    return _sanitize_education_entries(pattern_education)
             except Exception:
                 pass  # Fall through to empty array
         
@@ -3021,7 +3195,7 @@ def extract_education(text):
             try:
                 pattern_education = extract_education_from_patterns(text)
                 if pattern_education:
-                    return pattern_education
+                    return _sanitize_education_entries(pattern_education)
             except Exception:
                 pass
         return []
@@ -3917,13 +4091,15 @@ EXPERIENCE_NOISE_LINE_RE = re.compile(
 EXPERIENCE_NOISE_VALUE_RE = re.compile(
     r'(?i)\b(?:father|mother|marital|nationality|dob|date\s*of\s*birth|gender|'
     r'languages?|hobbies?|declaration|references?|board|university|cgpa|percentage|'
+    r'certifications?|licenses?|courses?|training|top\s*skills|job\s*simulation|'
+    r'project\s*management|excel|portfolio|linkedin|github|'
     r'personal\s*details?|academic\s*profile|skills?|strengths?)\b'
 )
 
 EXPERIENCE_VALID_COMPANY_HINT_RE = re.compile(
     r'(?i)\b(?:pvt\.?|ltd\.?|limited|inc\.?|corp\.?|llp|technologies|solutions|'
     r'laboratories|pharma|foods?|industries|services|company|motors|'
-    r'consultancy|consulting|systems|private|group)\b'
+    r'consultancy|consulting|systems|private|group|c-?dac|club|university|institute|school|academy)\b'
 )
 
 EXPERIENCE_INSTRUMENT_LINE_RE = re.compile(
@@ -3955,19 +4131,17 @@ ROLE_HINT_RE = re.compile(
 
 COMPANY_HINT_RE = re.compile(
     r'(?i)\b(?:pvt\.?|ltd\.?|limited|inc\.?|corp\.?|llp|technologies|solutions|'
-    r'systems|services|company|industries|private)\b'
+    r'systems|services|company|industries|private|c-?dac)\b'
 )
 
 DATE_RANGE_RE = re.compile(
     r'(?i)\b('
     r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{4}'
-    r'|\d{1,2}[/-]\d{2,4}'
-    r'|\d{4}'
-    r')\s*(?:to|till|until|\-|–|—)\s*('
+    r'|\d{1,2}[/-]\d{2,4}|\d{4}'
+    r')\s*(?:to|till|until|\-|–|—|–)\s*('   # ← add – and —
     r'present|current|till\s+date|'
     r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{4}'
-    r'|\d{1,2}[/-]\d{2,4}'
-    r'|\d{4}'
+    r'|\d{1,2}[/-]\d{2,4}|\d{4}'
     r')\b'
 )
 
@@ -4037,6 +4211,22 @@ def _extract_experience_section_lines(text):
             if EXPERIENCE_NOISE_LINE_RE.search(low):
                 continue
             section.append(line)
+
+    # If we captured only low-signal fragments (e.g., a stray "S"), treat as empty
+    # so stronger global fallbacks can run.
+    if section:
+        signal_lines = [
+            ln for ln in section
+            if (
+                DATE_RANGE_RE.search(ln)
+                or ROLE_HINT_RE.search(ln)
+                or COMPANY_HINT_RE.search(ln)
+                or EXPERIENCE_VALID_COMPANY_HINT_RE.search(ln)
+                or len(ln.split()) >= 4
+            )
+        ]
+        if not signal_lines:
+            section = []
 
     # Fallback 1: Check if we found anything in standard extraction
     if not section:
@@ -4123,6 +4313,17 @@ def _extract_experience_section_lines(text):
                     if not EXPERIENCE_NOISE_LINE_RE.search(tail.lower()):
                         section.append(tail)
                 break
+
+    # Fallback 4: Split full text into experience-like chunks when section boundaries are unreliable.
+    if not section:
+        chunks = _split_full_text_into_experience_chunks(normalized)
+        for chunk in chunks:
+            if not (DATE_RANGE_RE.search(chunk) or ROLE_HINT_RE.search(chunk)):
+                continue
+            for ln in chunk.splitlines():
+                cleaned_ln = re.sub(r'\s+', ' ', ln).strip()
+                if cleaned_ln and not EXPERIENCE_NOISE_LINE_RE.search(cleaned_ln.lower()):
+                    section.append(cleaned_ln)
     
     return _normalize_experience_section_lines(section)
 
@@ -4245,7 +4446,135 @@ def _is_experience_noise_line(line):
         return True
     if re.match(r'(?i)^\d{1,2}[./-]\d{1,2}[./-]\d{2,4}$', cleaned):
         return True
+    if re.match(r'(?i)^\d{4}\s*[-–—]\s*(?:\d{4}|present)$', cleaned):
+        return True
+    if re.search(r'(?i)\b(?:top\s*skills|licenses?\s*&\s*certifications?|certifications?|courses?|training|portfolio|linkedin|github)\b', cleaned):
+        return True
     return False
+
+
+def _looks_like_non_experience_role_text(role):
+    if not role:
+        return False
+    role_l = role.lower()
+    if len(role.split()) > 12:
+        return True
+    if ('.' in role or ',' in role) and len(role.split()) > 8:
+        return True
+    if re.search(r'(?i)\b\d+\s*months?\b', role_l):
+        return True
+    if re.search(r'(?i)\b(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec|january|february|march|april|june|july|august|september|october|november|december)\b', role_l):
+        return True
+    return bool(re.search(
+        r'\b(?:certifications?|course|courses|training|top\s*skills|licenses?|'
+        r'portfolio|linkedin|github|cybersecurity\s+analyst\s+job\s+simulation|'
+        r'project\s*management|excel|summary|education|university|college|school|'
+        r'responsible\s+for|managing|maintaining|building|delivering)\b',
+        role_l,
+    ))
+
+
+def _looks_like_noisy_company_text(company):
+    if not company:
+        return False
+    company_l = company.lower().strip()
+    if company_l in {'full', 'stack', 'page', 'experience', 'skills'}:
+        return True
+    if len(company.split()) > 20 or len(company) > 160:
+        return True
+    if re.search(r'(?i)\bpage\s+\d+\s+of\s+\d+\b', company_l):
+        return True
+    if re.search(r'\b(?:i\s+am|my|me|we)\b', company_l):
+        return True
+    return bool(re.search(
+        r'\b(?:top\s*skills|certifications?|courses?|training|summary|profile|'
+        r'page\s+\d+\s+of\s+\d+|linkedin|github)\b',
+        company_l,
+    ))
+
+
+def _extract_company_from_noisy_line(line):
+    if not line:
+        return None
+    text = _clean_experience_line(line)
+    if not text:
+        return None
+
+    patterns = [
+        r'([A-Z][A-Za-z&.\-/ ]{2,70}?\bPvt\.?\s*Ltd\.?)',
+        r'([A-Z][A-Za-z&.\-/ ]{2,70}?\b(?:Limited|LLP|Inc\.?|Corp\.?|Technologies|Solutions|Systems|Industries|Company|C-?DAC(?:\s+India)?))',
+        r'([A-Z][A-Za-z&.\-/ ]{2,70}?\bServices\b)',
+        r'\b(Industrial\s+Analytical\s+Services)\b',
+        r'\b(Kali\s+Tech\s+and\s+Services\s+Pvt\.?\s*Ltd\.?)\b',
+        r'\b(C-?DAC(?:\s+India)?)\b',
+    ]
+
+    for pattern in patterns:
+        m = re.search(pattern, text, re.I)
+        if not m:
+            continue
+        candidate = re.sub(r'\s+', ' ', m.group(1)).strip(' ,.-')
+        if not candidate:
+            continue
+        if _looks_like_noisy_company_text(candidate):
+            continue
+        return candidate
+    return None
+
+
+def _dedupe_experience_entries(experiences):
+    if not experiences:
+        return []
+    out = []
+    seen = set()
+    for exp in experiences:
+        key = (
+            (exp.get('company_name') or '').lower().strip(),
+            (exp.get('role') or '').lower().strip(),
+            (exp.get('start_date') or '').lower().strip(),
+            (exp.get('end_date') or '').lower().strip(),
+            (exp.get('duration_text') or '').lower().strip(),
+        )
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(exp)
+    return out
+
+
+def _filter_low_quality_experience_entries(experiences):
+    if not experiences:
+        return []
+    filtered = []
+    for exp in experiences:
+        company = exp.get('company_name')
+        role = exp.get('role')
+        start_date = exp.get('start_date')
+        end_date = exp.get('end_date')
+        responsibilities = exp.get('responsibilities') or []
+
+        strong_company = bool(company and EXPERIENCE_VALID_COMPANY_HINT_RE.search(company))
+        good_role = bool(role and ROLE_HINT_RE.search(role) and not _looks_like_non_experience_role_text(role))
+        has_dates = bool(start_date and end_date)
+        has_content = bool(responsibilities)
+
+        if company and _looks_like_noisy_company_text(company):
+            continue
+        if company and company.lower().startswith('and '):
+            continue
+        if role and _looks_like_non_experience_role_text(role):
+            continue
+
+        # Keep only entries with sufficient structural signal.
+        if not (has_dates or good_role or (strong_company and has_content)):
+            continue
+
+        # Company-only fragments are unreliable.
+        if strong_company and not good_role and not has_dates and not has_content:
+            continue
+
+        filtered.append(exp)
+    return filtered
 
 
 def _normalize_role_text(text):
@@ -4908,9 +5237,154 @@ def _extract_responsibilities(lines):
 
 def extract_professional_experience_profile(text):
     """Extract ATS-style professional experience details from resume text."""
+    def _looks_like_header_line(line, header_terms):
+        low = line.lower().strip(' :-')
+        if not low:
+            return False
+        if len(low.split()) > 6:
+            return False
+        return any(term in low for term in header_terms)
+
+    def _extract_section_lines_first(text_value, start_terms, stop_terms, max_lines=120):
+        lines = [re.sub(r'\s+', ' ', ln).strip() for ln in text_value.splitlines() if ln.strip()]
+        capture = False
+        out = []
+        for line in lines:
+            if not capture and _looks_like_header_line(line, start_terms):
+                capture = True
+                continue
+            if capture and _looks_like_header_line(line, stop_terms):
+                break
+            if capture:
+                out.append(line)
+                if len(out) >= max_lines:
+                    break
+        return out
+
+    def _clean_line_ok(line):
+        if not line:
+            return False
+        if len(line) < 3:
+            return False
+        if len(line.split()) > 20:
+            return False
+        return True
+
+    def _extract_company_phrase(line):
+        if not line:
+            return None
+        m = re.search(
+            r'(?i)\b([A-Za-z0-9&.,\-/ ]{2,90}?(?:c-?dac|pvt\.?\s*ltd\.?|ltd\.?|limited|services|solutions|technologies|university|college|institute|club))\b',
+            line,
+        )
+        if m:
+            return re.sub(r'\s+', ' ', m.group(1)).strip(' ,.-')
+        return None
+
+    def _extract_role_phrase(line):
+        if not line:
+            return None
+        role_words = r'developer|engineer|mentor|designer|analyst|manager|lead|lecturer|faculty|consultant|architect|officer|coordinator|specialist'
+        m = re.search(rf'(?i)\b([A-Za-z./&\- ]{{0,30}}(?:{role_words})[A-Za-z./&\- ]{{0,30}})\b', line)
+        if not m:
+            return None
+        role = re.sub(r'\s+', ' ', m.group(1)).strip(' ,.-')
+        if len(role.split()) > 8:
+            return None
+        return role
+
+    def _parse_experience_from_lines(lines):
+        out = []
+        pending_company = None
+        current = {}
+
+        for raw in lines:
+            line = raw.strip()
+            if not _clean_line_ok(line):
+                continue
+
+            company = _extract_company_phrase(line)
+            role = _extract_role_phrase(line)
+            date_match = DATE_RANGE_RE.search(line) or re.search(r'\b(19\d{2}|20\d{2})\s*[-–—]\s*(19\d{2}|20\d{2}|present|current)\b', line, re.I)
+
+            if company:
+                pending_company = company
+                current['company_name'] = company
+
+            if role:
+                current['role'] = role
+
+            if date_match:
+                current['duration_text'] = date_match.group(0)
+
+            if not current.get('company_name') and pending_company:
+                current['company_name'] = pending_company
+
+            if current.get('company_name') and current.get('role') and current.get('duration_text'):
+                out.append({
+                    'company_name': current['company_name'],
+                    'role': current['role'],
+                    'employment_type': None,
+                    'location': None,
+                    'start_date': None,
+                    'end_date': None,
+                    'currently_working': 'present' in current['duration_text'].lower(),
+                    'experience_duration': None,
+                    'duration_text': current['duration_text'],
+                    'ctc': None,
+                    'notice_period': None,
+                    'technologies': [],
+                    'responsibilities': [],
+                })
+                current = {'company_name': pending_company} if pending_company else {}
+
+        return out
+
+    def _scan_full_text_for_experience(text_value):
+        if not text_value:
+            return []
+        matches = list(DATE_RANGE_RE.finditer(text_value))
+        out = []
+        seen = set()
+        for m in matches:
+            start, end = m.start(), m.end()
+            window = text_value[max(0, start - 180):min(len(text_value), end + 180)]
+            company = _extract_company_phrase(window)
+            role = _extract_role_phrase(window)
+            if not company or not role:
+                continue
+            key = (company.lower(), role.lower(), m.group(0).lower())
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append({
+                'company_name': company,
+                'role': role,
+                'employment_type': None,
+                'location': None,
+                'start_date': None,
+                'end_date': None,
+                'currently_working': 'present' in m.group(0).lower(),
+                'experience_duration': None,
+                'duration_text': m.group(0),
+                'ctc': None,
+                'notice_period': None,
+                'technologies': [],
+                'responsibilities': [],
+            })
+        return out
+
+    section_first_entries = _parse_experience_from_lines(
+        _extract_section_lines_first(
+            text,
+            start_terms=['work experience', 'professional experience', 'employment history', 'experience'],
+            stop_terms=['education', 'skills', 'projects', 'certification', 'languages', 'profile', 'contact'],
+        )
+    )
+
     section_lines = _extract_experience_section_lines(text)
     if not section_lines:
-        return []
+        return section_first_entries or []
 
     blocks = []
     current = []
@@ -4959,6 +5433,10 @@ def extract_professional_experience_profile(text):
         for line in block:
             stripped_line, stripped_date = _strip_trailing_date_range(line)
             parsed_line = stripped_line or line
+            inferred_company = _extract_company_from_noisy_line(parsed_line)
+            if inferred_company and (company is None or _looks_like_noisy_company_text(company)):
+                company = inferred_company
+
             company_lbl = COMPANY_LABEL_RE.match(line)
             if company_lbl and company is None:
                 company = _clean_experience_line(company_lbl.group(1))
@@ -5060,10 +5538,25 @@ def extract_professional_experience_profile(text):
         experience_duration = _duration_from_range(start_date, end_date, currently_working)
 
         # Keep blocks that look like an experience entry.
+        if company and _looks_like_noisy_company_text(company):
+            company = None
+
         strong_company = bool(company and EXPERIENCE_VALID_COMPANY_HINT_RE.search(company))
-        has_signal = bool(start_date or role or strong_company)
+        has_signal = bool(start_date or (role and responsibilities) or (strong_company and role and ROLE_HINT_RE.search(role)))
         if not has_signal:
             continue
+
+        if role and _looks_like_non_experience_role_text(role) and not strong_company:
+            continue
+
+        # Reject weak fallback entries that only carry a role/date fragment.
+        if not company and not responsibilities and not technologies:
+            continue
+
+        # If year-only dates exist without a reliable company, it is often an education/certification spillover.
+        if not strong_company and start_date and end_date and not responsibilities:
+            if re.match(r'^\d{4}$', start_date or '') and re.match(r'^\d{4}$', end_date or ''):
+                continue
 
         if company and EXPERIENCE_NOISE_VALUE_RE.search(company) and not strong_company and not start_date:
             continue
@@ -5089,22 +5582,48 @@ def extract_professional_experience_profile(text):
 
     experiences = _rebalance_experience_responsibilities(experiences)
     experiences = _repair_cross_block_responsibility_fragments(experiences)
+    experiences = _dedupe_experience_entries(experiences)
+    experiences = _filter_low_quality_experience_entries(experiences)
     
     # FIX: If standard extraction found nothing, try pattern-based extraction for mangled PDFs
     if not experiences and PATTERN_EXTRACTION_AVAILABLE and extract_jobs_from_patterns:
         try:
             pattern_jobs = extract_jobs_from_patterns(text)
             for pjob in pattern_jobs:
+                p_company = _clean_experience_line(pjob.get('company')) if pjob.get('company') else None
+                p_role = _normalize_role_text(pjob.get('role')) if pjob.get('role') else None
+                p_date = pjob.get('date_range')
+                p_context = (pjob.get('context') or '').lower()
+
+                if p_company and _looks_like_noisy_company_text(p_company):
+                    p_company = None
+                if p_role and _looks_like_non_experience_role_text(p_role):
+                    continue
+                if not p_role or not ROLE_HINT_RE.search(p_role):
+                    continue
+                if not p_date:
+                    continue
+
+                # Skip obvious education/certification spillovers unless there is clear work context.
+                looks_educationish = bool(re.search(r'\b(?:education|university|college|school|certification|course|diploma|skills?)\b', p_context))
+                has_work_context = bool(re.search(r'\b(?:work\s+experience|professional\s+experience|employment|developer|designer|engineer|manager|analyst|faculty|lecturer|mentor)\b', p_context))
+                if looks_educationish and not has_work_context:
+                    continue
+
+                # Reject entries without a reliable company to avoid mixed section noise.
+                if not p_company:
+                    continue
+
                 experiences.append({
-                    'company_name': pjob.get('company'),
-                    'role': pjob.get('role'),
+                    'company_name': p_company,
+                    'role': p_role,
                     'employment_type': None,
                     'location': None,
                     'start_date': None,
                     'end_date': None,
                     'currently_working': False,
                     'experience_duration': None,
-                    'duration_text': pjob.get('date_range'),
+                    'duration_text': p_date,
                     'ctc': None,
                     'notice_period': None,
                     'technologies': [],
@@ -5113,6 +5632,20 @@ def extract_professional_experience_profile(text):
         except Exception:
             pass  # Fall back to empty array if pattern extraction fails
     
+    # Prefer clean section-first extraction when existing entries are weak/noisy.
+    if section_first_entries:
+        high_quality = [
+            e for e in experiences
+            if e.get('company_name') and e.get('role') and e.get('duration_text')
+        ]
+        if not high_quality:
+            return section_first_entries
+
+    if not experiences:
+        scanned = _scan_full_text_for_experience(text)
+        if scanned:
+            return scanned
+
     return experiences
 
 

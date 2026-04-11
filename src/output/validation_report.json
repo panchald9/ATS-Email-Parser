@@ -1,7 +1,7 @@
 {
   "total_resumes": 4,
-  "average_score": 93.91,
-  "min_score": 92.83,
+  "average_score": 93.9,
+  "min_score": 92.82,
   "max_score": 95.0,
   "quality_distribution": {
     "excellent": 4,
@@ -84,12 +84,12 @@
         },
         "skills": {
           "valid": true,
-          "score": 94.23913043478261,
-          "reason": "45/46 skills valid"
+          "score": 94.22222222222223,
+          "reason": "44/45 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 94.03985507246377,
+      "overall_score": 94.03703703703702,
       "quality_level": "excellent"
     },
     {
@@ -160,12 +160,12 @@
         },
         "skills": {
           "valid": true,
-          "score": 94.125,
-          "reason": "39/40 skills valid"
+          "score": 94.1025641025641,
+          "reason": "38/39 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 92.825,
+      "overall_score": 92.82051282051282,
       "quality_level": "excellent"
     }
   ]

@@ -6,6 +6,8 @@ This module provides enhanced education extraction for PDF/DOC resumes
 with structured parsing using Parsel selectors.
 """
 
+import csv
+import os
 import re
 from typing import List, Dict, Optional, Tuple
 
@@ -30,7 +32,8 @@ class EducationExtractor:
         (r'\b(?:b\.?cs\.?|bachelor\s+of\s+computer\s+science|bcs)\b', 'B.CS'),
         (r'\b(?:bba|bachelor\s+of\s+business\s+administration)\b', 'BBA'),
         (r'\b(?:m\.?a\.?|master\s+of\s+arts)\b', 'M.A'),
-        (r'\b(?:m\.?sc\.?|master\s+of\s+science)\b', 'M.Sc'),
+        (r'\b(?:m\.?sc\.?|master\s+of\s+science(?:\b|(?=[a-z])))', 'M.Sc'),
+        (r'\b(?:imsc|imscit|integrated\s+m\.?sc\.?|integrated\s+master\s+of\s+science)\b', 'M.Sc'),
         (r'\b(?:m\.?com\.?|master\s+of\s+commerce)\b', 'M.Com'),
         (r'\b(?:m\.?tech|mtech|master\s+of\s+technology)\b', 'M.Tech'),
         (r'\b(?:m\.?e\.?|master\s+of\s+engineering)\b', 'M.E'),
@@ -56,9 +59,140 @@ class EducationExtractor:
         'skills', 'projects', 'certifications', 'languages',
         'references', 'declaration', 'technical skills'
     ]
+
+    DEGREE_HINT_WORDS = (
+        'bachelor', 'master', 'b.tech', 'm.tech', 'b.sc', 'm.sc',
+        'bcom', 'mcom', 'mba', 'pgdm', 'diploma', 'phd', 'associate',
+        'degree', 'engineering', 'computer science', 'information technology'
+    )
     
-    def __init__(self):
+    def __init__(self, education_csv_path: Optional[str] = None):
         self.parsel_enabled = PARSEL_AVAILABLE
+        self.education_csv_path = education_csv_path or os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            '03_education.csv',
+        )
+        self.csv_hints = self._load_education_csv_hints(self.education_csv_path)
+
+    def _normalize_for_match(self, value: str) -> str:
+        if not value:
+            return ''
+        normalized = value.lower().strip()
+        normalized = re.sub(r'[^a-z0-9\s&\-]', ' ', normalized)
+        normalized = re.sub(r'\s+', ' ', normalized)
+        return normalized
+
+    def _is_valid_csv_program(self, program: str) -> bool:
+        if not program:
+            return False
+        p = self._normalize_for_match(program)
+        if p in {'na', 'n/a', 'none', 'null'}:
+            return False
+        return any(word in p for word in self.DEGREE_HINT_WORDS)
+
+    def _is_valid_csv_institution(self, institution: str) -> bool:
+        if not institution:
+            return False
+        inst = self._normalize_for_match(institution)
+        if len(inst) < 6:
+            return False
+        return any(k in inst for k in ('university', 'college', 'institute', 'school', 'academy', 'polytechnic'))
+
+    def _load_education_csv_hints(self, csv_path: str) -> List[Dict[str, Optional[str]]]:
+        hints = []
+        if not csv_path or not os.path.exists(csv_path):
+            return hints
+
+        try:
+            with open(csv_path, 'r', encoding='utf-8', errors='ignore', newline='') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    institution = (row.get('institution') or '').strip()
+                    program = (row.get('program') or '').strip()
+                    start_date = (row.get('start_date') or '').strip()
+                    location = (row.get('location') or '').strip()
+
+                    if not self._is_valid_csv_institution(institution) and not self._is_valid_csv_program(program):
+                        continue
+
+                    hint = {
+                        'institution': institution or None,
+                        'institution_norm': self._normalize_for_match(institution) if institution else None,
+                        'program': program or None,
+                        'program_norm': self._normalize_for_match(program) if program else None,
+                        'qualification': self.extract_degree(program) if program else None,
+                        'passing_year': self.extract_year(start_date) if start_date else None,
+                        'location': location or None,
+                    }
+                    hints.append(hint)
+        except Exception:
+            return []
+
+        return hints
+
+    def _extract_from_csv_hints(self, text: str) -> List[Dict[str, Optional[str]]]:
+        """Fallback extraction using known education phrases from CSV dataset."""
+        if not text or not self.csv_hints:
+            return []
+
+        text_norm = self._normalize_for_match(text)
+        results = []
+        seen = set()
+
+        for hint in self.csv_hints:
+            institution_norm = hint.get('institution_norm') or ''
+            program_norm = hint.get('program_norm') or ''
+
+            has_institution = bool(institution_norm and institution_norm in text_norm)
+            has_program = bool(program_norm and len(program_norm) >= 8 and program_norm in text_norm)
+
+            if not (has_institution or has_program):
+                continue
+
+            candidate_text_parts = []
+            if has_program and hint.get('program'):
+                candidate_text_parts.append(hint['program'])
+            if has_institution and hint.get('institution'):
+                candidate_text_parts.append(hint['institution'])
+            candidate_text_parts.append(text)
+            candidate_text = ' '.join(candidate_text_parts)
+
+            qualification = hint.get('qualification') or self.extract_degree(candidate_text)
+            passing_year = self.extract_year(candidate_text) or hint.get('passing_year')
+            institute = hint.get('institution') or self.extract_university(candidate_text)
+            specialization = self.extract_specialization(hint.get('program') or candidate_text)
+
+            # Require at least degree + institute OR degree + year to avoid noisy matches.
+            if not qualification:
+                continue
+            if not institute and not passing_year:
+                continue
+
+            row = {
+                'qualification': qualification,
+                'specialization_branch': specialization,
+                'institute_university': institute,
+                'passing_year': passing_year,
+                'grade_cgpa': None,
+                'mode_of_study': None,
+                'location': hint.get('location'),
+                'major_subjects': None,
+            }
+
+            key = (
+                (row.get('qualification') or '').lower(),
+                (row.get('institute_university') or '').lower(),
+                str(row.get('passing_year') or ''),
+            )
+            if key in seen:
+                continue
+            seen.add(key)
+            results.append(row)
+
+            if len(results) >= 3:
+                break
+
+        return results
     
     def clean_text(self, text: str) -> str:
         """Clean and normalize text from PDF/DOC extraction."""
@@ -70,6 +204,11 @@ class EducationExtractor:
         text = re.sub(r'[\x00-\x08\x0B-\x0C\x0E-\x1F]', '', text)  # Remove control chars
         text = re.sub(r'–', '-', text)  # Normalize dashes
         text = re.sub(r'\.{2,}', '.', text)  # Collapse multiple dots
+        # Fix common PDF glue where degree phrases are directly attached to next token.
+        text = re.sub(r'(?i)(master\s+of\s+science)(?=[a-z])', r'\1 ', text)
+        text = re.sub(r'(?i)(bachelor\s+of\s+science)(?=[a-z])', r'\1 ', text)
+        text = re.sub(r'(?i)(bachelor\s+of\s+technology)(?=[a-z])', r'\1 ', text)
+        text = re.sub(r'(?i)(university)(?=\d)', r'\1 ', text)
         
         return text.strip()
     
@@ -599,6 +738,16 @@ class EducationExtractor:
                             if key not in seen:
                                 seen.add(key)
                                 results.append(parsed)
+
+        # Strategy 4: CSV-hint fallback for heavily mangled PDF text.
+        if not results:
+            csv_results = self._extract_from_csv_hints(text)
+            for parsed in csv_results:
+                if parsed.get('qualification'):
+                    key = (parsed.get('qualification'), parsed.get('institute_university'), parsed.get('passing_year'))
+                    if key not in seen:
+                        seen.add(key)
+                        results.append(parsed)
         
         return results
     
@@ -806,7 +955,7 @@ class EducationExtractor:
         return [e.strip() for e in entries if e.strip()]
 
 
-def extract_education_pdf_doc(text: str) -> List[Dict[str, Optional[str]]]:
+def extract_education_pdf_doc(text: str, education_csv_path: Optional[str] = None) -> List[Dict[str, Optional[str]]]:
     """
     Main function for extracting education from PDF/DOC text.
     
@@ -816,5 +965,5 @@ def extract_education_pdf_doc(text: str) -> List[Dict[str, Optional[str]]]:
     Returns:
         List of education records with degree, university, year, etc.
     """
-    extractor = EducationExtractor()
+    extractor = EducationExtractor(education_csv_path=education_csv_path)
     return extractor.extract_all_education(text)
