@@ -72,35 +72,14 @@ if "parsing_failed" not in st.session_state:
 
 
 # ─────────────────────────────────────────────────────────────────
-# Header & Setup Check
+# Header
 # ─────────────────────────────────────────────────────────────────
 st.title("📄 Resume Parser")
 st.markdown("Extract structured information from CVs and resumes using AI")
 
-# Check if API is properly configured
-if API_URL == "http://localhost:8000":
-    st.warning("""
-    ⚠️ **API Not Configured!**
-    
-    To use this app, you need to configure the Resume Parser API.
-    
-    **For Streamlit Cloud Users:**
-    1. Click **⋯** (top right) → **Settings** → **Secrets**
-    2. Add this configuration:
-    ```toml
-    api_url = "https://your-api-url.railway.app"
-    api_key = "dev-secret-key"
-    ```
-    3. Replace URL with your actual API URL
-    4. Save and refresh this page
-    
-    **Options to get an API URL:**
-    - Deploy to Railway.app (free, recommended): https://railway.app/
-    - Use ngrok for local testing: https://ngrok.com/
-    - Deploy to any cloud provider
-    
-    📖 See Settings tab for more details
-    """)
+if not PARSER_AVAILABLE:
+    st.error("❌ Resume parser not available. Please check Main_Resume.py is in the same directory.")
+    st.stop()
 
 # ─────────────────────────────────────────────────────────────────
 # Main Content
@@ -142,52 +121,39 @@ with tabs[0]:
                             tmp_file.write(uploaded_file.getbuffer())
                             tmp_path = tmp_file.name
                         
-                        # Prepare API request
-                        files = {"file": open(tmp_path, "rb")}
-                        headers = {"x-api-key": API_KEY}
-                        params = {
-                            "enable_validation": enable_validation,
-                            "enable_detailed_log": enable_detailed_log
-                        }
+                        # Parse resume directly using Main_Resume
+                        process_folder = os.path.dirname(tmp_path)
+                        temp_fname = os.path.basename(tmp_path)
                         
-                        # Call API
-                        response = requests.post(
-                            f"{API_URL}/parse",
-                            files=files,
-                            headers=headers,
-                            params=params,
-                            timeout=60
+                        # Call parser
+                        result = resume_parser._extract_resume_record(
+                            fname=temp_fname,
+                            process_folder=process_folder,
+                            skill_source='auto',
+                            skills_list=[],
+                            compiled_skill_matchers=None,
+                            fast_response=False,
                         )
-                        files["file"].close()
                         
-                        # Handle response
-                        if response.status_code == 200:
-                            try:
-                                st.session_state.parse_result = response.json()
-                                st.session_state.parsing_failed = False
-                                st.success("✅ Resume parsed successfully!")
-                                st.rerun()
-                            except requests.exceptions.JSONDecodeError as e:
-                                st.error(f"❌ Invalid JSON response: {str(e)}")
-                                st.write("**Response text:**", response.text[:200])
-                                st.session_state.parsing_failed = True
+                        if result and not result.get("error"):
+                            st.session_state.parse_result = result
+                            st.session_state.parsing_failed = False
+                            st.success("✅ Resume parsed successfully!")
+                            st.rerun()
                         else:
-                            try:
-                                error_data = response.json()
-                                error_msg = error_data.get("detail", str(error_data))
-                            except:
-                                error_msg = response.text if response.text else "No error details"
-                            st.error(f"❌ API Error ({response.status_code}): {error_msg}")
+                            error_msg = result.get("error", "Unknown parsing error") if result else "Failed to parse resume"
+                            st.error(f"❌ {error_msg}")
                             st.session_state.parsing_failed = True
                         
                         # Cleanup
-                        os.unlink(tmp_path)
+                        try:
+                            os.unlink(tmp_path)
+                        except:
+                            pass
                     
-                    except requests.exceptions.ConnectionError:
-                        st.error("❌ Cannot connect to API. Is the server running?")
-                        st.info(f"API URL: {API_URL}")
                     except Exception as e:
                         st.error(f"❌ Error: {str(e)}")
+                        st.session_state.parsing_failed = True
         
         with col2:
             st.write("")  # Spacer
