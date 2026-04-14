@@ -368,6 +368,7 @@ with tabs[3]:
     **No Configuration Needed!**
     Just upload a resume and start parsing.
     """)
+    """
     - Contact information
     
     **Features:**
