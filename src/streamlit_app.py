@@ -126,7 +126,7 @@ with tabs[0]:
                         
                         # Call API
                         response = requests.post(
-                            f"{API_URL}/parse-resume",
+                            f"{API_URL}/parse",
                             files=files,
                             headers=headers,
                             params=params,
@@ -136,13 +136,22 @@ with tabs[0]:
                         
                         # Handle response
                         if response.status_code == 200:
-                            st.session_state.parse_result = response.json()
-                            st.session_state.parsing_failed = False
-                            st.success("✅ Resume parsed successfully!")
-                            st.rerun()
+                            try:
+                                st.session_state.parse_result = response.json()
+                                st.session_state.parsing_failed = False
+                                st.success("✅ Resume parsed successfully!")
+                                st.rerun()
+                            except requests.exceptions.JSONDecodeError as e:
+                                st.error(f"❌ Invalid JSON response: {str(e)}")
+                                st.write("**Response text:**", response.text[:200])
+                                st.session_state.parsing_failed = True
                         else:
-                            error_msg = response.json().get("detail", "Unknown error")
-                            st.error(f"❌ Error: {error_msg}")
+                            try:
+                                error_data = response.json()
+                                error_msg = error_data.get("detail", str(error_data))
+                            except:
+                                error_msg = response.text if response.text else "No error details"
+                            st.error(f"❌ API Error ({response.status_code}): {error_msg}")
                             st.session_state.parsing_failed = True
                         
                         # Cleanup
@@ -306,8 +315,10 @@ with tabs[2]:
     st.subheader("Health Check")
     if st.button("Check API Health"):
         try:
+            headers = {"x-api-key": API_KEY}
             response = requests.get(
                 f"{API_URL}/health",
+                headers=headers,
                 timeout=5
             )
             if response.status_code == 200:
@@ -315,6 +326,13 @@ with tabs[2]:
                 st.json(response.json())
             else:
                 st.error(f"❌ API returned status {response.status_code}")
+                try:
+                    st.json(response.json())
+                except:
+                    st.write(response.text)
+        except requests.exceptions.ConnectionError:
+            st.error(f"❌ Cannot connect to {API_URL}")
+            st.info("Make sure the API URL is correct and the API is running")
         except Exception as e:
             st.error(f"❌ Connection failed: {str(e)}")
     
@@ -330,26 +348,48 @@ with tabs[2]:
 with tabs[3]:
     st.subheader("⚙️ Configuration")
     
+    # Check if using default/incomplete configuration
+    if API_URL == "http://localhost:8000":
+        st.warning("""
+        ⚠️ **API Not Configured for Cloud**
+        
+        You're using the local development API URL. To use this app:
+        
+        **Option 1: Deploy API to Cloud (Recommended)**
+        1. Deploy the Resume Parser API to a cloud service
+        2. Get the API URL (e.g., https://my-api.railway.app)
+        3. Add to Streamlit Secrets in dashboard:
+           - Go to app dashboard → ⋯ → Settings → Secrets
+           - Add: `api_url = "https://my-api.railway.app"`
+           - Add: `api_key = "your-api-key"`
+        
+        **Option 2: Local Testing**
+        1. Run API locally: `python -m uvicorn main_resume_api:app --port 8000`
+        2. Use ngrok to expose: `ngrok http 8000`
+        3. Add ngrok URL to secrets
+        """)
+    
+    st.divider()
+    
     col1, col2 = st.columns(2)
     
     with col1:
         api_url_input = st.text_input(
             "API URL",
             value=API_URL,
-            help="Base URL of the Resume Parser API"
+            help="Base URL of the Resume Parser API (e.g., https://api.example.com)"
         )
     
     with col2:
         api_key_input = st.text_input(
             "API Key",
-            value=API_KEY,
-            type="password" if API_KEY != "dev-secret-key" else "default",
+            value=API_KEY if API_KEY != "dev-secret-key" else "",
+            type="password",
             help="API authentication key"
         )
     
-    if st.button("Save Settings"):
-        # Save to environment or local storage
-        st.success("✅ Settings saved (session only)")
+    if st.button("💾 Save Settings"):
+        st.info("ℹ️ For permanent changes, update Streamlit Secrets in dashboard (⋯ → Settings → Secrets)")
         API_URL = api_url_input
         API_KEY = api_key_input
     
