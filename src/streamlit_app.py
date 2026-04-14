@@ -1,15 +1,24 @@
 """
 Streamlit UI for Resume Parser
 Provides interactive interface for uploading and parsing resumes
+No external API required - runs directly using Main_Resume parser
 """
 
 import streamlit as st
-import requests
 import json
 import os
+import sys
 from pathlib import Path
 from datetime import datetime
 import tempfile
+
+# Import the resume parser
+try:
+    import Main_Resume as resume_parser
+    PARSER_AVAILABLE = True
+except Exception as e:
+    PARSER_AVAILABLE = False
+    st.error(f"❌ Failed to load resume parser: {e}")
 
 # ─────────────────────────────────────────────────────────────────
 # Configuration
@@ -20,14 +29,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-
-# Load from Streamlit secrets (cloud) or environment variables (local)
-try:
-    API_URL = st.secrets.get("api_url", os.getenv("API_URL", "http://localhost:8000"))
-    API_KEY = st.secrets.get("api_key", os.getenv("API_KEY", "dev-secret-key"))
-except (FileNotFoundError, KeyError):
-    API_URL = os.getenv("API_URL", "http://localhost:8000")
-    API_KEY = os.getenv("API_KEY", "dev-secret-key")
 
 # ─────────────────────────────────────────────────────────────────
 # Styling
@@ -71,10 +72,35 @@ if "parsing_failed" not in st.session_state:
 
 
 # ─────────────────────────────────────────────────────────────────
-# Header
+# Header & Setup Check
 # ─────────────────────────────────────────────────────────────────
 st.title("📄 Resume Parser")
 st.markdown("Extract structured information from CVs and resumes using AI")
+
+# Check if API is properly configured
+if API_URL == "http://localhost:8000":
+    st.warning("""
+    ⚠️ **API Not Configured!**
+    
+    To use this app, you need to configure the Resume Parser API.
+    
+    **For Streamlit Cloud Users:**
+    1. Click **⋯** (top right) → **Settings** → **Secrets**
+    2. Add this configuration:
+    ```toml
+    api_url = "https://your-api-url.railway.app"
+    api_key = "dev-secret-key"
+    ```
+    3. Replace URL with your actual API URL
+    4. Save and refresh this page
+    
+    **Options to get an API URL:**
+    - Deploy to Railway.app (free, recommended): https://railway.app/
+    - Use ngrok for local testing: https://ngrok.com/
+    - Deploy to any cloud provider
+    
+    📖 See Settings tab for more details
+    """)
 
 # ─────────────────────────────────────────────────────────────────
 # Main Content
@@ -349,7 +375,7 @@ with tabs[3]:
     st.subheader("⚙️ Configuration")
     
     # Check if using default/incomplete configuration
-    if API_URL == "http://localhost:8000":
+    if API_URL == "http://localhost:1122" or API_KEY == "dev-secret-key":
         st.warning("""
         ⚠️ **API Not Configured for Cloud**
         
