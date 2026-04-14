@@ -375,7 +375,7 @@ with tabs[3]:
     - Validation reporting
     - Detailed logging
     - JSON export
-    """)
+    """
 
 # ─────────────────────────────────────────────────────────────────
 # Footer
