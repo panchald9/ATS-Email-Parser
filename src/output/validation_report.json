@@ -1,7 +1,7 @@
 {
   "total_resumes": 4,
   "average_score": 93.9,
-  "min_score": 92.82,
+  "min_score": 92.63,
   "max_score": 95.0,
   "quality_distribution": {
     "excellent": 4,
@@ -47,7 +47,7 @@
         "skills": {
           "valid": true,
           "score": 95.0,
-          "reason": "18/18 skills valid"
+          "reason": "10/10 skills valid"
         }
       },
       "warnings": [],
@@ -84,50 +84,12 @@
         },
         "skills": {
           "valid": true,
-          "score": 94.22222222222223,
-          "reason": "44/45 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 94.03703703703702,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "Dhruv Panchal.pdf",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid international format with country code"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": false,
-          "score": 0,
-          "reason": "Address is empty"
-        },
-        "skills": {
-          "valid": true,
           "score": 93.79310344827587,
           "reason": "28/29 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 93.75862068965517,
+      "overall_score": 93.9655172413793,
       "quality_level": "excellent"
     },
     {
@@ -160,12 +122,50 @@
         },
         "skills": {
           "valid": true,
-          "score": 94.1025641025641,
-          "reason": "38/39 skills valid"
+          "score": 93.15789473684211,
+          "reason": "18/19 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 92.82051282051282,
+      "overall_score": 92.63157894736841,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "Dhruv Panchal.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": false,
+          "score": 0,
+          "reason": "Address is empty"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "9/9 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 94.0,
       "quality_level": "excellent"
     }
   ]

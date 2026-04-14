@@ -212,47 +212,58 @@ with tabs[1]:
         
         # Personal Data
         with result_tabs[0]:
-            personal = result.get("personal_data", {})
-            if personal:
-                col1, col2 = st.columns(2)
-                with col1:
-                    st.write("**Name:**", personal.get("name", "N/A"))
-                    st.write("**Email:**", personal.get("email", "N/A"))
-                    st.write("**DOB:**", personal.get("date_of_birth", "N/A"))
-                with col2:
-                    st.write("**Gender:**", personal.get("gender", "N/A"))
-                    st.write("**Address:**", personal.get("address", "N/A"))
-                    st.write("**Phone:**", personal.get("phone", "N/A"))
-            else:
-                st.info("No personal data extracted")
+            col1, col2 = st.columns(2)
+            with col1:
+                st.write("**Name:**", result.get("name", "N/A"))
+                st.write("**Email:**", result.get("email", "N/A"))
+                st.write("**DOB:**", result.get("dob", "N/A"))
+            with col2:
+                st.write("**Gender:**", result.get("gender", "N/A"))
+                st.write("**Address:**", result.get("address", "N/A"))
+                st.write("**Phone:**", result.get("contact_number", "N/A"))
         
         # Education
         with result_tabs[1]:
             education = result.get("education", [])
             if education:
                 for idx, edu in enumerate(education, 1):
-                    with st.expander(f"Education #{idx}: {edu.get('degree', 'Unknown')}"):
-                        st.write("**Degree:**", edu.get("degree"))
-                        st.write("**Institution:**", edu.get("institution"))
-                        st.write("**Field:**", edu.get("field"))
-                        st.write("**Year:**", edu.get("year"))
-                        st.write("**CGPA:**", edu.get("cgpa", "N/A"))
+                    qual = edu.get('qualification', 'Unknown')
+                    with st.expander(f"Education #{idx}: {qual}"):
+                        st.write("**Qualification:**", edu.get("qualification", "N/A"))
+                        st.write("**Institution:**", edu.get("institute_university", "N/A"))
+                        st.write("**Branch/Specialization:**", edu.get("specialization_branch", "N/A"))
+                        st.write("**Year:**", edu.get("passing_year", "N/A"))
+                        st.write("**CGPA/Grade:**", edu.get("grade_cgpa", "N/A"))
+                        st.write("**Mode of Study:**", edu.get("mode_of_study", "N/A"))
+                        st.write("**Location:**", edu.get("location", "N/A"))
             else:
                 st.info("No education data extracted")
         
         # Experience
         with result_tabs[2]:
-            experience = result.get("experience", [])
+            experience = result.get("professional_experience", [])
             if experience:
                 for idx, exp in enumerate(experience, 1):
-                    with st.expander(f"Job #{idx}: {exp.get('job_title', 'Unknown')}"):
-                        st.write("**Title:**", exp.get("job_title"))
-                        st.write("**Company:**", exp.get("company_name"))
-                        st.write("**Duration:**", exp.get("duration"))
+                    role = exp.get('role', 'Unknown')
+                    with st.expander(f"Job #{idx}: {role}"):
+                        st.write("**Role/Title:**", exp.get("role", "N/A"))
+                        st.write("**Company:**", exp.get("company_name", "N/A"))
+                        st.write("**Duration:**", exp.get("duration_text", "N/A"))
                         st.write("**Location:**", exp.get("location", "N/A"))
-                        if exp.get("job_description"):
-                            st.write("**Description:**")
-                            st.write(exp.get("job_description"))
+                        st.write("**Employment Type:**", exp.get("employment_type", "N/A"))
+                        st.write("**Currently Working:**", exp.get("currently_working", "N/A"))
+                        
+                        # Technologies
+                        techs = exp.get("technologies", [])
+                        if techs:
+                            st.write("**Technologies:**", ", ".join(techs))
+                        
+                        # Responsibilities
+                        resp = exp.get("responsibilities", [])
+                        if resp:
+                            st.write("**Responsibilities:**")
+                            for r in resp:
+                                st.write(f"• {r}")
             else:
                 st.info("No experience data extracted")
         
@@ -260,27 +271,33 @@ with tabs[1]:
         with result_tabs[3]:
             skills = result.get("skills", [])
             if skills:
-                col1, col2, col3 = st.columns(3)
-                for idx, skill in enumerate(skills):
-                    with [col1, col2, col3][idx % 3]:
-                        st.tag(skill)
+                # Display skills as formatted badges
+                skill_badges = " | ".join([f"🏷️ {skill}" for skill in skills])
+                st.markdown(skill_badges)
+                st.write(f"**Total Skills:** {len(skills)}")
             else:
                 st.info("No skills extracted")
         
         # Contact
         with result_tabs[4]:
-            contact = result.get("contact_info", {})
-            st.write(contact or "No contact info extracted")
+            contact_phone = result.get("contact_number", "N/A")
+            contact_email = result.get("email", "N/A")
+            st.write("**Email:**", contact_email)
+            st.write("**Phone:**", contact_phone)
         
         # Other
         with result_tabs[5]:
-            other = {k: v for k, v in result.items()
-                    if k not in ["personal_data", "education", "experience",
-                               "skills", "contact_info"]}
+            # Show fields not displayed in other tabs
+            excluded_keys = {
+                "name", "email", "contact_number", "dob", "gender", "address",
+                "skills", "professional_experience", "education", "file"
+            }
+            other = {k: v for k, v in result.items() if k not in excluded_keys}
             if other:
-                st.json(other)
+                for key, value in other.items():
+                    st.write(f"**{key}:**", value)
             else:
-                st.info("No other data")
+                st.info("No additional data")
         
         st.divider()
         
