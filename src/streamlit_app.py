@@ -20,6 +20,15 @@ except Exception as e:
     PARSER_AVAILABLE = False
     st.error(f"❌ Failed to load resume parser: {e}")
 
+
+# ─────────────────────────────────────────────────────────────────
+# Caching for Performance
+# ─────────────────────────────────────────────────────────────────
+@st.cache_resource
+def get_parser():
+    """Cache the parser to avoid reloading"""
+    return resume_parser
+
 # ─────────────────────────────────────────────────────────────────
 # Configuration
 # ─────────────────────────────────────────────────────────────────
@@ -99,11 +108,6 @@ with tabs[0]:
             type=["pdf", "docx", "doc"],
             help="Supported formats: PDF, DOCX, DOC"
         )
-    
-    with col2:
-        st.subheader("Parse Options")
-        enable_validation = st.checkbox("Enable Validation", value=True)
-        enable_detailed_log = st.checkbox("Detailed Logging", value=False)
     
     # Parse button
     if uploaded_file is not None:
@@ -288,121 +292,82 @@ with tabs[1]:
         st.info("👈 Parse a resume first to see results here")
 
 # ─────────────────────────────────────────────────────────────────
-# TAB 3: API Info
+# TAB 3: About & Info
 # ─────────────────────────────────────────────────────────────────
 with tabs[2]:
-    st.subheader("API Endpoints")
+    st.subheader("📋 About Resume Parser")
     
-    endpoints = {
-        "POST /parse-resume": "Parse a resume file",
-        "GET /health": "Check API health",
-        "GET /docs": "Interactive API documentation",
-    }
+    st.markdown("""
+    **Resume Parser** is an AI-powered tool that extracts structured information from CVs and resumes.
     
-    for endpoint, description in endpoints.items():
-        st.write(f"**{endpoint}** - {description}")
+    ✨ **Features:**
+    - Extract personal information (name, email, phone, DOB, address)
+    - Identify education history (degree, institution, field, year)
+    - Parse work experience (job title, company, duration, location)
+    - Recognize technical and soft skills
+    - Support for PDF, DOCX, and DOC formats
     
-    st.divider()
+    **Technology Stack:**
+    - spaCy for NLP processing
+    - pdfminer.six for PDF extraction
+    - python-docx for Word document parsing
+    - Pattern matching for skill extraction
     
-    st.subheader("Health Check")
-    if st.button("Check API Health"):
-        try:
-            headers = {"x-api-key": API_KEY}
-            response = requests.get(
-                f"{API_URL}/health",
-                headers=headers,
-                timeout=5
-            )
-            if response.status_code == 200:
-                st.success("✅ API is healthy")
-                st.json(response.json())
-            else:
-                st.error(f"❌ API returned status {response.status_code}")
-                try:
-                    st.json(response.json())
-                except:
-                    st.write(response.text)
-        except requests.exceptions.ConnectionError:
-            st.error(f"❌ Cannot connect to {API_URL}")
-            st.info("Make sure the API URL is correct and the API is running")
-        except Exception as e:
-            st.error(f"❌ Connection failed: {str(e)}")
+    **Supported File Formats:**
+    - PDF (.pdf)
+    - Word Documents (.docx, .doc)
+    - Max file size: Unlimited (local processing)
+    """)
     
     st.divider()
     
-    st.subheader("Configuration")
-    st.write(f"**API URL:** `{API_URL}`")
-    st.write(f"**API Key:** {'✅ Set' if API_KEY else '❌ Not set'}")
+    st.subheader("📊 Parser Configuration")
+    st.write("**Current Settings:**")
+    st.write(f"- Skill Source: **auto**")
+    st.write(f"- Validation: **Enabled**")
+    st.write(f"- Detailed Logging: **Enabled**")
+    st.write(f"- Parser Type: **Standalone (No API)**")
 
 # ─────────────────────────────────────────────────────────────────
 # TAB 4: Settings
 # ─────────────────────────────────────────────────────────────────
 with tabs[3]:
-    st.subheader("⚙️ Configuration")
+    st.subheader("⚙️ About This App")
     
-    # Check if using default/incomplete configuration
-    if API_URL == "http://localhost:1122" or API_KEY == "dev-secret-key":
-        st.warning("""
-        ⚠️ **API Not Configured for Cloud**
-        
-        You're using the local development API URL. To use this app:
-        
-        **Option 1: Deploy API to Cloud (Recommended)**
-        1. Deploy the Resume Parser API to a cloud service
-        2. Get the API URL (e.g., https://my-api.railway.app)
-        3. Add to Streamlit Secrets in dashboard:
-           - Go to app dashboard → ⋯ → Settings → Secrets
-           - Add: `api_url = "https://my-api.railway.app"`
-           - Add: `api_key = "your-api-key"`
-        
-        **Option 2: Local Testing**
-        1. Run API locally: `python -m uvicorn main_resume_api:app --port 8000`
-        2. Use ngrok to expose: `ngrok http 8000`
-        3. Add ngrok URL to secrets
-        """)
-    
-    st.divider()
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        api_url_input = st.text_input(
-            "API URL",
-            value=API_URL,
-            help="Base URL of the Resume Parser API (e.g., https://api.example.com)"
-        )
-    
-    with col2:
-        api_key_input = st.text_input(
-            "API Key",
-            value=API_KEY if API_KEY != "dev-secret-key" else "",
-            type="password",
-            help="API authentication key"
-        )
-    
-    if st.button("💾 Save Settings"):
-        st.info("ℹ️ For permanent changes, update Streamlit Secrets in dashboard (⋯ → Settings → Secrets)")
-        API_URL = api_url_input
-        API_KEY = api_key_input
-    
-    st.divider()
-    
-    st.subheader("About")
     st.markdown("""
     **Resume Parser v1.0**
     
     Extract structured information from CVs and resumes using advanced AI and pattern matching.
     
-    **Supported Formats:**
+    ✨ **Supported Formats:**
     - PDF
     - DOCX
     - DOC
     
-    **Extracted Information:**
+    📊 **Extracted Information:**
     - Personal details (name, email, phone, DOB, address)
     - Education history
     - Work experience
     - Technical skills
+    - Contact information
+    
+    🚀 **Features:**
+    - Validation reporting
+    - Detailed logging
+    - JSON export
+    - Completely local processing (no API needed!)
+    
+    ---
+    
+    **Technology:**
+    - Built with Streamlit for web interface
+    - Uses spaCy for NLP processing
+    - pdfminer.six for PDF extraction
+    - python-docx for Word parsing
+    
+    **No Configuration Needed!**
+    Just upload a resume and start parsing.
+    """)
     - Contact information
     
     **Features:**
