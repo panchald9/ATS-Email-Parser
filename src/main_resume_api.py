@@ -15,7 +15,7 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 
-import Main_Resume as resume_parser
+from src import Main_Resume as resume_parser
 
 
 _SRC_ENV_PATH = Path(__file__).resolve().parent / ".env"

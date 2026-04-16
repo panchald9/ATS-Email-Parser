@@ -6090,7 +6090,6 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list,
             'skills':         matched_skills,
             'professional_experience': experience_profile,
             'education':      education_profile,    # ← NEW
-            'image':          image,          # ← NEW: Added image support
         }
     except Exception as exc:
         return {
@@ -6104,7 +6103,6 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list,
             'skills':         [],
             'professional_experience': [],
             'education':      [],             # ← NEW
-            'image':          None,           # ← NEW: Added image support
             'error':          str(exc),
         }
 
