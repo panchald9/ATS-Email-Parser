@@ -1,10 +1,10 @@
 {
-  "total_resumes": 4,
-  "average_score": 93.9,
+  "total_resumes": 5,
+  "average_score": 94.37,
   "min_score": 92.63,
-  "max_score": 95.0,
+  "max_score": 96.25,
   "quality_distribution": {
-    "excellent": 4,
+    "excellent": 5,
     "good": 0,
     "fair": 0,
     "poor": 0
@@ -166,6 +166,44 @@
       },
       "warnings": [],
       "overall_score": 94.0,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "Subhrajit CL & CV_20260225_220011_0000.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": false,
+          "score": 0,
+          "reason": "Address is empty"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "5/5 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 96.25,
       "quality_level": "excellent"
     }
   ]

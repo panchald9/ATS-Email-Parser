@@ -231,7 +231,7 @@ EMAIL_STRICT_RE = re.compile(r"^[a-z0-9][a-z0-9._%+-]{1,63}@[a-z0-9-]+(?:\.[a-z0
 
 EMAIL_NOISY_PREFIX_RE = re.compile(
     r"^(?:(?:contact|skills?|languages?|profile|email|mobile|phone|experience|work|summary|"
-    r"certifications?|portfolio|linkedin|contactinfo)[._\-]*)+",
+    r"certifications?|portfolio|linkedin|contactinfo|resume|cv)[._\-]*)+",
     re.I,
 )
 
@@ -615,7 +615,7 @@ def extract_dob(text):
         return None
 
     # ── Pass 1: explicit labeled DOB pattern ────────────────────
-    for line in lines[:120]:
+    for line in lines[:150]:  # Extended from 120 to 150 to cover full personal info
         m = DOB_LABEL_RE.search(line)
         if m:
             parsed = _parse_dob_value(m.group(1))
@@ -686,6 +686,16 @@ def extract_dob(text):
         m = DOB_BARE_RE.search(line)
         if m:
             parsed = _parse_dob_value(m.group(1))
+            if parsed:
+                return parsed
+
+    # ── Pass 6: Simple date pattern in first 50 lines (as fallback) ──
+    #    Just look for any date pattern that looks reasonable
+    for line in lines[:50]:
+        # Match DD/MM/YYYY or DD-MM-YYYY or DD.MM.YYYY
+        m = re.search(r'\b(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{2,4})\b', line)
+        if m:
+            parsed = _parse_dob_value(m.group(0))
             if parsed:
                 return parsed
 
@@ -1425,12 +1435,16 @@ def extract_name(text):
                 return compact_candidate
 
     # FIX: Detect if we're in a "Top Skills" or similar section at the beginning
-    # If the first 20 lines contain skill section markers, skip S0.3
+    # Only skip if there's an actual SECTION HEADER (not just the word appearing in text)
+    # and we can confirm the resume structure has skills at the very top
     early_section_text ='\n'.join(norm[:20]).lower()
+    # Be very strict: only consider it early skill section if:
+    # 1. "top skill" appears (explicit section header)
+    # 2. OR "skills" is on its own line (section header pattern)
     has_early_skill_section = (
         'top skill' in early_section_text or 
-        re.search(r'\b(?:skill|language|certification|strength)\b', early_section_text) and
-        any(line.lower().strip() in SKIP_LINES for line in norm[:15])
+        re.search(r'^\s*skills\s*$', early_section_text, re.M) or
+        re.search(r'^\s*(?:top\s+)?skills?\s*:\s*$', early_section_text, re.M)
     )
     
     # Find where the skill section ends (if present)
@@ -1438,7 +1452,7 @@ def extract_name(text):
     if has_early_skill_section:
         # Skills section typically occupies lines 4-16 in resumes with top skills
         # Set start_search_idx to skip past it but still catch names that come right after
-        start_search_idx = 15  # Start searching from line 15 to catch names like "Om Dave"
+        start_search_idx = 8  # Reduced from 15 - be less aggressive
 
     # S-Blob: single-line / heavily merged resumes
     if len(raw) <= 3 or sum(1 for l in raw if len(l) > 120) >= 1:
@@ -3047,17 +3061,22 @@ def extract_education(text):
             q_key = re.sub(r'[^a-z0-9]', '', qualification.lower())
             institute_lower = institute.lower()
 
-            if institute and not re.search(r'(?i)\b(?:university|college|institute|school|academy|polytechnic|board)\b', institute):
+            if institute and not re.search(r'(?i)\b(?:university|college|institute|school|academy|polytechnic|board|ncvt|nctvet|govt|government|certification|certificate)\b', institute):
                 # Keep non-keyword institute only if there is strong year signal and no skill noise.
                 if year is None or re.search(r'(?i)\b(?:photoshop|illustrator|creative\s*suite|ui/?ux|management\s*system)\b', institute):
-                    continue
+                    # Accept if we have a strong qualification (like degree names or certificates)
+                    if not re.search(r'(?i)\b(?:diploma|bachelor|master|b\.tech|m\.tech|b\.a|b\.sc|b\.com|m\.a|m\.sc|m\.com|mba|llb|llm|phd|certificate|ncvt|electrician|technician)\b', qualification):
+                        continue
 
             if re.search(r'(?i)\b(?:photoshop|illustrator|creative\s*suite|ui/?ux)\b', qualification):
                 continue
 
-            # Reject low-signal short forms when no supporting institute/grade/year is present.
-            if q_key in {'ma', 'me', 'ba', 'be', 'bsc', 'msc', 'bcom', 'mcom'} and not institute and not grade and year is None:
+            # Reject only truly weak short forms (like single letter degrees) when no supporting data
+            if q_key in {'ma', 'me', 'ba', 'be'} and not institute and not grade and year is None:
                 continue
+            # But allow recognized degree abbreviations
+            if q_key in {'btech', 'mtech', 'bsc', 'msc', 'bcom', 'mcom', 'mba', 'llb', 'phd', 'ncvt'}:
+                pass  # Accept these even without institute/grade/year
 
             if not qualification and not institute and year is None:
                 continue

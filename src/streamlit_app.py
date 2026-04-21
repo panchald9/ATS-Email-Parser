@@ -146,6 +146,7 @@ with tabs[0]:
                             st.session_state.parsing_failed = False
                             st.session_state.show_results = True  # Flag to display results
                             st.success("✅ Resume parsed successfully!")
+                            st.rerun()  # Rerun to display results
                         else:
                             error_msg = result.get("error", "Unknown parsing error") if result else "Failed to parse resume"
                             st.error(f"❌ {error_msg}")

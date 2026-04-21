@@ -1,5 +1,5 @@
 [*] Skill source: auto (csv first, dataset fallback | csv=572)
-[*] Processing 4 resume file(s) from: D:\Project\ATS\ATS Email Parser\Resume
+[*] Processing 5 resume file(s) from: D:\Project\ATS\ATS Email Parser\Resume
 [*] Workers: 8
 
 #    File                   Name                           Phone          Gender   DOB            Email
@@ -11,31 +11,35 @@
 [*] Taking 3-second break...
   3    Dhruv_Panchal_CV.pdf   Dhruv Panchal                  +919601945583  Male     ❌ N/A          dp148026@gmail.com
        Address: Surat, Gujarat, India, linkedin.com/in/panchald 9 a 0 b 263,...
-       Skills [29]: Postgresql, Flutter, Sprint Planning, Linux, C, ReactJS, Mysql, automation  (+21 more)
+       Skills [29]: Linux, Sprint Planning, ReactJS, Postgresql, Flutter, Mysql, C, automation  (+21 more)
 [*] Taking 3-second break...
   2    Dhruv PanchalResume.pdf Dhruv Panchal                  919601945583   Male     ❌ N/A          dp148026@gmail.com
        Address: ❌ NOT FOUND
-       Skills [19]: .net, Css, Solidworks, Javascript, C, Html, Rest Api, Mysql  (+11 more)
+       Skills [19]: Solidworks, Css, Mysql, Html, Api Development, Rest Api, Flask, C  (+11 more)
 [*] Taking 3-second break...
   1    Dhruv Panchal.pdf      Dhruv Panchal                  +919601945583  Male     ❌ N/A          dp148026@gmail.com
        Address: ❌ NOT FOUND
        Skills [9]: cad, campaigns, cybersecurity, mentorship, Illustrator, Photoshop, solidworks, C#  (+1 more)
+[*] Taking 3-second break...
+  5    Subhrajit CL & CV_20260225_220011_0000.pdf Photography Painting Travelin  8777869920     ❌ N/A    ❌ N/A          subhrajit-ghosh-84b67221asubhrajit367@gmail.com
+       Address: ❌ NOT FOUND
+       Skills [5]: civil, physical, PLC, Production Planning, Process Control
 
 =======================================================================================================================================
 💾 Validation report saved → D:\Project\ATS\ATS Email Parser\src\output\validation_report.json
 
 ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 📊 PROCESSING SUMMARY:
-   Total files processed : 4
-   Successfully parsed   : 4 (100.0%)
+   Total files processed : 5
+   Successfully parsed   : 5 (100.0%)
    Extraction errors     : 0 (0.0%)
 
 📋 EXTRACTION QUALITY:
-   Names found    : 4/4 (100.0%)
-   Emails found   : 4/4 (100.0%)
-   Phones found   : 4/4 (100.0%)
-   DOBs found     : 0/4 (0.0%)
-   With skills    : 4/4 (100.0%)
+   Names found    : 5/5 (100.0%)
+   Emails found   : 5/5 (100.0%)
+   Phones found   : 5/5 (100.0%)
+   DOBs found     : 0/5 (0.0%)
+   With skills    : 5/5 (100.0%)
 
 💾 Results saved → D:\Project\ATS\ATS Email Parser\src\output\resume_parsed.json
    Log saved      → D:\Project\ATS\ATS Email Parser\src\output\parser.log

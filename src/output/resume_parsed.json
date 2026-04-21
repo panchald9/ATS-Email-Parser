@@ -19,8 +19,7 @@
       "UI/UX Design"
     ],
     "professional_experience": [],
-    "education": [],
-    "image": null
+    "education": []
   },
   {
     "file": "Dhruv PanchalResume.pdf",
@@ -31,16 +30,16 @@
     "gender": "Male",
     "address": null,
     "skills": [
-      ".net",
-      "Css",
       "Solidworks",
-      "Javascript",
-      "C",
-      "Html",
-      "Rest Api",
+      "Css",
       "Mysql",
-      "Flask",
+      "Html",
       "Api Development",
+      "Rest Api",
+      "Flask",
+      "C",
+      "Javascript",
+      ".net",
       "Django",
       "automation",
       "android",
@@ -79,8 +78,7 @@
         "location": null,
         "major_subjects": null
       }
-    ],
-    "image": null
+    ]
   },
   {
     "file": "Dhruv_Panchal_CV.pdf",
@@ -91,13 +89,13 @@
     "gender": "Male",
     "address": "Surat, Gujarat, India, linkedin.com/in/panchald 9 a 0 b 263, github.com/panchald 9",
     "skills": [
+      "Linux",
+      "Sprint Planning",
+      "ReactJS",
       "Postgresql",
       "Flutter",
-      "Sprint Planning",
-      "Linux",
-      "C",
-      "ReactJS",
       "Mysql",
+      "C",
       "automation",
       "devops",
       "server",
@@ -200,8 +198,7 @@
         "location": null,
         "major_subjects": null
       }
-    ],
-    "image": null
+    ]
   },
   {
     "file": "Profile.pdf",
@@ -251,7 +248,42 @@
         "location": null,
         "major_subjects": null
       }
+    ]
+  },
+  {
+    "file": "Subhrajit CL & CV_20260225_220011_0000.pdf",
+    "name": "Photography Painting Traveling Gardening",
+    "contact_number": "8777869920",
+    "email": "subhrajit-ghosh-84b67221asubhrajit367@gmail.com",
+    "dob": null,
+    "gender": null,
+    "address": null,
+    "skills": [
+      "civil",
+      "physical",
+      "PLC",
+      "Production Planning",
+      "Process Control"
     ],
-    "image": null
+    "professional_experience": [
+      {
+        "company_name": "Mahanadi Coalfields limited",
+        "role": null,
+        "employment_type": "Full-time",
+        "location": null,
+        "start_date": "Oct 2018",
+        "end_date": "Oct 2019",
+        "currently_working": false,
+        "experience_duration": "1y",
+        "duration_text": "Oct 2018 - Oct 2019",
+        "ctc": null,
+        "notice_period": null,
+        "technologies": [],
+        "responsibilities": [
+          "s on time and within budget. Committed tostaying updated with the latest advancements in electrical technologyand codes.Profile SubhrajitGhosh"
+        ]
+      }
+    ],
+    "education": []
   }
 ]
