@@ -78,6 +78,8 @@ if "parse_result" not in st.session_state:
     st.session_state.parse_result = None
 if "parsing_failed" not in st.session_state:
     st.session_state.parsing_failed = False
+if "show_results" not in st.session_state:
+    st.session_state.show_results = False
 
 
 # ─────────────────────────────────────────────────────────────────
@@ -142,8 +144,8 @@ with tabs[0]:
                         if result and not result.get("error"):
                             st.session_state.parse_result = result
                             st.session_state.parsing_failed = False
+                            st.session_state.show_results = True  # Flag to display results
                             st.success("✅ Resume parsed successfully!")
-                            st.rerun()
                         else:
                             error_msg = result.get("error", "Unknown parsing error") if result else "Failed to parse resume"
                             st.error(f"❌ {error_msg}")
@@ -177,6 +179,108 @@ with tabs[0]:
                     )
     else:
         st.info("👆 Please upload a resume file to get started")
+    
+    # ─────────────────────────────────────────────────────────────────
+    # AUTO-DISPLAY FULL RESULTS AFTER PARSING
+    # ─────────────────────────────────────────────────────────────────
+    if st.session_state.show_results and st.session_state.parse_result:
+        st.divider()
+        st.subheader("📊 Parsing Results")
+        
+        result = st.session_state.parse_result
+        
+        # Summary metrics
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.metric("Name", result.get("name", "N/A"))
+        with col2:
+            st.metric("Skills Count", len(result.get("skills", [])))
+        with col3:
+            st.metric("Education Entries", len(result.get("education", [])))
+        with col4:
+            st.metric("Experience Entries", len(result.get("professional_experience", [])))
+        
+        st.divider()
+        
+        # Personal Data
+        with st.expander("👤 Personal Information", expanded=True):
+            col1, col2 = st.columns(2)
+            with col1:
+                st.write("**Name:**", result.get("name", "N/A"))
+                st.write("**Email:**", result.get("email", "N/A"))
+                st.write("**DOB:**", result.get("dob", "N/A"))
+            with col2:
+                st.write("**Gender:**", result.get("gender", "N/A"))
+                st.write("**Address:**", result.get("address", "N/A"))
+                st.write("**Phone:**", result.get("contact_number", "N/A"))
+        
+        # Education
+        education = result.get("education", [])
+        with st.expander("🎓 Education", expanded=True):
+            if education:
+                for idx, edu in enumerate(education, 1):
+                    qual = edu.get('qualification', 'Unknown')
+                    st.write(f"### Education #{idx}: {qual}")
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        st.write("**Qualification:**", edu.get("qualification", "N/A"))
+                        st.write("**Institution:**", edu.get("institute_university", "N/A"))
+                        st.write("**Branch/Specialization:**", edu.get("specialization_branch", "N/A"))
+                    with col2:
+                        st.write("**Year:**", edu.get("passing_year", "N/A"))
+                        st.write("**CGPA/Grade:**", edu.get("grade_cgpa", "N/A"))
+                        st.write("**Mode of Study:**", edu.get("mode_of_study", "N/A"))
+                    st.write("**Location:**", edu.get("location", "N/A"))
+                    st.divider()
+            else:
+                st.info("No education data extracted")
+        
+        # Experience
+        experience = result.get("professional_experience", [])
+        with st.expander("💼 Professional Experience", expanded=True):
+            if experience:
+                for idx, exp in enumerate(experience, 1):
+                    role = exp.get('role', 'Unknown')
+                    st.write(f"### Job #{idx}: {role}")
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        st.write("**Role/Title:**", exp.get("role", "N/A"))
+                        st.write("**Company:**", exp.get("company_name", "N/A"))
+                        st.write("**Duration:**", exp.get("duration_text", "N/A"))
+                    with col2:
+                        st.write("**Location:**", exp.get("location", "N/A"))
+                        st.write("**Employment Type:**", exp.get("employment_type", "N/A"))
+                        st.write("**Currently Working:**", exp.get("currently_working", "N/A"))
+                    
+                    # Technologies
+                    techs = exp.get("technologies", [])
+                    if techs:
+                        st.write("**Technologies:**", ", ".join(techs))
+                    
+                    # Responsibilities
+                    resp = exp.get("responsibilities", [])
+                    if resp:
+                        st.write("**Responsibilities:**")
+                        for r in resp:
+                            st.write(f"• {r}")
+                    st.divider()
+            else:
+                st.info("No experience data extracted")
+        
+        # Skills
+        skills = result.get("skills", [])
+        with st.expander("🛠️ Technical & Professional Skills", expanded=True):
+            if skills:
+                # Display all skills as formatted badges
+                skill_badges = " | ".join([f"🏷️ {skill}" for skill in skills])
+                st.markdown(skill_badges)
+                st.write(f"**Total Skills:** {len(skills)}")
+            else:
+                st.info("No skills extracted")
+        
+        # Raw JSON
+        with st.expander("📋 Raw JSON Data"):
+            st.json(result)
 
 # ─────────────────────────────────────────────────────────────────
 # TAB 2: View Results
