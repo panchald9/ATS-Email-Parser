@@ -30,6 +30,8 @@ SUPPORTED_EXTENSIONS = {".pdf", ".doc", ".docx"}
 MAX_UPLOAD_MB = int(os.getenv("MAX_UPLOAD_MB", "10"))
 MAX_UPLOAD_BYTES = MAX_UPLOAD_MB * 1024 * 1024
 RATE_LIMIT_PER_MINUTE = int(os.getenv("RATE_LIMIT_PER_MINUTE", "30"))
+PARSER_RETRY_COUNT = max(0, int(os.getenv("PARSER_RETRY_COUNT", "1")))
+PARSER_SERIALIZE = os.getenv("PARSER_SERIALIZE", "true").strip().lower() in {"1", "true", "yes", "on"}
 TRUSTED_HOSTS = [h.strip() for h in os.getenv("TRUSTED_HOSTS", "*").split(",") if h.strip()]
 
 _SKILLS_LIST_CACHE = None
@@ -37,6 +39,7 @@ _COMPILED_MATCHERS_CACHE = None
 _SKILL_SOURCE_CACHE = None
 _CACHE_LOCK = threading.Lock()
 _RATE_LIMIT_LOCK = threading.Lock()
+_PARSER_LOCK = threading.Lock()
 _REQUEST_HISTORY = defaultdict(deque)
 
 
@@ -173,14 +176,56 @@ def parse_resume_from_file(file_path: str, display_filename: str) -> dict:
     temp_fname = os.path.basename(file_path)
     skills_list, compiled_matchers, skill_source = _get_parser_context()
 
-    record = resume_parser._extract_resume_record(
-        fname=temp_fname,
-        process_folder=process_folder,
-        skill_source=skill_source,
-        skills_list=skills_list,
-        compiled_skill_matchers=compiled_matchers,
-        fast_response=False,
-    )
+    def _extract_once() -> dict:
+        if PARSER_SERIALIZE:
+            with _PARSER_LOCK:
+                return resume_parser._extract_resume_record(
+                    fname=temp_fname,
+                    process_folder=process_folder,
+                    skill_source=skill_source,
+                    skills_list=skills_list,
+                    compiled_skill_matchers=compiled_matchers,
+                    fast_response=False,
+                )
+
+        return resume_parser._extract_resume_record(
+            fname=temp_fname,
+            process_folder=process_folder,
+            skill_source=skill_source,
+            skills_list=skills_list,
+            compiled_skill_matchers=compiled_matchers,
+            fast_response=False,
+        )
+
+    def _record_score(rec: dict) -> int:
+        if not isinstance(rec, dict):
+            return -1
+        score = 0
+        for key in ("name", "contact_number", "email", "dob", "gender", "address"):
+            if rec.get(key):
+                score += 1
+        if rec.get("skills"):
+            score += 1
+        if rec.get("professional_experience"):
+            score += 1
+        if rec.get("education"):
+            score += 1
+        return score
+
+    record = _extract_once()
+
+    # Retry transient low-quality parses and keep the richer output.
+    attempts_left = PARSER_RETRY_COUNT
+    best_record = record
+    best_score = _record_score(record)
+    while attempts_left > 0 and best_score < 7:
+        candidate = _extract_once()
+        candidate_score = _record_score(candidate)
+        if candidate_score > best_score:
+            best_record = candidate
+            best_score = candidate_score
+        attempts_left -= 1
+    record = best_record
 
     if not isinstance(record, dict):
         raise RuntimeError("Invalid parser response format")
