@@ -72,6 +72,21 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ─────────────────────────────────────────────────────────────────
+# Authentication & Session State
+# ─────────────────────────────────────────────────────────────────
+# Demo credentials for login
+DEMO_CREDENTIALS = {
+    "demo": "demo",
+    "admin": "admin123",
+    "user": "user123"
+}
+
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+if "username" not in st.session_state:
+    st.session_state.username = None
+
+# ─────────────────────────────────────────────────────────────────
 # Initialize Session State
 # ─────────────────────────────────────────────────────────────────
 if "parse_result" not in st.session_state:
@@ -81,6 +96,66 @@ if "parsing_failed" not in st.session_state:
 if "show_results" not in st.session_state:
     st.session_state.show_results = False
 
+
+# ─────────────────────────────────────────────────────────────────
+# Login Function
+# ─────────────────────────────────────────────────────────────────
+def show_login_page():
+    """Display the login page"""
+    col1, col2, col3 = st.columns([1, 2, 1])
+    
+    with col2:
+        st.markdown("<h1 style='text-align: center; margin-top: 50px;'>📄 ATS Email Parser</h1>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: center; color: #666;'>Resume Parser & Data Extraction</h3>", unsafe_allow_html=True)
+        
+        st.divider()
+        
+        # st.markdown("### 🔐 Demo Login")
+        # st.info("**Demo Credentials:**\n\n- Username: `demo` | Password: `demo`\n- Username: `admin` | Password: `admin123`\n- Username: `user` | Password: `user123`")
+        
+        username = st.text_input("Username", placeholder="Enter username")
+        password = st.text_input("Password", type="password", placeholder="Enter password")
+        
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col2:
+            if st.button("🔓 Login", use_container_width=True):
+                if username in DEMO_CREDENTIALS and DEMO_CREDENTIALS[username] == password:
+                    st.session_state.authenticated = True
+                    st.session_state.username = username
+                    st.success("✅ Login successful!")
+                    st.rerun()
+                else:
+                    st.error("❌ Invalid credentials. Please try again.")
+        
+        st.divider()
+        st.markdown("""
+        <div style='text-align: center; margin-top: 40px; color: #666;'>
+            <p><small>This is a demo application for testing the Resume Parser.</small></p>
+            <p><small>All data is processed locally and not stored on any server.</small></p>
+        </div>
+        """, unsafe_allow_html=True)
+
+
+# ─────────────────────────────────────────────────────────────────
+# Show Login or Main App
+# ─────────────────────────────────────────────────────────────────
+if not st.session_state.authenticated:
+    show_login_page()
+    st.stop()
+
+# Add logout button in sidebar (only show when authenticated)
+with st.sidebar:
+    st.markdown("---")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.write(f"👤 **{st.session_state.username}**")
+    with col2:
+        if st.button("🚪 Logout", use_container_width=True):
+            st.session_state.authenticated = False
+            st.session_state.username = None
+            st.session_state.parse_result = None
+            st.success("✅ Logged out successfully!")
+            st.rerun()
 
 # ─────────────────────────────────────────────────────────────────
 # Header

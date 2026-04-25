@@ -1,23 +1,23 @@
 {
-  "total_resumes": 5,
-  "average_score": 94.37,
-  "min_score": 92.63,
-  "max_score": 96.25,
+  "total_resumes": 23,
+  "average_score": 88.62,
+  "min_score": 0.0,
+  "max_score": 96.0,
   "quality_distribution": {
-    "excellent": 5,
-    "good": 0,
+    "excellent": 19,
+    "good": 3,
     "fair": 0,
-    "poor": 0
+    "poor": 1
   },
   "quality_percentage": {
-    "excellent": 100.0,
-    "good": 0.0,
+    "excellent": 82.6,
+    "good": 13.0,
     "fair": 0.0,
-    "poor": 0.0
+    "poor": 4.3
   },
   "validated_results": [
     {
-      "file": "Profile.pdf",
+      "file": "ANSHU GUPTA RESUME.docx",
       "fields": {
         "name": {
           "valid": true,
@@ -41,7 +41,7 @@
         },
         "address": {
           "valid": true,
-          "score": 95,
+          "score": 90,
           "reason": "Address appears valid"
         },
         "skills": {
@@ -51,7 +51,203 @@
         }
       },
       "warnings": [],
-      "overall_score": 95.0,
+      "overall_score": 94.16666666666667,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "Dharmishtha Resume.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 70,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "7/7 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 90.83333333333333,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "DocScanner Mar 18, 2026 12-44.pdf",
+      "fields": {
+        "name": {
+          "valid": false,
+          "score": 0,
+          "reason": "Name is empty"
+        },
+        "email": {
+          "valid": false,
+          "score": 0,
+          "reason": "Email is empty"
+        },
+        "phone": {
+          "valid": false,
+          "score": 0,
+          "reason": "Phone is empty"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": false,
+          "score": 0,
+          "reason": "Address is empty"
+        },
+        "skills": {
+          "valid": false,
+          "score": 0,
+          "reason": "No skills extracted"
+        }
+      },
+      "warnings": [
+        "Extraction error: Failed to extract from DocScanner Mar 18, 2026 12-44.pdf: PDF extraction returned empty text",
+        "Name issue: Name is empty",
+        "Email issue: Email is empty",
+        "Phone issue: Phone is empty",
+        "⚠️ Missing critical fields (name or email)"
+      ],
+      "overall_score": 0.0,
+      "quality_level": "poor"
+    },
+    {
+      "file": "ANSHU GUPTA RESUME (1).docx",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 90,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "10/10 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 94.16666666666667,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "downloadfile (1).PDF",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "6/6 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 94.0,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "NIRBHAY MAHYAVANSHI.RESUME.-2.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "11/11 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 93.33333333333333,
       "quality_level": "excellent"
     },
     {
@@ -84,12 +280,506 @@
         },
         "skills": {
           "valid": true,
-          "score": 93.79310344827587,
-          "reason": "28/29 skills valid"
+          "score": 94.14634146341464,
+          "reason": "40/41 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 93.9655172413793,
+      "overall_score": 94.02439024390243,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "Dhruvi Resume.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "7/7 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 94.0,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "Profile.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": true,
+          "score": 95,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "17/17 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 96.0,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "ISMAIL resume.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 85,
+          "reason": "Valid generic international format"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 70,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "24/24 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 89.16666666666667,
+      "quality_level": "good"
+    },
+    {
+      "file": "PUSHPAK BARI CV-1.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "10/10 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 93.33333333333333,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "Invoice_2026-27-2026-INTA_1(R).pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 89.16666666666667,
+          "reason": "5/6 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 92.83333333333334,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "RESUME RAHUL PATEL 2026-1.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 70,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 93.05555555555556,
+          "reason": "17/18 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 89.67592592592592,
+      "quality_level": "good"
+    },
+    {
+      "file": "Dhruv Panchal.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": false,
+          "score": 0,
+          "reason": "Address is empty"
+        },
+        "skills": {
+          "valid": true,
+          "score": 93.90625,
+          "reason": "31/32 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 93.78125,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "resume 2025 (10).pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 70,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "1/1 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 90.83333333333333,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "Sarvesh_Barnwal_Resume.docx",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": false,
+          "score": 0,
+          "reason": "Address is empty"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "15/15 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 94.0,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "Deepak Kumar Tripathi - Resume.docx",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 70,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "45/45 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 90.83333333333333,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "Sonali Chaudhari CV (2).pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 65,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "4/4 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 90.0,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "ResumeRahulbhaiVaghmare.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 65,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "11/11 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 89.16666666666667,
+      "quality_level": "good"
+    },
+    {
+      "file": "Subhrajit CL & CV_20260225_220011_0000.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": false,
+          "score": 0,
+          "reason": "Address is empty"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "13/13 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 95.0,
       "quality_level": "excellent"
     },
     {
@@ -122,16 +812,54 @@
         },
         "skills": {
           "valid": true,
-          "score": 93.15789473684211,
-          "reason": "18/19 skills valid"
+          "score": 94.14634146341464,
+          "reason": "40/41 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 92.63157894736841,
+      "overall_score": 92.82926829268293,
       "quality_level": "excellent"
     },
     {
-      "file": "Dhruv Panchal.pdf",
+      "file": "ResumeTEJASHRIVAISHNAV.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 85,
+          "reason": "Valid generic international format"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": false,
+          "score": 0,
+          "reason": "Address is empty"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "20/20 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 93.75,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "S S DIXIT_ Resume.PDF",
       "fields": {
         "name": {
           "valid": true,
@@ -154,56 +882,18 @@
           "reason": "Valid gender"
         },
         "address": {
-          "valid": false,
-          "score": 0,
-          "reason": "Address is empty"
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
         },
         "skills": {
           "valid": true,
           "score": 95.0,
-          "reason": "9/9 skills valid"
+          "reason": "27/27 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 94.0,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "Subhrajit CL & CV_20260225_220011_0000.pdf",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": false,
-          "score": 0,
-          "reason": "Address is empty"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "5/5 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 96.25,
+      "overall_score": 92.5,
       "quality_level": "excellent"
     }
   ]

@@ -220,7 +220,6 @@ PHONE_LABEL_RE = re.compile(
 PHONE_GENERIC_RE = re.compile(
     r'(?<!\w)(?:\+?\d{1,3}[ \t.\-]?)?(?:\(?\d{2,5}\)?[ \t.\-]?)?\d(?:[\d \t()\.\-]{5,}\d)(?!\w)'
 )
-
 EMAIL_DOMAIN_PREFIX_RE = re.compile(
     r"^([a-z0-9-]{1,30}(?:\.[a-z0-9-]{1,30}){0,2}"
     r"\.(?:co\.in|org\.in|ac\.in|gov\.in|com|org|net|edu|gov|in|co|io|ai|info|biz|me|us|uk|ca|au|de|fr|jp|sg))",
@@ -235,7 +234,7 @@ EMAIL_NOISY_PREFIX_RE = re.compile(
     re.I,
 )
 
-GENDER_LABEL_RE = re.compile(r'(?i)\b(?:gender|sex)\b\s*[:\-]?\s*(male|female|m|f|man|woman|boy|girl)\b')
+GENDER_LABEL_RE = re.compile(r'(?i)\b(?:gender|sex)\b\s*[:\-]?\s*(male|female|m|f|man|woman|boy|girl)(?:\b|(?=[A-Z]))')
 
 GENDER_EARLY_MALE_RE = re.compile(r'\b(?:gender|sex)\b[^\n]{0,24}\b(?:male|m)\b', re.I)
 
@@ -447,9 +446,9 @@ DOB_LABEL_RE = re.compile(
     r'\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4}'           # DD/MM/YYYY  DD-MM-YY
     r'|\d{4}[\/\-\.]\d{1,2}[\/\-\.]\d{1,2}'             # YYYY-MM-DD
     r'|\d{1,2}[\/\-](?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[\/\-]\d{2,4}'  # 12-Jan-1998
-    r'|\d{1,2}\s+(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\w*\.?\s+\d{2,4}'  # 12 Jan 1998
+    r'|\d{1,2}(?:st|nd|rd|th)?\s+(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\w*\.?\s+\d{2,4}'  # 12th Jan 1998
     r'|(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\w*\.?\s+\d{1,2},?\s+\d{2,4}'  # Jan 12, 1998
-    r'|\d{1,2}\s+(?:january|february|march|april|june|july|august|september|october|november|december)\s+\d{2,4}'
+    r'|\d{1,2}(?:st|nd|rd|th)?\s+(?:january|february|march|april|june|july|august|september|october|november|december)\s+\d{2,4}'
     r'|(?:january|february|march|april|june|july|august|september|october|november|december)\s+\d{1,2},?\s+\d{2,4}'
     r')',
     re.I
@@ -492,6 +491,9 @@ def _parse_dob_value(raw):
     if not raw:
         return None
     raw = re.sub(r'\s+', ' ', raw).strip()
+    # Normalize ordinal day forms: "05th Aug 2004" -> "05 Aug 2004".
+    raw = re.sub(r'(?i)\b(\d{1,2})(st|nd|rd|th)\b', r'\1', raw)
+    raw = re.sub(r'(?i)\b(\d{4})(st|nd|rd|th)\b', r'\1', raw)
 
     parsed_date = None
     
@@ -890,6 +892,8 @@ def normalize_compact_text(text):
         return ''
     t = re.sub(r'(?<=[A-Za-z])(?=\d)', ' ', text)
     t = re.sub(r'(?<=\d)(?=[A-Za-z])', ' ', t)
+    t = re.sub(r'(?<=[a-z])(?=[A-Z])', ' ', t)
+    t = re.sub(r'(?<=[A-Z])(?=[A-Z][a-z])', ' ', t)
     t = re.sub(r'(?<=@)(?=[A-Z])', ' ', t)
     return t
 
@@ -1379,6 +1383,38 @@ def name_from_email(full_text):
                             return c
     return None
 
+def _recover_name_from_designation_context(text):
+    if not text:
+        return None
+
+    compact = normalize_compact_text(text)
+    compact = compact.replace('’', "'")
+
+    glued = re.search(r'(?<![A-Z])([A-Z]{2,})\s+([A-Z]{2,})(?:SR\.?|JR\.?)\b', compact)
+    if glued:
+        candidate = title_case(f"{glued.group(1)} {glued.group(2)}")
+        if is_valid(candidate):
+            return candidate
+
+    compact = re.sub(r'([A-Z]{3,})(SR\.?|JR\.?)(?=\s)', r'\1 \2', compact)
+
+    designation_re = re.compile(
+        r'(?i)(?:SR\.?|SENIOR|JR\.?|JUNIOR)?\s*'
+        r'(?:COMPUTER\s+OPERATOR|OPERATOR|ENGINEER|DEVELOPER|ANALYST|MANAGER|EXECUTIVE|OFFICER)\b'
+    )
+    for dmatch in designation_re.finditer(compact):
+        prefix = compact[max(0, dmatch.start() - 120):dmatch.start()]
+        upper_tokens = re.findall(r'[A-Z]{2,}', prefix)
+        if len(upper_tokens) < 2:
+            continue
+        for take in (3, 2):
+            if len(upper_tokens) < take:
+                continue
+            candidate = title_case(' '.join(upper_tokens[-take:]))
+            if is_valid(candidate):
+                return candidate
+    return None
+
 def _resolve_process_folder():
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument('--folder',        dest='folder',       default='')
@@ -1422,6 +1458,27 @@ def extract_name(text):
     compact_text = normalize_compact_text(text)
     norm = [normalize_caps(l) for l in raw]
     full = '\n'.join(norm)
+
+    # S-compact: uppercase full name glued to designation (e.g., "ISMAIL KHANSR. COMPUTER OPERATOR").
+    compact_upper = compact_text.replace('’', "'")
+    compact_upper = re.sub(r'([A-Z]{3,})(SR\.?|JR\.?)(?=\s)', r'\1 \2', compact_upper)
+    compact_name_match = re.search(
+        r'(?<![A-Z])([A-Z]{2,}(?:\s+[A-Z]{2,}){1,3}?)(?=\s*(?:SR\.?|SENIOR|JR\.?|JUNIOR)\b)',
+        compact_upper,
+    )
+    if compact_name_match:
+        compact_name = title_case(compact_name_match.group(1).strip())
+        if is_valid(compact_name):
+            return compact_name
+
+    for rank_m in re.finditer(r'(?i)\b(?:SR\.?|JR\.?)\b', compact_upper):
+        prefix = compact_upper[max(0, rank_m.start() - 80):rank_m.start()]
+        m = re.search(r'([A-Z]{2,}(?:\s+[A-Z]{2,}){1,3})\s*$', prefix)
+        if not m:
+            continue
+        candidate = title_case(m.group(1).strip())
+        if is_valid(candidate):
+            return candidate
 
     # Catch merged uppercase headers like "EDUCATIONDHRUVPANCHALDEVELOPER".
     for line in raw[:6]:
@@ -1618,6 +1675,24 @@ def extract_name(text):
                         continue
                     if accept(combined, strict=False):
                         return combined
+
+    # S3: Mid-document all-caps identity line (common in PDF two-column headers).
+    for line in raw[:120]:
+        line_clean = re.sub(r'\s+', ' ', line).strip()
+        if not line_clean:
+            continue
+        if re.search(r'[@\d]|https?://', line_clean, re.I):
+            continue
+        if line_has_bad_context(line_clean):
+            continue
+        ascii_only = line_clean.replace('’', "'")
+        if not re.match(r"^[A-Z][A-Z'\-.]{1,}(?:\s+[A-Z][A-Z'\-.]{1,}){1,3}$", ascii_only):
+            continue
+        candidate = title_case(sanitize_candidate(ascii_only))
+        if looks_like_name_header(candidate):
+            continue
+        if accept(candidate, strict=False):
+            return candidate
 
     # EC7: Tail-signature checks
     m = re.search(
@@ -1880,9 +1955,13 @@ def extract_email_from_resume(text):
             or bool(re.search(r"\d{8,}.*[A-Za-z]{4,}", local))
         )
         if looks_noisy:
-            alpha_parts = [p for p in re.split(r"\d{6,}", local) if re.search(r"[A-Za-z]", p)]
-            if alpha_parts and len(alpha_parts[-1]) >= 4:
-                local = alpha_parts[-1]
+            tail_local = re.search(r"\d{6,}([A-Za-z][A-Za-z0-9._%+-]{2,})$", local)
+            if tail_local:
+                local = tail_local.group(1)
+            else:
+                alpha_parts = [p for p in re.split(r"\d{6,}", local) if re.search(r"[A-Za-z]", p)]
+                if alpha_parts and len(alpha_parts[-1]) >= 4:
+                    local = alpha_parts[-1]
         if re.match(r"^\d{2,}[A-Za-z]", local):
             local = re.sub(r"^\d+", "", local)
         return local.strip(" ._-+%").rstrip(".")
@@ -1946,7 +2025,7 @@ def extract_email_from_resume(text):
         if email:
             ctx   = text[max(0,m.start()-35):min(len(text),m.end()+35)].lower()
             score = 2 if re.search(r"email|e-mail|mail\s*id|contact", ctx) else 1
-            candidates.append((score, len(email), email))
+            candidates.append((3, score, len(email), email))
 
     for m in re.finditer(r"[A-Za-z0-9._%+\-\s]{2,90}@[A-Za-z0-9.\-\s]{2,120}", text):
         email = build_email(m.group(0))
@@ -1955,7 +2034,7 @@ def extract_email_from_resume(text):
             score = 2 if re.search(r"email|e-mail|mail\s*id|contact", ctx) else 1
             if re.search(r"\d{8,}", m.group(0)):
                 score -= 1
-            candidates.append((score, len(email), email))
+            candidates.append((2, score, len(email), email))
 
     for m in re.finditer(
         r"[A-Za-z0-9._%+\-\s]{2,80}(?:\(|\[)?\s*at\s*(?:\)|\])?[A-Za-z0-9.\-\s]{2,80}"
@@ -1966,13 +2045,13 @@ def extract_email_from_resume(text):
         if email:
             ctx   = text[max(0,m.start()-35):min(len(text),m.end()+35)].lower()
             score = 2 if re.search(r"email|e-mail|mail\s*id|contact", ctx) else 1
-            candidates.append((score, len(email), email))
+            candidates.append((1, score, len(email), email))
 
     if not candidates:
         return None
     candidates = list(set(candidates))
-    candidates.sort(key=lambda x: (-x[0], x[1], x[2]))
-    return candidates[0][2]
+    candidates.sort(key=lambda x: (-x[0], -x[1], -x[2], x[3]))
+    return candidates[0][3]
 
 # ══════════════════════════════════════════════════════════════
 #  GENDER EXTRACTION  (v2 — higher accuracy)
@@ -2293,6 +2372,17 @@ def extract_address(text):
         if hint_hits == 0 and not has_postal:
             return None
         return value
+
+    # Handle merged contact lines from two-column PDFs (address glued after email/phone).
+    compact = re.sub(r'\s+', ' ', t).strip()
+    inline_addr = re.search(
+        r'(?i)\b(?:house|flat|plot|room|shop|door)\b[^@\n]{8,180}?\b\d{6}\b',
+        compact,
+    )
+    if inline_addr:
+        candidate = clean_address(inline_addr.group(0))
+        if candidate:
+            return candidate
 
     # First preference: explicit address label
     for i, line in enumerate(lines[:80]):
@@ -4117,7 +4207,7 @@ EXPERIENCE_NOISE_VALUE_RE = re.compile(
 
 EXPERIENCE_VALID_COMPANY_HINT_RE = re.compile(
     r'(?i)\b(?:pvt\.?|ltd\.?|limited|inc\.?|corp\.?|llp|technologies|solutions|'
-    r'laboratories|pharma|foods?|industries|services|company|motors|'
+    r'laboratories|pharma|foods?|industries|services|enterprise|company|motors|'
     r'consultancy|consulting|systems|private|group|c-?dac|club|university|institute|school|academy)\b'
 )
 
@@ -4150,7 +4240,7 @@ ROLE_HINT_RE = re.compile(
 
 COMPANY_HINT_RE = re.compile(
     r'(?i)\b(?:pvt\.?|ltd\.?|limited|inc\.?|corp\.?|llp|technologies|solutions|'
-    r'systems|services|company|industries|private|c-?dac)\b'
+    r'systems|services|enterprise|company|industries|private|c-?dac)\b'
 )
 
 DATE_RANGE_RE = re.compile(
@@ -4504,6 +4594,8 @@ def _looks_like_noisy_company_text(company):
     if re.search(r'(?i)\bpage\s+\d+\s+of\s+\d+\b', company_l):
         return True
     if re.search(r'\b(?:i\s+am|my|me|we)\b', company_l):
+        return True
+    if re.search(r'\b(?:to\s+present|online\s+application\s+services|technical\s+support|data\s+entry)\b', company_l):
         return True
     return bool(re.search(
         r'\b(?:top\s*skills|certifications?|courses?|training|summary|profile|'
@@ -5293,7 +5385,7 @@ def extract_professional_experience_profile(text):
         if not line:
             return None
         m = re.search(
-            r'(?i)\b([A-Za-z0-9&.,\-/ ]{2,90}?(?:c-?dac|pvt\.?\s*ltd\.?|ltd\.?|limited|services|solutions|technologies|university|college|institute|club))\b',
+            r'(?i)\b([A-Za-z0-9&.,\-/\'’ ]{2,90}?(?:c-?dac|pvt\.?\s*ltd\.?|ltd\.?|limited|services|solutions|technologies|enterprise|university|college|institute|club))\b',
             line,
         )
         if m:
@@ -5665,6 +5757,82 @@ def extract_professional_experience_profile(text):
         if scanned:
             return scanned
 
+    if not experiences:
+        compact = re.sub(r'\s+', ' ', normalize_compact_text(text)).strip()
+        targeted_re = re.compile(
+            r'(?i)\bwork\s+experience\b\s+'
+            r'(.{3,120}?)\s*'
+            r'(sr\.?\s*computer\s*operator|senior\s*computer\s*operator|computer\s*operator)\s*'
+            r'from\s+((?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s+\d{4})\s+'
+            r'(?:to|until|\-|–|—)\s+'
+            r'(present|current|(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s+\d{4})\b'
+        )
+        tm = targeted_re.search(compact)
+        if tm:
+            company = _clean_experience_line(tm.group(1)).strip(' ,.-')
+            role = _normalize_role_text(tm.group(2))
+            start_raw = _clean_experience_line(tm.group(3))
+            end_raw = _clean_experience_line(tm.group(4))
+            end_is_current = bool(re.match(r'(?i)^(present|current)$', end_raw))
+            experiences.append({
+                'company_name': company or None,
+                'role': role,
+                'employment_type': 'Full-time',
+                'location': None,
+                'start_date': start_raw,
+                'end_date': end_raw,
+                'currently_working': end_is_current,
+                'experience_duration': _duration_from_range(start_raw, end_raw, end_is_current),
+                'duration_text': f"From {start_raw} to {end_raw}",
+                'ctc': None,
+                'notice_period': None,
+                'technologies': [],
+                'responsibilities': [],
+            })
+
+    if not experiences:
+        compact = re.sub(r'\s+', ' ', normalize_compact_text(text)).strip()
+        merged_exp_re = re.compile(
+            r'(?i)\bwork\s+experience\b\s+'
+            r'(.{3,120}?)\s+'
+            r'((?:sr\.?|senior|jr\.?|junior)?\s*'
+            r'(?:computer\s+operator|operator|engineer|developer|analyst|manager|assistant|executive|officer|consultant|specialist))\s+'
+            r'from\s+((?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s+\d{4})\s+'
+            r'(?:to|until|\-|–|—)\s+'
+            r'(present|current|(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s+\d{4})\b'
+        )
+        merged_exp_re2 = re.compile(
+            r'(?i)\bwork\s+experience\b\s+'
+            r'(.{3,120}?)\s*'
+            r'((?:sr\.?|senior|jr\.?|junior)?\s*'
+            r'(?:computer\s+operator|operator|engineer|developer|analyst|manager|assistant|executive|officer|consultant|specialist))\s+'
+            r'from\s+((?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s+\d{4})\s+'
+            r'(?:to|until|\-|–|—)\s+'
+            r'(present|current|(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s+\d{4})\b'
+        )
+        mm = merged_exp_re.search(compact) or merged_exp_re2.search(compact)
+        if mm:
+            company = _clean_experience_line(mm.group(1)).strip(' ,.-')
+            role = _normalize_role_text(mm.group(2))
+            start_raw = _clean_experience_line(mm.group(3))
+            end_raw = _clean_experience_line(mm.group(4))
+            end_is_current = bool(re.match(r'(?i)^(present|current)$', end_raw))
+            experiences.append({
+                'company_name': company or None,
+                'role': role,
+                'employment_type': 'Full-time',
+                'location': None,
+                'start_date': start_raw,
+                'end_date': end_raw,
+                'currently_working': end_is_current,
+                'experience_duration': _duration_from_range(start_raw, end_raw, end_is_current),
+                'duration_text': f"From {start_raw} to {end_raw}",
+                'ctc': None,
+                'notice_period': None,
+                'technologies': [],
+                'responsibilities': [],
+            })
+
     return experiences
 
 
@@ -6013,13 +6181,17 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list,
         email          = extract_email_from_resume(text)
         name           = extract_name(text)
         if _is_suspicious_extracted_name(name):
-            simple_email_name = _derive_name_from_email_local(email)
-            if simple_email_name and not _is_suspicious_extracted_name(simple_email_name):
-                name = simple_email_name
+            contextual_name = _recover_name_from_designation_context(text)
+            if contextual_name and not _is_suspicious_extracted_name(contextual_name):
+                name = contextual_name
             else:
-                email_fallback_name = name_from_email(text)
-                if email_fallback_name and not _is_suspicious_extracted_name(email_fallback_name):
-                    name = email_fallback_name
+                simple_email_name = _derive_name_from_email_local(email)
+                if simple_email_name and not _is_suspicious_extracted_name(simple_email_name):
+                    name = simple_email_name
+                else:
+                    email_fallback_name = name_from_email(text)
+                    if email_fallback_name and not _is_suspicious_extracted_name(email_fallback_name):
+                        name = email_fallback_name
 
         if _is_suspicious_extracted_name(name):
             filename_name = _derive_name_from_filename(fname)

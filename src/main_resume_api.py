@@ -14,8 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
-
-from src import Main_Resume as resume_parser
+import Main_Resume as resume_parser
 
 
 _SRC_ENV_PATH = Path(__file__).resolve().parent / ".env"
