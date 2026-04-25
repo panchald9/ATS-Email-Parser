@@ -1073,6 +1073,7 @@ def sanitize_candidate(candidate):
     c = re.sub(r'(?:\s+|,\s*)(?:[A-Z]{2,5}[®™©]*(?:\s+[A-Z]{2,5}[®™©]*)*)$', '', c)
     
     c = re.sub(r'(?i)^\s*(?:full\s+)?name\s*[:\-]\s*', '', c)
+    c = re.sub(r'(?i)^\s*(?:mr|mrs|ms|miss|dr|shri|smt)\.?\s+', '', c)
     c = re.sub(r'(?i)^\s*resume\s+of\s*', '', c)
     c = re.sub(r'^[\-–—:\.\)\(\[\]\{\}\|\s]+', '', c)
     c = re.sub(r'[\-–—:\.\)\(\[\]\{\}\|\s]+$', '', c)
@@ -1207,9 +1208,10 @@ def is_valid(name, allow_single=False):
         if len(alpha) < 2:
             if not (len(alpha) == 1 and (w.endswith('.') or w.isupper())):
                 return False
-    if any(len(re.sub(r'[^A-Za-z]', '', w)) > 20 for w in words):
+    if any(len(re.sub(r'[^A-Za-z]', '', w)) > 24 for w in words):
         return False
-    if len(words) >= 3 and any(len(re.sub(r'[^A-Za-z]', '', w)) > 12 for w in words):
+    # Support longer Indian names that legitimately exceed 12 characters.
+    if len(words) >= 3 and any(len(re.sub(r'[^A-Za-z]', '', w)) > 18 for w in words):
         return False
     if any(w.lower().strip('.,') in BLACKLIST for w in words):
         return False
@@ -1454,6 +1456,12 @@ def extract_name(text):
     raw  = [l.strip() for l in text.split('\n') if l.strip()]
     if not raw:
         return None
+
+    raw_early_text = '\n'.join(raw[:25])
+    for m in re.finditer(r'(?im)^(?:full\s+)?name\s*[:\-]\s*(.+?)\s*$', raw_early_text):
+        candidate = title_case(sanitize_candidate(m.group(1).split('|')[0]))
+        if accept(candidate, strict=False, allow_single=True):
+            return candidate
 
     compact_text = normalize_compact_text(text)
     norm = [normalize_caps(l) for l in raw]
@@ -1918,6 +1926,22 @@ def extract_email_from_resume(text):
     if not text:
         return None
 
+    lines = [re.sub(r'\s+', ' ', line).strip() for line in text.splitlines() if line.strip()]
+    if lines:
+        early_lines = []
+        for line in lines[:60]:
+            if re.match(r'(?i)^\s*(reference|references|declaration)\s*[:\-]?\s*$', line):
+                break
+            early_lines.append(line)
+        for line in early_lines:
+            if not re.search(r'(?i)\b(?:e-?mail|mail\s*id|email\s*id)\b', line):
+                continue
+            m = re.search(r'([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})', line)
+            if m:
+                direct = m.group(1).strip().lower()
+                if EMAIL_STRICT_RE.match(direct):
+                    return direct
+
     def normalize_piece(s):
         s = s.replace("\r", " ").replace("\n", " ").replace("\t", " ")
         s = re.sub(r"(?i)\(\s*at\s*\)|\[\s*at\s*\]|\sat\s", "@", s)
@@ -2332,6 +2356,8 @@ def extract_address(text):
 
     def clean_address(value):
         value = re.sub(r'\s+', ' ', value).strip(' ,;:-')
+        value = re.sub(r'(?i)\b(Post|Ta|Dist)\.\s*', lambda m: f"{m.group(1)} ", value)
+        value = re.sub(r'\s*,\s*', ', ', value)
         if len(value) < 8:
             return None
         if len(value) > 220:
@@ -2343,14 +2369,17 @@ def extract_address(text):
             return None
         if value.count(',') > 6:
             return None
-        if value.count('.') > 2:
+        if value.count('.') > 4:
             return None
         lower_value = value.lower()
         non_address_phrases = (
             'working on', 'upgraded the', 'completes day-to-day', 'conduct various conference',
             'analyzing the', 'operating systems', 'inventory control', 'responses to it',
+            'competition', 'semester', 'specialization', 'award', 'awards',
         )
         if any(p in lower_value for p in non_address_phrases):
+            return None
+        if re.match(r'^\d+\.\s*(?:\d+\s*)?(?:st|nd|rd|th)\b', lower_value):
             return None
         if ADDRESS_CONTACT_RE.search(value):
             return None
@@ -2601,6 +2630,12 @@ DEGREE_PATTERNS = [
     (r'\b(?:10th?|s\.?s\.?c|ssc|secondary)\b', '10th'),
     (r'\b(?:dmcp|ccc|diploma\s+in|certificate\s+in)\b', 'Diploma'),
 ]
+
+DEGREE_PATTERNS.extend([
+    (r'\b(?:b\.?\s*pharm(?:acy)?|bachelor\s+of\s+pharmacy)\b', 'B.Pharmacy'),
+    (r'\b(?:m\.?\s*pharm(?:acy)?|master\s+of\s+pharmacy)\b', 'M.Pharmacy'),
+    (r'\b(?:d\.?\s*pharm(?:acy)?|diploma\s+in\s+pharmacy)\b', 'D.Pharmacy'),
+])
 
 SPECIALIZATION_KEYWORDS = [
     'computer science', 'information technology', 'it', 'cse', 'ec', 'electronics',
@@ -3138,9 +3173,15 @@ def extract_education(text):
                 continue
 
             qualification = str(item.get('qualification') or '').strip()
-            institute = str(item.get('institute_university') or '').strip()
+            combined_institute = str(item.get('institute_university') or '').strip()
+            institution = str(item.get('institution') or '').strip()
+            board_university = str(item.get('board_university') or '').strip()
+            if combined_institute and (not institution and not board_university):
+                institution, board_university = _split_institution_and_board(qualification, combined_institute)
+            institute = institution or combined_institute
             grade = str(item.get('grade_cgpa') or '').strip()
             year_raw = str(item.get('passing_year') or '').strip()
+            institute_was_suspicious = False
 
             year = None
             if year_raw.isdigit() and len(year_raw) == 4:
@@ -3151,11 +3192,35 @@ def extract_education(text):
             q_key = re.sub(r'[^a-z0-9]', '', qualification.lower())
             institute_lower = institute.lower()
 
+            suspicious_institute = bool(re.search(
+                r'(?i)\b(?:published|publication|publications|evaluation|evaluations|study|studies|drug|journal|article|review|abstract|adme|'
+                r'issn|volume|issue|guide|conference|webinar|activities|internship|technical\s+skills|soft\s+skills|'
+                r'personal\s+details|permanent\s+address|date\s+of\s+birth|languages?\s+known|hobbies)\b',
+                institute,
+            ))
+            if suspicious_institute and not re.search(
+                r'(?i)\b(?:university|college|institute|school|academy|polytechnic|board)\b',
+                institute,
+            ):
+                institute = ''
+                institute_was_suspicious = True
+
+            if len(institute) > 160:
+                institute = ''
+                institute_was_suspicious = True
+
+            if institute and re.search(
+                r'(?i)\b(?:published|publication|publications|journal|issn|volume|issue|personal\s+details|languages?\s+known|hobbies)\b',
+                institute,
+            ):
+                institute = ''
+                institute_was_suspicious = True
+
             if institute and not re.search(r'(?i)\b(?:university|college|institute|school|academy|polytechnic|board|ncvt|nctvet|govt|government|certification|certificate)\b', institute):
                 # Keep non-keyword institute only if there is strong year signal and no skill noise.
-                if year is None or re.search(r'(?i)\b(?:photoshop|illustrator|creative\s*suite|ui/?ux|management\s*system)\b', institute):
+                if year is None or re.search(r'(?i)\b(?:photoshop|illustrator|creative\s*suite|ui/?ux|management\s*system|published|evaluation|study|adme)\b', institute):
                     # Accept if we have a strong qualification (like degree names or certificates)
-                    if not re.search(r'(?i)\b(?:diploma|bachelor|master|b\.tech|m\.tech|b\.a|b\.sc|b\.com|m\.a|m\.sc|m\.com|mba|llb|llm|phd|certificate|ncvt|electrician|technician)\b', qualification):
+                    if not re.search(r'(?i)\b(?:diploma|bachelor|master|b\.tech|m\.tech|b\.a|b\.sc|b\.com|m\.a|m\.sc|m\.com|mba|llb|llm|phd|certificate|ncvt|electrician|technician|pharmacy|pharm)\b', qualification):
                         continue
 
             if re.search(r'(?i)\b(?:photoshop|illustrator|creative\s*suite|ui/?ux)\b', qualification):
@@ -3171,6 +3236,12 @@ def extract_education(text):
             if not qualification and not institute and year is None:
                 continue
 
+            if institute_was_suspicious and not grade:
+                continue
+
+            if qualification and not institute and year is None and not grade:
+                continue
+
             row_key = (q_key, institute.lower(), str(year or ''), grade.lower())
             if row_key in seen:
                 continue
@@ -3178,7 +3249,11 @@ def extract_education(text):
 
             normalized = dict(item)
             normalized['qualification'] = qualification or item.get('qualification')
-            normalized['institute_university'] = institute or None
+            normalized['institution'] = institution or None
+            normalized['board_university'] = board_university or None
+            normalized['institute_university'] = ' '.join(
+                part for part in [institution or None, board_university or None] if part
+            ) or institute or None
             normalized['grade_cgpa'] = grade or None
             normalized['passing_year'] = str(year) if year is not None else None
             cleaned.append(normalized)
@@ -3261,8 +3336,381 @@ def extract_education(text):
 
         return results
 
+    def _normalize_tabular_qualification(raw_value):
+        raw_value = re.sub(r'\s+', ' ', (raw_value or '')).strip(' ,.-')
+        raw_lower = raw_value.lower()
+        specialization = None
+
+        qual_map = [
+            (r'(?i)^mba(?:\s*\(([^)]+)\))?$', 'MBA'),
+            (r'(?i)^b\.?\s*com$', 'B.Com'),
+            (r'(?i)^m\.?\s*com$', 'M.Com'),
+            (r'(?i)^b\.?\s*sc$', 'B.Sc'),
+            (r'(?i)^m\.?\s*sc$', 'M.Sc'),
+            (r'(?i)^b\.?\s*tech$', 'B.Tech'),
+            (r'(?i)^m\.?\s*tech$', 'M.Tech'),
+            (r'(?i)^hsc$', '12th'),
+            (r'(?i)^ssc$', '10th'),
+        ]
+        for pattern, label in qual_map:
+            m = re.match(pattern, raw_value)
+            if m:
+                specialization = m.group(1).strip() if m.lastindex and m.group(1) else None
+                return label, specialization
+
+        if raw_lower.startswith('mba(') and raw_value.endswith(')'):
+            inside = raw_value[raw_value.find('(') + 1:-1].strip()
+            specialization = inside or None
+            return 'MBA', specialization
+
+        return raw_value, specialization
+
+    def _split_institution_and_board(qualification, combined_value):
+        combined = re.sub(r'\s+', ' ', (combined_value or '')).strip(' ,.-')
+        if not combined:
+            return (None, None)
+
+        university_match = re.search(r'(?i)\b([A-Z][A-Za-z&.\-]*\s+University)\s*$', combined)
+        if university_match:
+            board = university_match.group(1).strip(' ,.-')
+            institution = combined[:university_match.start()].strip(' ,.-')
+            if institution:
+                return (institution, board)
+
+        for pattern in (
+            r'(?i)\b([A-Z][A-Za-z&.\- ]{2,80}?\s+(?:University|Board))\s*$',
+            r'\b([A-Z]{2,10})\s*$',
+        ):
+            match = re.search(pattern, combined)
+            if match:
+                board = match.group(1).strip(' ,.-')
+                institution = combined[:match.start()].strip(' ,.-')
+                if institution:
+                    return (institution, board)
+
+        if qualification in {'12th', '10th'}:
+            parts = [p.strip() for p in re.split(r'[,.]\s*', combined) if p.strip()]
+            if len(parts) >= 2:
+                board = parts[-1]
+                institution = ', '.join(parts[:-1]).strip(' ,.-')
+                if institution and board and len(board.split()) <= 2:
+                    return (institution, board)
+            tokens = combined.split()
+            if len(tokens) >= 4 and len(tokens[-1]) >= 4:
+                board = tokens[-1].strip(' ,.-')
+                institution = ' '.join(tokens[:-1]).strip(' ,.-')
+                if institution:
+                    return (institution, board)
+
+        return (combined, None)
+
+    def _extract_tabular_education_rows(text_value):
+        lines = [re.sub(r'\s+', ' ', ln).strip() for ln in text_value.splitlines() if ln.strip()]
+        results = []
+        seen = set()
+        header_seen = False
+        row_re = re.compile(
+            r'^(?P<qualification>[A-Z][A-Z()./& -]{1,40}?)\s+'
+            r'(?P<institute>[A-Z][A-Z.& -]{1,30})\s+'
+            r'(?P<year>(?:19|20)\d{2})\s+'
+            r'(?P<grade>\d+(?:\.\d+)?%)$'
+        )
+
+        for line in lines:
+            low = line.lower()
+            if 'qualification' in low and ('passing year' in low or 'percentage' in low or 'board' in low):
+                header_seen = True
+                continue
+            if not header_seen and not re.search(r'(?i)\b(?:mba(?:\(|$)|b\.?\s*com|m\.?\s*com|hsc|ssc|b\.?\s*sc|m\.?\s*sc|b\.?\s*tech|m\.?\s*tech)\b', line):
+                continue
+            if re.match(r'(?i)^(?:project|achievements?|declaration|personal profile|technical skills|experience|skills?)\b', line):
+                break
+
+            match = row_re.match(line)
+            if not match:
+                continue
+
+            qualification_raw = match.group('qualification').strip()
+            institute = match.group('institute').strip(' ,.-')
+            qualification, specialization = _normalize_tabular_qualification(qualification_raw)
+            institution, board_university = _split_institution_and_board(qualification, institute)
+            row_key = (qualification.lower(), institute.lower(), match.group('year'), match.group('grade'))
+            if row_key in seen:
+                continue
+            seen.add(row_key)
+            results.append({
+                'qualification': qualification,
+                'specialization_branch': specialization,
+                'institution': institution,
+                'board_university': board_university,
+                'institute_university': institute,
+                'passing_year': match.group('year'),
+                'grade_cgpa': match.group('grade'),
+                'mode_of_study': None,
+                'location': None,
+                'major_subjects': None,
+            })
+
+        return results
+
+    def _extract_multiline_education_rows(text_value):
+        lines = [re.sub(r'\s+', ' ', ln).strip() for ln in text_value.splitlines() if ln.strip()]
+        if not lines:
+            return []
+
+        degree_start_re = re.compile(
+            r'(?i)^(?:m\.?\s*pharm(?:acy)?|b\.?\s*pharm(?:acy)?|d\.?\s*pharm(?:acy)?|'
+            r'm\s+pharmacy|b\s+pharmacy|d\s+pharmacy|mba|b\.?\s*com|m\.?\s*com|'
+            r'b\.?\s*sc|m\.?\s*sc|b\.?\s*tech|m\.?\s*tech|h\.?\s*s\.?\s*c|s\.?\s*s\.?\s*c|hsc|ssc)\b'
+        )
+
+        def _normalize_multiline_qualification(line):
+            line = re.sub(r'\s+', ' ', line).strip()
+            mapping = [
+                (r'(?i)^m\.?\s*pharm(?:acy)?\b|^m\s+pharmacy\b', 'M.Pharmacy'),
+                (r'(?i)^b\.?\s*pharm(?:acy)?\b|^b\s+pharmacy\b', 'B.Pharmacy'),
+                (r'(?i)^d\.?\s*pharm(?:acy)?\b|^d\s+pharmacy\b', 'D.Pharmacy'),
+                (r'(?i)^h\.?\s*s\.?\s*c\b|^hsc\b', '12th'),
+                (r'(?i)^s\.?\s*s\.?\s*c\b|^ssc\b', '10th'),
+            ]
+            for pattern, label in mapping:
+                if re.search(pattern, line):
+                    return label
+            for pattern, degree_name in DEGREE_PATTERNS:
+                if re.search(pattern, line, re.I):
+                    return degree_name
+            return None
+
+        def _extract_specialization(block_lines):
+            for ln in block_lines[:2]:
+                m = re.search(r'\(([^)]+)\)', ln)
+                if m:
+                    spec = re.sub(r'\s+', ' ', m.group(1)).strip(' ,.-')
+                    if spec and len(spec) <= 60:
+                        return spec
+            return None
+
+        def _clean_institute_text(block_text, qualification, specialization):
+            cleaned = block_text
+            cleaned = re.sub(
+                r'(?i)\b(?:m\.?\s*pharm(?:acy)?|b\.?\s*pharm(?:acy)?|d\.?\s*pharm(?:acy)?|'
+                r'm\s+pharmacy|b\s+pharmacy|d\s+pharmacy|h\.?\s*s\.?\s*c|s\.?\s*s\.?\s*c|hsc|ssc)\b',
+                ' ',
+                cleaned,
+            )
+            if specialization:
+                cleaned = re.sub(r'\(\s*' + re.escape(specialization) + r'\s*\)', ' ', cleaned, flags=re.I)
+                cleaned = re.sub(re.escape(specialization), ' ', cleaned, flags=re.I)
+            cleaned = re.sub(r'\b(?:19|20)\d{2}\b', ' ', cleaned)
+            cleaned = re.sub(r'\d+(?:\.\d+)?\s*%', ' ', cleaned)
+            cleaned = re.sub(r'\s+', ' ', cleaned).strip(' ,.-')
+            return cleaned or None
+
+        def _flush_block(block_lines):
+            if not block_lines:
+                return None
+            qualification = _normalize_multiline_qualification(block_lines[0])
+            if not qualification:
+                return None
+            block_text = ' '.join(block_lines)
+            year_matches = re.findall(r'\b(19\d{2}|20\d{2})\b', block_text)
+            grade_matches = re.findall(r'(\d+(?:\.\d+)?)\s*%', block_text)
+            specialization = _extract_specialization(block_lines)
+            institute = _clean_institute_text(block_text, qualification, specialization)
+            institution, board_university = _split_institution_and_board(qualification, institute)
+            return {
+                'qualification': qualification,
+                'specialization_branch': specialization,
+                'institution': institution,
+                'board_university': board_university,
+                'institute_university': institute,
+                'passing_year': year_matches[-1] if year_matches else None,
+                'grade_cgpa': (grade_matches[-1] + '%') if grade_matches else None,
+                'mode_of_study': None,
+                'location': None,
+                'major_subjects': None,
+            }
+
+        results = []
+        current_block = []
+
+        for line in lines:
+            if degree_start_re.search(line):
+                if current_block:
+                    parsed = _flush_block(current_block)
+                    if parsed:
+                        results.append(parsed)
+                current_block = [line]
+                continue
+            if current_block:
+                if re.match(r'(?i)^(?:experience|skills?|projects?|certifications?|languages?|declaration|references?)\b', line):
+                    parsed = _flush_block(current_block)
+                    if parsed:
+                        results.append(parsed)
+                    current_block = []
+                    continue
+                current_block.append(line)
+        if current_block:
+            parsed = _flush_block(current_block)
+            if parsed:
+                results.append(parsed)
+
+        return results
+
+    def _extract_numbered_table_education_rows(text_value):
+        lines = [re.sub(r'\s+', ' ', ln).strip() for ln in text_value.splitlines() if ln.strip()]
+        if not lines:
+            return []
+
+        start_idx = None
+        for idx in range(len(lines)):
+            window = ' '.join(lines[idx:min(len(lines), idx + 6)]).lower()
+            if (
+                'qualification' in window
+                and ('year of passing' in window or 'year of' in window)
+                and 'percentage' in window
+                and ('institution/board' in window or 'institution' in window)
+            ):
+                start_idx = min(len(lines), idx + 6)
+                break
+        if start_idx is None:
+            return []
+
+        stop_re = re.compile(
+            r'(?i)^(?:experience|professional\s*skills?|curricular\s*activities|project\s*work|'
+            r'areas?\s+of\s+interest|languages?\s+known|reference|declaration)\b'
+        )
+        relevant = []
+        for line in lines[start_idx:]:
+            if stop_re.match(line):
+                break
+            relevant.append(line)
+
+        if not relevant:
+            return []
+
+        blocks = []
+        current = []
+        for line in relevant:
+            if re.match(r'^\d{1,2}\s+\S+', line):
+                if current:
+                    blocks.append(current)
+                current = [re.sub(r'^\d+\s*', '', line).strip()]
+            elif current:
+                current.append(line)
+        if current:
+            blocks.append(current)
+
+        results = []
+        for block in blocks:
+            block_text = ' '.join(block)
+            qualification = None
+            specialization = None
+            institution = None
+            board_university = None
+            passing_year = None
+            grade = None
+
+            year_match = re.search(r'\b(19\d{2}|20\d{2})\b', block_text)
+            if year_match:
+                passing_year = year_match.group(1)
+            grade_match = re.search(r'(\d+(?:\.\d+)?)\s*(cgpa|%)', block_text, re.I)
+            if grade_match:
+                grade = f"{grade_match.group(1)}{'%' if grade_match.group(2).lower() == '%' else ' CGPA'}".replace(' %', '%')
+
+            for pattern, degree_name in DEGREE_PATTERNS:
+                if re.search(pattern, block_text, re.I):
+                    qualification = degree_name
+                    break
+
+            if qualification == 'Diploma':
+                qualification = 'Diploma in Engineering'
+
+            mech_match = re.search(r'(?i)\b(mechanical|civil|electrical|electronics|computer|automobile|chemical)\s+engineering\b', block_text)
+            if mech_match:
+                specialization = mech_match.group(0).title()
+
+            if qualification in {'10th', '12th'}:
+                board_match = re.search(r'(?i)\b([A-Z]{2,}(?:\s+[A-Z][a-z]+)?)\s+(19\d{2}|20\d{2})\b', block_text)
+                if board_match:
+                    board_university = board_match.group(1).strip(' ,.-')
+                institution_part = block_text
+                if qualification == '10th':
+                    institution_part = re.sub(r'(?i)^10th\b', '', institution_part).strip()
+                else:
+                    institution_part = re.sub(r'(?i)^(?:h\.?s\.?c|12th)\b', '', institution_part).strip()
+                if board_university:
+                    institution_part = institution_part.replace(board_university, '').strip(' ,.-')
+                if passing_year:
+                    institution_part = institution_part.replace(passing_year, '').strip(' ,.-')
+                if grade:
+                    institution_part = re.sub(re.escape(grade), '', institution_part, flags=re.I).strip(' ,.-')
+                institution = institution_part or None
+            else:
+                if qualification:
+                    raw = re.sub(re.escape(qualification), '', block_text, flags=re.I).strip(' ,.-')
+                else:
+                    raw = block_text
+                if specialization:
+                    raw = re.sub(re.escape(specialization), '', raw, flags=re.I).strip(' ,.-')
+                if passing_year:
+                    raw = raw.replace(passing_year, '').strip(' ,.-')
+                if grade:
+                    raw = re.sub(re.escape(grade), '', raw, flags=re.I).strip(' ,.-')
+
+                board_match = re.search(r'\b([A-Z]{2,10})\s*$', raw)
+                if not board_match:
+                    board_match = re.search(r'(?i)\b([A-Z][A-Za-z&.\- ]{2,80}\s+(?:University|Board))\s*$', raw)
+                if board_match:
+                    board_university = board_match.group(1).strip(' ,.-')
+                    raw = raw[:board_match.start()].strip(' ,.-')
+                institution = raw or None
+
+            if qualification and (institution or board_university or passing_year or grade):
+                results.append({
+                    'qualification': qualification,
+                    'specialization_branch': specialization,
+                    'institution': institution,
+                    'board_university': board_university,
+                    'institute_university': ' '.join(part for part in [institution, board_university] if part) or None,
+                    'passing_year': passing_year,
+                    'grade_cgpa': grade,
+                    'mode_of_study': None,
+                    'location': None,
+                    'major_subjects': None,
+                })
+
+        return results
+
+    def _education_quality_score(entries):
+        if not entries:
+            return 0
+        score = 0
+        for row in entries:
+            if not isinstance(row, dict):
+                continue
+            if row.get('qualification'):
+                score += 2
+            if row.get('institute_university'):
+                score += 2
+            if row.get('passing_year'):
+                score += 2
+            if row.get('grade_cgpa'):
+                score += 2
+            if row.get('specialization_branch'):
+                score += 1
+        return score
+
     try:
-        # Priority: section-first parsing to avoid picking skills lines as education.
+        numbered_table_education = _extract_numbered_table_education_rows(text)
+        multiline_education = _extract_multiline_education_rows(text)
+
+        # Prefer table-style parsing first for resumes like:
+        # QUALIFICATION | BOARD & UNIVERSITY | PASSING YEAR | PERCENTAGE
+        tabular_education = _extract_tabular_education_rows(text)
+
+        # Section-first parsing is still useful for narrative education blocks,
+        # but it should not override richer tabular extraction.
         edu_lines = _extract_section_lines_first(
             text,
             start_terms=['education', 'academic qualification', 'academic'],
@@ -3275,11 +3723,19 @@ def extract_education(text):
             and row.get('institute_university')
             and re.search(r'(?i)\b(?:university|college|institute|school|academy|polytechnic)\b', row.get('institute_university') or '')
         ]
-        if high_quality_section_education:
-            return _sanitize_education_entries(high_quality_section_education)
+        sanitized_numbered_table = _sanitize_education_entries(numbered_table_education)
+        sanitized_multiline = _sanitize_education_entries(multiline_education)
+        sanitized_tabular = _sanitize_education_entries(tabular_education)
+        sanitized_high_quality_section = _sanitize_education_entries(high_quality_section_education)
+        sanitized_section = _sanitize_education_entries(section_first_education)
 
-        if section_first_education:
-            return _sanitize_education_entries(section_first_education)
+        best_education = max(
+            [sanitized_numbered_table, sanitized_multiline, sanitized_tabular, sanitized_high_quality_section, sanitized_section],
+            key=_education_quality_score,
+            default=[],
+        )
+        if best_education:
+            return best_education
 
         # Use the enhanced extraction from education_extraction_utils
         # This has been thoroughly tested and handles edge cases better
@@ -4760,6 +5216,19 @@ def _parse_month_year(token):
     if t in {'present', 'current', 'till date'}:
         today = date.today()
         return today.year, today.month
+    day_month_year = re.match(
+        r'^(?:\d{1,2}(?:st|nd|rd|th)?\s+)?'
+        r'(jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*(\d{2,4})$',
+        t,
+    )
+    if day_month_year:
+        month_key = day_month_year.group(1)[:3]
+        month = MONTH_MAP.get(month_key)
+        year = int(day_month_year.group(2))
+        if year < 100:
+            year += 2000 if year < 50 else 1900
+        if month and 1 <= month <= 12:
+            return year, month
     ym = re.match(r'^(\d{1,2})[/-](\d{2,4})$', t)
     if ym:
         month = int(ym.group(1))
@@ -4791,6 +5260,20 @@ def _extract_date_range(line):
     if not line:
         return (None, None, False, None)
     m = DATE_RANGE_RE.search(line)
+    if not m:
+        verbose_re = re.compile(
+            r'(?i)\b('
+            r'(?:\d{1,2}(?:st|nd|rd|th)?\s+)?'
+            r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{4}'
+            r'|\d{4}'
+            r')\s*(?:to|till|until|\-|–|—)\s*('
+            r'present|current|till\s+date|'
+            r'(?:\d{1,2}(?:st|nd|rd|th)?\s+)?'
+            r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{4}'
+            r'|\d{4}'
+            r')\b'
+        )
+        m = verbose_re.search(line)
     if not m:
         return (None, None, False, None)
     start_raw = re.sub(r'\s+', ' ', m.group(1)).strip()

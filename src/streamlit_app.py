@@ -300,7 +300,8 @@ with tabs[0]:
                     col1, col2 = st.columns(2)
                     with col1:
                         st.write("**Qualification:**", edu.get("qualification", "N/A"))
-                        st.write("**Institution:**", edu.get("institute_university", "N/A"))
+                        st.write("**Institution:**", edu.get("institution") or edu.get("institute_university", "N/A"))
+                        st.write("**Board/University:**", edu.get("board_university", "N/A"))
                         st.write("**Branch/Specialization:**", edu.get("specialization_branch", "N/A"))
                     with col2:
                         st.write("**Year:**", edu.get("passing_year", "N/A"))
@@ -376,7 +377,7 @@ with tabs[1]:
         with col3:
             st.metric("Education Entries", len(result.get("education", [])))
         with col4:
-            st.metric("Experience Entries", len(result.get("experience", [])))
+            st.metric("Experience Entries", len(result.get("professional_experience", [])))
         
         st.divider()
         
@@ -410,7 +411,8 @@ with tabs[1]:
                     qual = edu.get('qualification', 'Unknown')
                     with st.expander(f"Education #{idx}: {qual}"):
                         st.write("**Qualification:**", edu.get("qualification", "N/A"))
-                        st.write("**Institution:**", edu.get("institute_university", "N/A"))
+                        st.write("**Institution:**", edu.get("institution") or edu.get("institute_university", "N/A"))
+                        st.write("**Board/University:**", edu.get("board_university", "N/A"))
                         st.write("**Branch/Specialization:**", edu.get("specialization_branch", "N/A"))
                         st.write("**Year:**", edu.get("passing_year", "N/A"))
                         st.write("**CGPA/Grade:**", edu.get("grade_cgpa", "N/A"))
