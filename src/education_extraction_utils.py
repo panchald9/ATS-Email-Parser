@@ -38,10 +38,13 @@ class EducationExtractor:
         (r'\b(?:m\.?tech|mtech|master\s+of\s+technology)\b', 'M.Tech'),
         (r'\b(?:m\.?e\.?|master\s+of\s+engineering)\b', 'M.E'),
         (r'\b(?:mba|master\s+(?:of\s+)?business\s+administration)\b', 'MBA'),
+        (r'\b(?:bms|bachelor\s+of\s+management\s+studies)\b', 'BMS'),
+        (r'\b(?:bba|bachelor\s+of\s+business\s+administration)\b', 'BBA'),
         (r'\b(?:pgdm|post\s+graduate\s+diploma\s+in\s+management)\b', 'PGDM'),
         (r'\b(?:llb|bachelor\s+of\s+laws)\b', 'LLB'),
         (r'\b(?:llm|master\s+of\s+laws)\b', 'LLM'),
-        (r'\bphd\b|\bdoctor\s+of\s+philosophy\b', 'PhD'),
+        (r'\b(?:ph\.?\s*d\.?|doctor\s+of\s+philosophy|d\.?\s*phil\.?|doctoral)\b', 'PhD'),
+        (r'\b(?:m\.?\s*phil\.?|master\s+of\s+philosophy)\b', 'M.Phil'),
         (r'\b(?:iti|industrial\s+training\s+institute|industrial\s+training\s+diploma)\b', 'ITI'),
         (r'\b(?:diploma|diplom[aá])\b', 'Diploma'),
         (r'\bgrad\w*\b', 'Graduate'),
@@ -429,7 +432,8 @@ class EducationExtractor:
                 # Filter quality checks
                 if (len(institute) > 2 and len(institute) < 150 and
                     not any(x in institute.lower() for x in ['year', 'grade', 'cgpa', 'gpa', 'percent', 'marks',
-                                                              'passing', '%', 'board examination', 'email', 'contact'])):
+                                                              'passing', '%', 'board examination', 'email', 'contact',
+                                                              'phd', 'ph.d', 'd.phil', 'm.phil', 'doctoral'])):
                     # Avoid single common words
                     if len(institute.split()) > 1 or institute.lower() not in ['the', 'and', 'from', 'with', 'in', 'of']:
                         candidates.append(institute)
@@ -496,7 +500,11 @@ class EducationExtractor:
                 return spec
         
         # Look for "in Branch" pattern
-        branch_match = re.search(r'(?:in|of)\s+([A-Za-z\s]+)(?:\s*(?:–|-|from|$))', text)
+        branch_match = re.search(
+            r'(?:in|of)\s+([A-Za-z\s]+?)(?:\s*(?:–|-|from|,|\b(?:19|20)\d{2}\b|$))',
+            text,
+            re.I,
+        )
         if branch_match:
             branch = branch_match.group(1).strip()
             branch_lower = branch.lower()
@@ -548,7 +556,7 @@ class EducationExtractor:
             for capsule in capsules:
                 capsule_lower = capsule.lower()
                 if (len(capsule) > 3 and 
-                    capsule_lower not in ['cgpa', 'grade', 'year', 'completed', 'from', 'with', 'in'] and
+                    capsule_lower not in ['cgpa', 'grade', 'year', 'completed', 'from', 'with', 'in', 'phil', 'phd', 'doctoral'] and
                     not any(d in capsule for d in ['2019', '2020', '2021', '2022', '2023', '2024', '2025'])):
                     result['institute_university'] = capsule
                     break
@@ -566,6 +574,15 @@ class EducationExtractor:
                 if (4 < len(spec) < 80 and 
                     not any(x in spec.lower() for x in ['year', 'board', 'from', 'email', 'aicte', 'approved'])):
                     result['specialization_branch'] = spec
+
+        if result['institute_university'] and result['specialization_branch']:
+            institute_lower = result['institute_university'].strip().lower()
+            specialization_lower = result['specialization_branch'].strip().lower()
+            has_institution_keyword = any(
+                kw in institute_lower for kw in ['university', 'institute', 'college', 'academy', 'board', 'school']
+            )
+            if not has_institution_keyword and institute_lower == specialization_lower:
+                result['institute_university'] = None
         
         # Extract mode of study
         mode_match = re.search(

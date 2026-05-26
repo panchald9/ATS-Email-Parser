@@ -2187,7 +2187,6 @@ def _infer_gender_from_name(name):
 
     return None
 
-
 def _infer_gender_from_text_context(text):
     """Infer gender from self-identification cues in resume body text."""
     if not text:
@@ -2248,7 +2247,6 @@ def _infer_gender_from_text_context(text):
         return 'Female'
 
     return None
-
 
 def extract_gender(text, name=None):
     """
@@ -2340,7 +2338,6 @@ def extract_gender(text, name=None):
 
     # Pass 5: name-based inference (weakest signal)
     return _infer_gender_from_name(name)
-
 
 # ══════════════════════════════════════════════════════════════
 #  ADDRESS EXTRACTION
@@ -2620,10 +2617,13 @@ DEGREE_PATTERNS = [
     (r'\b(?:m\.?tech|mtech|master\s+of\s+technology)\b', 'M.Tech'),
     (r'\b(?:m\.?e\.?|master\s+of\s+engineering)\b', 'M.E'),
     (r'\b(?:mba|master\s+(?:of\s+)?business\s+administration)\b', 'MBA'),
+    (r'\b(?:bms|bachelor\s+of\s+management\s+studies)\b', 'BMS'),
+    (r'\b(?:bba|bachelor\s+of\s+business\s+administration)\b', 'BBA'),
     (r'\b(?:pgdm|post\s+graduate\s+diploma\s+in\s+management)\b', 'PGDM'),
     (r'\b(?:llb|bachelor\s+of\s+laws)\b', 'LLB'),
     (r'\b(?:llm|master\s+of\s+laws)\b', 'LLM'),
-    (r'\bphd\b|\bdoctor\s+of\s+philosophy\b', 'PhD'),
+    (r'\b(?:ph\.?\s*d\.?|doctor\s+of\s+philosophy|d\.?\s*phil\.?|doctoral)\b', 'PhD'),
+    (r'\b(?:m\.?\s*phil\.?|master\s+of\s+philosophy)\b', 'M.Phil'),
     (r'\b(?:diploma|diplom[aá])\b', 'Diploma'),
     (r'\bgrad\w*\b', 'Graduate'),
     (r'\b(?:12th?|intermediate|h\.?s\.?c|hs|high\s+school)\b', '12th'),
@@ -2716,7 +2716,7 @@ def _parse_inline_education_entry(line):
     # Try to match common inline patterns
     # Pattern 1: "SSC in 2016 from GSEB with 51%"
     pattern1 = re.search(
-        r'(s\.?s\.?c|ssc|hsc|12th?|10th?|b\.?(?:tech|sc|a|com|e)|m\.?(?:tech|sc|a|com|e)|diploma|iti|pgdm|mba|phd|llb|llm)'
+        r'(s\.?s\.?c|ssc|hsc|12th?|10th?|b\.?(?:tech|sc|a|com|e)|m\.?(?:tech|sc|a|com|e|phil)|diploma|iti|pgdm|mba|ph\.?\s*d\.?|d\.?\s*phil\.?|doctoral|llb|llm)'
         r'[,\s]*\(?([^)]*)\)?\s*'
         r'(?:in|from|of|at)?\s*'
         r'(\d{4})?\s*'
@@ -2811,7 +2811,7 @@ def _parse_inline_education_entry(line):
     
     # Pattern 2: "M.A. (Political Science) - from Kanpur University – 52%"
     pattern2 = re.search(
-        r'(m\.?a\.?|m\.?sc|b\.?a\.?|b\.?sc|b\.?com|b\.?tech|b\.?e\.?|llb|llm|phd|mba|pgdm|diploma|iti)'
+        r'(m\.?a\.?|m\.?sc|m\.?e\.?|m\.?\s*phil\.?|b\.?a\.?|b\.?sc|b\.?com|b\.?tech|b\.?e\.?|llb|llm|ph\.?\s*d\.?|d\.?\s*phil\.?|doctoral|mba|pgdm|diploma|iti)'
         r'\.?\s*\(([^)]+)\)?\s*'
         r'(?:from|at|-)?\s*'
         r'([A-Z][A-Za-z\s&\.,-]*?)\s*'
@@ -2857,9 +2857,9 @@ def _parse_inline_education_entry(line):
         if pct_match:
             result['grade_cgpa'] = pct_match.group(1) + '%'
     
-    # Only return if we found a qualification AND (a university OR a year)
+    # Only return if we found a qualification AND some supporting signal.
     # This prevents false positives from random text
-    if result['qualification'] and (result['institute_university'] or result['passing_year']):
+    if result['qualification'] and (result['institute_university'] or result['passing_year'] or result['grade_cgpa']):
         return result
     
     return None
@@ -3193,7 +3193,7 @@ def extract_education(text):
             institute_lower = institute.lower()
 
             suspicious_institute = bool(re.search(
-                r'(?i)\b(?:published|publication|publications|evaluation|evaluations|study|studies|drug|journal|article|review|abstract|adme|'
+                r'(?i)\b(?:published|publication|publications|evaluation|evaluations|drug|journal|article|review|abstract|adme|'
                 r'issn|volume|issue|guide|conference|webinar|activities|internship|technical\s+skills|soft\s+skills|'
                 r'personal\s+details|permanent\s+address|date\s+of\s+birth|languages?\s+known|hobbies)\b',
                 institute,
@@ -3299,7 +3299,7 @@ def extract_education(text):
     def _parse_education_from_lines(lines):
         results = []
         current = {}
-        degree_re = re.compile(r'(?i)\b(?:integrated\s*m\.?sc(?:\.?\s*[a-z ]{0,30})?|imscit|imsc|bachelor(?:\s+of\s+[a-z &]{2,40})?|master(?:\s+of\s+[a-z &]{2,40})?|diploma(?:\s+in\s+[a-z &]{2,40})?|pgdm|phd|associate|12th|10th|b\.?\s*tech|m\.?\s*tech|b\.?\s*sc|m\.?\s*sc|b\.?\s*com|m\.?\s*com)\b')
+        degree_re = re.compile(r'(?i)\b(?:integrated\s*m\.?sc(?:\.?\s*[a-z ]{0,30})?|imscit|imsc|bachelor(?:\s+of\s+[a-z &]{2,40})?|master(?:\s+of\s+[a-z &]{2,40})?|diploma(?:\s+in\s+[a-z &]{2,40})?|pgdm|ph\.?\s*d\.?|d\.?\s*phil\.?|doctoral|m\.?\s*phil\.?|associate|12th|10th|b\.?\s*tech|m\.?\s*tech|b\.?\s*sc|m\.?\s*sc|b\.?\s*com|m\.?\s*com|b\.?\s*a|m\.?\s*a|b\.?\s*e|m\.?\s*e)\b')
         institute_re = re.compile(r'(?i)\b(?:university|college|institute|school|academy|polytechnic)\b')
 
         for raw in lines:
@@ -3321,13 +3321,25 @@ def extract_education(text):
             if years:
                 current['passing_year'] = years[-1]
 
-            if current.get('qualification') and (current.get('institute_university') or current.get('passing_year')):
+            grade_match = re.search(r'(\d+(?:\.\d+)?)\s*(?:cgpa|gpa|%)\b', line, re.I)
+            if grade_match:
+                grade_value = grade_match.group(1)
+                if '%' in grade_match.group(0):
+                    current['grade_cgpa'] = f'{grade_value}%'
+                else:
+                    current['grade_cgpa'] = grade_value
+
+            if current.get('qualification') and (
+                current.get('institute_university')
+                or current.get('passing_year')
+                or current.get('grade_cgpa')
+            ):
                 results.append({
                     'qualification': current.get('qualification'),
                     'specialization_branch': None,
                     'institute_university': current.get('institute_university'),
                     'passing_year': current.get('passing_year'),
-                    'grade_cgpa': None,
+                    'grade_cgpa': current.get('grade_cgpa'),
                     'mode_of_study': None,
                     'location': None,
                     'major_subjects': None,
@@ -3460,8 +3472,10 @@ def extract_education(text):
 
         degree_start_re = re.compile(
             r'(?i)^(?:m\.?\s*pharm(?:acy)?|b\.?\s*pharm(?:acy)?|d\.?\s*pharm(?:acy)?|'
-            r'm\s+pharmacy|b\s+pharmacy|d\s+pharmacy|mba|b\.?\s*com|m\.?\s*com|'
-            r'b\.?\s*sc|m\.?\s*sc|b\.?\s*tech|m\.?\s*tech|h\.?\s*s\.?\s*c|s\.?\s*s\.?\s*c|hsc|ssc)\b'
+            r'm\s+pharmacy|b\s+pharmacy|d\s+pharmacy|mba|bms|bba|b\.?\s*com|m\.?\s*com|'
+            r'b\.?\s*sc|m\.?\s*sc|b\.?\s*tech|m\.?\s*tech|b\.?\s*a|m\.?\s*a|b\.?\s*e|m\.?\s*e|'
+            r'm\.?\s*phil\.?|ph\.?\s*d\.?|d\.?\s*phil\.?|doctoral|'
+            r'h\.?\s*s\.?\s*c|s\.?\s*s\.?\s*c|hsc|ssc|12th?|10th?)\b'
         )
 
         def _normalize_multiline_qualification(line):
@@ -3487,6 +3501,13 @@ def extract_education(text):
                 if m:
                     spec = re.sub(r'\s+', ' ', m.group(1)).strip(' ,.-')
                     if spec and len(spec) <= 60:
+                        spec_lower = spec.lower()
+                        if re.search(r'\b(?:running|pursuing|ongoing|current|present|enrolled)\b', spec_lower):
+                            return None
+                        if re.search(r'\b(?:school|college|institute|academy|vidyalaya)\b', spec_lower):
+                            return None
+                        if re.search(r'\b(?:19|20)\d{2}\b', spec):
+                            return None
                         return spec
             return None
 
@@ -3515,6 +3536,9 @@ def extract_education(text):
             block_text = ' '.join(block_lines)
             year_matches = re.findall(r'\b(19\d{2}|20\d{2})\b', block_text)
             grade_matches = re.findall(r'(\d+(?:\.\d+)?)\s*%', block_text)
+            currently_enrolled = bool(re.search(
+                r'\b(?:running|pursuing|ongoing|current|present|enrolled)\b', block_text, re.I
+            ))
             specialization = _extract_specialization(block_lines)
             institute = _clean_institute_text(block_text, qualification, specialization)
             institution, board_university = _split_institution_and_board(qualification, institute)
@@ -3524,7 +3548,8 @@ def extract_education(text):
                 'institution': institution,
                 'board_university': board_university,
                 'institute_university': institute,
-                'passing_year': year_matches[-1] if year_matches else None,
+                'passing_year': year_matches[-1] if year_matches and not currently_enrolled else None,
+                'currently_enrolled': currently_enrolled,
                 'grade_cgpa': (grade_matches[-1] + '%') if grade_matches else None,
                 'mode_of_study': None,
                 'location': None,
@@ -3701,6 +3726,59 @@ def extract_education(text):
                 score += 1
         return score
 
+    def _merge_education_results(*entry_lists):
+        merged = []
+
+        def _same_record(left, right):
+            left_qual = (left.get('qualification') or '').strip().lower()
+            right_qual = (right.get('qualification') or '').strip().lower()
+            if not left_qual or left_qual != right_qual:
+                return False
+
+            left_inst = (left.get('institute_university') or '').strip().lower()
+            right_inst = (right.get('institute_university') or '').strip().lower()
+            left_year = (left.get('passing_year') or '').strip()
+            right_year = (right.get('passing_year') or '').strip()
+
+            same_institute = left_inst and right_inst and left_inst == right_inst
+            same_year = left_year and right_year and left_year == right_year
+            compatible_institute = not left_inst or not right_inst or same_institute
+            compatible_year = not left_year or not right_year or same_year
+
+            return (same_institute or same_year) and compatible_institute and compatible_year
+
+        for entries in entry_lists:
+            for row in entries or []:
+                if not isinstance(row, dict):
+                    continue
+
+                matched = None
+                for existing in merged:
+                    if _same_record(existing, row):
+                        matched = existing
+                        break
+
+                if matched is None:
+                    merged.append(dict(row))
+                    continue
+
+                for field in (
+                    'qualification',
+                    'specialization_branch',
+                    'institution',
+                    'board_university',
+                    'institute_university',
+                    'passing_year',
+                    'grade_cgpa',
+                    'mode_of_study',
+                    'location',
+                    'major_subjects',
+                ):
+                    if not matched.get(field) and row.get(field):
+                        matched[field] = row.get(field)
+
+        return merged
+
     try:
         numbered_table_education = _extract_numbered_table_education_rows(text)
         multiline_education = _extract_multiline_education_rows(text)
@@ -3729,10 +3807,12 @@ def extract_education(text):
         sanitized_high_quality_section = _sanitize_education_entries(high_quality_section_education)
         sanitized_section = _sanitize_education_entries(section_first_education)
 
-        best_education = max(
-            [sanitized_numbered_table, sanitized_multiline, sanitized_tabular, sanitized_high_quality_section, sanitized_section],
-            key=_education_quality_score,
-            default=[],
+        best_education = _merge_education_results(
+            sanitized_numbered_table,
+            sanitized_multiline,
+            sanitized_tabular,
+            sanitized_high_quality_section,
+            sanitized_section,
         )
         if best_education:
             return best_education
