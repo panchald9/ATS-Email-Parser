@@ -1,6 +1,6 @@
 {
   "total_resumes": 23,
-  "average_score": 88.62,
+  "average_score": 88.73,
   "min_score": 0.0,
   "max_score": 96.0,
   "quality_distribution": {
@@ -16,44 +16,6 @@
     "poor": 4.3
   },
   "validated_results": [
-    {
-      "file": "ANSHU GUPTA RESUME.docx",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 90,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "10/10 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 94.16666666666667,
-      "quality_level": "excellent"
-    },
     {
       "file": "Dharmishtha Resume.pdf",
       "fields": {
@@ -79,7 +41,7 @@
         },
         "address": {
           "valid": true,
-          "score": 70,
+          "score": 85,
           "reason": "Address appears valid"
         },
         "skills": {
@@ -89,7 +51,7 @@
         }
       },
       "warnings": [],
-      "overall_score": 90.83333333333333,
+      "overall_score": 93.33333333333333,
       "quality_level": "excellent"
     },
     {
@@ -138,6 +100,44 @@
     },
     {
       "file": "ANSHU GUPTA RESUME (1).docx",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 90,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "10/10 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 94.16666666666667,
+      "quality_level": "excellent"
+    },
+    {
+      "file": "ANSHU GUPTA RESUME.docx",
       "fields": {
         "name": {
           "valid": true,
@@ -327,6 +327,44 @@
       "quality_level": "excellent"
     },
     {
+      "file": "PUSHPAK BARI CV-1.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 95.0,
+          "reason": "10/10 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 93.33333333333333,
+      "quality_level": "excellent"
+    },
+    {
       "file": "Profile.pdf",
       "fields": {
         "name": {
@@ -403,7 +441,7 @@
       "quality_level": "good"
     },
     {
-      "file": "PUSHPAK BARI CV-1.pdf",
+      "file": "resume 2025 (10).pdf",
       "fields": {
         "name": {
           "valid": true,
@@ -427,55 +465,17 @@
         },
         "address": {
           "valid": true,
-          "score": 85,
+          "score": 70,
           "reason": "Address appears valid"
         },
         "skills": {
           "valid": true,
           "score": 95.0,
-          "reason": "10/10 skills valid"
+          "reason": "1/1 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 93.33333333333333,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "Invoice_2026-27-2026-INTA_1(R).pdf",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": false,
-          "score": 0,
-          "reason": "Gender is empty"
-        },
-        "address": {
-          "valid": true,
-          "score": 85,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 89.16666666666667,
-          "reason": "5/6 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 92.83333333333334,
+      "overall_score": 90.83333333333333,
       "quality_level": "excellent"
     },
     {
@@ -517,6 +517,44 @@
       "quality_level": "good"
     },
     {
+      "file": "Invoice_2026-27-2026-INTA_1(R).pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid Indian phone (10 digits)"
+        },
+        "gender": {
+          "valid": false,
+          "score": 0,
+          "reason": "Gender is empty"
+        },
+        "address": {
+          "valid": true,
+          "score": 85,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 89.16666666666667,
+          "reason": "5/6 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 92.83333333333334,
+      "quality_level": "excellent"
+    },
+    {
       "file": "Dhruv Panchal.pdf",
       "fields": {
         "name": {
@@ -552,44 +590,6 @@
       },
       "warnings": [],
       "overall_score": 93.78125,
-      "quality_level": "excellent"
-    },
-    {
-      "file": "resume 2025 (10).pdf",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid Indian phone (10 digits)"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 95.0,
-          "reason": "1/1 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 90.83333333333333,
       "quality_level": "excellent"
     },
     {
@@ -812,12 +812,12 @@
         },
         "skills": {
           "valid": true,
-          "score": 94.14634146341464,
-          "reason": "40/41 skills valid"
+          "score": 94.125,
+          "reason": "39/40 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 92.82926829268293,
+      "overall_score": 92.825,
       "quality_level": "excellent"
     },
     {

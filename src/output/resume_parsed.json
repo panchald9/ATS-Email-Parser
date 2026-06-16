@@ -9,8 +9,8 @@
     "address": "102 Sentosa Home City near haria park vapi Silvassa road",
     "skills": [
       "Compliance",
-      "Esic",
       "Recruitment",
+      "Esic",
       "documentation",
       "excel",
       "problem solve",
@@ -28,7 +28,7 @@
         "start_date": "2024",
         "end_date": "till date",
         "currently_working": true,
-        "experience_duration": "2y 3m",
+        "experience_duration": "2y 5m",
         "duration_text": "2024- till date",
         "ctc": null,
         "notice_period": null,
@@ -40,6 +40,45 @@
     ],
     "education": [
       {
+        "qualification": "MBA",
+        "specialization_branch": null,
+        "institution": "MBA - Master of Business Administration (Running)",
+        "board_university": null,
+        "institute_university": "MBA - Master of Business Administration (Running)",
+        "passing_year": null,
+        "currently_enrolled": true,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "BMS",
+        "specialization_branch": null,
+        "institution": "BMS – (Bachelor of Management Studies – )",
+        "board_university": null,
+        "institute_university": "BMS – (Bachelor of Management Studies – )",
+        "passing_year": "2024",
+        "currently_enrolled": false,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "12th",
+        "specialization_branch": null,
+        "institution": "12th - ( Winners English School - )",
+        "board_university": null,
+        "institute_university": "12th - ( Winners English School - )",
+        "passing_year": "2021",
+        "currently_enrolled": false,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
         "qualification": "12th",
         "specialization_branch": null,
         "institute_university": "Winners English School",
@@ -47,7 +86,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Winners English School",
+        "board_university": null
       },
       {
         "qualification": "10th",
@@ -57,7 +98,21 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Winners English School",
+        "board_university": null
+      },
+      {
+        "qualification": "Bachelor of Management Studies",
+        "specialization_branch": null,
+        "institute_university": null,
+        "passing_year": "2024",
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null,
+        "institution": null,
+        "board_university": null
       }
     ]
   },
@@ -71,8 +126,8 @@
     "address": "102 Sentosa Home City near haria park vapi Silvassa road",
     "skills": [
       "Compliance",
-      "Esic",
       "Recruitment",
+      "Esic",
       "documentation",
       "excel",
       "problem solve",
@@ -90,7 +145,7 @@
         "start_date": "2024",
         "end_date": "till date",
         "currently_working": true,
-        "experience_duration": "2y 3m",
+        "experience_duration": "2y 5m",
         "duration_text": "2024- till date",
         "ctc": null,
         "notice_period": null,
@@ -102,6 +157,45 @@
     ],
     "education": [
       {
+        "qualification": "MBA",
+        "specialization_branch": null,
+        "institution": "MBA - Master of Business Administration (Running)",
+        "board_university": null,
+        "institute_university": "MBA - Master of Business Administration (Running)",
+        "passing_year": null,
+        "currently_enrolled": true,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "BMS",
+        "specialization_branch": null,
+        "institution": "BMS – (Bachelor of Management Studies – )",
+        "board_university": null,
+        "institute_university": "BMS – (Bachelor of Management Studies – )",
+        "passing_year": "2024",
+        "currently_enrolled": false,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "12th",
+        "specialization_branch": null,
+        "institution": "12th - ( Winners English School - )",
+        "board_university": null,
+        "institute_university": "12th - ( Winners English School - )",
+        "passing_year": "2021",
+        "currently_enrolled": false,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
         "qualification": "12th",
         "specialization_branch": null,
         "institute_university": "Winners English School",
@@ -109,7 +203,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Winners English School",
+        "board_university": null
       },
       {
         "qualification": "10th",
@@ -119,7 +215,21 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Winners English School",
+        "board_university": null
+      },
+      {
+        "qualification": "Bachelor of Management Studies",
+        "specialization_branch": null,
+        "institute_university": null,
+        "passing_year": "2024",
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null,
+        "institution": null,
+        "board_university": null
       }
     ]
   },
@@ -133,10 +243,10 @@
     "address": "Vapi Gujarat 7905829501",
     "skills": [
       "Compliance",
-      "Sap",
-      "cGMP",
-      "Logistics",
       "Dispatch",
+      "cGMP",
+      "Sap",
+      "Logistics",
       "coordination",
       "documentation",
       "security",
@@ -187,7 +297,7 @@
         "start_date": "Dec 2018",
         "end_date": "Present",
         "currently_working": true,
-        "experience_duration": "7y 4m",
+        "experience_duration": "7y 6m",
         "duration_text": "Dec 2018 – Present",
         "ctc": null,
         "notice_period": null,
@@ -229,12 +339,40 @@
       {
         "qualification": "B.Sc",
         "specialization_branch": null,
+        "institution": "B.Sc Chemistry Intermediate,U.P.Board Allahabad ,06/",
+        "board_university": null,
+        "institute_university": "B.Sc Chemistry Intermediate,U.P.Board Allahabad ,06/",
+        "passing_year": "2010",
+        "currently_enrolled": false,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "12th",
+        "specialization_branch": null,
+        "institution": "12th Science High School, U, P, Board Allahabad",
+        "board_university": "06/",
+        "institute_university": "12th Science High School, U, P, Board Allahabad 06/",
+        "passing_year": "2008",
+        "currently_enrolled": false,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "B.Sc",
+        "specialization_branch": null,
         "institute_university": "Bundelkhand University",
         "passing_year": "2013",
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Bundelkhand University",
+        "board_university": null
       },
       {
         "qualification": "10th",
@@ -244,18 +382,32 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "High School",
+        "board_university": null
+      },
+      {
+        "qualification": "12th",
+        "specialization_branch": null,
+        "institute_university": null,
+        "passing_year": "2010",
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null,
+        "institution": null,
+        "board_university": null
       }
     ]
   },
   {
     "file": "Dharmishtha Resume.pdf",
-    "name": "Investigate Workplace Issues",
+    "name": "Dhodi Dharmishthaben Natavarbhai",
     "contact_number": "7874076318",
     "email": "dn864946@gmail.com",
     "dob": "04/10/2000",
     "gender": "Female",
-    "address": "4. 3 rd in Rakhi making competition",
+    "address": "Malav (Parshipada), Post Bhilad, Ta Umbergaon, Dist Valsad - 396105",
     "skills": [
       "Employee Relations",
       "excel",
@@ -288,6 +440,45 @@
     ],
     "education": [
       {
+        "qualification": "MBA",
+        "specialization_branch": "HR",
+        "institution": "MBA",
+        "board_university": null,
+        "institute_university": "MBA",
+        "passing_year": null,
+        "currently_enrolled": false,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "B.Com",
+        "specialization_branch": null,
+        "institution": "B",
+        "board_university": "COM",
+        "institute_university": "B COM",
+        "passing_year": null,
+        "currently_enrolled": false,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "10th",
+        "specialization_branch": null,
+        "institution": "BOARD & UNIVERCITY GTU VNSGU GHSEB GSEB PASSING YEAR",
+        "board_university": "PERCENTAGE",
+        "institute_university": "BOARD & UNIVERCITY GTU VNSGU GHSEB GSEB PASSING YEAR PERCENTAGE",
+        "passing_year": "2016",
+        "currently_enrolled": false,
+        "grade_cgpa": "53%",
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
         "qualification": "B.COM",
         "specialization_branch": null,
         "institute_university": null,
@@ -295,7 +486,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": null,
+        "board_university": null
       }
     ]
   },
@@ -351,7 +544,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Creative Suite",
+        "board_university": null
       }
     ]
   },
@@ -365,14 +560,14 @@
     "address": null,
     "skills": [
       "Css",
-      "Django",
-      "Java",
-      "Flask",
-      "Rest Api",
-      "Html",
       "C",
-      "Sql",
+      "Flask",
+      "Html",
+      "Django",
       "Api Development",
+      "Java",
+      "Sql",
+      "Rest Api",
       "automation",
       "authentication",
       "excel",
@@ -395,7 +590,6 @@
       "firebase",
       "integration",
       "based system",
-      "web system",
       "import export",
       "pandas",
       "inventory system",
@@ -432,7 +626,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": null,
+        "board_university": null
       }
     ]
   },
@@ -445,12 +641,12 @@
     "gender": "Male",
     "address": "Surat, Gujarat, India, linkedin.com/in/panchald 9 a 0 b 263, github.com/panchald 9",
     "skills": [
+      "Flutter",
       "Linux",
-      "ReactJS",
       "Sprint Planning",
       "C",
-      "Flutter",
       "Sql",
+      "ReactJS",
       "automation",
       "optimization",
       "git",
@@ -496,7 +692,7 @@
         "start_date": "Jan 2026",
         "end_date": "Present",
         "currently_working": true,
-        "experience_duration": "3m",
+        "experience_duration": "5m",
         "duration_text": "Jan 2026 – Present",
         "ctc": null,
         "notice_period": null,
@@ -563,7 +759,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Silver",
+        "board_university": "Oak University"
       }
     ]
   },
@@ -587,6 +785,58 @@
     "professional_experience": [],
     "education": [
       {
+        "qualification": "M.Com",
+        "specialization_branch": null,
+        "institution": "M.com from Rofel College, Vapi",
+        "board_university": null,
+        "institute_university": "M.com from Rofel College, Vapi",
+        "passing_year": null,
+        "currently_enrolled": false,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "B.Com",
+        "specialization_branch": null,
+        "institution": "B.com from Rofel College, Vapi",
+        "board_university": null,
+        "institute_university": "B.com from Rofel College, Vapi",
+        "passing_year": null,
+        "currently_enrolled": false,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "12th",
+        "specialization_branch": null,
+        "institution": "M, K, Mehta high School",
+        "board_university": "Umbergaon",
+        "institute_university": "M, K, Mehta high School Umbergaon",
+        "passing_year": null,
+        "currently_enrolled": false,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "10th",
+        "specialization_branch": null,
+        "institution": "M.K.Mehta high School, Umbergaon Year Percentage/CGPA Appear 68.30 CGPA  Basic knowledge of computer (MS word, Excel, PPT)  Advanced Excel  Tally with",
+        "board_university": "GST",
+        "institute_university": "M.K.Mehta high School, Umbergaon Year Percentage/CGPA Appear 68.30 CGPA  Basic knowledge of computer (MS word, Excel, PPT)  Advanced Excel  Tally with GST",
+        "passing_year": "2019",
+        "currently_enrolled": false,
+        "grade_cgpa": "59.33%",
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
         "qualification": "M.com",
         "specialization_branch": null,
         "institute_university": "M.com from Rofel College",
@@ -594,7 +844,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "M.com from Rofel College",
+        "board_university": null
       },
       {
         "qualification": "B.com",
@@ -604,7 +856,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "B.com from Rofel College",
+        "board_university": null
       }
     ]
   },
@@ -630,8 +884,8 @@
     "gender": null,
     "address": "(cid:127) Quality Control & Sampling, (cid:127) Packaging Inspection, (cid:127) Documentation & Record Keeping",
     "skills": [
-      "Quality Control",
       "Inspection",
+      "Quality Control",
       "documentation",
       "organizational",
       "laboratory technique",
@@ -660,12 +914,27 @@
       {
         "qualification": "B.Sc",
         "specialization_branch": null,
+        "institution": "B.Sc – Veer Narmad South Gujarat University ( ) – CGPA: 6.68",
+        "board_university": null,
+        "institute_university": "B.Sc – Veer Narmad South Gujarat University ( ) – CGPA: 6.68",
+        "passing_year": "2023",
+        "currently_enrolled": false,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "B.Sc",
+        "specialization_branch": null,
         "institute_university": "Veer Narmad South Gujarat University",
         "passing_year": "2023",
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Veer Narmad South",
+        "board_university": "Gujarat University"
       }
     ]
   },
@@ -731,7 +1000,7 @@
         "start_date": "May 2021",
         "end_date": "Present",
         "currently_working": true,
-        "experience_duration": "4y 11m",
+        "experience_duration": "5y 1m",
         "duration_text": "From May 2021 to Present",
         "ctc": null,
         "notice_period": null,
@@ -748,7 +1017,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Dr. APJ Abdul Kalam College",
+        "board_university": null
       }
     ]
   },
@@ -783,7 +1054,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Laxmi Institute",
+        "board_university": null
       },
       {
         "qualification": "12TH",
@@ -793,17 +1066,33 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Smt. C.D.J. Rofel Arts & Smt. I.S.R.A. Rofel Commerce College",
+        "board_university": null
       },
       {
         "qualification": "10th",
         "specialization_branch": null,
-        "institute_university": "Shah J.G.S. High School",
+        "institute_university": "Shah J, G, S High School",
         "passing_year": "2020",
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Shah J, G, S",
+        "board_university": "High School"
+      },
+      {
+        "qualification": "Bachelor of Commerce",
+        "specialization_branch": null,
+        "institute_university": null,
+        "passing_year": "2025",
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null,
+        "institution": null,
+        "board_university": null
       }
     ]
   },
@@ -814,7 +1103,7 @@
     "email": "dkrp16708@gmail.com",
     "dob": null,
     "gender": null,
-    "address": "Ahm,guj,india 382481, 9601945583 (Home)",
+    "address": "Ahm, guj, india 382481, 9601945583 (Home)",
     "skills": [
       "ReactJS",
       "campaign",
@@ -860,7 +1149,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "SILVER",
+        "board_university": "OAK UNIVERSITY"
       }
     ]
   },
@@ -871,7 +1162,7 @@
     "email": "pushpakbari7028@gmail.com",
     "dob": null,
     "gender": "Female",
-    "address": " Attened one day national level of pharma AI-IT career workshop 2025, organized by Sarojini",
+    "address": "At Po Varkhedi Tal. Pachora. Dist Jalgaon, Pin Code, 424202",
     "skills": [
       "biostatistics",
       "excel",
@@ -887,31 +1178,14 @@
     "professional_experience": [],
     "education": [
       {
-        "qualification": "12th",
+        "qualification": "D.Pharmacy",
         "specialization_branch": null,
-        "institute_university": null,
-        "passing_year": null,
-        "grade_cgpa": null,
-        "mode_of_study": null,
-        "location": null,
-        "major_subjects": null
-      },
-      {
-        "qualification": "10th",
-        "specialization_branch": null,
-        "institute_university": "ADME Study published in",
-        "passing_year": "2024",
-        "grade_cgpa": null,
-        "mode_of_study": null,
-        "location": null,
-        "major_subjects": null
-      },
-      {
-        "qualification": "10th",
-        "specialization_branch": "the Drug",
-        "institute_university": "ADME Evaluations of the",
-        "passing_year": "2025",
-        "grade_cgpa": null,
+        "institution": "APCK Kolhapur Shivaji University Uruli MKCOPER Kanchan Pune Institute Of Trimurti Pharmacy, Paldhi. Jalgaon BATU MSBTE New English School,Jr College Jamner. SMT.P.D. Badola M V Varkhedi Nashik Nashik",
+        "board_university": null,
+        "institute_university": "APCK Kolhapur Shivaji University Uruli MKCOPER Kanchan Pune Institute Of Trimurti Pharmacy, Paldhi. Jalgaon BATU MSBTE New English School,Jr College Jamner. SMT.P.D. Badola M V Varkhedi Nashik Nashik",
+        "passing_year": "2015",
+        "currently_enrolled": false,
+        "grade_cgpa": "78.80%",
         "mode_of_study": null,
         "location": null,
         "major_subjects": null
@@ -934,12 +1208,27 @@
       {
         "qualification": "10th",
         "specialization_branch": null,
+        "institution": "10th Institution/Board Year of passing Percentage 7, 04 CGPA Government polytechnic, Daman",
+        "board_university": "BSEB Patna",
+        "institute_university": "10th Institution/Board Year of passing Percentage 7, 04 CGPA Government polytechnic, Daman BSEB Patna",
+        "passing_year": "2021",
+        "currently_enrolled": false,
+        "grade_cgpa": "76%",
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "10th",
+        "specialization_branch": null,
         "institute_university": null,
         "passing_year": "2024",
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": null,
+        "board_university": null
       }
     ]
   },
@@ -952,16 +1241,16 @@
     "gender": "Male",
     "address": "Passing Year-2020",
     "skills": [
-      "Rca",
-      "Equipment Maintenance",
-      "Enterprise Resource Planning",
-      "Sap",
-      "Iso 9001",
-      "Excel",
-      "C",
-      "Iso 14001",
-      "Preventive Maintenance",
       "Capa",
+      "Iso 14001",
+      "Iso 9001",
+      "C",
+      "Rca",
+      "Sap",
+      "Excel",
+      "Enterprise Resource Planning",
+      "Equipment Maintenance",
+      "Preventive Maintenance",
       "cad",
       "erp",
       "sap erp",
@@ -976,32 +1265,14 @@
       {
         "qualification": "B.E",
         "specialization_branch": null,
-        "institute_university": "Mechanical Engineering",
+        "institute_university": null,
         "passing_year": "2020",
-        "grade_cgpa": "6.08",
-        "mode_of_study": null,
-        "location": null,
-        "major_subjects": null
-      },
-      {
-        "qualification": "10th",
-        "specialization_branch": null,
-        "institute_university": "S.H.C-Naroli Government High Secondary School",
-        "passing_year": "2015",
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
-      },
-      {
-        "qualification": "12th",
-        "specialization_branch": null,
-        "institute_university": "High School Zaroli",
-        "passing_year": "1998",
-        "grade_cgpa": null,
-        "mode_of_study": null,
-        "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": null,
+        "board_university": null
       }
     ]
   },
@@ -1052,7 +1323,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": null,
+        "board_university": null
       }
     ]
   },
@@ -1066,11 +1339,11 @@
     "address": null,
     "skills": [
       "Compliance",
+      "Inspection",
       "Excel",
       "Quality Control",
-      "Inspection",
-      "Standard Operating Procedure",
       "Plant Operations",
+      "Standard Operating Procedure",
       "coordination",
       "documentation",
       "monitoring",
@@ -1096,7 +1369,9 @@
         "grade_cgpa": "50%",
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Green Ethanol Production",
+        "board_university": null
       }
     ]
   },
@@ -1147,7 +1422,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Ramashwaram Apartment",
+        "board_university": null
       },
       {
         "qualification": "10th",
@@ -1157,7 +1434,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Royal College Bhadrak",
+        "board_university": null
       }
     ]
   },
@@ -1170,8 +1449,8 @@
     "gender": "Male",
     "address": null,
     "skills": [
-      "Compliance",
       "Root Cause Analysis",
+      "Compliance",
       "optimization",
       "lean manufacturing",
       "production planning",
@@ -1222,12 +1501,27 @@
       {
         "qualification": "B.Tech",
         "specialization_branch": null,
+        "institution": "B.Tech Mechanical Engineering – Kanpur Institute of Technology ( – ) | Grade: A Diploma Mechanical Engineering – Buddha Institute of Technology ( – )",
+        "board_university": null,
+        "institute_university": "B.Tech Mechanical Engineering – Kanpur Institute of Technology ( – ) | Grade: A Diploma Mechanical Engineering – Buddha Institute of Technology ( – )",
+        "passing_year": "2021",
+        "currently_enrolled": false,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "B.Tech",
+        "specialization_branch": null,
         "institute_university": "Kanpur Institute",
         "passing_year": "2024",
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Kanpur Institute",
+        "board_university": null
       },
       {
         "qualification": "Diploma",
@@ -1237,17 +1531,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
-      },
-      {
-        "qualification": "12th",
-        "specialization_branch": null,
-        "institute_university": "Mahatma Gandhi Inter College",
-        "passing_year": null,
-        "grade_cgpa": null,
-        "mode_of_study": null,
-        "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Buddha Institute",
+        "board_university": null
       }
     ]
   },
@@ -1260,8 +1546,8 @@
     "gender": "Male",
     "address": "Bardoli, Gujarat",
     "skills": [
-      "Employee Engagement",
       "Excel",
+      "Employee Engagement",
       "interpersonal skills",
       "PowerPoint"
     ],
@@ -1289,9 +1575,25 @@
     "education": [
       {
         "qualification": "12th",
-        "specialization_branch": "Intermediate",
-        "institute_university": "Uka Tarsadia University",
-        "passing_year": null,
+        "specialization_branch": null,
+        "institution": "Government Higher Secondary School –",
+        "board_university": "Khanvel",
+        "institute_university": "Government Higher Secondary School – Khanvel",
+        "passing_year": "2019",
+        "currently_enrolled": false,
+        "grade_cgpa": null,
+        "mode_of_study": null,
+        "location": null,
+        "major_subjects": null
+      },
+      {
+        "qualification": "10th",
+        "specialization_branch": null,
+        "institution": "Government Higher Secondary School, Khanvel –",
+        "board_university": "Khanvel",
+        "institute_university": "Government Higher Secondary School, Khanvel – Khanvel",
+        "passing_year": "2017",
+        "currently_enrolled": false,
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
@@ -1350,17 +1652,9 @@
         "grade_cgpa": null,
         "mode_of_study": null,
         "location": null,
-        "major_subjects": null
-      },
-      {
-        "qualification": "B.Com",
-        "specialization_branch": "Accountancy Honours",
-        "institute_university": "Accountancy Honours",
-        "passing_year": null,
-        "grade_cgpa": null,
-        "mode_of_study": null,
-        "location": null,
-        "major_subjects": null
+        "major_subjects": null,
+        "institution": "Electrical Engineering",
+        "board_university": null
       }
     ]
   }

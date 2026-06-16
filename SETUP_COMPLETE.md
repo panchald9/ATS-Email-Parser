@@ -8,7 +8,6 @@ I've created a **complete production-ready system** for parsing resumes with:
 - 🧪 **Comprehensive Tests** - 20+ unit tests included
 - 📚 **Full Documentation** - Step-by-step guides
 - ☁️ **Cloud Deployment Ready** - Deploy to Streamlit Cloud in minutes
-
 ---
 
 ## 📁 New Files Created

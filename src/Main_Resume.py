@@ -897,7 +897,6 @@ def normalize_compact_text(text):
     t = re.sub(r'(?<=@)(?=[A-Z])', ' ', t)
     return t
 
-
 def restore_section_breaks(text):
     """
     Fix PDFs where all content is extracted as a single line.
@@ -3957,7 +3956,6 @@ PURE_SECTION_HEADER_RE = re.compile(
     r'(?i)^\s*(?:languages?|certifications?|strengths?|hobbies?|interests?)\s*:?\s*$'
 )
 
-
 def _is_weak_generic_skill(skill):
     """
     Only block truly generic single words.
@@ -3992,7 +3990,6 @@ def _is_weak_generic_skill(skill):
         return True
 
     return False
-
 
 def load_skills_from_csv(csv_path):
     skills       = []
@@ -4058,7 +4055,6 @@ def load_skills_from_csv(csv_path):
         print("[!] Invalid skills:", invalid_skills[:20])  # show first 20
     return skills
 
-
 def build_skill_matchers(skills_list):
     matchers = []
     seen     = set()
@@ -4073,7 +4069,6 @@ def build_skill_matchers(skills_list):
         seen.add(key)
         matchers.append((key, skill, pattern))
     return matchers
-
 
 INFERRED_SKILL_RULES = [
     # Existing rules preserved
@@ -4313,7 +4308,6 @@ INFERRED_SKILL_RULES = [
     (r'\bdcs\b', 'DCS'),
 ]
 
-
 def infer_context_skills(text, existing_skills=None):
     if not text:
         return []
@@ -4339,7 +4333,6 @@ def infer_context_skills(text, existing_skills=None):
                 seen.add(key)
                 inferred.append(skill)
     return inferred
-
 
 def cleanup_extracted_skills(text, extracted_skills):
     if not extracted_skills:
@@ -4442,7 +4435,6 @@ def cleanup_extracted_skills(text, extracted_skills):
 
     return final_skills
 
-
 def extract_skills_from_resume(text, skills_list, compiled_skill_matchers=None):
     if not text or not skills_list:
         return []
@@ -4493,7 +4485,6 @@ def extract_skills_from_resume(text, skills_list, compiled_skill_matchers=None):
         filtered.append(skill)
     return filtered
 
-
 def _extract_skill_text_from_skillner_item(item):
     if isinstance(item, str):
         return item
@@ -4508,7 +4499,6 @@ def _extract_skill_text_from_skillner_item(item):
         return doc_node.strip()
     return None
 
-
 def _normalize_header_candidate(line):
     if not line:
         return ''
@@ -4516,7 +4506,6 @@ def _normalize_header_candidate(line):
     line = re.sub(r'^[\W_]+', '', line)
     line = re.sub(r'[\W_]+$', '', line)
     return line.strip()
-
 
 def _is_probable_skill_header(line):
     candidate = _normalize_header_candidate(line)
@@ -4550,7 +4539,6 @@ def _is_probable_skill_header(line):
 
     return False
 
-
 def _is_probable_non_skill_header(line):
     candidate = _normalize_header_candidate(line)
     if not candidate:
@@ -4567,7 +4555,6 @@ def _is_probable_non_skill_header(line):
         words = re.findall(r'[A-Za-z0-9+#&/.-]+', candidate)
         return len(words) <= 10 or candidate.endswith(':')
     return False
-
 
 def _extract_skill_section_text(text):
     if not text:
@@ -4602,7 +4589,6 @@ def _extract_skill_section_text(text):
                 in_skill_block = False
     return ('\n'.join(selected), found_header and len(selected) > 1)
 
-
 def _build_fast_skillner_text(text):
     if not text:
         return ''
@@ -4611,7 +4597,6 @@ def _build_fast_skillner_text(text):
         return section_text[:SKILLNER_MAX_TEXT_CHARS]
     normalized = normalize_compact_text(text)
     return normalized[:SKILLNER_MAX_TEXT_CHARS]
-
 
 # ══════════════════════════════════════════════════════════════
 #  PROFESSIONAL EXPERIENCE EXTRACTION (ATS STYLE)
@@ -4627,7 +4612,6 @@ INLINE_JOB_ENTRY_RE = re.compile(
     r'(?:\s+\(([^)]+)\))?'
     r'(?:\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|January|February|March|April|May|June|July|August|September|October|November|December|\d{4})\s*[\-–]\s*(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|January|February|March|April|May|June|July|August|September|October|November|December|Present|\d{4}))?'
 )
-
 
 def _extract_job_entries_from_full_text(text):
     """
@@ -4676,7 +4660,6 @@ def _extract_job_entries_from_full_text(text):
                     entries.append('\n'.join(job_block))
     
     return entries
-
 
 def _split_full_text_into_experience_chunks(text):
     """
@@ -4781,12 +4764,14 @@ COMPANY_HINT_RE = re.compile(
 
 DATE_RANGE_RE = re.compile(
     r'(?i)\b('
-    r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{4}'
-    r'|\d{1,2}[/-]\d{2,4}|\d{4}'
-    r')\s*(?:to|till|until|\-|–|—|–)\s*('   # ← add – and —
+    r'(?:\d{1,2}(?:st|nd|rd|th)?\s+)?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{2,4}'
+    r'|(?:0?[1-9]|1[0-2])[/\-](?:\d{4}|\d{2})'
+    r'|\b(?:19|20)\d{2}\b'
+    r')\s*(?:to|till|until|\-|–|—)\s*('
     r'present|current|till\s+date|'
-    r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{4}'
-    r'|\d{1,2}[/-]\d{2,4}|\d{4}'
+    r'(?:\d{1,2}(?:st|nd|rd|th)?\s+)?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{2,4}'
+    r'|(?:0?[1-9]|1[0-2])[/\-](?:\d{4}|\d{2})'
+    r'|\b(?:19|20)\d{2}\b'
     r')\b'
 )
 
@@ -4972,14 +4957,12 @@ def _extract_experience_section_lines(text):
     
     return _normalize_experience_section_lines(section)
 
-
 def _clean_experience_line(line):
     if not line:
         return ''
     cleaned = re.sub(r'^\s*[\u2022\u25cf\u25aa\u25ba\u27a2\u2713\uf0b7#\-–—*]+\s*', '', line)
     cleaned = re.sub(r'\s+', ' ', cleaned).strip()
     return cleaned
-
 
 def _is_experience_metadata_line(line):
     cleaned = _clean_experience_line(line)
@@ -4994,7 +4977,6 @@ def _is_experience_metadata_line(line):
     if re.search(r'(?i)\b(?:full-time|part-time|internship|contract|freelance|remote|onsite|hybrid)\b', cleaned):
         return True
     return False
-
 
 def _is_experience_fragment_line(line):
     cleaned = _clean_experience_line(line)
@@ -5018,7 +5000,6 @@ def _is_experience_fragment_line(line):
         return True
     return False
 
-
 def _line_has_incomplete_experience_phrase(line):
     cleaned = _clean_experience_line(line)
     if not cleaned:
@@ -5030,7 +5011,6 @@ def _line_has_incomplete_experience_phrase(line):
     if cleaned.lower().endswith((' and', ' or', ' with', ' for', ' to', ' by', ' in', ' of', ' while', ' including')):
         return True
     return len(cleaned.split()) >= 4
-
 
 def _find_experience_merge_target(lines):
     for idx in range(len(lines) - 1, -1, -1):
@@ -5045,7 +5025,6 @@ def _find_experience_merge_target(lines):
             continue
         return idx
     return None
-
 
 def _normalize_experience_section_lines(lines):
     normalized = []
@@ -5079,7 +5058,6 @@ def _normalize_experience_section_lines(lines):
         normalized.append(cleaned)
     return normalized
 
-
 def _is_experience_noise_line(line):
     cleaned = _clean_experience_line(line)
     if not cleaned:
@@ -5096,7 +5074,6 @@ def _is_experience_noise_line(line):
     if re.search(r'(?i)\b(?:top\s*skills|licenses?\s*&\s*certifications?|certifications?|courses?|training|portfolio|linkedin|github)\b', cleaned):
         return True
     return False
-
 
 def _looks_like_non_experience_role_text(role):
     if not role:
@@ -5118,7 +5095,6 @@ def _looks_like_non_experience_role_text(role):
         role_l,
     ))
 
-
 def _looks_like_noisy_company_text(company):
     if not company:
         return False
@@ -5138,7 +5114,6 @@ def _looks_like_noisy_company_text(company):
         r'page\s+\d+\s+of\s+\d+|linkedin|github)\b',
         company_l,
     ))
-
 
 def _extract_company_from_noisy_line(line):
     if not line:
@@ -5168,7 +5143,6 @@ def _extract_company_from_noisy_line(line):
         return candidate
     return None
 
-
 def _dedupe_experience_entries(experiences):
     if not experiences:
         return []
@@ -5187,7 +5161,6 @@ def _dedupe_experience_entries(experiences):
         seen.add(key)
         out.append(exp)
     return out
-
 
 def _filter_low_quality_experience_entries(experiences):
     if not experiences:
@@ -5223,7 +5196,6 @@ def _filter_low_quality_experience_entries(experiences):
         filtered.append(exp)
     return filtered
 
-
 def _normalize_role_text(text):
     if not text:
         return None
@@ -5236,7 +5208,6 @@ def _normalize_role_text(text):
     cleaned = re.sub(r'(?i)^\s*(?:as|for)\s+', '', cleaned)
     cleaned = re.sub(r'\s+', ' ', cleaned).strip(' ,.-')
     return cleaned or None
-
 
 def _looks_like_company(line):
     if not line or len(line) < 3:
@@ -5273,7 +5244,6 @@ def _looks_like_company(line):
             return True
     return False
 
-
 def _looks_like_role(line):
     if not line:
         return False
@@ -5287,7 +5257,6 @@ def _looks_like_role(line):
     if re.search(r'(?i)\b(?:managed|tracking|tracked|prepared|handling|handled|designed|coordinated|perform(?:ed|ing)|supported|collaborated|ensuring|improving|maintained)\b', line):
         return False
     return bool(ROLE_HINT_RE.search(line))
-
 
 def _parse_month_year(token):
     if not token:
@@ -5335,32 +5304,16 @@ def _parse_month_year(token):
             return year, month
     return None
 
-
 def _extract_date_range(line):
     if not line:
         return (None, None, False, None)
     m = DATE_RANGE_RE.search(line)
-    if not m:
-        verbose_re = re.compile(
-            r'(?i)\b('
-            r'(?:\d{1,2}(?:st|nd|rd|th)?\s+)?'
-            r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{4}'
-            r'|\d{4}'
-            r')\s*(?:to|till|until|\-|–|—)\s*('
-            r'present|current|till\s+date|'
-            r'(?:\d{1,2}(?:st|nd|rd|th)?\s+)?'
-            r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{4}'
-            r'|\d{4}'
-            r')\b'
-        )
-        m = verbose_re.search(line)
     if not m:
         return (None, None, False, None)
     start_raw = re.sub(r'\s+', ' ', m.group(1)).strip()
     end_raw = re.sub(r'\s+', ' ', m.group(2)).strip()
     is_current = bool(re.match(r'(?i)^(present|current|till\s+date)$', end_raw))
     return (start_raw, end_raw, is_current, m.group(0).strip())
-
 
 def _strip_trailing_date_range(line):
     if not line:
@@ -5372,14 +5325,14 @@ def _strip_trailing_date_range(line):
     if not match:
         fallback_re = re.compile(
             r'(?i)\b('
-            r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{4}'
-            r'|\d{1,2}[/-]\d{2,4}'
-            r'|\d{4}'
+            r'(?:\d{1,2}(?:st|nd|rd|th)?\s+)?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{2,4}'
+            r'|(?:0?[1-9]|1[0-2])[/\-](?:\d{4}|\d{2})'
+            r'|\b(?:19|20)\d{2}\b'
             r')\s*(?:to|till|until|[-?])\s*('
             r'present|current|till\s+date|'
-            r'(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{4}'
-            r'|\d{1,2}[/-]\d{2,4}'
-            r'|\d{4}'
+            r'(?:\d{1,2}(?:st|nd|rd|th)?\s+)?(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\s*\d{2,4}'
+            r'|(?:0?[1-9]|1[0-2])[/\-](?:\d{4}|\d{2})'
+            r'|\b(?:19|20)\d{2}\b'
             r')\b'
         )
         for item in fallback_re.finditer(cleaned):
@@ -5396,7 +5349,6 @@ def _strip_trailing_date_range(line):
     end_raw = re.sub(r'\s+', ' ', match.group(2)).strip()
     is_current = bool(re.match(r'(?i)^(present|current|till\s+date)$', end_raw))
     return prefix, (start_raw, end_raw, is_current, match.group(0).strip())
-
 
 def _duration_from_range(start_raw, end_raw, is_current):
     start = _parse_month_year(start_raw)
@@ -5416,20 +5368,17 @@ def _duration_from_range(start_raw, end_raw, is_current):
         return f"{years}y"
     return f"{rem}m"
 
-
 def _extract_ctc(text):
     if not text:
         return None
     m = CTC_RE.search(text)
     return m.group(1).strip() if m else None
 
-
 def _extract_notice_period(text):
     if not text:
         return None
     m = NOTICE_RE.search(text)
     return m.group(1).strip() if m else None
-
 
 def _extract_location_from_line(line):
     if not line:
@@ -5452,7 +5401,6 @@ def _extract_location_from_line(line):
             return ', '.join(parts)
     return None
 
-
 def _extract_technologies(text):
     if not text:
         return []
@@ -5468,7 +5416,6 @@ def _extract_technologies(text):
                 seen.add(key)
                 found.append(pretty)
     return found
-
 
 def _parse_inline_experience_header(line):
     if not line:
@@ -5621,7 +5568,6 @@ def _parse_inline_experience_header(line):
 
     return None
 
-
 def _responsibility_role_alignment_score(role, responsibility):
     role_l = (role or '').lower()
     resp_l = (responsibility or '').lower()
@@ -5645,7 +5591,6 @@ def _responsibility_role_alignment_score(role, responsibility):
     if not keywords:
         return 0
     return sum(1 for keyword in keywords if keyword in resp_l)
-
 
 def _rebalance_experience_responsibilities(experiences):
     if not experiences:
@@ -5673,7 +5618,6 @@ def _rebalance_experience_responsibilities(experiences):
             nxt['responsibilities'] = moved + next_responsibilities
 
     return experiences
-
 
 def _repair_cross_block_responsibility_fragments(experiences):
     if not experiences:
@@ -5712,7 +5656,6 @@ def _repair_cross_block_responsibility_fragments(experiences):
 
     return experiences
 
-
 def _looks_like_experience_body_line(line):
     cleaned = _clean_experience_line(line)
     if not cleaned or _is_experience_noise_line(cleaned):
@@ -5730,7 +5673,6 @@ def _looks_like_experience_body_line(line):
     if re.search(r'(?i)\b(?:develop|design|build|create|manage|lead|work|implement|optimi|collaborat|maintain|ensure|coordinate|support|monitor|prepare|deliver|analyze|conduct|architect)\w*\b', cleaned):
         return True
     return False
-
 
 def _is_experience_entry_start_line(line):
     cleaned = _clean_experience_line(line)
@@ -5766,7 +5708,6 @@ def _is_experience_entry_start_line(line):
             return True
     return False
 
-
 def _peel_trailing_experience_metadata(block):
     if not block:
         return block, []
@@ -5792,7 +5733,6 @@ def _peel_trailing_experience_metadata(block):
     if (tail_has_date and head_has_date) or (tail_has_location and head_has_location):
         return head, tail
     return block, []
-
 
 def _extract_rich_responsibilities(block, company=None, role=None, duration_text=None):
     if not block:
@@ -5829,7 +5769,6 @@ def _extract_rich_responsibilities(block, company=None, role=None, duration_text
                 out.append(l)
     return out
 
-
 def _extract_responsibilities(lines):
     if not lines:
         return []
@@ -5846,7 +5785,6 @@ def _extract_responsibilities(lines):
                 out.append(val)
     return out
 
-
 def _extract_employment_type(text):
     if not text:
         return 'Full-time'
@@ -5854,7 +5792,6 @@ def _extract_employment_type(text):
         if pattern.search(text):
             return label
     return 'Full-time'
-
 
 def _extract_rich_responsibilities(block, company=None, role=None, duration_text=None):
     if not block:
@@ -5890,7 +5827,6 @@ def _extract_rich_responsibilities(block, company=None, role=None, duration_text
                 out.append(l)
     return out
 
-
 def _extract_responsibilities(lines):
     if not lines:
         return []
@@ -5907,7 +5843,6 @@ def _extract_responsibilities(lines):
                 seen.add(key)
                 out.append(val)
     return out
-
 
 def extract_professional_experience_profile(text):
     """Extract ATS-style professional experience details from resume text."""
@@ -6398,7 +6333,6 @@ def extract_professional_experience_profile(text):
 
     return experiences
 
-
 # ══════════════════════════════════════════════════════════════
 #  WORK EXPERIENCE SKILL EXTRACTION
 #  Extract skills from WORK EXPERIENCE section, not just "Skills" section
@@ -6410,7 +6344,6 @@ def get_work_experience_section(text):
     Skills are often embedded in experience descriptions, not in a dedicated section.
     """
     return _extract_experience_section_lines(text)
-
 
 def clean_skill_lines(lines):
     """
@@ -6444,7 +6377,6 @@ def clean_skill_lines(lines):
             cleaned.append(line)
     
     return cleaned
-
 
 # Domain-specific skill keywords for various industries
 # Dynamically build from CSV, but can be extended domain-by-domain
@@ -6608,7 +6540,6 @@ WORK_EXPERIENCE_SKILLS = {
     'demand planning', 's&op', 'forecasting', 'order management',
 }
 
-
 def extract_skills_from_work_experience(text):
     """
     Extract skills mentioned in WORK EXPERIENCE section.
@@ -6647,7 +6578,6 @@ def extract_skills_from_work_experience(text):
                 matched_skills.append(normalized)
     
     return matched_skills
-
 
 def normalize_and_expand_skills(skills):
     """
@@ -6696,7 +6626,6 @@ def normalize_and_expand_skills(skills):
     
     return normalized
 
-
 def extract_skills_from_dataset(text):
     if not text:
         return []
@@ -6727,7 +6656,6 @@ def extract_skills_from_dataset(text):
             seen.add(key)
             candidates.append(skill_text)
     return candidates
-
 
 # ══════════════════════════════════════════════════════════════
 #  SINGLE-RESUME EXTRACTION  (updated to include DOB)
@@ -6859,7 +6787,6 @@ def _extract_resume_record(fname, process_folder, skill_source, skills_list,
             'education':      [],             # ← NEW
             'error':          str(exc),
         }
-
 
 # ══════════════════════════════════════════════════════════════
 #  BATCH RUNNER
