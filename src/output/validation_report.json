@@ -99,7 +99,7 @@
       "quality_level": "poor"
     },
     {
-      "file": "ANSHU GUPTA RESUME (1).docx",
+      "file": "ANSHU GUPTA RESUME.docx",
       "fields": {
         "name": {
           "valid": true,
@@ -137,7 +137,7 @@
       "quality_level": "excellent"
     },
     {
-      "file": "ANSHU GUPTA RESUME.docx",
+      "file": "ANSHU GUPTA RESUME (1).docx",
       "fields": {
         "name": {
           "valid": true,
@@ -403,6 +403,44 @@
       "quality_level": "excellent"
     },
     {
+      "file": "RESUME RAHUL PATEL 2026-1.pdf",
+      "fields": {
+        "name": {
+          "valid": true,
+          "score": 95,
+          "reason": "Valid name format"
+        },
+        "email": {
+          "valid": true,
+          "score": 100,
+          "reason": "Email valid"
+        },
+        "phone": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid international format with country code"
+        },
+        "gender": {
+          "valid": true,
+          "score": 90,
+          "reason": "Valid gender"
+        },
+        "address": {
+          "valid": true,
+          "score": 70,
+          "reason": "Address appears valid"
+        },
+        "skills": {
+          "valid": true,
+          "score": 93.05555555555556,
+          "reason": "17/18 skills valid"
+        }
+      },
+      "warnings": [],
+      "overall_score": 89.67592592592592,
+      "quality_level": "good"
+    },
+    {
       "file": "ISMAIL resume.pdf",
       "fields": {
         "name": {
@@ -477,44 +515,6 @@
       "warnings": [],
       "overall_score": 90.83333333333333,
       "quality_level": "excellent"
-    },
-    {
-      "file": "RESUME RAHUL PATEL 2026-1.pdf",
-      "fields": {
-        "name": {
-          "valid": true,
-          "score": 95,
-          "reason": "Valid name format"
-        },
-        "email": {
-          "valid": true,
-          "score": 100,
-          "reason": "Email valid"
-        },
-        "phone": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid international format with country code"
-        },
-        "gender": {
-          "valid": true,
-          "score": 90,
-          "reason": "Valid gender"
-        },
-        "address": {
-          "valid": true,
-          "score": 70,
-          "reason": "Address appears valid"
-        },
-        "skills": {
-          "valid": true,
-          "score": 93.05555555555556,
-          "reason": "17/18 skills valid"
-        }
-      },
-      "warnings": [],
-      "overall_score": 89.67592592592592,
-      "quality_level": "good"
     },
     {
       "file": "Invoice_2026-27-2026-INTA_1(R).pdf",
@@ -812,12 +812,12 @@
         },
         "skills": {
           "valid": true,
-          "score": 94.125,
-          "reason": "39/40 skills valid"
+          "score": 94.14634146341464,
+          "reason": "40/41 skills valid"
         }
       },
       "warnings": [],
-      "overall_score": 92.825,
+      "overall_score": 92.82926829268293,
       "quality_level": "excellent"
     },
     {

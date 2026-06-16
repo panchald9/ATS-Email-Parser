@@ -1053,6 +1053,9 @@ def sanitize_candidate(candidate):
     c = c.split('|')[0]
     c = re.sub(r'\([^)]{0,50}\)', ' ', c)
     
+    # Remove all digits and underscores (often artifacts from file names like "111dhruv")
+    c = re.sub(r'[\d_]+', ' ', c)
+    
     # FIX: Handle names with credentials like "Jamil M, PMP®, PSM"
     # Remove everything after comma if what follows looks like credentials
     if ',' in c:
@@ -1533,7 +1536,7 @@ def extract_name(text):
     # S0.3: Strong top-line candidates (only if not in skill section)
     if not has_early_skill_section:
         for i, line in enumerate(norm[:10]):
-            if re.search(r'[@\d]|https?://', line, re.I):
+            if re.search(r'[@]|https?://', line, re.I):
                 continue
             line_lower = line.lower().strip('.,- ')
             if line_lower in SKIP_LINES:
@@ -1578,7 +1581,7 @@ def extract_name(text):
         # S0.2: Two-line header  (skip if in early skill section)
         for i in range(min(len(norm) - 1, 8)):
             a, b = norm[i], norm[i + 1]
-            if re.search(r'[@\d]', a + b):
+            if re.search(r'[@]', a + b):
                 continue
             if a.lower().strip('.,- ') in SKIP_LINES or b.lower().strip('.,- ') in SKIP_LINES:
                 continue
