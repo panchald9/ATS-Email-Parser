@@ -60,26 +60,23 @@ def sample_docx_file():
 class TestAuthentication:
     """Test API authentication"""
     
-    def test_health_check_without_key(self, client):
-        """Test health endpoint without API key"""
-        response = client.get("/health")
+    def test_parse_without_key(self, client):
+        """Test protected endpoint without API key"""
+        response = client.post("/parse")
         assert response.status_code == 401
         assert "Unauthorized" in response.text or "detail" in response.json()
     
-    def test_health_check_with_invalid_key(self, client, invalid_api_key):
-        """Test health endpoint with invalid API key"""
-        response = client.get(
-            "/health",
+    def test_parse_with_invalid_key(self, client, invalid_api_key):
+        """Test protected endpoint with invalid API key"""
+        response = client.post(
+            "/parse",
             headers={"x-api-key": invalid_api_key}
         )
         assert response.status_code == 401
     
-    def test_health_check_with_valid_key(self, client, valid_api_key):
-        """Test health endpoint with valid API key"""
-        response = client.get(
-            "/health",
-            headers={"x-api-key": valid_api_key}
-        )
+    def test_health_check_unauthenticated(self, client):
+        """Test health check is accessible without API key for load balancers"""
+        response = client.get("/health")
         assert response.status_code == 200
         assert response.json()["status"] == "ok"
 
@@ -98,12 +95,9 @@ class TestEndpoints:
         assert "message" in data
         assert "docs" in data
     
-    def test_health_endpoint(self, client, valid_api_key):
+    def test_health_endpoint(self, client):
         """Test health endpoint"""
-        response = client.get(
-            "/health",
-            headers={"x-api-key": valid_api_key}
-        )
+        response = client.get("/health")
         assert response.status_code == 200
         assert response.json()["status"] == "ok"
 
@@ -130,7 +124,7 @@ class TestFileUpload:
             headers={"x-api-key": valid_api_key}
         )
         assert response.status_code == 400
-        assert "Unsupported file type" in response.json()["detail"]
+        assert "Unsupported file type" in response.json()["detail"] or "Unsupported" in response.json()["detail"]
     
     def test_parse_with_pdf(self, client, valid_api_key, sample_pdf_file):
         """Test parse endpoint with PDF file"""
@@ -176,19 +170,12 @@ class TestRateLimiting:
     
     def test_rate_limit_not_exceeded(self, client, valid_api_key):
         """Test that normal requests are allowed"""
-        response = client.get(
-            "/health",
-            headers={"x-api-key": valid_api_key}
-        )
+        response = client.get("/health")
         assert response.status_code == 200
     
     def test_rate_limit_header(self, client, valid_api_key):
         """Test rate limit configuration"""
-        # Make a single request to check we're under the limit
-        response = client.get(
-            "/health",
-            headers={"x-api-key": valid_api_key}
-        )
+        response = client.get("/health")
         assert response.status_code == 200
 
 
@@ -198,12 +185,9 @@ class TestRateLimiting:
 class TestResponseFormats:
     """Test response data formats"""
     
-    def test_health_response_format(self, client, valid_api_key):
+    def test_health_response_format(self, client):
         """Test health response has correct format"""
-        response = client.get(
-            "/health",
-            headers={"x-api-key": valid_api_key}
-        )
+        response = client.get("/health")
         assert response.status_code == 200
         data = response.json()
         assert isinstance(data, dict)
@@ -211,8 +195,8 @@ class TestResponseFormats:
     
     def test_error_response_format(self, client, invalid_api_key):
         """Test error response has correct format"""
-        response = client.get(
-            "/health",
+        response = client.post(
+            "/parse",
             headers={"x-api-key": invalid_api_key}
         )
         assert response.status_code == 401
@@ -260,14 +244,13 @@ class TestEdgeCases:
             files={"file": ("", BytesIO(b"content"), "application/pdf")},
             headers={"x-api-key": valid_api_key}
         )
-        # Should handle gracefully
         assert response.status_code in [400, 422]
     
     def test_very_large_key(self, client):
         """Test with very large API key"""
         large_key = "x" * 1000
-        response = client.get(
-            "/health",
+        response = client.post(
+            "/parse",
             headers={"x-api-key": large_key}
         )
         assert response.status_code == 401

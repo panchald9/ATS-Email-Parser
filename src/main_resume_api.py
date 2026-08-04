@@ -1,15 +1,17 @@
 from __future__ import annotations
 
+import asyncio
 import os
 import secrets
 import tempfile
 import threading
 import time
 from collections import defaultdict, deque
+from concurrent.futures import ThreadPoolExecutor
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import Depends, FastAPI, File, Header, HTTPException, Request, UploadFile, status
-from fastapi.concurrency import run_in_threadpool
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse
@@ -22,17 +24,19 @@ _ROOT_ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
 load_dotenv(_SRC_ENV_PATH)
 load_dotenv(_ROOT_ENV_PATH)
 
-
-app = FastAPI(title="Main Resume API", version="1.0.0")
-
 API_KEY_HEADER = "x-api-key"
 SUPPORTED_EXTENSIONS = {".pdf", ".doc", ".docx"}
 MAX_UPLOAD_MB = int(os.getenv("MAX_UPLOAD_MB", "10"))
 MAX_UPLOAD_BYTES = MAX_UPLOAD_MB * 1024 * 1024
-RATE_LIMIT_PER_MINUTE = int(os.getenv("RATE_LIMIT_PER_MINUTE", "30"))
-PARSER_RETRY_COUNT = max(0, int(os.getenv("PARSER_RETRY_COUNT", "1")))
-PARSER_SERIALIZE = os.getenv("PARSER_SERIALIZE", "true").strip().lower() in {"1", "true", "yes", "on"}
+ENABLE_RATE_LIMIT = os.getenv("ENABLE_RATE_LIMIT", "false").strip().lower() in {"1", "true", "yes", "on"}
+RATE_LIMIT_PER_MINUTE = int(os.getenv("RATE_LIMIT_PER_MINUTE", "6000"))
+PARSER_RETRY_COUNT = max(0, int(os.getenv("PARSER_RETRY_COUNT", "0")))
+PARSER_SERIALIZE = os.getenv("PARSER_SERIALIZE", "false").strip().lower() in {"1", "true", "yes", "on"}
 TRUSTED_HOSTS = [h.strip() for h in os.getenv("TRUSTED_HOSTS", "*").split(",") if h.strip()]
+
+# High-concurrency tuning parameters (for 1200+ concurrent requests)
+PARSER_MAX_WORKERS = int(os.getenv("PARSER_MAX_WORKERS", str(min(64, (os.cpu_count() or 4) * 4))))
+MAX_CONCURRENT_PARSES = int(os.getenv("MAX_CONCURRENT_PARSES", "100"))
 
 _SKILLS_LIST_CACHE = None
 _COMPILED_MATCHERS_CACHE = None
@@ -41,6 +45,38 @@ _CACHE_LOCK = threading.Lock()
 _RATE_LIMIT_LOCK = threading.Lock()
 _PARSER_LOCK = threading.Lock()
 _REQUEST_HISTORY = defaultdict(deque)
+
+_PARSER_EXECUTOR: ThreadPoolExecutor | None = None
+_PARSE_SEMAPHORE: asyncio.Semaphore | None = None
+
+
+def _get_executor() -> ThreadPoolExecutor:
+    global _PARSER_EXECUTOR
+    if _PARSER_EXECUTOR is None:
+        _PARSER_EXECUTOR = ThreadPoolExecutor(max_workers=PARSER_MAX_WORKERS, thread_name_prefix="resume_worker")
+    return _PARSER_EXECUTOR
+
+
+def _get_semaphore() -> asyncio.Semaphore:
+    global _PARSE_SEMAPHORE
+    if _PARSE_SEMAPHORE is None:
+        _PARSE_SEMAPHORE = asyncio.Semaphore(MAX_CONCURRENT_PARSES)
+    return _PARSE_SEMAPHORE
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Pre-warm dataset caches and initialize worker threadpool on startup."""
+    _get_parser_context()
+    _get_executor()
+    yield
+    global _PARSER_EXECUTOR
+    if _PARSER_EXECUTOR is not None:
+        _PARSER_EXECUTOR.shutdown(wait=False)
+        _PARSER_EXECUTOR = None
+
+
+app = FastAPI(title="Main Resume API", version="1.0.0", lifespan=lifespan)
 
 
 def _load_api_key() -> str:
@@ -84,6 +120,9 @@ def _validate_upload_filename(filename: str) -> str:
 
 
 def _check_rate_limit(client_ip: str) -> None:
+    if not ENABLE_RATE_LIMIT:
+        return
+
     now = time.time()
     window_start = now - 60
 
@@ -214,7 +253,6 @@ def parse_resume_from_file(file_path: str, display_filename: str) -> dict:
 
     record = _extract_once()
 
-    # Retry transient low-quality parses and keep the richer output.
     attempts_left = PARSER_RETRY_COUNT
     best_record = record
     best_score = _record_score(record)
@@ -236,28 +274,55 @@ def parse_resume_from_file(file_path: str, display_filename: str) -> dict:
     return record
 
 
+async def _parse_single_file_async(file: UploadFile) -> dict:
+    """Helper to process a single file upload concurrently with semaphore backpressure control."""
+    sem = _get_semaphore()
+    async with sem:
+        if file.content_type and file.content_type not in {
+            "application/pdf",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        }:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Unsupported file type. Only PDF, DOC, and DOCX are allowed.",
+            )
+
+        suffix = _validate_upload_filename(file.filename)
+        temp_path = await _save_upload_to_tempfile(file, suffix)
+
+        try:
+            loop = asyncio.get_running_loop()
+            data = await loop.run_in_executor(_get_executor(), parse_resume_from_file, temp_path, file.filename)
+            return data
+        finally:
+            try:
+                os.unlink(temp_path)
+            except OSError:
+                pass
+
+
+@app.get("/")
+async def root_endpoint():
+    """Root endpoint for API documentation and status discovery."""
+    return {
+        "message": "Main Resume API Service is operational",
+        "version": "1.0.0",
+        "docs": "/docs",
+        "health": "/health",
+    }
+
+
 @app.get("/health")
-async def health_check(_: str = Depends(verify_api_key)):
+async def health_check():
+    """Unauthenticated health check endpoint for load balancers and container probes."""
     return {"status": "ok"}
 
 
 @app.post("/parse")
 async def parse_endpoint(file: UploadFile = File(...), _: str = Depends(verify_api_key)):
-    if file.content_type and file.content_type not in {
-        "application/pdf",
-        "application/msword",
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-    }:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Unsupported content type. Only PDF, DOC, and DOCX are allowed.",
-        )
-
-    suffix = _validate_upload_filename(file.filename)
-    temp_path = await _save_upload_to_tempfile(file, suffix)
-
     try:
-        data = await run_in_threadpool(parse_resume_from_file, temp_path, file.filename)
+        data = await _parse_single_file_async(file)
         return JSONResponse(status_code=status.HTTP_200_OK, content=data)
     except HTTPException:
         raise
@@ -266,11 +331,6 @@ async def parse_endpoint(file: UploadFile = File(...), _: str = Depends(verify_a
             status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
             detail="Unable to parse this resume",
         ) from exc
-    finally:
-        try:
-            os.unlink(temp_path)
-        except OSError:
-            pass
 
 
 @app.post("/parse-batch")
@@ -281,38 +341,14 @@ async def parse_batch_endpoint(files: list[UploadFile] = File(...), _: str = Dep
             detail="At least one file is required.",
         )
 
-    results = []
-
-    for file in files:
-        temp_path = None
+    async def _process_file_item(file: UploadFile) -> dict:
         try:
-            if file.content_type and file.content_type not in {
-                "application/pdf",
-                "application/msword",
-                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-            }:
-                results.append(
-                    {
-                        "file": file.filename,
-                        "success": False,
-                        "error": "Unsupported content type. Only PDF, DOC, and DOCX are allowed.",
-                    }
-                )
-                continue
-
-            suffix = _validate_upload_filename(file.filename)
-            temp_path = await _save_upload_to_tempfile(file, suffix)
-            data = await run_in_threadpool(parse_resume_from_file, temp_path, file.filename)
-            results.append({"file": file.filename, "success": True, "data": data})
+            data = await _parse_single_file_async(file)
+            return {"file": file.filename, "success": True, "data": data}
         except HTTPException as exc:
-            results.append({"file": file.filename, "success": False, "error": str(exc.detail)})
+            return {"file": file.filename, "success": False, "error": str(exc.detail)}
         except Exception:
-            results.append({"file": file.filename, "success": False, "error": "Unable to parse this resume"})
-        finally:
-            if temp_path:
-                try:
-                    os.unlink(temp_path)
-                except OSError:
-                    pass
+            return {"file": file.filename, "success": False, "error": "Unable to parse this resume"}
 
-    return JSONResponse(status_code=status.HTTP_200_OK, content={"count": len(results), "results": results})
+    results = await asyncio.gather(*[_process_file_item(f) for f in files])
+    return JSONResponse(status_code=status.HTTP_200_OK, content={"count": len(results), "results": list(results)})
